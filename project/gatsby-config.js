@@ -1,3 +1,12 @@
 module.exports = {
-  plugins: [{ resolve: `gatsby-theme-minimal`, options: {} }],
+    plugins: [
+        {
+            resolve: `vactory-gatsby-core`,
+            options: {}
+        },
+        {
+            resolve: `vactory-gatsby-news`,
+            options: {}
+        }
+    ],
 }

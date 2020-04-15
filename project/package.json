@@ -1,8 +1,8 @@
 {
-  "name": "example",
+  "name": "project",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "christopherbiscardi <chris@christopherbiscardi.com> (@chrisbiscardi)",
+  "author": "Hamza Bahlaouane <h.bahlaouane@void.fr>",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "gatsby": "^2.20.12",
-    "gatsby-theme-minimal": "^1.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "vactory-gatsby-core": "*",
+    "vactory-gatsby-news": "*"
   }
 }

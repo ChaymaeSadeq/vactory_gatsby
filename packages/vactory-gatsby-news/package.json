@@ -1,0 +1,13 @@
+{
+  "name": "vactory-gatsby-news",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.6.0"
+  },
+  "dependencies": {
+    "vactory-gatsby-core": "*"
+  }
+}
