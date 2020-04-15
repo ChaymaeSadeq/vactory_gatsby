@@ -1,9 +1,22 @@
 // These templates are simply data-fetching wrappers that import components
-const PostTemplate = require.resolve(`./src/components/post.container`)
-const PostsTemplate = require.resolve(`./src/components/posts.container`)
-
+const PostTemplate = require.resolve(`./src/components/post.container`);
+const PostsTemplate = require.resolve(`./src/components/posts.container`);
+const api = require('vactory-gatsby-api');
+const esmRequire = require("esm")(module)
+const apiParams = esmRequire("./index");
 exports.createPages = async ({actions}) => {
     const {createPage} = actions
+
+    const results = await api.getResources('node/vactory_news', {
+        ...apiParams.nodesNewsParams,
+        page: {
+            ...apiParams.nodesNewsParams.page,
+            offset: 0,
+        },
+        sort: "-created",
+    }, 'ar');
+
+    console.log(results);
 
     // Create the Post page
     createPage({
