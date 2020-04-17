@@ -3,10 +3,9 @@ import React, {Fragment} from "react"
 const Posts = ({posts}) => {
     return (
         <div>
-            <h1>News</h1>
             <main>
                 {posts.map(node => {
-                    const title = node.title
+                    const title = node.title;
 
                     return (
                         <Fragment key={node.id}>
@@ -24,6 +23,6 @@ const Posts = ({posts}) => {
             </main>
         </div>
     )
-}
+};
 
 export default Posts

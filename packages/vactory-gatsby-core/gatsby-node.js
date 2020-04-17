@@ -1,12 +1,12 @@
-const api = require('vactory-gatsby-api')
+const api = require('vactory-gatsby-api');
 
-exports.onPreBootstrap = () => {
-    console.log("Create an API instance")
+exports.onPreBootstrap = ({cache, actions, emitter, reporter}, pluginOptions) => {
+    const apiConfig = pluginOptions.api;
+
+    // Init API.
     api.init(
-        "https://dam-new.lapreprod.com/backend/",
-        {
-            Authorization: 'Basic YXdiOmF3YnZvaWQyMDIw'
-        },
-        ['fr', 'ar']
+        apiConfig.url,
+        apiConfig.headers,
+        apiConfig.languages
     )
-}
+};

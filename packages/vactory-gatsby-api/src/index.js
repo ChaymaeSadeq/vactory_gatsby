@@ -14,7 +14,7 @@ var Api = {
  * @param params
  * @returns {Promise<[]>}
  */
-Api.getAllResources = async (model, params = {}) => {
+Api.getAll = async (model, params = {}) => {
     if (!Api.kitsu) {
         throw "API has not been initialized. call init()";
     }
@@ -60,7 +60,7 @@ Api.getAllResources = async (model, params = {}) => {
  * @param lang
  * @returns {Promise<[]>}
  */
-Api.getResources = async (model, params = {}, lang = null) => {
+Api.get = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
         throw "API has not been initialized. call init()";
     }
@@ -71,11 +71,13 @@ Api.getResources = async (model, params = {}, lang = null) => {
 
     if (lang) {
         Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
-        response = await Api.kitsu.get(model, params)
+        const {data} = await Api.kitsu.get(model, params);
+        response = data
     } else {
         response = await Promise.all(Api.languages.map(async lang => {
             Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
-            return await Api.kitsu.get(model, params)
+            const {data} = await Api.kitsu.get(model, params);
+            return data
         }));
     }
 
@@ -110,6 +112,20 @@ Api.init = async (baseURL, headers = {}, languages = []) => {
             headers: headers
         },
         headers: headers
+    })
+};
+
+/**
+ * Enable debug.
+ */
+Api.enableDebug = () => {
+    Api.kitsu.axios.interceptors.request.use(config => {
+        console.log(config);
+        // Do something before request is sent
+        return config
+    }, error => {
+        // Do something with request error
+        return Promise.reject(error)
     })
 };
 

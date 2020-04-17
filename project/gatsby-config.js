@@ -2,11 +2,18 @@ module.exports = {
     plugins: [
         {
             resolve: `vactory-gatsby-core`,
-            options: {}
+            options: {
+                api: {
+                    url: "http://vactory-decoupled-project.dd:8083/",
+                    // headers: {
+                    //     Authorization: 'Basic YXdiOmF3YnZvaWQyMDIw'
+                    // },
+                    languages: ['fr', 'ar']
+                }
+            }
         },
         {
-            resolve: `vactory-gatsby-news`,
-            options: {}
+            resolve: `vactory-gatsby-blog`,
         }
     ],
 }
