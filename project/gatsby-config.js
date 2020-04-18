@@ -8,7 +8,14 @@ module.exports = {
                     // headers: {
                     //     Authorization: 'Basic YXdiOmF3YnZvaWQyMDIw'
                     // },
-                    languages: ['fr', 'ar']
+                },
+                languages: {
+                    defaultLanguage: 'fr',
+                    availableLanguages: ['fr', 'ar'],
+                    languageLabels: [
+                        {code: "fr", label: "Français"},
+                        {code: "ar", label: "العربية"},
+                    ],
                 }
             }
         },

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from "react"
+import { useTranslation } from "react-i18next"
 import Api from "vactory-gatsby-api"
 import {postsQueryParams} from 'vactory-gatsby-blog'
 import {normalizeNodes, normalizeTerms} from '../internal/normalizers'
@@ -7,6 +8,8 @@ import PostsPage from "./posts"
 import PostsFormFilter from "./posts.form.filter";
 
 const PostsContainer = ({pageContext: {node, nodes, terms}}) => {
+    const { t } = useTranslation();
+
     const normalizedCategories = normalizeTerms(terms);
     const normalizedNodes = normalizeNodes(nodes);
 
@@ -59,9 +62,9 @@ const PostsContainer = ({pageContext: {node, nodes, terms}}) => {
 
     return (
         <div>
-            <h1>Blogs</h1>
+            <h1>{t('Blogs')}</h1>
             {isLoading && <h3>Loading...</h3>}
-            {!isLoading && posts.length <= 0 && <h3>Aucun résultat.</h3>}
+            {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
             <PostsFormFilter terms={normalizedCategories} value={selectedTerm} handleChange={handleChange}/>
             {posts.length > 0 && <PostsPage posts={posts}/>}
         </div>

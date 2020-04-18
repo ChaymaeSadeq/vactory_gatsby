@@ -88,6 +88,32 @@ Api.get = async (model, params = {}, lang = null) => {
 };
 
 /**
+ *
+ * @param model
+ * @param params
+ * @param lang
+ * @returns {Promise<[]>}
+ */
+Api.getRest = async (model, params = {}, lang = null) => {
+    if (!Api.kitsu) {
+        throw "API has not been initialized. call init()";
+    }
+
+    // Without language prefix.
+    if (typeof lang === 'boolean') {
+        return await Api.kitsu.axios.get(`${Api.baseURL}${model}`, params);
+    } else if (typeof lang === 'string') {  // With language prefix.
+        return await Api.kitsu.axios.get(`${Api.baseURL}${lang}/${model}`, params);
+    }
+
+    // Multi language by default.
+    return await Promise.all(Api.languages.map(async lang => {
+        return await Api.kitsu.axios.get(`${Api.baseURL}${lang}/${model}`, params);
+    }));
+};
+
+
+/**
  * Init API
  *
  * @param {string} baseURL Backend URL
@@ -95,7 +121,7 @@ Api.get = async (model, params = {}, lang = null) => {
  * @param {Array} languages Languages supported by the backend
  * @returns null
  */
-Api.init = async (baseURL, headers = {}, languages = []) => {
+Api.init = (baseURL, headers = {}, languages = []) => {
     Api.initialized = true;
     Api.baseURL = baseURL;
     Api.languages = languages;
