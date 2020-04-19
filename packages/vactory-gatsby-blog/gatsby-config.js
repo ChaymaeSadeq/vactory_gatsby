@@ -46,7 +46,7 @@ module.exports = {
         {
             resolve: `vactory-gatsby-nodes`,
             options: {
-                title: "Source Blog",
+                title: "Source Blog Listing",
                 template: PostsTemplate,
                 amp: {
                     enabled: ampSettings.enabled,

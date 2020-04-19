@@ -3,7 +3,6 @@ import get from 'lodash.get';
 import {Jumbotron} from "./jumbotron";
 
 export const JumbotronContainer = ({data}) => {
-    console.log(data);
     const title = get(data, 'components.0.title');
     const description = get(data, 'components.0.description');
     const lead = get(data, 'components.0.lead');

@@ -2,11 +2,13 @@ const api = require('vactory-gatsby-api');
 const fse = require('fs-extra');
 const path = require('path');
 const os = require('os');
+const esmRequire = require('esm')(module);
+const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
 
 exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, parentSpan}, pluginOptions) => {
-    const apiConfig = pluginOptions.api;
-    const languagesConfig = pluginOptions.languages;
-    const widgetsConfig = pluginOptions.widgets;
+    const apiConfig = appConfig.api;
+    const languagesConfig = appConfig.languages;
+    const widgetsConfig = appConfig.widgets;
     const {program} = store.getState();
     let i18nTranslations = {
         resources: {},
@@ -21,6 +23,15 @@ exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, paren
     const translationActivity = reporter.activityTimer(`Download translations from Drupal`, {
         parentSpan,
     });
+
+    // Save Configuration
+    const configurationFile = `${__dirname}/.tmp/appConfig.json`;
+    try {
+        await fse.ensureFile(configurationFile);
+        await fse.writeJson(configurationFile, appConfig);
+    } catch (err) {
+        console.error(err)
+    }
 
     // Init API.
     api.init(
@@ -48,15 +59,6 @@ exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, paren
     try {
         await fse.ensureFile(translationsFile);
         await fse.writeJson(translationsFile, i18nTranslations);
-    } catch (err) {
-        console.error(err)
-    }
-
-    // Save received options
-    const optionsFile = `${__dirname}/.tmp/pluginOptions.json`;
-    try {
-        await fse.ensureFile(optionsFile);
-        await fse.writeJson(optionsFile, pluginOptions);
     } catch (err) {
         console.error(err)
     }
@@ -106,7 +108,7 @@ exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, paren
 
 exports.onCreatePage = ({page, actions}, pluginOptions) => {
     const {createPage, deletePage} = actions;
-    const {languages} = pluginOptions;
+    const {languages} = appConfig;
 
     if (
         page.path === "/404/" ||
@@ -141,7 +143,7 @@ exports.onCreatePage = ({page, actions}, pluginOptions) => {
 
 exports.createPages = ({actions}, pluginOptions) => {
     const {createRedirect} = actions
-    const {languages} = pluginOptions;
+    const {languages} = appConfig;
     const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
     createRedirect({

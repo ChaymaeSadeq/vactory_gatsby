@@ -4,6 +4,11 @@
 const manifestIcon = require.resolve(`./src/images/factory-logo.png`);
 const reduxCreateStore = require.resolve(`./src/state/createStore`);
 
+// Config
+const path = require('path');
+const esmRequire = require('esm')(module);
+const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
+
 module.exports = {
     plugins: [
         `gatsby-plugin-react-helmet`,

@@ -1,10 +1,10 @@
 import React from "react"
 import {useTranslation} from "react-i18next";
-import {CoreSettings} from 'vactory-gatsby-core'
+import {AppSettings} from 'vactory-gatsby-core'
 
 export default ({pageInfo, currentLanguage}) => {
     const {t} = useTranslation();
-    const languages = CoreSettings.languages.languageLabels;
+    const languages = AppSettings.languages.languageLabels;
 
     const switchLanguage = (selectedLng) => {
         const {path} = pageInfo.find(route => route.locale === selectedLng);

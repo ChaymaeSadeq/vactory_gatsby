@@ -2,10 +2,11 @@ import React from 'react';
 import Api from "vactory-gatsby-api"
 import {I18nextProvider} from 'react-i18next';
 import i18nInstance from './i18n/i18nInstance';
+import {AppSettings} from "vactory-gatsby-core"
 
 export const wrapRootElement = ({element}, pluginOptions) => {
-    const apiConfig = pluginOptions.api;
-    const lngConfig = pluginOptions.languages;
+    const apiConfig = AppSettings.api;
+    const lngConfig = AppSettings.languages;
 
     // Api configuration.
     Api.init(

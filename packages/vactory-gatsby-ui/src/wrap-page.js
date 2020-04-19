@@ -5,11 +5,8 @@ import Layout from './layouts/DefaultLayout'
 
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');
-    const pageInfo = get(props, 'pageContext.pageInfo');
-    const location = get(props, 'location');
-
-    console.log(location)
-    console.log(pageInfo)
+    // const pageInfo = get(props, 'pageContext.pageInfo');
+    // const location = get(props, 'location');
 
     if (node) {
         return (
