@@ -1,9 +1,9 @@
 import {WidgetsMapping} from "vactory-gatsby-ui";
-import {TestWidgetContainer} from "./testWidget/testWidget.container";
+import {ExampleWidgetContainer} from "./example-widget/example-widget.container";
 
 const widgets = {
     ...WidgetsMapping,
-    'vactory_bootstrap:5': TestWidgetContainer
+    'vactory_bootstrap:5': ExampleWidgetContainer
 };
 
 export default widgets
