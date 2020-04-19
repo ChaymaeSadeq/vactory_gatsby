@@ -1,0 +1,14 @@
+{
+  "name": "vactory-gatsby-page",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.6.0"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "vactory-gatsby-nodes": "*"
+  }
+}
