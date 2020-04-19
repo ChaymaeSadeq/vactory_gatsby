@@ -61,5 +61,8 @@ module.exports = {
             },
         },
         `vactory-gatsby-ui`,
+        {
+            resolve: `vactory-gatsby-page`,
+        }
     ]
 };

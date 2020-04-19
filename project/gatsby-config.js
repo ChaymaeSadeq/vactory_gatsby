@@ -16,11 +16,15 @@ module.exports = {
                         {code: "fr", label: "Français"},
                         {code: "ar", label: "العربية"},
                     ],
+                },
+                widgets: {
+                    pathToWidgetsMappingFile: './src/widgets/mapping',
+                    pathToAMPWidgetsMappingFile: './src/widgets/mapping.amp',
                 }
             }
         },
         {
             resolve: `vactory-gatsby-blog`,
-        }
+        },
     ],
 }
