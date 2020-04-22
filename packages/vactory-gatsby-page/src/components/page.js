@@ -3,7 +3,7 @@ import {ParagraphsController} from 'vactory-gatsby-ui'
 
 const Page = ({page}) => (
     <div>
-        {page.field_vactory_paragraphs.map((paragraph) => {
+        {page.field_vactory_paragraphs && page.field_vactory_paragraphs.map((paragraph) => {
             return (
                 <ParagraphsController key={paragraph.id} data={paragraph} hasAMP={false}/>
             )
