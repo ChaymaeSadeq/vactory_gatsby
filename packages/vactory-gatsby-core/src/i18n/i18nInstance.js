@@ -12,6 +12,10 @@ i18n
         fallbackLng: AppSettings.languages.defaultLanguage,
         whitelist: AppSettings.languages.availableLanguages,
         keySeparator: false,
+        // load: 'currentOnly',
+        initImmediate: false,
+        ns: ["translations"],
+        defaultNS: "translations",
         interpolation: {
             escapeValue: false
         },
@@ -24,6 +28,6 @@ i18n
             checkWhitelist: true,
             lookupQuerystring: "_lng",
         },
-    })
+    });
 
 export default i18n

@@ -35,8 +35,6 @@ module.exports = {
             options: appConfig.font,
         },
         `vactory-gatsby-ui`,
-        {
-            resolve: `vactory-gatsby-page`,
-        }
+        `vactory-gatsby-page`,
     ]
 };

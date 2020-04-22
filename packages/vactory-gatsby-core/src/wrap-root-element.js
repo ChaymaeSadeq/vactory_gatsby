@@ -1,10 +1,8 @@
 import React from 'react';
 import Api from "vactory-gatsby-api"
-import {I18nextProvider} from 'react-i18next';
-import i18nInstance from './i18n/i18nInstance';
 import {AppSettings} from "vactory-gatsby-core"
 
-export const wrapRootElement = ({element}, pluginOptions) => {
+export const wrapRootElement = ({element, pageContext}, pluginOptions) => {
     const apiConfig = AppSettings.api;
     const lngConfig = AppSettings.languages;
 
@@ -16,8 +14,8 @@ export const wrapRootElement = ({element}, pluginOptions) => {
     );
 
     return (
-        <I18nextProvider i18n={i18nInstance}>
+        <>
             {element}
-        </I18nextProvider>
+        </>
     )
 };
