@@ -108,7 +108,11 @@ Api.getRest = async (model, params = {}, lang = null) => {
 
     // Multi language by default.
     return await Promise.all(Api.languages.map(async lang => {
-        return await Api.kitsu.axios.get(`${Api.baseURL}${lang}/${model}`, params);
+        const response = await Api.kitsu.axios.get(`${Api.baseURL}${lang}/${model}`, params);
+        return {
+            locale: lang,
+            response
+        }
     }));
 };
 
