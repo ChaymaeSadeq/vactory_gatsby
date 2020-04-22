@@ -14,6 +14,7 @@ export default {
             {code: "ar", label: "العربية"},
         ],
     },
+    menus: ['main', 'footer'],
     widgets: {
         pathToWidgetsMappingFile: './src/widgets/mapping',
         pathToAMPWidgetsMappingFile: './src/widgets/mapping.amp',

@@ -2,12 +2,14 @@ const api = require('vactory-gatsby-api');
 const fse = require('fs-extra');
 const path = require('path');
 const os = require('os');
+const chalk = require("chalk");
 const esmRequire = require('esm')(module);
 const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
 
-exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, parentSpan}, pluginOptions) => {
+exports.onPreBootstrap = async ({store}, pluginOptions) => {
     const apiConfig = appConfig.api;
     const languagesConfig = appConfig.languages;
+    const enabledMenus = appConfig.menus;
     const widgetsConfig = appConfig.widgets;
     const {program} = store.getState();
     let i18nTranslations = {
@@ -19,10 +21,6 @@ exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, paren
             '[vactory-gatsby-core]: missing required option "pathToWidgetsMappingFile"',
         );
     }
-
-    const translationActivity = reporter.activityTimer(`Download translations from Drupal`, {
-        parentSpan,
-    });
 
     // Save Configuration
     const configurationFile = `${__dirname}/.tmp/appConfig.json`;
@@ -103,7 +101,45 @@ exports.onPreBootstrap = async ({store, cache, actions, emitter, reporter, paren
     }
     ;
 
-    translationActivity.end()
+
+    // Menus
+    const menusIds = enabledMenus;
+    let menuData = {
+        menus: []
+    };
+
+    for (const menu of menusIds) {
+        console.log(chalk.blue(`[\u25E6] ${menu}`));
+        try {
+            const results = await api.getRest('_menus', {
+                params: {
+                    menu_name: menu
+                }
+            });
+
+            for (const result of results) {
+                const {locale, response} = result;
+
+                menuData.menus.push({
+                    menu_name: menu,
+                    locale,
+                    items: response.data.json
+                })
+            }
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    // Save Menu
+    const menusFile = `${__dirname}/.tmp/menus.json`;
+    try {
+        await fse.ensureFile(menusFile);
+        await fse.writeJson(menusFile, menuData);
+    } catch (err) {
+        console.error(err)
+    }
 };
 
 exports.onCreatePage = ({page, actions}, pluginOptions) => {
