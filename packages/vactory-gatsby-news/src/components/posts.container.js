@@ -1,9 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
 import {useTranslation} from "react-i18next"
 import Api from "vactory-gatsby-api"
-import {postsQueryParams, normalizeNodes, normalizeTerms} from 'vactory-gatsby-news'
-import PostsPage from "./posts"
-import PostsFormFilter from "./posts.form.filter";
+import {postsQueryParams, normalizeNodes, normalizeTerms, PostsPage, PostsFormFilter} from 'vactory-gatsby-news'
 
 const PostsContainer = ({pageContext: {node, nodes, terms}}) => {
     const {t} = useTranslation();
