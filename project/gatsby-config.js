@@ -13,6 +13,7 @@ module.exports = {
         `vactory-gatsby-core`,
         `vactory-gatsby-blog`,
         `vactory-gatsby-news`,
-        `vactory-gatsby-press-kit`
+        `vactory-gatsby-press-kit`,
+        `vactory-gatsby-press-release`,
     ],
 };
