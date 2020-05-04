@@ -17,7 +17,14 @@ exports.createPages = async ({store, actions: {createPage}}, {
 }) => {
     console.log(chalk.green("[\u2713] " + title));
 
-    const response = await api.getAll(resource, params);
+    let response = [];
+    try {
+        response = await api.getAll(resource, params);
+    } catch (error) {
+        console.error(error);
+        return;
+    }
+
     const flattenNodes = [].concat(...response);
 
     // Merge nodes with translations.
