@@ -15,6 +15,7 @@
     "react-dom": "^16.12.0",
     "vactory-gatsby-blog": "*",
     "vactory-gatsby-core": "*",
+    "vactory-gatsby-events": "*",
     "vactory-gatsby-news": "*",
     "vactory-gatsby-press-kit": "*",
     "vactory-gatsby-press-release": "*"
