@@ -13,6 +13,7 @@
     "gatsby": "^2.20.12",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "vactory-gatsby-academy": "*",
     "vactory-gatsby-blog": "*",
     "vactory-gatsby-core": "*",
     "vactory-gatsby-events": "*",
