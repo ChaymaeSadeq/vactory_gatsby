@@ -16,5 +16,6 @@ module.exports = {
         `vactory-gatsby-press-kit`,
         `vactory-gatsby-press-release`,
         `vactory-gatsby-events`,
+        `vactory-gatsby-publication`,
     ],
 };

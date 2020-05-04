@@ -18,6 +18,7 @@
     "vactory-gatsby-events": "*",
     "vactory-gatsby-news": "*",
     "vactory-gatsby-press-kit": "*",
-    "vactory-gatsby-press-release": "*"
+    "vactory-gatsby-press-release": "*",
+    "vactory-gatsby-publication": "*"
   }
 }
