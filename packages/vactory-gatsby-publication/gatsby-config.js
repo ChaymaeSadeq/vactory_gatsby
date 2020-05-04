@@ -54,7 +54,7 @@ module.exports = {
                 },
                 resource: "node/vactory_page_listing",
                 params: {
-                    fields: {
+                    filter: {
                         field_view_id: 'publications'
                     }
                 },
