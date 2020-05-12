@@ -1,9 +1,9 @@
 import React from "react"
-import {useTranslation} from "react-i18next";
+// import {useTranslation} from "react-i18next";
 import {AppSettings} from 'vactory-gatsby-core'
 
-export default ({pageInfo, currentLanguage}) => {
-    const {t} = useTranslation();
+export const LanguageSelectorA = ({pageInfo, currentLanguage}) => {
+    // const {t} = useTranslation();
     const languages = AppSettings.languages.languageLabels;
 
     const switchLanguage = (selectedLng) => {
@@ -13,7 +13,7 @@ export default ({pageInfo, currentLanguage}) => {
 
     return (
         <div>
-            <label htmlFor="language-dropdown">{t('Langue')}</label>
+            {/*<label htmlFor="language-dropdown">{t('Langue')}</label>*/}
             <select
                 id="language-dropdown"
                 onBlur={null}

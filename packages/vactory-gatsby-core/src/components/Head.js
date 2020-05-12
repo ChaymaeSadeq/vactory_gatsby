@@ -38,10 +38,12 @@ function Head({title = '', meta, lang = ''}) {
 }
 
 Head.defaultProps = {
+    title: "",
     meta: "",
 };
 
 Head.propTypes = {
+    title: PropTypes.string,
     meta: PropTypes.string,
 };
 

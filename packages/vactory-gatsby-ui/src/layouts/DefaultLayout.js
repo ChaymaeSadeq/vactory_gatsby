@@ -1,13 +1,15 @@
 import React from "react"
-import {DefaultLanguageDropdown} from '../components/language-dropdown'
-import {DefaultMenu} from '../components/menus/DefaultMenu'
+import {HeaderA as Header} from '../components/headers/headerA'
+import {FooterA as Footer} from "../components/footers/footerA";
 
 export default ({children, location, pageContext: {node, pageInfo}}) => {
     return (
         <>
-            <DefaultLanguageDropdown pageInfo={pageInfo} currentLanguage={node.langcode}/>
-            <DefaultMenu/>
-            {children}
+            <Header pageInfo={pageInfo} currentLanguage={node.langcode} />
+            <main>
+                {children}
+            </main>
+            <Footer />
         </>
     )
 }
