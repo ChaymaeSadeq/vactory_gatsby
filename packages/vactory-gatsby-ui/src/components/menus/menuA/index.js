@@ -1,7 +1,7 @@
 import React from "react"
 import {Box, Nav, Navs} from "vactory-ui";
 import {useMenu} from 'vactory-gatsby-core'
-// import {Link} from 'vactory-gatsby-ui'
+import {Link} from 'vactory-gatsby-ui'
 
 export const MenuA = () => {
     const items = useMenu('main');
@@ -11,7 +11,7 @@ export const MenuA = () => {
             <Navs>
                 {items.map(item => {
                     return (
-                        <Nav key={item.id} href={item.url}>{item.title}</Nav>
+                        <Nav key={item.id} as={Link} to={item.url}>{item.title}</Nav>
                     )
                 })}
             </Navs>
