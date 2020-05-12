@@ -4,22 +4,22 @@ import {MenuA as MenuNavigation} from '../../menus/menuA'
 import {LanguageSelectorA as LanguageSelector} from "../../language-selectors/languageSelectorA";
 
 
-const CloseButton = ({ size = 'large', ...props }) =>
-    <Button {...props}
-            sx={{
-                transform: 'rotate(45deg)',
-                padding: '0',
-                background: 'transparent',
-                '&:hover, &:focus': {
-                    background: 'transparent',
-                    color: 'inherit',
-                    borderColor: 'transparent'
-                }
-            }}
-            size="none"
-            onClick={props.onClick}>
-        <Icon name="add-simple" size={size} />
-    </Button>
+// const CloseButton = ({ size = 'large', ...props }) =>
+//     <Button {...props}
+//             sx={{
+//                 transform: 'rotate(45deg)',
+//                 padding: '0',
+//                 background: 'transparent',
+//                 '&:hover, &:focus': {
+//                     background: 'transparent',
+//                     color: 'inherit',
+//                     borderColor: 'transparent'
+//                 }
+//             }}
+//             size="none"
+//             onClick={props.onClick}>
+//         <Icon name="add-simple" size={size} />
+//     </Button>
 
 const MenuButton = ({ size = 'large', ...props }) =>
     <Button {...props}
