@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from "react"
 import {useTranslation} from "react-i18next"
 import Api from "vactory-gatsby-api"
 import {postsQueryParams, normalizeNodes, normalizeTerms, PostsPage, PostsFormFilter} from 'vactory-gatsby-news'
+import {Heading} from 'vactory-ui'
 
 const PostsContainer = ({pageContext: {node, nodes, terms}}) => {
     const {t} = useTranslation();
@@ -58,7 +59,7 @@ const PostsContainer = ({pageContext: {node, nodes, terms}}) => {
 
     return (
         <div>
-            <h1>{t('News')}</h1>
+            <Heading level={2}>{t('News')}</Heading>
             {isLoading && <h3>Loading...</h3>}
             {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
             <PostsFormFilter terms={normalizedCategories} value={selectedTerm} handleChange={handleChange}/>
