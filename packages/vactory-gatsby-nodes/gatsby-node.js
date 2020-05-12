@@ -17,6 +17,9 @@ exports.createPages = async ({store, actions: {createPage}}, {
 }) => {
     console.log(chalk.green("[\u2713] " + title));
 
+    // @todo: benchmark this, maybe add cache to it.
+    const {breadcrumbs} = await fse.readJson(`${__dirname}/../vactory-gatsby-core/.tmp/breadcrumbs.json`);
+
     let response = [];
     try {
         response = await api.getAll(resource, params);
@@ -58,6 +61,8 @@ exports.createPages = async ({store, actions: {createPage}}, {
 
         for (let node of i18nNodes) {
             let extraContext = {};
+            const nodeBreadcrumb = breadcrumbs.find(link => link.path === node.path.alias);
+            const nodeBreadcrumbItems = nodeBreadcrumb ? nodeBreadcrumb.items : [];
 
             // Override langcode.
             node.langcode = node.path.langcode;
@@ -84,6 +89,7 @@ exports.createPages = async ({store, actions: {createPage}}, {
                 component: template,
                 context: {
                     node: node,
+                    breadcrumb: nodeBreadcrumbItems,
                     pageInfo,
                     ...extraContext,
                 },
