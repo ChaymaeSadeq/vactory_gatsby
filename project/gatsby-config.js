@@ -11,6 +11,12 @@ require('dotenv').config({
 module.exports = {
     plugins: [
         `vactory-gatsby-core`,
-        `vactory-gatsby-blog`
+        `vactory-gatsby-blog`,
+        `vactory-gatsby-news`,
+        `vactory-gatsby-press-kit`,
+        `vactory-gatsby-press-release`,
+        `vactory-gatsby-events`,
+        `vactory-gatsby-publication`,
+        `vactory-gatsby-academy`,
     ],
 };
