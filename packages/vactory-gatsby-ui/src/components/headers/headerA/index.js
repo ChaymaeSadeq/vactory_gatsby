@@ -1,5 +1,5 @@
 import React from "react"
-import {Box, Header, Text, Layer, Button, Icon, Flex} from "vactory-ui";
+import {Box, Header, Layer, Button, Icon, Flex} from "vactory-ui";
 import {MenuA as MenuNavigation} from '../../menus/menuA'
 import {LanguageSelectorA as LanguageSelector} from "../../language-selectors/languageSelectorA";
 import {Link} from 'vactory-gatsby-ui'
@@ -22,7 +22,7 @@ import {Link} from 'vactory-gatsby-ui'
 //         <Icon name="add-simple" size={size} />
 //     </Button>
 
-const MenuButton = ({ size = 'large', ...props }) =>
+const MenuButton = ({size = 'large', ...props}) =>
     <Button {...props}
             sx={{
                 padding: '0',
@@ -36,7 +36,7 @@ const MenuButton = ({ size = 'large', ...props }) =>
             }}
             size="none"
             onClick={props.onClick}>
-        <Icon name="menu" size={size} />
+        <Icon name="menu" size={size}/>
     </Button>
 
 export const HeaderA = ({pageInfo, currentLanguage}) => {
@@ -45,24 +45,24 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
     return (
         <Box>
             <Header p="large" bg="white" boxShadow={1}>
-                <Box>
-                    <Text textAlign="center" fontWeight="black" fontSize="14px"
-                          sx={{
-                              px: 3,
-                              py: 3,
-                              textTransform: 'uppercase',
-                              letterSpacing: '0.1em',
-                              border: '4px solid',
-                              color: 'primary500',
-                          }}
-
+                <Box flexGrow={[1, 1, 0, 0]}>
+                    <Box display="inline-block" textAlign="center" fontWeight="black" fontSize="14px"
+                         sx={{
+                             px: 3,
+                             py: 3,
+                             textTransform: 'uppercase',
+                             letterSpacing: '0.1em',
+                             border: '4px solid',
+                             color: 'primary500',
+                         }}
                     >
-                        <Link to={`/${currentLanguage}`}>VACTORY</Link>
-                    </Text>
+                        <Link color="primary500" to={`/${currentLanguage}`}>VACTORY</Link>
+                    </Box>
                 </Box>
                 <Box display={['none', 'none', 'block']}><MenuNavigation/></Box>
                 <LanguageSelector currentLanguage={currentLanguage} pageInfo={pageInfo}/>
-                <Box display={['block', null, 'none']} color="gray900" ><MenuButton onClick={() => setShowSidebarMenu(true)} /> </Box>
+                <Box display={['block', null, 'none']} color="gray900"><MenuButton
+                    onClick={() => setShowSidebarMenu(true)}/> </Box>
 
                 {showSidebarMenu && (
                     <Layer
@@ -71,7 +71,7 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
                         modal={true}
                         responsive
                         plain={true}
-                        onClickOutside={() => setShowSidebarMenu(false)} >
+                        onClickOutside={() => setShowSidebarMenu(false)}>
                         <Flex sx={{
                             backgroundColor: '#383838',
                             color: 'white',

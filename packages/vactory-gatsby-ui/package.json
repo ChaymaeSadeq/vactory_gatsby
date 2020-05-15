@@ -14,6 +14,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "react-loading-overlay": "^1.0.1",
     "styled-components": "^5.1.0",
+    "styled-system": "^5.1.5",
     "vactory-ui": "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git"
   }
 }

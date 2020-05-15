@@ -60,6 +60,11 @@ const SearchContainer = ({pageContext: {node}}) => {
                 {pageItems.length > 0 &&
                 <Posts posts={pageItems}/>
                 }
+                {!isLoading && pageItems.length <= 0 &&
+                <Paragraph my="medium" textAlign="center">
+                    {t("Aucun résultat trouvé pour votre recherche.")}
+                </Paragraph>
+                }
             </LoadingOverlay>
 
             {pageItems.length > 0 &&
