@@ -7,7 +7,9 @@ export const Link = props => {
     const isFile = /^\/sites\/default\/(?!\/)/.test(to)
 
     if (internal && !isFile) {
-        return <GatsbyLink {...props}>{props.children}</GatsbyLink>
+        return <GatsbyLink style={{
+            textDecoration: 'none'
+        }} {...props}>{props.children}</GatsbyLink>
     }
 
     if (isFile) {
