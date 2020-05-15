@@ -2,6 +2,7 @@ import React from "react"
 import {Box, Header, Text, Layer, Button, Icon, Flex} from "vactory-ui";
 import {MenuA as MenuNavigation} from '../../menus/menuA'
 import {LanguageSelectorA as LanguageSelector} from "../../language-selectors/languageSelectorA";
+import {Link} from 'vactory-gatsby-ui'
 
 
 // const CloseButton = ({ size = 'large', ...props }) =>
@@ -44,7 +45,21 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
     return (
         <Box>
             <Header p="large" bg="white" boxShadow={1}>
-                <Box><Text textAlign="center" fontWeight="black" fontSize="14px" color="primary500">LOGO</Text></Box>
+                <Box>
+                    <Text textAlign="center" fontWeight="black" fontSize="14px"
+                          sx={{
+                              px: 3,
+                              py: 3,
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.1em',
+                              border: '4px solid',
+                              color: 'primary500',
+                          }}
+
+                    >
+                        <Link to={`/${currentLanguage}`}>VACTORY</Link>
+                    </Text>
+                </Box>
                 <Box display={['none', 'none', 'block']}><MenuNavigation/></Box>
                 <LanguageSelector currentLanguage={currentLanguage} pageInfo={pageInfo}/>
                 <Box display={['block', null, 'none']} color="gray900" ><MenuButton onClick={() => setShowSidebarMenu(true)} /> </Box>
