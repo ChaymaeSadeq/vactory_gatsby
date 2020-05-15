@@ -1,9 +1,8 @@
 import React from "react"
 import classNames from "classnames"
-import ParagraphsContainer from "./paragraphs.container"
-import ParagraphsTemplate from "./pargaraphs.template"
+import {ParagraphsContainer, ParagraphsTemplate} from "vactory-gatsby-ui"
 
-export default (props) => {
+export const ParagraphsController = (props) => {
     const {hasAMP = false} = props;
     const {
         type,
@@ -43,4 +42,4 @@ export default (props) => {
             {childComponent}
         </ParagraphsContainer>
     )
-}
+};

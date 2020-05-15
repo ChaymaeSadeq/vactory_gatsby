@@ -7,8 +7,8 @@ const layoutClasses = {
     no_container: "no-container",
 };
 
-export default ({children, id, style, layout, className}) => {
-    const layoutClass = layoutClasses[layout]
+export const ParagraphsContainer = ({children, id, style, layout, className}) => {
+    const layoutClass = layoutClasses[layout];
     const isBackgroundSolid = style.backgroundColor ? 'has-background' : null;
 
     return (
@@ -18,4 +18,4 @@ export default ({children, id, style, layout, className}) => {
             </div>
         </div>
     )
-}
+};

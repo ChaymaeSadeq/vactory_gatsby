@@ -1,7 +1,11 @@
-import {JumbotronContainer} from "vactory-gatsby-ui";
+import {
+    TabsContainer,
+    AccordionContainer,
+} from "vactory-gatsby-ui";
 
 const widgets = {
-    'vactory_bootstrap:3': JumbotronContainer
+    'vactory_core_ui:tabs': TabsContainer,
+    'vactory_core_ui:accordion': AccordionContainer,
 };
 
 export default widgets

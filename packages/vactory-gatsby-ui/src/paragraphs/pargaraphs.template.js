@@ -1,7 +1,7 @@
 import React from "react"
 import {WidgetsMapping, WidgetsAmpMapping} from 'vactory-gatsby-core';
 
-export default (props) => {
+export const ParagraphsTemplate = (props) => {
     const {id, settings, hasAMP = false, ...rest} = props;
     let Component = hasAMP ? WidgetsAmpMapping[id] : WidgetsMapping[id];
 
@@ -18,4 +18,4 @@ export default (props) => {
             <Component data={settings} {...rest} />
         </div>
     )
-}
+};
