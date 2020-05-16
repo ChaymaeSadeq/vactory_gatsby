@@ -14,8 +14,8 @@ i18n
         keySeparator: false,
         // load: 'currentOnly',
         initImmediate: false,
-        ns: ["translations"],
-        defaultNS: "translations",
+        // ns: ["translations"],
+        // defaultNS: "translations",
         interpolation: {
             escapeValue: false
         },
