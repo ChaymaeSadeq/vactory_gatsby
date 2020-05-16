@@ -1,7 +1,7 @@
 import React from 'react';
 import get from 'lodash.get';
 import {Head} from 'vactory-gatsby-core'
-import Layout from './layouts/DefaultLayout'
+import {DefaultLayout as Layout} from 'vactory-gatsby-ui'
 import {theme as vactoryTheme, ColorModeProvider, DirectionManager, GlobalStyle} from 'vactory-ui';
 import {ThemeProvider} from 'styled-components';
 import deepmerge from 'deepmerge';

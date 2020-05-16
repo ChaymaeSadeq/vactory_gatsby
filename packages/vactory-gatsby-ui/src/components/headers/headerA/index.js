@@ -1,9 +1,10 @@
 import React from "react"
 import {Box, Header, Layer, Button, Icon, Flex} from "vactory-ui";
-import {MenuA as MenuNavigation} from '../../menus/menuA'
-import {LanguageSelectorA as LanguageSelector} from "../../language-selectors/languageSelectorA";
-import {Link} from 'vactory-gatsby-ui'
-
+import {
+    MenuA as MenuNavigation,
+    LanguageSelectorA as LanguageSelector,
+    Link
+} from 'vactory-gatsby-ui'
 
 // const CloseButton = ({ size = 'large', ...props }) =>
 //     <Button {...props}
