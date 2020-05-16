@@ -11,16 +11,53 @@ breakpoints.xs = '0px';
 breakpoints.lg = '1280px';
 breakpoints.xl = '1920px';
 
-
 const buttons = {
     fill: {
-        success : {
+        success: {
             backgroundColor: 'success500',
         },
     }
 };
 
+const navs = {
+    ancre: {
+        alignItems: 'start',
+        nav: {
+            padding: '0px',
+            fontSize: '14px',
+            fontWeight: 500,
+            color: '#000000',
+            textTransform: 'uppercase',
+            px: '16px',
+            py: ['16px', '0'],
+            borderWidth: ['0', '2px'],
+            borderStyle: 'solid',
+            borderColor: 'gray500',
+            borderTop: '0px',
+            borderBottom: '0px',
+            '&:first-of-type': {
+                border: '0px',
+            },
+            '&:last-of-type': {
+                border: '0px',
+            },
+            ':hover': {
+                color: '#017CFE'
+            }
+
+        },
+        activeNav: {
+            color: '#017CFE',
+            fontWeight: 600,
+            ':hover': {
+                color: '#017CFE'
+            }
+        },
+    }
+}
+
 export const theme = {
     breakpoints,
-    buttons
+    buttons,
+    navs
 };
