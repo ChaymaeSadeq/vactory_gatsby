@@ -1,21 +1,35 @@
 import React from "react"
 import classNames from "classnames"
+import {Container, Row, Col} from 'vactory-ui'
 
-const layoutClasses = {
-    narrow_width: "container",
-    full_width: "container-fluid",
-    no_container: "no-container",
+const NarrowContainer = ({children}) => {
+    return (<Container><Row><Col>{children}</Col></Row></Container>)
 };
 
+const FullContainer = ({children}) => {
+    return (<Container fluid={true}>{children}</Container>)
+};
+
+const NoContainer = ({children}) => {
+    return (<div>{children}</div>)
+};
+
+const layoutsMapping = {
+    narrow_width: NarrowContainer,
+    full_width: FullContainer,
+    no_container: NoContainer,
+};
+
+
 export const ParagraphsContainer = ({children, id, style, layout, className}) => {
-    const layoutClass = layoutClasses[layout];
+    const LayoutComponent = layoutsMapping[layout];
     const isBackgroundSolid = style.backgroundColor ? 'has-background' : null;
 
     return (
         <div className={classNames(className, isBackgroundSolid)} style={style} id={id}>
-            <div className={classNames(layoutClass)}>
+            <LayoutComponent>
                 {children}
-            </div>
+            </LayoutComponent>
         </div>
     )
 };
