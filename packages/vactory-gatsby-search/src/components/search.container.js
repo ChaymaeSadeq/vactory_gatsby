@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next"
 import * as queryString from "query-string"
 import isClient from "is-client"
 import Api from "vactory-gatsby-api"
-import Posts from "./posts"
+import {searchPageSize, SearchPosts} from 'vactory-gatsby-search'
 import {Paragraph, Container} from "vactory-ui";
 import {Pagination, LoadingOverlay} from 'vactory-gatsby-ui'
 
@@ -14,10 +14,9 @@ const SearchContainer = ({pageContext: {node}}) => {
     const [pageItems, setPageItems] = useState([]);
     const [pager, setPager] = useState(1);
     const isFrontClient = isClient();
-    const pageSize = 5;
+    const pageSize = searchPageSize;
     const queryParams = isFrontClient ? queryString.parse(window.location.search) : {q: ""};
     const {q} = queryParams || "";
-
 
     const handlePaginationChange = (selected) => {
         setPager(selected)
@@ -46,7 +45,7 @@ const SearchContainer = ({pageContext: {node}}) => {
                 })
         };
         fetchData()
-    }, [pager, q, node.langcode]);
+    }, [pager, q, node.langcode, pageSize]);
 
     return (
         <Container>
@@ -58,7 +57,7 @@ const SearchContainer = ({pageContext: {node}}) => {
 
             <LoadingOverlay active={isLoading}>
                 {pageItems.length > 0 &&
-                <Posts posts={pageItems}/>
+                <SearchPosts posts={pageItems}/>
                 }
                 {!isLoading && pageItems.length <= 0 &&
                 <Paragraph my="medium" textAlign="center">

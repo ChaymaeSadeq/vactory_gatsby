@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next"
 import {Link} from 'vactory-gatsby-ui'
 import {Box, Heading, Paragraph, Button} from "vactory-ui";
 
-const Posts = ({posts}) => {
+export const SearchPosts = ({posts}) => {
     const {t} = useTranslation();
 
     return (
@@ -35,5 +35,3 @@ const Posts = ({posts}) => {
         </Box>
     )
 }
-
-export default Posts
