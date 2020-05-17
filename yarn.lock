@@ -1486,6 +1486,25 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@react-google-maps/api@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-1.9.0.tgz#252c411687a490b6f20ad89d699a127d8e144e72"
+  integrity sha512-rDFJW18zir92dy9AqbT6KvtQt7vTxbR4o6mUg4I8igadEzM8CTH5zR+CIWKfMy89Bc2hZJVMHU/2+zPu63VHRw==
+  dependencies:
+    "@react-google-maps/infobox" "1.8.7"
+    "@react-google-maps/marker-clusterer" "1.8.7"
+    invariant "2.2.4"
+
+"@react-google-maps/infobox@1.8.7":
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-1.8.7.tgz#0e0c293c3f1bd4a07fddda4a762e2b43f45ba3ff"
+  integrity sha512-QKblFDfiWrBnuGui940YxH7OComeh+fpZ6yr1oDv/bZmWKMxTtOiv64uPmXS5ORCxBX0i5G/JiCCKbznvvMkzQ==
+
+"@react-google-maps/marker-clusterer@1.8.7":
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-1.8.7.tgz#7b357cc627056231cd63b75cf383246a174605d4"
+  integrity sha512-sJf5rhBVcykCZ5dmBCeoScRpXGq10KsDe+9AaztLTltaJaHtIV3oL6JMmUHWV0TA3IN69kz0CpjR8rQkeUH72A==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -6482,6 +6501,11 @@ functions-have-names@^1.2.0:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.1.tgz#a981ac397fa0c9964551402cdc5533d7a4d52f91"
   integrity sha512-j48B/ZI7VKs3sgeI2cZp7WXWmZXu7Iq5pl5/vptV5N2mq+DGFuS/ulaDjtaoLpYzuD6u8UgrUKHfgo7fDTSiBA==
 
+fuse.js@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-6.0.0.tgz#6fc16cd7555648deda392892402d4188553552b2"
+  integrity sha512-e5Ap6mhF/WQ9bKqsMFTTR5/DS9qbYab4VXHtMdxCanH+VZkdUV2LqcgMO31etSQv53NXsguQF1bdqkrrPAM2HQ==
+
 gatsby-cli@^2.11.8:
   version "2.11.8"
   resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.11.8.tgz#1517ae1aaef09e95b16d18c4bd6715bf6a43d354"
@@ -7960,7 +7984,7 @@ into-stream@^3.1.0:
     from2 "^2.1.1"
     p-is-promise "^1.1.0"
 
-invariant@^2.2.0, invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.0, invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==

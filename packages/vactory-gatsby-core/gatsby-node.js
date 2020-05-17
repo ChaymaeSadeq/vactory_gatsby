@@ -6,9 +6,26 @@ const chalk = require("chalk");
 const esmRequire = require('esm')(module);
 const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
 
-exports.onPreBootstrap = async ({store}, pluginOptions) => {
+/**
+ * Only one instance of this is allowed.
+ *
+ * @param _
+ * @param pluginOptions
+ * @returns {Promise<void>}
+ */
+exports.onPreInit = async (_, pluginOptions) => {
     const apiConfig = appConfig.api;
     const languagesConfig = appConfig.languages;
+
+    // Init API.
+    api.init(
+        apiConfig.url,
+        apiConfig.headers,
+        languagesConfig.availableLanguages
+    );
+};
+
+exports.onPreBootstrap = async ({store}, pluginOptions) => {
     const enabledMenus = appConfig.menus;
     const widgetsConfig = appConfig.widgets;
     const {program} = store.getState();
@@ -30,13 +47,6 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
     } catch (err) {
         console.error(err)
     }
-
-    // Init API.
-    api.init(
-        apiConfig.url,
-        apiConfig.headers,
-        languagesConfig.availableLanguages
-    );
 
     // Get translations.
     console.log(chalk.green("[\u2713] Source Translations"));
@@ -76,7 +86,7 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
             breadcrumbData.breadcrumbs.push(response.data)
         }
 
-        breadcrumbData.breadcrumbs = breadcrumbData.breadcrumbs.reduce(function(arr, row) {
+        breadcrumbData.breadcrumbs = breadcrumbData.breadcrumbs.reduce(function (arr, row) {
             return arr.concat(row)
         }, []);
 

@@ -12,6 +12,7 @@ module.exports = {
     plugins: [
         `vactory-gatsby-core`,
         `vactory-gatsby-search`,
+        `vactory-gatsby-map`,
         `vactory-gatsby-blog`,
         `vactory-gatsby-news`,
         `vactory-gatsby-press-kit`,
