@@ -17,9 +17,11 @@
     "vactory-gatsby-blog": "*",
     "vactory-gatsby-core": "*",
     "vactory-gatsby-events": "*",
+    "vactory-gatsby-map": "*",
     "vactory-gatsby-news": "*",
     "vactory-gatsby-press-kit": "*",
     "vactory-gatsby-press-release": "*",
-    "vactory-gatsby-publication": "*"
+    "vactory-gatsby-publication": "*",
+    "vactory-gatsby-search": "*"
   }
 }

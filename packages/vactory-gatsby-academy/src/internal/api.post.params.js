@@ -1,6 +1,6 @@
 export const params = {
     fields: {
-        "node--academy": "drupal_internal__nid,langcode,title,path,body,field_vactory_excerpt,field_vactory_taxonomy_1,field_vactory_media_image,comment,field_vactory_academy_duration,field_vactory_academy_language,field_vactory_date,field_vactory_meta_tags,field_vactory_youtube_videos,field_vactory_instructor,field_vactory_media_document,field_vactory_paragraphs",
+        "node--academy": "drupal_internal__nid,langcode,title,path,body,field_vactory_excerpt,field_vactory_taxonomy_1,field_vactory_media_image,comment,field_vactory_academy_duration,field_vactory_academy_language,field_vactory_date,field_vactory_meta_tags,field_vactory_youtube_videos,field_vactory_instructor,field_vactory_media_document,field_vactory_paragraphs,internal_node_banner",
         "media--image": "thumbnail",
         "file--image": "uri",
         "media--document": "thumbnail",

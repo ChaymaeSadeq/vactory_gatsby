@@ -1,6 +1,7 @@
 const Kitsu = require("kitsu");
 const https = require("https");
 const lodashGet = require("lodash.get");
+const url = require('url');
 
 var Api = {
     kitsu: null,
@@ -14,7 +15,7 @@ var Api = {
  * @param params
  * @returns {Promise<[]>}
  */
-Api.getAll = async (model, params = {}) => {
+Api.getAll = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
         throw "API has not been initialized. call init()";
     }
@@ -41,11 +42,23 @@ Api.getAll = async (model, params = {}) => {
     };
 
     // Make a call.
+    let response = null;
     const originalBaseURL = Api.kitsu.axios.defaults.baseURL;
-    const response = await Promise.all(Api.languages.map(async lang => {
+
+    if (lang) {
         Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
-        return await getData([], model, params)
-    }));
+        response = await getData([], model, params)
+    } else {
+        response = await Promise.all(Api.languages.map(async lang => {
+            Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
+            return await getData([], model, params)
+        }));
+    }
+    //
+    // const response = await Promise.all(Api.languages.map(async lang => {
+    //     Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
+    //     return await getData([], model, params)
+    // }));
 
     // Restore baseURL.
     Api.kitsu.axios.defaults.baseURL = originalBaseURL;

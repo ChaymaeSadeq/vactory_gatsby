@@ -1,0 +1,50 @@
+export const mapOptions = {
+    fullscreenControl: false,
+    streetViewControl: false,
+    mapTypeControl: false,
+    styles: [{ featureType: "administrative.country", stylers: [{ visibility: "off" }] },
+        { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#f15a48" }] },
+        { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#5e5e5e" }] },
+        {
+            "featureType": "road.highway",
+            "elementType": "labels.icon",
+            "stylers": [{ "hue": "#000000" }, { "lightness": 0 }],
+        },
+        { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "weight": 0.16 }] },
+        { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [{ "color": "#f37740" }] },
+        { "featureType": "transit.station.rail", "elementType": "labels.icon", "stylers": [{ "hue": "#000000" }] },
+        { "featureType": "transit.station.bus", "elementType": "labels.icon", "stylers": [{ "hue": "#000000" }] },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry.fill",
+            "stylers": [{ "color": "#f68f43" }, { "lightness": 23 }],
+        },
+        {
+            "featureType": "poi.medical",
+            "elementType": "geometry.fill",
+            "stylers": [{ "color": "#f37740" }, { "saturation": -12 }, { "lightness": 59 }],
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry.fill",
+            "stylers": [{ "visibility": "on" }, { "color": "#f37740" }, { "hue": "#301c0d" }, { "saturation": 0 }, { "lightness": 63 }],
+        },
+        { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "hue": "#d97127" }] },
+        { "featureType": "road.local", "elementType": "labels.icon", "stylers": [{ "hue": "#cfa136" }] },
+        {
+            "featureType": "landscape.natural.terrain",
+            "elementType": "geometry.fill",
+            "stylers": [{ "color": "#fdb813" }, { "lightness": 44 }],
+        },
+        //{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"color":"#fdb813"}]},
+        {
+            "featureType": "landscape.natural",
+            "elementType": "geometry.fill",
+            "stylers": [{ "hue": "#f68d43" }, { "saturation": 64 }, { "lightness": 19 }],
+        },
+        {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [{ "hue": "#ff9326" }, { "lightness": 24 }],
+        }],
+}

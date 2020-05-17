@@ -9,6 +9,15 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "styled-components": "^5.1.0"
+    "deepmerge": "^4.2.2",
+    "gatsby-plugin-styled-components": "^3.3.1",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
+    "html-react-parser": "^0.10.3",
+    "icomoon-react": "^2.0.16",
+    "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-loading-overlay": "^1.0.1",
+    "styled-components": "^5.1.0",
+    "styled-system": "^5.1.5",
+    "vactory-ui": "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git"
   }
 }

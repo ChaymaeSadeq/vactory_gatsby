@@ -6,9 +6,26 @@ const chalk = require("chalk");
 const esmRequire = require('esm')(module);
 const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
 
-exports.onPreBootstrap = async ({store}, pluginOptions) => {
+/**
+ * Only one instance of this is allowed.
+ *
+ * @param _
+ * @param pluginOptions
+ * @returns {Promise<void>}
+ */
+exports.onPreInit = async (_, pluginOptions) => {
     const apiConfig = appConfig.api;
     const languagesConfig = appConfig.languages;
+
+    // Init API.
+    api.init(
+        apiConfig.url,
+        apiConfig.headers,
+        languagesConfig.availableLanguages
+    );
+};
+
+exports.onPreBootstrap = async ({store}, pluginOptions) => {
     const enabledMenus = appConfig.menus;
     const widgetsConfig = appConfig.widgets;
     const {program} = store.getState();
@@ -31,19 +48,14 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
         console.error(err)
     }
 
-    // Init API.
-    api.init(
-        apiConfig.url,
-        apiConfig.headers,
-        languagesConfig.availableLanguages
-    );
-
+    // Get translations.
+    console.log(chalk.green("[\u2713] Source Translations"));
     try {
         const response = await api.getRest('_translations', {}, false);
         response.data.resources.forEach(({locale, translations}) => {
             i18nTranslations.resources[locale] = {
                 translation: {},
-            }
+            };
             translations.forEach(({source, translation}) => {
                 i18nTranslations.resources[locale]["translation"][source] = translation
             })
@@ -57,6 +69,36 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
     try {
         await fse.ensureFile(translationsFile);
         await fse.writeJson(translationsFile, i18nTranslations);
+    } catch (err) {
+        console.error(err)
+    }
+
+    // Get breadcrumbs.
+    console.log(chalk.green("[\u2713] Source Breadcrumbs"));
+    let breadcrumbData = {
+        breadcrumbs: []
+    };
+    try {
+        const results = await api.getRest('_breadcrumb');
+
+        for (const result of results) {
+            const {response} = result;
+            breadcrumbData.breadcrumbs.push(response.data)
+        }
+
+        breadcrumbData.breadcrumbs = breadcrumbData.breadcrumbs.reduce(function (arr, row) {
+            return arr.concat(row)
+        }, []);
+
+    } catch (error) {
+        console.error(error)
+    }
+
+    // Save breadcrumb
+    const breadcrumbFile = `${__dirname}/.tmp/breadcrumbs.json`;
+    try {
+        await fse.ensureFile(breadcrumbFile);
+        await fse.writeJson(breadcrumbFile, breadcrumbData);
     } catch (err) {
         console.error(err)
     }
@@ -103,6 +145,7 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
 
 
     // Menus
+    console.log(chalk.green("[\u2713] Source Menus"));
     const menusIds = enabledMenus;
     let menuData = {
         menus: []

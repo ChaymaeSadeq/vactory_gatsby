@@ -1,0 +1,17 @@
+{
+  "name": "vactory-gatsby-map",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.6.0"
+  },
+  "dependencies": {
+    "@react-google-maps/api": "^1.9.0",
+    "esm": "^3.2.25",
+    "fuse.js": "^6.0.0",
+    "vactory-gatsby-core": "*",
+    "vactory-gatsby-nodes": "*"
+  }
+}
