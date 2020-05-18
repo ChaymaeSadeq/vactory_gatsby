@@ -55,7 +55,7 @@ const PostsContainer = ({pageContext: {node, nodes, cities, contracts, professio
 
                 if(selectedCity === "all")
                     cityFilter = {};
-                if(selectedProfession === "all")
+                if(selectedContract === "all")
                     contractFilter = {};
                 if(selectedProfession === "all")
                     professionFilter = {};
