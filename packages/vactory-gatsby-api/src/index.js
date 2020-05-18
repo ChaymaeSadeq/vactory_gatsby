@@ -1,6 +1,7 @@
 const Kitsu = require("kitsu");
 const https = require("https");
 const lodashGet = require("lodash.get");
+const url = require('url');
 
 var Api = {
     kitsu: null,
@@ -14,7 +15,7 @@ var Api = {
  * @param params
  * @returns {Promise<[]>}
  */
-Api.getAll = async (model, params = {}) => {
+Api.getAll = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
         throw "API has not been initialized. call init()";
     }
@@ -41,11 +42,23 @@ Api.getAll = async (model, params = {}) => {
     };
 
     // Make a call.
+    let response = null;
     const originalBaseURL = Api.kitsu.axios.defaults.baseURL;
-    const response = await Promise.all(Api.languages.map(async lang => {
+
+    if (lang) {
         Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
-        return await getData([], model, params)
-    }));
+        response = await getData([], model, params)
+    } else {
+        response = await Promise.all(Api.languages.map(async lang => {
+            Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
+            return await getData([], model, params)
+        }));
+    }
+    //
+    // const response = await Promise.all(Api.languages.map(async lang => {
+    //     Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
+    //     return await getData([], model, params)
+    // }));
 
     // Restore baseURL.
     Api.kitsu.axios.defaults.baseURL = originalBaseURL;
@@ -109,6 +122,36 @@ Api.getRest = async (model, params = {}, lang = null) => {
     // Multi language by default.
     return await Promise.all(Api.languages.map(async lang => {
         const response = await Api.kitsu.axios.get(`${Api.baseURL}${lang}/${model}`, params);
+        return {
+            locale: lang,
+            response
+        }
+    }));
+};
+
+/**
+ *
+ * @param model
+ * @param params
+ * @param lang
+ * @param headers
+ * @returns {Promise<[]>}
+ */
+Api.postRest = async (model, params = {}, lang = null, headers = {}) => {
+    if (!Api.kitsu) {
+        throw "API has not been initialized. call init()";
+    }
+
+    // Without language prefix.
+    if (typeof lang === 'boolean') {
+        return Api.kitsu.axios.post(`${Api.baseURL}${model}`, params, headers);
+    } else if (typeof lang === 'string') {  // With language prefix.
+        return Api.kitsu.axios.post(`${Api.baseURL}${lang}/${model}`, params, headers);
+    }
+
+    // Multi language by default.
+    return Promise.all(Api.languages.map(async lang => {
+        const response = Api.kitsu.axios.post(`${Api.baseURL}${lang}/${model}`, params, headers);
         return {
             locale: lang,
             response

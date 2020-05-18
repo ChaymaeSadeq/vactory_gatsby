@@ -11,7 +11,6 @@ module.exports = {
     plugins: [
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-remove-generator`,
-        `gatsby-plugin-styled-components`,
         // {
         //     resolve: `gatsby-plugin-offline`,
         // },
@@ -28,11 +27,6 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: appConfig.manifest,
-        },
-        {
-            resolve: "gatsby-plugin-web-font-loader",
-            // https://github.com/typekit/webfontloader/issues/409
-            options: appConfig.font,
         },
         `vactory-gatsby-ui`,
         `vactory-gatsby-page`,
