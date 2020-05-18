@@ -5,6 +5,8 @@ const fs = require('fs');
 // Templates.
 const PostTemplate = require.resolve(`./src/components/post.container`);
 const PostAmpTemplate = require.resolve(`./src/components/post.amp.container`);
+const PostApplyFormTemplate = require.resolve(`./src/components/post.applyForm.container`);
+const PostApplyFormAmpTemplate = require.resolve(`./src/components/post.applyForm.amp.container`);
 const PostsTemplate = require.resolve(`./src/components/posts.container`);
 const PostsAmpTemplate = require.resolve(`./src/components/posts.amp.container`);
 
@@ -41,6 +43,23 @@ module.exports = {
                 },
                 resource: "node/job_ads",
                 params: postParams.params,
+            },
+        },
+        {
+            resolve: `vactory-gatsby-nodes`,
+            options: {
+                title: "Source Job Ads Forms",
+                template: PostApplyFormTemplate,
+                amp: {
+                    enabled: ampSettings.enabled,
+                    template: PostApplyFormAmpTemplate
+                },
+                resource: "node/job_ads",
+                params: postParams.params,
+                nodeProcessor: (node) => {
+                    node.path.alias = node.path.alias + '/form'
+                    return node
+                },
             },
         },
         {

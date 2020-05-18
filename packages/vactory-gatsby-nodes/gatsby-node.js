@@ -67,17 +67,17 @@ exports.createPages = async ({store, actions: {createPage}}, {
             // Override langcode.
             node.langcode = node.path.langcode;
 
+            // Hook into nodes.
+            if (nodeProcessor) {
+                node = await nodeProcessor(node);
+            }
+
             // Log.
             console.log(
                 `${chalk.blue("[\u25E6]")} ${chalk.blue(
                     node.path.alias,
                 )}`,
             );
-
-            // Hook into nodes.
-            if (nodeProcessor) {
-                node = await nodeProcessor(node);
-            }
 
             // Hooks into context.
             if (addContext) {
