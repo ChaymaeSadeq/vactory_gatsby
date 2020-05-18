@@ -129,6 +129,36 @@ Api.getRest = async (model, params = {}, lang = null) => {
     }));
 };
 
+/**
+ *
+ * @param model
+ * @param params
+ * @param lang
+ * @param headers
+ * @returns {Promise<[]>}
+ */
+Api.postRest = async (model, params = {}, lang = null, headers = {}) => {
+    if (!Api.kitsu) {
+        throw "API has not been initialized. call init()";
+    }
+
+    // Without language prefix.
+    if (typeof lang === 'boolean') {
+        return Api.kitsu.axios.post(`${Api.baseURL}${model}`, params, headers);
+    } else if (typeof lang === 'string') {  // With language prefix.
+        return Api.kitsu.axios.post(`${Api.baseURL}${lang}/${model}`, params, headers);
+    }
+
+    // Multi language by default.
+    return Promise.all(Api.languages.map(async lang => {
+        const response = Api.kitsu.axios.post(`${Api.baseURL}${lang}/${model}`, params, headers);
+        return {
+            locale: lang,
+            response
+        }
+    }));
+};
+
 
 /**
  * Init API

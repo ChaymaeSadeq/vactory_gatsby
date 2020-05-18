@@ -20,6 +20,7 @@
     "i18next": "^19.4.2",
     "i18next-browser-languagedetector": "^4.1.1",
     "is-client": "^0.0.2",
+    "qs": "^6.9.4",
     "query-string": "^6.12.1",
     "react-helmet": "^6.0.0",
     "react-i18next": "^11.3.4",
