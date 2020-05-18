@@ -20,5 +20,6 @@ module.exports = {
         `vactory-gatsby-events`,
         `vactory-gatsby-publication`,
         `vactory-gatsby-academy`,
+        `vactory-gatsby-job-ads`
     ],
 };
