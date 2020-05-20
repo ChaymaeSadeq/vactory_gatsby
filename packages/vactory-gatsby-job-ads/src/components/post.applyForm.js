@@ -48,7 +48,7 @@ const PostApplyForm = ({post}) => {
             reset();
             recaptchaRef.current.reset();
         }
-    }, [reset, webformFetch.status]);
+    }, [reset, webformFetch.status, recaptchaRef]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
