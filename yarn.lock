@@ -3833,6 +3833,11 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
+cogo-toast@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/cogo-toast/-/cogo-toast-4.2.3.tgz#5f91ce8e55c799f74d5e9ba1e39081b148b07f43"
+  integrity sha512-Lp/lPk493MLtkgqHboVJXb5frvLJqUDpIqLh6uCMcNecw0/shikDG+DGsjvmPe5qmorRwxe+6JgfKobRrcvhZQ==
+
 collect-v8-coverage@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/collect-v8-coverage/-/collect-v8-coverage-1.0.1.tgz#cc2c8e94fc18bbdffe64d6534570c8a673b27f59"
@@ -4110,7 +4115,7 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-copy-to-clipboard@^3.2.0:
+copy-to-clipboard@^3.2.0, copy-to-clipboard@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/copy-to-clipboard/-/copy-to-clipboard-3.3.1.tgz#115aa1a9998ffab6196f93076ad6da3b913662ae"
   integrity sha512-i13qo6kIHTTpCm8/Wup+0b1mVWETvu2kIMzKoK8FpkLkFxlt0znUAHcMzox+T8sPlqtZXq3CulEjQHsYiGFJUw==
@@ -14568,13 +14573,15 @@ v8-to-istanbul@^4.0.1:
 
 "vactory-ui@git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git":
   version "0.1.1"
-  resolved "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git#0f058fc46b401837f2fd1f48e13dfe9e694f6c09"
+  resolved "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git#49798c79b9a6cf75f3c754c751805e9e4019291f"
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/prop-types" "^5.1.5"
     "@styled-system/props" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
     "@styled-system/theme-get" "^5.1.2"
+    cogo-toast "^4.2.3"
+    copy-to-clipboard "^3.3.1"
     deepmerge "^4.2.2"
     framer-motion "^1.10.3"
     rc-pagination "^2.2.0"
