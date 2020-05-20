@@ -2,7 +2,9 @@ import React from "react"
 import {Link as GatsbyLink} from "gatsby"
 import styled from 'styled-components'
 
-const StyledGatsbyLink = styled(GatsbyLink)`
+const StyledGatsbyLink = styled(GatsbyLink).withConfig({
+    shouldForwardProp: (prop) => !['borderRadius'].includes(prop),
+})`
   text-decoration: none;
 `;
 
