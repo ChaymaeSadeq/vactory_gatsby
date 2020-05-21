@@ -8,6 +8,7 @@ import deepmerge from 'deepmerge';
 import {theme as UiTheme} from './theme'
 
 const theme = deepmerge.all([vactoryTheme, UiTheme]);
+theme.breakpoints = vactoryTheme.breakpoints;
 
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');

@@ -5,11 +5,10 @@ const breakpoints = [
     '1920px'
 ];
 
-breakpoints.md = '960px';
-breakpoints.sm = '500px';
-breakpoints.xs = '0px';
-breakpoints.lg = '1280px';
-breakpoints.xl = '1920px';
+breakpoints.sm = breakpoints[0];
+breakpoints.md = breakpoints[1];
+breakpoints.lg = breakpoints[2];
+breakpoints.xl = breakpoints[3];
 
 const buttons = {
     fill: {
