@@ -7,7 +7,7 @@ export const normalizeNodes = (nodes) => {
         url: get(post, 'path.alias', '#.'),
         excerpt: get(post, 'field_vactory_excerpt.processed', null),
         category: get(post, 'field_vactory_taxonomy_1.name', null),
-        image: get(post, 'field_vactory_media_image.thumbnail.uri.value', null),
+        image: get(post, 'field_vactory_media.thumbnail.uri.value', null),
         file: get(post, 'field_vactory_media_file', null)
     }));
 };
