@@ -1,70 +1,82 @@
-import React, {useState, useEffect, useRef} from "react"
-import {useTranslation} from "react-i18next"
-import Api from "vactory-gatsby-api"
-import {postsQueryParams, normalizeNodes, normalizeTerms, PostsPage, PostsFormFilter} from 'vactory-gatsby-academy'
+import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import Api from 'vactory-gatsby-api'
+import {
+  postsQueryParams,
+  normalizeNodes,
+  normalizeTerms,
+  PostsPage,
+  PostsFormFilter,
+} from 'vactory-gatsby-academy'
+import { Heading } from 'vactory-ui'
 
-const PostsContainer = ({pageContext: {node, nodes, terms}}) => {
-    const {t} = useTranslation();
+const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
+  console.log('we', nodes)
+  const { t } = useTranslation()
+  const normalizedCategories = normalizeTerms(terms)
+  const normalizedNodes = normalizeNodes(nodes)
+  const isFirstRun = useRef(true)
+  const [posts, setPosts] = useState(normalizedNodes)
+  const [selectedTerm, setSelectedTerm] = useState('all')
+  const [isLoading, setIsLoading] = useState(false)
 
-    const normalizedCategories = normalizeTerms(terms);
-    const normalizedNodes = normalizeNodes(nodes);
+  const handleChange = (tid) => {
+    setSelectedTerm(tid)
+  }
 
-    const isFirstRun = useRef(true);
-    const [posts, setPosts] = useState(normalizedNodes);
-    const [selectedTerm, setSelectedTerm] = useState("all");
-    const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false
+      return
+    }
 
-    const handleChange = (tid) => {
-        setSelectedTerm(tid);
-    };
+    function fetchData() {
+      let categoryFilter = {
+        'filter[category][condition][path]':
+          'field_vactory_taxonomy_1.drupal_internal__tid',
+        'filter[category][condition][operator]': '=',
+        'filter[category][condition][value]': selectedTerm,
+      }
 
-    useEffect(() => {
-            if (isFirstRun.current) {
-                isFirstRun.current = false;
-                return;
-            }
+      if (selectedTerm === 'all') {
+        categoryFilter = {}
+      }
 
-            function fetchData() {
-                let categoryFilter = {
-                    "filter[category][condition][path]": "field_vactory_taxonomy_1.drupal_internal__tid",
-                    "filter[category][condition][operator]": "=",
-                    "filter[category][condition][value]": selectedTerm,
-                };
+      const requestParams = {
+        ...postsQueryParams,
+        ...categoryFilter,
+      }
 
-                if (selectedTerm === "all") {
-                    categoryFilter = {}
-                }
+      setIsLoading(true)
 
-                const requestParams = {
-                    ...postsQueryParams,
-                    ...categoryFilter,
-                };
+      Api.get('node/academy', requestParams, node.langcode)
+        .then((data) => {
+          const normalizedNodes = normalizeNodes(data)
+          setPosts(normalizedNodes)
+          setIsLoading(false)
+        })
+        .catch((err) => {
+          setIsLoading(false)
+          console.log(err)
+        })
+    }
 
-                setIsLoading(true);
+    fetchData()
+  }, [selectedTerm, node.langcode])
 
-                Api.get('node/academy', requestParams, node.langcode).then(data => {
-                    const normalizedNodes = normalizeNodes(data);
-                    setPosts(normalizedNodes);
-                    setIsLoading(false);
-                }).catch(err => {
-                    setIsLoading(false);
-                    console.log(err)
-                });
-            }
-
-            fetchData()
-        }, [selectedTerm, node.langcode],
-    );
-
-    return (
-        <div>
-            <h1>{t('Academy')}</h1>
-            {isLoading && <h3>Loading...</h3>}
-            {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
-            <PostsFormFilter terms={normalizedCategories} value={selectedTerm} handleChange={handleChange} />
-            {posts.length > 0 && <PostsPage posts={posts}/>}
-        </div>
-    )
-};
+  return (
+    <div>
+      <Heading level={2}>{t('Academy')}</Heading>
+      {isLoading && <h3>Loading...</h3>}
+      {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
+      <PostsFormFilter
+        terms={normalizedCategories}
+        value={selectedTerm}
+        handleChange={handleChange}
+      />
+      {posts.length > 0 && <PostsPage posts={posts} />}
+    </div>
+  )
+}
 
 export default PostsContainer

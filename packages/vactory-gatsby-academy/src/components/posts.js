@@ -1,31 +1,21 @@
-import React, {Fragment} from "react"
-import {Link} from "gatsby"
+import React from 'react'
+import { CardAcademy } from 'vactory-gatsby-academy'
+import { Flex } from 'vactory-ui'
 
-const Posts = ({posts}) => {
-    return (
-        <div>
-            <main>
-                {posts.map(node => {
-                    const title = node.title;
-                    const url = node.url;
-
-                    return (
-                        <Fragment key={node.id}>
-                            <div>
-                                <h2
-                                >
-                                    {title}
-                                </h2>
-                                <small>{node.date}</small>
-                                <p>{node.excerpt}</p>
-                                <Link to={url}>Read more</Link>
-                            </div>
-                        </Fragment>
-                    )
-                })}
-            </main>
-        </div>
-    )
-};
+const Posts = ({ posts }) => {
+  return (
+    <div>
+      <Flex flexWrap="wrap">
+        {posts.map((node) => {
+          return (
+            <Flex key={node.id} px="8px" width={[1, 1 / 2, 1 / 3]}>
+              <CardAcademy {...node} />
+            </Flex>
+          )
+        })}
+      </Flex>
+    </div>
+  )
+}
 
 export default Posts
