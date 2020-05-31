@@ -148,7 +148,7 @@ export const CardPressRelease = (props) => {
                   }}
                 />
               </Box>
-              <Box p="medium">
+              <Box p="medium" mt='auto'>
                 <Button outline="info">Download</Button>
               </Box>
             </Flex>
