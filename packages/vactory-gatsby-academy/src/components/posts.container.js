@@ -11,7 +11,6 @@ import {
 import { Heading } from 'vactory-ui'
 
 const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
-  console.log('we', nodes)
   const { t } = useTranslation()
   const normalizedCategories = normalizeTerms(terms)
   const normalizedNodes = normalizeNodes(nodes)
@@ -19,9 +18,15 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
   const [posts, setPosts] = useState(normalizedNodes)
   const [selectedTerm, setSelectedTerm] = useState('all')
   const [isLoading, setIsLoading] = useState(false)
+  const [pager, setPager] = useState(1)
+  //const [count, setCount] = useState(0)
 
   const handleChange = (tid) => {
     setSelectedTerm(tid)
+  }
+
+  const handlePaginationChange = (selected) => {
+    setPager(selected)
   }
 
   useEffect(() => {
@@ -44,11 +49,11 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
 
       const requestParams = {
         ...postsQueryParams,
+        page: { limit: 4, offset: (pager - 1) * 4 },
         ...categoryFilter,
       }
 
       setIsLoading(true)
-
       Api.get('node/academy', requestParams, node.langcode)
         .then((data) => {
           const normalizedNodes = normalizeNodes(data)
@@ -60,9 +65,8 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
           console.log(err)
         })
     }
-
     fetchData()
-  }, [selectedTerm, node.langcode])
+  }, [selectedTerm, node.langcode, pager])
 
   return (
     <div>
@@ -74,7 +78,14 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
         value={selectedTerm}
         handleChange={handleChange}
       />
-      {posts.length > 0 && <PostsPage posts={posts} />}
+      {posts.length > 0 && (
+        <PostsPage
+          //count={count}
+          current={pager}
+          onChange={handlePaginationChange}
+          posts={posts}
+        />
+      )}
     </div>
   )
 }

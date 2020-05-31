@@ -173,7 +173,7 @@ export const CardAcademy = (props) => {
             }}
           />
         </Box>
-        <Box p="medium">
+        <Box p="medium" mt='auto'>
           <Link to={url} style={{ textDecoration: 'none' }}>
             <Button fill="info">Read more</Button>
           </Link>
@@ -183,5 +183,6 @@ export const CardAcademy = (props) => {
   )
 }
 /**
- * favorite on hover
+ * pagination
+ * same size
  */
