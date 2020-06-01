@@ -143,7 +143,6 @@ const Card = ({ sx, children, ...rest }) => {
 }
 
 export const CardAcademy = (props) => {
-  //const id = props.id
   const title = props.title
   const excerpt = props.excerpt
   const instructor = props.instructor
@@ -173,7 +172,7 @@ export const CardAcademy = (props) => {
             }}
           />
         </Box>
-        <Box p="medium" mt='auto'>
+        <Box p="medium" mt="auto">
           <Link to={url} style={{ textDecoration: 'none' }}>
             <Button fill="info">Read more</Button>
           </Link>
@@ -182,7 +181,3 @@ export const CardAcademy = (props) => {
     </Card>
   )
 }
-/**
- * pagination
- * same size
- */

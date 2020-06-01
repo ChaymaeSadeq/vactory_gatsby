@@ -2,7 +2,7 @@ import React from 'react'
 import { CardAcademy } from 'vactory-gatsby-academy'
 import { Flex, Pagination, Box } from 'vactory-ui'
 
-const Posts = ({ posts, current, onChange }) => {
+const Posts = ({ posts, current, onChange, count }) => {
   return (
     <div>
       <Flex flexWrap="wrap">
@@ -16,7 +16,7 @@ const Posts = ({ posts, current, onChange }) => {
       </Flex>
       <Box p="medium">
         <Pagination
-          total={6}
+          total={count}
           pageSize={4}
           current={current}
           onChange={onChange}

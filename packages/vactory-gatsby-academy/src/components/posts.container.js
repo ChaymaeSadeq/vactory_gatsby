@@ -19,7 +19,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
   const [selectedTerm, setSelectedTerm] = useState('all')
   const [isLoading, setIsLoading] = useState(false)
   const [pager, setPager] = useState(1)
-  //const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0)
 
   const handleChange = (tid) => {
     setSelectedTerm(tid)
@@ -54,10 +54,12 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
       }
 
       setIsLoading(true)
-      Api.get('node/academy', requestParams, node.langcode)
-        .then((data) => {
-          const normalizedNodes = normalizeNodes(data)
+      Api.getResponse('node/academy', requestParams, node.langcode)
+        .then((res) => {
+          const normalizedNodes = normalizeNodes(res.data)
+          const total = res.meta.count
           setPosts(normalizedNodes)
+          setCount(total)
           setIsLoading(false)
         })
         .catch((err) => {
@@ -80,7 +82,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
       />
       {posts.length > 0 && (
         <PostsPage
-          //count={count}
+          count={count}
           current={pager}
           onChange={handlePaginationChange}
           posts={posts}
