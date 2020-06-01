@@ -5,7 +5,7 @@ export const normalizeNodes = (nodes) => {
         id: post.drupal_internal__nid,
         title: post.title,
         url: get(post, 'path.alias', '#.'),
-        dateInterval: get('field_vactory_date_interval', null),
+        dateInterval: get(post,'field_vactory_date_interval', null),
         excerpt: get(post, 'field_vactory_excerpt.processed', null),
         category: get(post, 'field_vactory_taxonomy_1.name', null),
         city: get(post, 'field_vactory_taxonomy_2.name', null),
