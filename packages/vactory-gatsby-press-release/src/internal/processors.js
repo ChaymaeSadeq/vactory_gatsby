@@ -7,8 +7,11 @@ exports.nodeProcessor = async (node) => {
 exports.addContext = async (node, postsParams, taxonomyParams) => {
     let context = {};
 
-    context.nodes = await api.get('node/press_release', postsParams, node.langcode);
+    
     context.terms = await api.get('taxonomy_term/press_release_theme', taxonomyParams, node.langcode);
+    const nodeResponse = await api.getResponse('node/press_release', postsParams, node.langcode);
+    context.nodes = nodeResponse.data
+    context.pageCount = nodeResponse.meta.count
 
     return context
 };

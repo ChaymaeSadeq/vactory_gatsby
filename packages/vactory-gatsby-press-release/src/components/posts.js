@@ -12,14 +12,14 @@ const Posts = ({ posts, current, onChange, count }) => {
           </Row>
         )
       })}
-      <Box p="medium">
+      {count > 4 && <Box p="medium">
         <Pagination
           total={count}
           pageSize={4}
           current={current}
           onChange={onChange}
         />
-      </Box>
+      </Box>}
     </Container>
   )
 }

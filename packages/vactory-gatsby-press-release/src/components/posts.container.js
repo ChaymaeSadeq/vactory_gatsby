@@ -10,7 +10,7 @@ import {
 } from 'vactory-gatsby-press-release'
 import { Heading } from 'vactory-ui'
 
-const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
+const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   const { t } = useTranslation()
   const normalizedCategories = normalizeTerms(terms)
   const normalizedNodes = normalizeNodes(nodes)
@@ -20,10 +20,11 @@ const PostsContainer = ({ pageContext: { node, nodes, terms } }) => {
   const [selectedTerm, setSelectedTerm] = useState('all')
   const [isLoading, setIsLoading] = useState(false)
   const [pager, setPager] = useState(1)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(pageCount)
 
   const handleChange = (tid) => {
     setSelectedTerm(tid)
+    setPager(1)
   }
 
   const handlePaginationChange = (selected) => {
