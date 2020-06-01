@@ -23,6 +23,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
 
   const handleChange = (tid) => {
     setSelectedTerm(tid)
+    setPager(1)
   }
 
   const handlePaginationChange = (selected) => {
