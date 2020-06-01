@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Text, Image, Button, Icon } from 'vactory-ui'
+import { Box, Text, Image, Button } from 'vactory-ui'
 import { Link } from 'gatsby'
 
 const CardTitle = ({ sx, children, ...rest }) => {
@@ -58,44 +58,44 @@ const AcademyDuration = ({ sx, children, ...rest }) => {
   )
 }
 
-const AddToFavorite = ({ sx, ...rest }) => {
-  return (
-    <Icon
-      __css={{
-        float: 'left',
-        position: 'absolute',
-        left: '88%',
-        top: '3%',
-        zIndex: 1001,
-        p: 'none',
-        '&:hover': {
-          color: 'warning500',
-        },
-      }}
-      name="chevron-down"
-      color="danger700"
-      size="xlarge"
-      onClick={(e) => console.log(e)}
-    />
-  )
-}
+// const AddToFavorite = ({ sx, ...rest }) => {
+//   return (
+//     <Icon
+//       __css={{
+//         float: 'left',
+//         position: 'absolute',
+//         left: '88%',
+//         top: '3%',
+//         zIndex: 1001,
+//         p: 'none',
+//         '&:hover': {
+//           color: 'warning500',
+//         },
+//       }}
+//       name="chevron-down"
+//       color="danger700"
+//       size="xlarge"
+//       onClick={(e) => console.log(e)}
+//     />
+//   )
+// }
 
-const Rating = ({ sx, rating }) => {
-  let table = []
-  for (let i = 0; i < 5; i++) {
-    if (i < rating)
-      table.push(<Icon name="chevron-top" color="warning500" size="xlarge" />)
-    else table.push(<Icon name="chevron-top" color="black500" size="xlarge" />)
-  }
-  return (
-    <Flex>
-      {table}
-      <Text p="small" fontSize="12px" color="black800">
-        Note ({rating}/5)
-      </Text>
-    </Flex>
-  )
-}
+// const Rating = ({ sx, rating }) => {
+//   let table = []
+//   for (let i = 0; i < 5; i++) {
+//     if (i < rating)
+//       table.push(<Icon name="chevron-top" color="warning500" size="xlarge" />)
+//     else table.push(<Icon name="chevron-top" color="black500" size="xlarge" />)
+//   }
+//   return (
+//     <Flex>
+//       {table}
+//       <Text p="small" fontSize="12px" color="black800">
+//         Note ({rating}/5)
+//       </Text>
+//     </Flex>
+//   )
+// }
 
 const CardExcerpt = ({ children, ...rest }) => {
   return (
@@ -154,7 +154,7 @@ export const CardAcademy = (props) => {
     <Card>
       <CardBody>
         <CardImage>
-          <AddToFavorite />
+          {/* <AddToFavorite /> */}
           <AcademyDuration>Duree {duration}</AcademyDuration>
           <Box width={[1]} height="244px">
             <Image src={image} width={[1]} height="100%" />
@@ -165,7 +165,7 @@ export const CardAcademy = (props) => {
           <Text fontSize="body" mb="small">
             {instructor}
           </Text>
-          <Rating rating={4} />
+          {/* <Rating rating={4} /> */}
           <CardExcerpt
             dangerouslySetInnerHTML={{
               __html: excerpt,

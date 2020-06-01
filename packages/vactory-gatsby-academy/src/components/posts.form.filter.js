@@ -6,7 +6,7 @@ const PostsFormFilter = ({ terms, value, handleChange }) => {
   const { t } = useTranslation()
 
   return (
-    <Box py="10px">
+    <Box py="10px" px="medium">
       <Label htmlFor="academy-themes">{t('Thématique')}</Label>
       <Select
         id="academy-themes"
