@@ -2,7 +2,7 @@ import React from 'react'
 import { CardPressRelease } from 'vactory-gatsby-press-release'
 import { Container, Row, Pagination, Box } from 'vactory-ui'
 
-const Posts = ({ posts, current, onChange }) => {
+const Posts = ({ posts, current, onChange, count }) => {
   return (
     <Container fluid={true}>
       {posts.map((node) => {
@@ -14,7 +14,7 @@ const Posts = ({ posts, current, onChange }) => {
       })}
       <Box p="medium">
         <Pagination
-          total={6}
+          total={count}
           pageSize={4}
           current={current}
           onChange={onChange}
