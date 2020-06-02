@@ -7,8 +7,9 @@ exports.nodeProcessor = async (node) => {
 exports.addContext = async (node, postsParams, taxonomyParams) => {
     let context = {};
 
-    context.nodes = await api.get('node/publication', postsParams, node.langcode);
+    const nodeResponse = await api.getResponse('node/publication', postsParams, node.langcode); 
     context.terms = await api.get('taxonomy_term/publication_theme', taxonomyParams, node.langcode);
-
+    context.nodes = nodeResponse.data
+    context.pageCount = nodeResponse.meta.count
     return context
 };
