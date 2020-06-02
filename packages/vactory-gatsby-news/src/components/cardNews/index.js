@@ -42,6 +42,7 @@ const InternalCard = ({sx, children, ...rest}) => {
         overflow: 'hidden',
         fontFamily: 'montserrat',
         marginBottom: '16px',
+        width: '100%'
     }}>
         {children}
     </Box>)

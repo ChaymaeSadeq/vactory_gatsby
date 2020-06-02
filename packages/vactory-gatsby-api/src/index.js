@@ -100,6 +100,32 @@ Api.get = async (model, params = {}, lang = null) => {
     return response
 };
 
+Api.getResponse = async (model, params = {}, lang = null) => {
+    if (!Api.kitsu) {
+        throw "API has not been initialized. call init()";
+    }
+
+    // Make a call.
+    let response = null;
+    const originalBaseURL = Api.kitsu.axios.defaults.baseURL;
+
+    if (lang) {
+        Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
+        response = await Api.kitsu.get(model, params);
+    } else {
+        response = await Promise.all(Api.languages.map(async lang => {
+            Api.kitsu.axios.defaults.baseURL = `${Api.baseURL}${lang}/api/`;
+            const data = await Api.kitsu.get(model, params);
+            return data
+        }));
+    }
+
+    // Restore baseURL.
+    Api.kitsu.axios.defaults.baseURL = originalBaseURL;
+
+    return response
+};
+
 /**
  *
  * @param model
