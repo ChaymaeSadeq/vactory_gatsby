@@ -5,7 +5,7 @@ exports.nodeProcessor = async (node) => {
 };
 
 exports.addContext = async (node, postsParams, taxonomyParams) => {
-    let context = {};
+     let context = {};
 
     const nodeResponse = await api.getResponse('node/publication', postsParams, node.langcode); 
     context.terms = await api.get('taxonomy_term/publication_theme', taxonomyParams, node.langcode);

@@ -18,7 +18,7 @@ const Posts = ({ posts, handlePaginationChange, pager, count }) => {
       {count > 4 && (
         <Box p="medium">
           <Pagination
-            total={count}
+             total={count}
             pageSize={4}
             current={pager}
             onChange={handlePaginationChange}

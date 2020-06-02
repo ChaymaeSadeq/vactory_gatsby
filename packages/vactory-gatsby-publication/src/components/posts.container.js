@@ -78,7 +78,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
 
   return (
     <div>
-      <Heading level={2}>{t("Publications")}</Heading>
+       <Heading level={2}>{t("Publications")}</Heading>
       {isLoading && <h3>Loading...</h3>}
       {!isLoading && posts.length <= 0 && <h3>{t("Aucun résultat.")}</h3>}
       <PostsFormFilter
