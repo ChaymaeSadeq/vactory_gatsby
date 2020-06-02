@@ -1,6 +1,8 @@
 import React from 'react'
 import { Box, Text, Image, Button } from 'vactory-ui'
 import { Link } from 'gatsby'
+import get from 'lodash.get';
+import { ImageDefault } from 'vactory-gatsby-ui'
 
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -134,6 +136,7 @@ const Card = ({ sx, children, ...rest }) => {
         fontFamily: 'montserrat',
         marginBottom: '16px',
         boxShadow: 2,
+        width: '100%'
       }}
       {...rest}
     >
@@ -148,7 +151,7 @@ export const CardAcademy = (props) => {
   const instructor = props.instructor
   const duration = props.duration
   const url = props.url
-  const image = props.image._default
+  const image = get(props, 'image._default', ImageDefault)
 
   return (
     <Card>

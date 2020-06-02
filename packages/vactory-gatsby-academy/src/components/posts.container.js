@@ -8,7 +8,7 @@ import {
   PostsPage,
   PostsFormFilter,
 } from 'vactory-gatsby-academy'
-import { Heading } from 'vactory-ui'
+import { Heading, Container } from 'vactory-ui'
 
 const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   const { t } = useTranslation()
@@ -72,15 +72,15 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   }, [selectedTerm, node.langcode, pager])
 
   return (
-    <div>
+    <Container>
       <Heading level={2}>{t('Academy')}</Heading>
-      {isLoading && <h3>Loading...</h3>}
-      {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
       <PostsFormFilter
         terms={normalizedCategories}
         value={selectedTerm}
         handleChange={handleChange}
       />
+      {isLoading && <h3>Loading...</h3>}
+      {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
       {posts.length > 0 && (
         <PostsPage
           count={count}
@@ -89,7 +89,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
           posts={posts}
         />
       )}
-    </div>
+    </Container>
   )
 }
 
