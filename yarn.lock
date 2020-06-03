@@ -14573,7 +14573,7 @@ v8-to-istanbul@^4.0.1:
 
 "vactory-ui@git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git":
   version "0.1.1"
-  resolved "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git#653fa8fb69e5cd4d4201f9d3d19e2c56a5886ddb"
+  resolved "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git#104adc8cfd766e29986c7abb22e881122a9c9873"
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/prop-types" "^5.1.5"
