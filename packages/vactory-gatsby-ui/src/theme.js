@@ -1,8 +1,8 @@
 const breakpoints = [
-    '500px',
-    '960px',
-    '1280px',
-    '1920px'
+    '576px',
+    '768px',
+    '992px',
+    '1200px'
 ];
 
 breakpoints.sm = breakpoints[0];
