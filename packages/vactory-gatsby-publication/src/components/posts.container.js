@@ -8,7 +8,8 @@ import {
   PostsPage,
   PostsFormFilter,
 } from "vactory-gatsby-publication";
-import { Heading } from "vactory-ui";
+import { Heading, Container, Paragraph } from "vactory-ui";
+import { LoadingOverlay } from "vactory-gatsby-ui";
 
 const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
     function fetchData() {
       let categoryFilter = {
         "filter[category][condition][path]":
-        "field_vactory_taxonomy_1.drupal_internal__tid",
+          "field_vactory_taxonomy_1.drupal_internal__tid",
         "filter[category][condition][operator]": "=",
         "filter[category][condition][value]": selectedTerm,
       };
@@ -65,7 +66,6 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
           setPosts(normalizedNodes);
           setCount(total);
           setIsLoading(false);
-          console.log("zebi",res)
         })
         .catch((err) => {
           setIsLoading(false);
@@ -77,24 +77,32 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   }, [selectedTerm, node.langcode, pager]);
 
   return (
-    <div>
-      <Heading level={2}>{t("Publications")}</Heading>
-      {isLoading && <h3>Loading...</h3>}
-      {!isLoading && posts.length <= 0 && <h3>{t("Aucun résultat.")}</h3>}
+    <Container>
+      <Heading px="xsmall" level={2}>
+        {t("Publications")}
+      </Heading>
+
       <PostsFormFilter
         terms={normalizedCategories}
         value={selectedTerm}
         handleChange={handleChange}
       />
-      {posts.length > 0 && (
-        <PostsPage
-          handlePaginationChange={handlePaginationChange}
-          count={count}
-          pager={pager}
-          posts={posts}
-        />
-      )}
-    </div>
+      <LoadingOverlay active={isLoading}>
+        {posts.length > 0 && (
+          <PostsPage
+            count={count}
+            current={pager}
+            handlePaginationChange={handlePaginationChange}
+            posts={posts}
+          />
+        )}
+        {!isLoading && posts.length <= 0 && (
+          <Paragraph my="medium" textAlign="center">
+            {t("Aucun résultat trouvé")}
+          </Paragraph>
+        )}
+      </LoadingOverlay>
+    </Container>
   );
 };
 
