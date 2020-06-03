@@ -6,7 +6,7 @@ import { Pagination } from "vactory-gatsby-ui";
 const Posts = ({ posts, handlePaginationChange, pager, count }) => {
   return (
     <div>
-      <Flex flexWrap="wrap">
+       <Flex flexWrap="wrap">
         {posts.map((node) => {
           return (
             <Flex key={node.id} px="8px" width={[1, 1 / 2, 1 / 3]}>

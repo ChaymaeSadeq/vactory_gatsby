@@ -8,7 +8,7 @@ const PostsFormFilter = ({ terms, value, handleChange }) => {
   return (
     <Box p="medium">
       <Label htmlFor="publication_theme">{t("Thématique")}</Label>
-      <Select
+       <Select
         id="publication_theme"
         onBlur={null}
         onChange={(e) => {
