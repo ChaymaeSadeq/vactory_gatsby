@@ -73,7 +73,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   }, [selectedTerm, node.langcode, pager])
 
   return (
-    <Container fluid={true}>
+    <Container>
       <Heading px="xsmall" level={2}>
         {t('Academy')}
       </Heading>

@@ -5,7 +5,7 @@ import { Container, Row, Col, Pagination, Box } from 'vactory-ui'
 const Posts = ({ posts, current, onChange, count }) => {
   return (
     <div>
-      <Container fluid={true}>
+      <Container>
         <Row>
           {posts.map((node) => {
             return (
