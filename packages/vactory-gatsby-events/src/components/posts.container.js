@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Api from "vactory-gatsby-api";
+import { Heading, Container, Paragraph } from 'vactory-ui'
+import { LoadingOverlay } from 'vactory-gatsby-ui'
 import {
   postsQueryParams,
   normalizeNodes,
@@ -9,20 +11,18 @@ import {
   PostsFormFilter,
 } from "vactory-gatsby-events";
 
-const PostsContainer = ({ pageContext: { node, nodes, terms, cities } }) => {
+const PostsContainer = ({ pageContext: { node, nodes, terms, cities,pageCount } }) => {
   const { t } = useTranslation();
   const normalizedCategories = normalizeTerms(terms);
   const normalizedCities = normalizeTerms(cities);
   const normalizedNodes = normalizeNodes(nodes);
-
   const isFirstRun = useRef(true);
   const [posts, setPosts] = useState(normalizedNodes);
   const [selectedTerm, setSelectedTerm] = useState("all");
   const [selectedCity, setSelectedCity] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
   const [pager, setPager] = useState(1);
-  const [count, setCount] = useState(0);
-
+  const [count, setCount] = useState(pageCount);
   const handlePaginationChange = (selected) => {
     setPager(selected);
   };
@@ -76,6 +76,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, cities } }) => {
           const normalizedNodes = normalizeNodes(res.data);
           setPosts(normalizedNodes);
           const total = res.meta.count;
+          console.log(total)
           setCount(total);
           setIsLoading(false);
         })
@@ -89,26 +90,26 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, cities } }) => {
   }, [selectedTerm, selectedCity, node.langcode, pager]);
 
   return (
-    <div>
-      <h1>{t("Events")}</h1>
-      {isLoading && <h3>Loading...</h3>}
-      {!isLoading && posts.length <= 0 && <h3>{t("Aucun résultat.")}</h3>}
-      <PostsFormFilter
-        terms={normalizedCategories}
-        cities={normalizedCities}
-        value={selectedTerm}
-        handleChangeCategory={handleChangeCategory}
-        handleChangeCity={handleChangeCity}
-      />
-      {posts.length > 0 && (
-        <PostsPage
-          count={count}
-          posts={posts}
-          current={pager}
-          onChange={handlePaginationChange}
-        />
-      )}
-    </div>
+      <Container>
+      <Heading px="xsmall" level={2}>
+        {t('Events')}
+      </Heading>
+      <LoadingOverlay active={isLoading}>
+       {posts.length > 0 && (
+         <PostsPage
+           count={count}
+           current={pager}
+           onChange={handlePaginationChange}
+           posts={posts}
+         />
+       )}
+       {!isLoading && posts.length <= 0 && (
+         <Paragraph my="medium" textAlign="center">
+           {t('Aucun résultat trouvé')}
+         </Paragraph>
+       )}
+     </LoadingOverlay>
+    </Container>
   );
 };
 

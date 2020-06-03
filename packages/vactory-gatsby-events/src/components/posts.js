@@ -1,19 +1,20 @@
 import React from "react";
 import CardEvents from "./cardEvents";
-import { Flex, Pagination, Box } from "vactory-ui";
-
+import { Container, Row, Col, Pagination, Box } from 'vactory-ui'
 const Posts = ({ posts, current, onChange, count }) => {
   return (
     <div>
-      <Flex flexWrap="wrap">
+      <Container>
+        <Row>
         {posts.map((node) => {
           return (
-            <Flex key={node.id} px="8px" width={[1, 1 / 2, 1 / 3]}>
+            <Col key={node.id} xs={12} sm={6} md={4}>
               <CardEvents node={node} />
-            </Flex>
+            </Col>
           );
         })}
-      </Flex>
+        </Row>
+      </Container>
       <Box p="medium">
         <Pagination
           total={count}

@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Flex, Image, Button, Text } from "vactory-ui";
 import { Link } from "gatsby";
-
+import get from 'lodash.get'
+import { ImageDefault } from 'vactory-gatsby-ui'
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
     <Box
@@ -128,7 +129,7 @@ const dateCalc = (date) => {
   x[1] = mS[months - 1];
   return x;
 };
-const InternalCard = ({ sx, children, ...rest }) => {
+const Card = ({ sx, children, ...rest }) => {
   return (
     <Box
       sx={sx}
@@ -141,6 +142,7 @@ const InternalCard = ({ sx, children, ...rest }) => {
         fontFamily: "montserrat",
         marginBottom: "16px",
         boxShadow: 2,
+        width:'100%',
       }}
     >
       {children}
@@ -149,10 +151,11 @@ const InternalCard = ({ sx, children, ...rest }) => {
 };
 const Agenda = (props) => {
   const { node } = props;
+  const image = get(props, 'node.image._default', ImageDefault)
   const beginDate = dateCalc(node.dateInterval.value);
   const endDate = dateCalc(node.dateInterval.end_value);
   return (
-    <InternalCard>
+    <Card>
       <CardBody>
         <Hoover>
           <Date>
@@ -162,7 +165,7 @@ const Agenda = (props) => {
             <Bx>{endDate[2]}</Bx>
             <Bx sx={{ fontSize: "20px" }}>{endDate[1]}</Bx>
           </Date>
-          <Image src={node.image._default} />
+          <Image src={image} />
         </Hoover>
         <Box p="medium">
           <CardTitle>{node.title}</CardTitle>
@@ -186,7 +189,7 @@ const Agenda = (props) => {
           </Link>
         </Box>
       </CardBody>
-    </InternalCard>
+    </Card>
   );
 };
 export default Agenda;
