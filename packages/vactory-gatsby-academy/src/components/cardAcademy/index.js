@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Text, Image, Button } from 'vactory-ui'
 import { Link } from 'gatsby'
-import get from 'lodash.get';
+import get from 'lodash.get'
 import { ImageDefault } from 'vactory-gatsby-ui'
 
 const CardTitle = ({ sx, children, ...rest }) => {
@@ -136,7 +136,7 @@ const Card = ({ sx, children, ...rest }) => {
         fontFamily: 'montserrat',
         marginBottom: '16px',
         boxShadow: 2,
-        width: '100%'
+        width: '100%',
       }}
       {...rest}
     >
@@ -154,33 +154,35 @@ export const CardAcademy = (props) => {
   const image = get(props, 'image._default', ImageDefault)
 
   return (
-    <Card>
-      <CardBody>
-        <CardImage>
-          {/* <AddToFavorite /> */}
-          <AcademyDuration>Duree {duration}</AcademyDuration>
-          <Box width={[1]} height="244px">
-            <Image src={image} width={[1]} height="100%" />
+    <Box height="100%"  pb='16px'>
+      <Card height="100%">
+        <CardBody>
+          <CardImage>
+            {/* <AddToFavorite /> */}
+            <AcademyDuration>Duree {duration}</AcademyDuration>
+            <Box width={[1]} height="244px">
+              <Image src={image} width={[1]} height="100%" />
+            </Box>
+          </CardImage>
+          <Box sx={{ p: 'medium' }}>
+            <CardTitle>{title}</CardTitle>
+            <Text fontSize="body" mb="small">
+              {instructor}
+            </Text>
+            {/* <Rating rating={4} /> */}
+            <CardExcerpt
+              dangerouslySetInnerHTML={{
+                __html: excerpt,
+              }}
+            />
           </Box>
-        </CardImage>
-        <Box sx={{ p: 'medium' }}>
-          <CardTitle>{title}</CardTitle>
-          <Text fontSize="body" mb="small">
-            {instructor}
-          </Text>
-          {/* <Rating rating={4} /> */}
-          <CardExcerpt
-            dangerouslySetInnerHTML={{
-              __html: excerpt,
-            }}
-          />
-        </Box>
-        <Box p="medium" mt="auto">
-          <Link to={url} style={{ textDecoration: 'none' }}>
-            <Button fill="info">Read more</Button>
-          </Link>
-        </Box>
-      </CardBody>
-    </Card>
+          <Box p="medium" mt="auto">
+            <Link to={url} style={{ textDecoration: 'none' }}>
+              <Button fill="info">Read more</Button>
+            </Link>
+          </Box>
+        </CardBody>
+      </Card>
+    </Box>
   )
 }
