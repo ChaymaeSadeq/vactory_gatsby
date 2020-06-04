@@ -133,7 +133,7 @@ export const Publication = (props) => {
           {file && (
             <Box p="medium" mt="auto">
               <Button
-                outline="info"
+                outline="primary"
                 as={"a"}
                 href={file}
                 target={"_blank"}
