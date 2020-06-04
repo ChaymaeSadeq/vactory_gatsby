@@ -1,21 +1,20 @@
 import React from "react"
 import {CardNews} from 'vactory-gatsby-news'
-// import {Link} from "gatsby"
-import {Flex} from "vactory-ui";
+import {Container, Row, Col} from "vactory-ui";
 
 const Posts = ({posts}) => {
     return (
-        <div>
-            <Flex flexWrap="wrap">
+        <Container>
+            <Row>
                 {posts.map(node => {
                     return (
-                        <Flex key={node.id} px="8px" width={[1, 1 / 2, 1 / 3]}>
+                        <Col key={node.id} xs={12} sm={6} md={4}>
                             <CardNews {...node} />
-                        </Flex>
+                        </Col>
                     )
                 })}
-            </Flex>
-        </div>
+            </Row>
+        </Container>
     )
 };
 
