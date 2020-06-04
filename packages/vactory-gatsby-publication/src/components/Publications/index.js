@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Image, Text, Button } from "vactory-ui";
 import get from "lodash.get";
 import { ImageDefault } from "vactory-gatsby-ui";
+import {useTranslation} from "react-i18next"
 
 const CapitalCardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -80,22 +81,6 @@ const CardExcerpt = ({ children, ...rest }) => {
   );
 };
 
-const CapitalCardButton = ({ children }) => {
-  return (
-    <Button
-      sx={{
-        borderRadius: "none",
-        border: "1px solid",
-        weight: "8px",
-        height: "45px",
-      }}
-      outline="info"
-    >
-      {children}
-    </Button>
-  );
-};
-
 const Card = ({ sx, children, ...rest }) => {
   return (
     <Box
@@ -122,10 +107,14 @@ export const Publication = (props) => {
   const title = props.title;
   const excerpt = props.excerpt;
   const image = get(props, "image._default", ImageDefault);
+  const file = props.file;
+  const date = props.date;
+  const {t} = useTranslation()
+  console.log("hahoma", props)
 
   return (
   <Box height="100%" pb="16px">
-      <Card>
+      <Card height="100%">
         <CardBody>
           <Image src={image} />
           <Box padding="medium">
@@ -137,10 +126,12 @@ export const Publication = (props) => {
               }}
             />
           </Box>
-          <Box p="medium">
-            <CapitalCardButton>Download</CapitalCardButton>
-          </Box>
-          <CapitalCardDate>10 months 2 weeks ago</CapitalCardDate>
+          {file &&
+                <Box p="medium" mt="auto">
+                    <Button outline="info" as={'a'} href={file} target={'_blank'} download>{t('Download')}</Button>
+                </Box>
+               }
+          <CapitalCardDate>{date}</CapitalCardDate>
         </CardBody>
       </Card>
     </Box>

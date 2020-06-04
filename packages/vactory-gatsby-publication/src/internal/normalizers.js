@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 
 export const normalizeNodes = (nodes) => {
+    console.log("hado homa node", nodes)
     return nodes.map(post => ({
         id: post.drupal_internal__nid,
         title: post.title,
@@ -8,7 +9,8 @@ export const normalizeNodes = (nodes) => {
         excerpt: get(post, 'field_vactory_excerpt.processed', null),
         category: get(post, 'field_vactory_taxonomy_1.name', null),
         image: get(post, 'field_vactory_media_image.thumbnail.uri.value', null),
-        file: get(post, 'field_vactory_media_file', null)
+        file: get(post, 'field_vactory_media_file', null),
+        date: get(post, 'field_vactory_date', null)
     }));
 };
 
