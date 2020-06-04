@@ -8,7 +8,8 @@ import {
   PostsPage,
   PostsFormFilter,
 } from 'vactory-gatsby-press-release'
-import { Heading } from 'vactory-ui'
+import { Heading, Container, Paragraph } from 'vactory-ui'
+import { LoadingOverlay } from 'vactory-gatsby-ui'
 
 const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   const { t } = useTranslation()
@@ -75,24 +76,32 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   }, [selectedTerm, node.langcode, pager])
 
   return (
-    <div>
-      <Heading level={2}>{t('Press Release')}</Heading>
-      {isLoading && <h3>Loading...</h3>}
+    <Container>
+      <Heading px="xsmall" level={2}>
+        {t('Press Release')}
+      </Heading>
       {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
       <PostsFormFilter
         terms={normalizedCategories}
         value={selectedTerm}
         handleChange={handleChange}
       />
-      {posts.length > 0 && (
-        <PostsPage
-          count={count}
-          current={pager}
-          onChange={handlePaginationChange}
-          posts={posts}
-        />
-      )}
-    </div>
+      <LoadingOverlay active={isLoading}>
+        {posts.length > 0 && (
+          <PostsPage
+            count={count}
+            current={pager}
+            onChange={handlePaginationChange}
+            posts={posts}
+          />
+        )}
+        {!isLoading && posts.length <= 0 && (
+          <Paragraph my="medium" textAlign="center">
+            {t('Aucun résultat trouvé')}
+          </Paragraph>
+        )}
+      </LoadingOverlay>
+    </Container>
   )
 }
 

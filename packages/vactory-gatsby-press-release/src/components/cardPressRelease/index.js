@@ -1,5 +1,7 @@
 import React from 'react'
 import { Box, Flex, Text, Image, Button, Col } from 'vactory-ui'
+import get from 'lodash.get'
+import { ImageDefault } from 'vactory-gatsby-ui'
 
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -49,13 +51,15 @@ const Card = ({ sx, children, ...rest }) => {
     <Box
       sx={sx}
       __css={{
+        borderRadius: 'small',
+        boxShadow: '2',
         background: 'white',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: '8px',
         overflow: 'hidden',
         fontFamily: 'montserrat',
         marginBottom: '16px',
+        width: '100%',
       }}
       {...rest}
     >
@@ -100,38 +104,22 @@ const CardDate = ({ children }) => (
   </Box>
 )
 
-// const CardImage = ({ children }) => {
-//   return (
-//     <Box
-//       __css={{
-//         maxWidth: '577px',
-//         maxHeight: '300px',
-//         overflow: 'hidden',
-//         '&:hover': {
-//           transform: 'scale(1.5)',
-//         },
-//       }}
-//     >
-//       {children}
-//     </Box>
-//   )
-// }
-
 export const CardPressRelease = (props) => {
   const title = props.title
   const date = props.date
   const category = props.category
   const excerpt = props.excerpt
-  // const url = props.url
-  const image = props.image._default
+  const image = get(props, 'image._default', ImageDefault)
 
   return (
     <Col xs={12}>
-      <Card borderRadius="small" boxShadow={2}>
+      <Card>
         <CardBody>
           <Flex flexDirection={['column', 'column', 'row']}>
             <Col xs={12} md={5}>
-              <Image src={image} width={[1]} maxHeight="300px" />
+              <Box>
+                <Image src={image} width="100%" maxHeight="260px" />
+              </Box>
             </Col>
             <Flex flexDirection="column">
               <Box sx={{ p: 'medium', flexGrow: 1 }}>
@@ -148,7 +136,7 @@ export const CardPressRelease = (props) => {
                   }}
                 />
               </Box>
-              <Box p="medium" mt='auto'>
+              <Box p="medium" mt="auto">
                 <Button outline="info">Download</Button>
               </Box>
             </Flex>
