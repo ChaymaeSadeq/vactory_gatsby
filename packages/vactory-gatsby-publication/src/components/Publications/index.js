@@ -7,11 +7,11 @@ import { useTranslation } from "react-i18next";
 const CapitalCardTitle = ({ sx, children, ...rest }) => {
   return (
     <Box
-      as="h1"
+      as="h2"
       sx={sx}
       __css={{
         fontSize: ["16px", null, "18px", null],
-        ineHeight: "28px",
+        lineHeight: "28px",
         fontWeight: 600,
         letterSpacing: "0",
         marginBottom: "6px",
@@ -66,7 +66,7 @@ const CapitalCardDate = ({ children }) => (
       fontWeight: "300",
       fontFamily: "sans",
       color: "gray700",
-      padding: "medium",
+      pb: "small",
     }}
   >
     {children}
@@ -104,22 +104,27 @@ const Card = ({ sx, children, ...rest }) => {
 };
 
 export const Publication = (props) => {
-  const title = props.title;
+    const { t } = useTranslation();
+    const title = props.title;
   const excerpt = props.excerpt;
   const image = get(props, "image._default", ImageDefault);
+  const category = props.category;
   const file = props.file;
   const date = props.date;
-  const { t } = useTranslation();
 
   return (
-    <Box height="100%" pb="16px">
-      <Card  height="100%">
+    <Box pb="16px">
+      <Card>
         <CardBody>
           <Image src={image} />
           <Box padding="medium">
             <CapitalCardTitle>{title}</CapitalCardTitle>
-            <CapitalCardTag>Publication</CapitalCardTag>
-            <CardExcerpt
+              <CapitalCardDate>{date}</CapitalCardDate>
+
+              <div>
+                  <CapitalCardTag>{category}</CapitalCardTag>
+              </div>
+              <CardExcerpt
               dangerouslySetInnerHTML={{
                 __html: excerpt,
               }}
@@ -138,7 +143,6 @@ export const Publication = (props) => {
               </Button>
             </Box>
           )}
-          <CapitalCardDate>{date}</CapitalCardDate>
         </CardBody>
       </Card>
     </Box>
