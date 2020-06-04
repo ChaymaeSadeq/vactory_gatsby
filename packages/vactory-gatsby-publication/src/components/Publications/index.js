@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Image, Text, Button } from "vactory-ui";
 import get from "lodash.get";
 import { ImageDefault } from "vactory-gatsby-ui";
-import {useTranslation} from "react-i18next"
+import { useTranslation } from "react-i18next";
 
 const CapitalCardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -109,11 +109,10 @@ export const Publication = (props) => {
   const image = get(props, "image._default", ImageDefault);
   const file = props.file;
   const date = props.date;
-  const {t} = useTranslation()
-  console.log("hahoma", props)
+  const { t } = useTranslation();
 
   return (
-  <Box height="100%" pb="16px">
+    <Box height="100%" pb="16px">
       <Card height="100%">
         <CardBody>
           <Image src={image} />
@@ -126,11 +125,19 @@ export const Publication = (props) => {
               }}
             />
           </Box>
-          {file &&
-                <Box p="medium" mt="auto">
-                    <Button outline="info" as={'a'} href={file} target={'_blank'} download>{t('Download')}</Button>
-                </Box>
-               }
+          {file && (
+            <Box p="medium" mt="auto">
+              <Button
+                outline="info"
+                as={"a"}
+                href={file}
+                target={"_blank"}
+                download
+              >
+                {t("Download")}
+              </Button>
+            </Box>
+          )}
           <CapitalCardDate>{date}</CapitalCardDate>
         </CardBody>
       </Card>
