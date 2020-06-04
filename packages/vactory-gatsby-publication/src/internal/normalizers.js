@@ -13,7 +13,7 @@ export const normalizeNodes = (nodes) => {
     date: get(post, "field_vactory_date", null),
   }));
 };
-
+ 
 export const normalizeTerms = (terms) => {
   return terms.map((term) => ({
     id: term.drupal_internal__tid,

@@ -113,7 +113,7 @@ export const Publication = (props) => {
 
   return (
     <Box height="100%" pb="16px">
-      <Card height="100%">
+      <Card  height="100%">
         <CardBody>
           <Image src={image} />
           <Box padding="medium">

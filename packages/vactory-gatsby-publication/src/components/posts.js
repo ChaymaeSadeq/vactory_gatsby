@@ -16,7 +16,6 @@ const Posts = ({ posts, handlePaginationChange, pager, count }) => {
           })}
         </Row>
       </Container>
-
       {count > 4 && (
         <Box p="medium">
           <Pagination
