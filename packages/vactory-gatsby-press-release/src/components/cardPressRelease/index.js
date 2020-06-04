@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Flex, Text, Image, Button, Col } from 'vactory-ui'
 import get from 'lodash.get'
+import {useTranslation} from "react-i18next"
 import { ImageDefault } from 'vactory-gatsby-ui'
 
 const CardTitle = ({ sx, children, ...rest }) => {
@@ -105,10 +106,12 @@ const CardDate = ({ children }) => (
 )
 
 export const CardPressRelease = (props) => {
+  const {t} = useTranslation()
   const title = props.title
   const date = props.date
   const category = props.category
   const excerpt = props.excerpt
+  const file = props.file
   const image = get(props, 'image._default', ImageDefault)
 
   return (
@@ -136,9 +139,12 @@ export const CardPressRelease = (props) => {
                   }}
                 />
               </Box>
-              <Box p="medium" mt="auto">
-                <Button outline="info">Download</Button>
-              </Box>
+                {file &&
+                <Box p="medium" mt="auto">
+                    <Button outline="info" as={'a'} href={file} target={'_blank'} download>{t('Télécharger le document')}</Button>
+                </Box>
+                }
+
             </Flex>
           </Flex>
         </CardBody>

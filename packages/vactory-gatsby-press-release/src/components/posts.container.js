@@ -80,7 +80,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
       <Heading px="xsmall" level={2}>
         {t('Press Release')}
       </Heading>
-      {!isLoading && posts.length <= 0 && <h3>{t('Aucun résultat.')}</h3>}
+
       <PostsFormFilter
         terms={normalizedCategories}
         value={selectedTerm}
