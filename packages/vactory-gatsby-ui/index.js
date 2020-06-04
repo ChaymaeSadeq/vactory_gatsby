@@ -6,3 +6,5 @@ export * from './src/layouts'
 
 export {default as WidgetsMapping} from './src/widgets/mapping'
 export {default as WidgetsAmpMapping} from './src/widgets/mapping.amp'
+
+export * from './src/images/index'
