@@ -1,13 +1,23 @@
-const api = require('vactory-gatsby-api');
+const api = require("vactory-gatsby-api");
 exports.nodeProcessor = async (node) => {
-    return node
+  return node;
 };
 
 exports.addContext = async (node, postsParams, taxonomyParams) => {
-    let context = {};
+  let context = {};
 
-    context.nodes = await api.get('node/vactory_news', postsParams, node.langcode);
-    context.terms = await api.get('taxonomy_term/vactory_news_theme', taxonomyParams, node.langcode);
+  nodeResponse = await api.getResponse(
+    "node/vactory_news",
+    postsParams,
+    node.langcode
+  );
+  context.nodes = nodeResponse.data;
+  context.pageCount = nodeResponse.meta.count;
+  context.terms = await api.get(
+    "taxonomy_term/vactory_news_theme",
+    taxonomyParams,
+    node.langcode
+  );
 
-    return context
+  return context;
 };

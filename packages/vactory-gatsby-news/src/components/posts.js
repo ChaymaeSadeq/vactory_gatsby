@@ -1,23 +1,31 @@
-import React from "react"
-import {CardNews} from 'vactory-gatsby-news'
-// import {Link} from "gatsby"
-import {Flex} from "vactory-ui";
+import React from "react";
+import { CardNews } from "vactory-gatsby-news";
+import { Container, Row, Col, Pagination, Box } from "vactory-ui";
 
-const Posts = ({posts}) => {
-    return (
-        <div>
-            <Flex flexWrap="wrap">
-                {posts.map(node => {
-                    return (
-                   
-                        <Flex key={node.id} px="8px" width={[1, 1 / 2, 1 / 3]}>
-                            <CardNews {...node} />
-                        </Flex>
-                    )
-                })}
-            </Flex>
-        </div>
-    )
+const Posts = ({ posts, current, onChange, count }) => {
+  return (
+    <div>
+      <Container>
+        <Row>
+          {posts.map((node) => {
+            return (
+              <Col key={node.id} xs={12} sm={6} md={4}>
+                <CardNews {...node} />
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+      <Box p="medium">
+        <Pagination
+          total={count}
+          pageSize={4}
+          current={current}
+          onChange={onChange}
+        />
+      </Box>
+    </div>
+  );
 };
 
-export default Posts
+export default Posts;
