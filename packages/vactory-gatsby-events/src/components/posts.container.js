@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Api from "vactory-gatsby-api";
-import { Heading, Container, Paragraph } from 'vactory-ui'
-import { LoadingOverlay } from 'vactory-gatsby-ui'
+import { Heading, Container, Paragraph } from "vactory-ui";
+import { LoadingOverlay } from "vactory-gatsby-ui";
 import {
   postsQueryParams,
   normalizeNodes,
@@ -11,7 +11,9 @@ import {
   PostsFormFilter,
 } from "vactory-gatsby-events";
 
-const PostsContainer = ({ pageContext: { node, nodes, terms, cities,pageCount } }) => {
+const PostsContainer = ({
+  pageContext: { node, nodes, terms, cities, pageCount },
+}) => {
   const { t } = useTranslation();
   const normalizedCategories = normalizeTerms(terms);
   const normalizedCities = normalizeTerms(cities);
@@ -29,10 +31,12 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, cities,pageCount } 
 
   const handleChangeCategory = (tid) => {
     setSelectedTerm(tid);
+    setPager(1);
   };
 
   const handleChangeCity = (tid) => {
     setSelectedCity(tid);
+    setPager(1);
   };
 
   useEffect(() => {
@@ -76,7 +80,6 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, cities,pageCount } 
           const normalizedNodes = normalizeNodes(res.data);
           setPosts(normalizedNodes);
           const total = res.meta.count;
-          console.log(total)
           setCount(total);
           setIsLoading(false);
         })
@@ -90,25 +93,32 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, cities,pageCount } 
   }, [selectedTerm, selectedCity, node.langcode, pager]);
 
   return (
-      <Container>
+    <Container>
       <Heading px="xsmall" level={2}>
-        {t('Events')}
+        {t("Events")}
       </Heading>
+      <PostsFormFilter
+        cities={normalizedCities}
+        terms={normalizedCategories}
+        value={selectedTerm}
+        handleChangeCategory={handleChangeCategory}
+        handleChangeCity={handleChangeCity}
+      />
       <LoadingOverlay active={isLoading}>
-       {posts.length > 0 && (
-         <PostsPage
-           count={count}
-           current={pager}
-           onChange={handlePaginationChange}
-           posts={posts}
-         />
-       )}
-       {!isLoading && posts.length <= 0 && (
-         <Paragraph my="medium" textAlign="center">
-           {t('Aucun résultat trouvé')}
-         </Paragraph>
-       )}
-     </LoadingOverlay>
+        {posts.length > 0 && (
+          <PostsPage
+            count={count}
+            current={pager}
+            onChange={handlePaginationChange}
+            posts={posts}
+          />
+        )}
+        {!isLoading && posts.length <= 0 && (
+          <Paragraph my="medium" textAlign="center">
+            {t("Aucun résultat trouvé")}
+          </Paragraph>
+        )}
+      </LoadingOverlay>
     </Container>
   );
 };
