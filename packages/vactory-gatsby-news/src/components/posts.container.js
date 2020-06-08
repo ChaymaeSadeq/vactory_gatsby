@@ -75,7 +75,11 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
       <Heading px="xsmall" level={2}>
         {t("News")}
       </Heading>
-
+      <PostsFormFilter
+        terms={normalizedCategories}
+        value={selectedTerm}
+        handleChange={handleChange}
+      />
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (
           <PostsPage
