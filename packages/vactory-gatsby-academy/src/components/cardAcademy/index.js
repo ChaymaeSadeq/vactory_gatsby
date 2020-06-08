@@ -159,7 +159,7 @@ export const CardAcademy = (props) => {
         <CardBody>
           <CardImage>
             {/* <AddToFavorite /> */}
-            <AcademyDuration>Duree {duration}</AcademyDuration>
+            <AcademyDuration>Durée {duration && duration.length > 0 ? duration : 'indéterminée'}</AcademyDuration>
             <Box width={[1]} height="244px">
               <Image src={image} width={[1]} height="100%" />
             </Box>
