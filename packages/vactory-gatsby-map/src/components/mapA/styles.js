@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const MapContainer = styled.div`
-  padding-top: 40px;
-  padding-bottom: 60px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   background-color: #FFF;
   
   h2 {
@@ -45,7 +45,6 @@ export const MapContainer = styled.div`
   }
   .map-input-wrapper {
     position: relative;
-    max-width: 976px;
     height: 500px;
     margin: 0 auto;
     box-shadow: 0px 10px 16px 0px #cacaca;

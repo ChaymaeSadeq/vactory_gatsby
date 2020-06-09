@@ -45,25 +45,20 @@ const CardBody = ({ sx, children, ...rest }) => {
   );
 };
 
-const InternalCard = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      sx={sx}
-      __css={{
-        background: "white",
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "8px",
-        overflow: "hidden",
-        fontFamily: "montserrat",
-        marginBottom: "16px",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      {children}
-    </Box>
-  );
+
+const InternalCard = ({sx, children, ...rest}) => {
+    return (<Box sx={sx} __css={{
+        background: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        fontFamily: 'montserrat',
+        marginBottom: '16px',
+        width: '100%'
+    }}>
+        {children}
+    </Box>)
 };
 
 const CardTag = ({ children }) => (

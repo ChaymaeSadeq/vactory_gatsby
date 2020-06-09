@@ -1,20 +1,21 @@
-import get from 'lodash.get';
+import get from "lodash.get";
 
 export const normalizeNodes = (nodes) => {
-    return nodes.map(post => ({
-        id: post.drupal_internal__nid,
-        title: post.title,
-        url: get(post, 'path.alias', '#.'),
-        excerpt: get(post, 'field_vactory_excerpt.processed', null),
-        category: get(post, 'field_vactory_taxonomy_1.name', null),
-        image: get(post, 'field_vactory_media_image.thumbnail.uri.value', null),
-        file: get(post, 'field_vactory_media_file', null)
-    }));
+  return nodes.map((post) => ({
+    id: post.drupal_internal__nid,
+    title: post.title,
+    url: get(post, "path.alias", "#."),
+    excerpt: get(post, "field_vactory_excerpt.processed", null),
+    category: get(post, "field_vactory_taxonomy_1.name", null),
+    image: get(post, "field_vactory_media_image.thumbnail.uri.value", null),
+    file: get(post, 'field_vactory_media_file.field_media_document.uri.value._default', null),
+    date: get(post, "field_vactory_date", null),
+  }));
 };
 
 export const normalizeTerms = (terms) => {
-    return terms.map(term => ({
-        id: term.drupal_internal__tid,
-        name: term.name
-    }));
+  return terms.map((term) => ({
+    id: term.drupal_internal__tid,
+    name: term.name,
+  }));
 };

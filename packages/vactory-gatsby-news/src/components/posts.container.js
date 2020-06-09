@@ -97,6 +97,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
       </LoadingOverlay>
     </Container>
   );
+
 };
 
 export default PostsContainer;

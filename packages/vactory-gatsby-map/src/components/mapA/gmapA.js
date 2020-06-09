@@ -6,7 +6,6 @@ import {MapContainer, InfoWindowWrapper} from "./styles"
 import {MapSearch} from "./map-search"
 import isClient from "is-client"
 import Markers from "./markers"
-import {Icon, Heading} from "vactory-ui"
 import InfoWindowImage from "./images/building.jpg"
 import {mapOptions} from './options'
 
@@ -86,12 +85,6 @@ export const GmapA = (props) => {
 
     return (
         <MapContainer>
-            <Heading level="2" className="d-flex justify-content-center align-items-center">
-                <div className="title-icon">
-                    <Icon icon="location-pin"/>
-                </div>
-                <span>{t("Trouvez ")} <br className="d-none d-md-inline-block"/> {t("une agence")}</span>
-            </Heading>
             <div className="map-input-wrapper">
                 {isLoaded && items.length > 0 ?
                     <>
@@ -130,11 +123,11 @@ export const GmapA = (props) => {
                                                 <h5 className="card-title">{selected.name}</h5>
                                                 <p className="card-text map-adresse">{selected.field_locator_adress.address_line1}</p>
                                                 <p className="card-text map-phone">
-                                                    <span> Tel : </span>
+                                                    <span> {t('Tel')} : </span>
                                                     <span
                                                         className="map-text">{selected.field_locator_phone} / {selected.field_locator_phone2}</span>
                                                 </p>
-                                                <p className="card-text map-phone"> Fax : <span
+                                                <p className="card-text map-phone"> {t('Fax')} : <span
                                                     className="map-text">{selected.field_locator_fax}</span></p>
                                             </div>
                                         </InfoWindowWrapper>
