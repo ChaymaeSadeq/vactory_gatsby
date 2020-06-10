@@ -9,6 +9,10 @@ import {
 } from "vactory-gatsby-gouvernance";
 import {DefaultContainer as MapDefaultContainer} from "vactory-gatsby-map";
 import {ExampleWidgetContainer} from "./example-widget/example-widget.container";
+import {
+    ThreeColumnsContainer as PressReleaseThreeColumnsContainer,
+    TwoColumnsContainer as PressReleaseTwoColumnsContainer
+} from "vactory-gatsby-press-release";
 
 const widgets = {
     ...WidgetsMapping,
@@ -18,6 +22,8 @@ const widgets = {
     'vactory_gouvernance:slider': GouvernanceSliderContainer,
     'vactory_gouvernance:tabs': GouvernanceTabsContainer,
     'vactory_locator:default': MapDefaultContainer,
+    'vactory_press_release:three-columns': PressReleaseThreeColumnsContainer,
+    'vactory_press_release:two-columns': PressReleaseTwoColumnsContainer,
 };
 
 export default widgets

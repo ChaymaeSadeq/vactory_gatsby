@@ -1,15 +1,17 @@
 import React from 'react'
-import { CardPressRelease } from 'vactory-gatsby-press-release'
-import { Container, Row, Pagination, Box } from 'vactory-ui'
+import { CardPressReleaseOneRow } from 'vactory-gatsby-press-release'
+import { Col, Container, Row, Pagination, Box } from 'vactory-ui'
 
 const Posts = ({ posts, current, onChange, count }) => {
   return (
     <div>
-      <Container fluid={true}>
+      <Container>
         {posts.map((node) => {
           return (
             <Row key={node.id}>
-              <CardPressRelease {...node} />
+              <Col xs={12}>
+                <CardPressReleaseOneRow {...node} />
+              </Col>
             </Row>
           )
         })}
