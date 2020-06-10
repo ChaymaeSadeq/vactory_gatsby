@@ -22,20 +22,7 @@ const CardTitle = ({ sx, children, ...rest }) => {
     </Box>
   );
 };
-const CardBody = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      sx={sx}
-      __css={{
-        display: "flex",
-        flexDirection: "column",
-        flexGrow: 1,
-      }}
-    >
-      {children}
-    </Box>
-  );
-};
+
 const CapitalCardTag = ({ sx, children }) => (
   <Box
     sx={sx}
@@ -78,8 +65,8 @@ const Date = ({ sx, children }) => (
       color: "white",
       fontWeight: "bold",
       borderRadius: "small",
-      py: "medium",
-      px: "medium",
+      // py: "1%",
+       px: "5%",
     }}
   >
     {children}
@@ -150,14 +137,14 @@ const Card = ({ sx, children, ...rest }) => {
     </Box>
   );
 };
-const Agenda = (props) => {
-  const { node } = props;
-  const image = get(props, 'node.image._default', ImageDefault)
-  const beginDate = dateCalc(node.dateInterval.value);
-  const endDate = dateCalc(node.dateInterval.end_value);
+export const CardEvents = (props) => {
+  
+  const { posts } = props;
+  const image = get(props, 'posts.image._default', ImageDefault)
+  const beginDate = dateCalc(posts.dateInterval.value);
+  const endDate = dateCalc(posts.dateInterval.end_value);
   return (
     <Card>
-      <CardBody>
         <Hoover>
           <Date>
             <Bx>{beginDate[2]}</Bx>
@@ -169,28 +156,26 @@ const Agenda = (props) => {
           <Image src={image} />
         </Hoover>
         <Box p="medium">
-          <CardTitle>{node.title}</CardTitle>
+          <CardTitle>{posts.title}</CardTitle>
           <Flex mb="16px">
             <CapitalCardTag sx={{ backgroundColor: "info500" }}>
-              {node.category}
+              {posts.category}
             </CapitalCardTag>
             <CapitalCardTag sx={{ backgroundColor: "danger500" }}>
-              {node.city}
+              {posts.city}
             </CapitalCardTag>
           </Flex>
           <CardExcerpt
             dangerouslySetInnerHTML={{
-              __html: node.excerpt,
+              __html: posts.excerpt,
             }}
           />
         </Box>
         <Box p="medium" mt="auto">
-          <Link to={node.url} style={{ textDecoration: "none" }}>
+          <Link to={posts.url} style={{ textDecoration: "none" }}>
             <Button fill="info">Read more</Button>
           </Link>
         </Box>
-      </CardBody>
     </Card>
   );
 };
-export default Agenda;

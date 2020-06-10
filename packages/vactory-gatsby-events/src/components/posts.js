@@ -1,5 +1,5 @@
 import React from "react";
-import CardEvents from "./cardEvents";
+import {CardEvents} from "./cardEvents";
 import { Container, Row, Col, Pagination, Box } from 'vactory-ui'
 const Posts = ({ posts, current, onChange, count }) => {
   return (
@@ -9,7 +9,7 @@ const Posts = ({ posts, current, onChange, count }) => {
         {posts.map((node) => {
           return (
             <Col key={node.id} xs={12} sm={6} md={4}>
-              <CardEvents node={node} />
+              <CardEvents posts={node} />
             </Col>
           );
         })}
