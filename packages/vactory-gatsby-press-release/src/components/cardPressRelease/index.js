@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Flex, Text, Image, Button, Col } from 'vactory-ui'
 import get from 'lodash.get'
-import {useTranslation} from "react-i18next"
+import { useTranslation } from 'react-i18next'
 import { ImageDefault } from 'vactory-gatsby-ui'
 
 const CardTitle = ({ sx, children, ...rest }) => {
@@ -14,7 +14,7 @@ const CardTitle = ({ sx, children, ...rest }) => {
         ineHeight: '28px',
         fontWeight: 600,
         letterSpacing: '0',
-        marginBottom: '16px',
+        marginBottom: 'xsmall',
       }}
       {...rest}
     >
@@ -75,13 +75,13 @@ const CardTag = ({ children }) => (
       display: 'inline-flex',
       fontSize: '9px',
       fontWeight: '600',
-      backgroundColor: 'primary800',
+      backgroundColor: 'info500',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 'rounded',
+      borderRadius: 'xsmall',
       textTransform: 'uppercase',
-      py: 'xsmall',
-      px: 'medium',
+      py: 'xxsmall',
+      px: 'xsmall',
       color: 'white',
     }}
   >
@@ -98,7 +98,7 @@ const CardDate = ({ children }) => (
       justifyContent: 'center',
       fontWeight: '500',
       color: '#9B9B9B',
-      ml: '10px',
+      mb: 'medium',
     }}
   >
     {children}
@@ -106,7 +106,7 @@ const CardDate = ({ children }) => (
 )
 
 export const CardPressRelease = (props) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const title = props.title
   const date = props.date
   const category = props.category
@@ -115,40 +115,90 @@ export const CardPressRelease = (props) => {
   const image = get(props, 'image._default', ImageDefault)
 
   return (
-    <Col xs={12}>
-      <Card>
+    <Box height="100%" pb="16px">
+      <Card height="100%">
         <CardBody>
-          <Flex flexDirection={['column', 'column', 'row']}>
-            <Col xs={12} md={5}>
-              <Box>
-                <Image src={image} width="100%" maxHeight="260px" />
-              </Box>
-            </Col>
-            <Flex flexDirection="column">
-              <Box sx={{ p: 'medium', flexGrow: 1 }}>
-                <CardTitle sx={{ mb: 'xsmall' }}>{title}</CardTitle>
-                <Flex mb="medium">
-                  <CardTag sx={{ borderRadius: 'xsmall', bg: 'info500' }}>
-                    {category}
-                  </CardTag>
-                </Flex>
-                <CardDate sx={{ mb: 'small' }}>{date}</CardDate>
-                <CardExcerpt
-                  dangerouslySetInnerHTML={{
-                    __html: excerpt,
-                  }}
-                />
-              </Box>
-                {file &&
-                <Box p="medium" mt="auto">
-                    <Button outline="info" as={'a'} href={file} target={'_blank'} download>{t('Télécharger le document')}</Button>
-                </Box>
-                }
-
+          <Box width="100%" height="244px">
+            <Image src={image} width="100%" height="100%" />
+          </Box>
+          <Box sx={{ p: 'medium', flexGrow: 1 }}>
+            <CardTitle>{title}</CardTitle>
+            <Flex mb="medium">
+              <CardTag>{category}</CardTag>
             </Flex>
-          </Flex>
+            <CardDate>{date}</CardDate>
+            <CardExcerpt
+              dangerouslySetInnerHTML={{
+                __html: excerpt,
+              }}
+            />
+          </Box>
+          {file && (
+            <Box p="medium" mt="auto">
+              <Button
+                outline="info"
+                as={'a'}
+                href={file}
+                target={'_blank'}
+                download
+              >
+                {t('Télécharger le document')}
+              </Button>
+            </Box>
+          )}
         </CardBody>
       </Card>
-    </Col>
+    </Box>
+  )
+}
+
+export const CardPressReleaseOneRow = (props) => {
+  const { t } = useTranslation()
+  const title = props.title
+  const date = props.date
+  const category = props.category
+  const excerpt = props.excerpt
+  const file = props.file
+  const image = get(props, 'image._default', ImageDefault)
+
+  return (
+    <Card>
+      <CardBody>
+        <Flex flexDirection={['column', 'column', 'row']}>
+          <Col xs={12} md={5}>
+            <Box>
+              <Image src={image} width="100%" maxHeight="260px" />
+            </Box>
+          </Col>
+          <Flex flexDirection="column">
+            <Box sx={{ p: 'medium', flexGrow: 1 }}>
+              <CardTitle>{title}</CardTitle>
+              <Flex mb="medium">
+                <CardTag>{category}</CardTag>
+              </Flex>
+              <CardDate>{date}</CardDate>
+              <CardExcerpt
+                dangerouslySetInnerHTML={{
+                  __html: excerpt,
+                }}
+              />
+            </Box>
+            {file && (
+              <Box p="medium" mt="auto">
+                <Button
+                  outline="info"
+                  as={'a'}
+                  href={file}
+                  target={'_blank'}
+                  download
+                >
+                  {t('Télécharger le document')}
+                </Button>
+              </Box>
+            )}
+          </Flex>
+        </Flex>
+      </CardBody>
+    </Card>
   )
 }
