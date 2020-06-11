@@ -1,6 +1,8 @@
 import React from "react";
 import {CardEvents} from "./cardEvents";
-import { Container, Row, Col, Pagination, Box } from 'vactory-ui'
+import { Container, Row, Col, Box } from 'vactory-ui'
+import {Pagination} from 'vactory-gatsby-ui'
+
 const Posts = ({ posts, current, onChange, count }) => {
   return (
     <div>

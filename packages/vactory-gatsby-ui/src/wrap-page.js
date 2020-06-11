@@ -2,13 +2,23 @@ import React from 'react';
 import get from 'lodash.get';
 import {Head} from 'vactory-gatsby-core'
 import {DefaultLayout as Layout} from 'vactory-gatsby-ui'
-import {theme as vactoryTheme, ColorModeProvider, DirectionManager, GlobalStyle} from 'vactory-ui';
+import {
+    theme as vactoryTheme,
+    ColorModeProvider,
+    DirectionManager,
+    GlobalStyle,
+    mergeIcons,
+    iconSet,
+    VactoryIconProvider
+} from 'vactory-ui';
 import {ThemeProvider} from 'styled-components';
 import deepmerge from 'deepmerge';
 import {theme as UiTheme} from './theme'
+import customIconSet from './icons/custom-icons.json';
 
 const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
+const customIcons = mergeIcons(iconSet, customIconSet);
 
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');
@@ -18,13 +28,15 @@ export const wrapPageElement = ({element, props}) => {
     if (node) {
         return (
             <ThemeProvider theme={theme}>
-                <ColorModeProvider>
-                    <DirectionManager>
-                        <GlobalStyle/>
-                        <Head lang={node.langcode} meta={node.field_vactory_meta_tags}/>
-                        <Layout {...props}>{element}</Layout>
-                    </DirectionManager>
-                </ColorModeProvider>
+                <VactoryIconProvider value={customIcons}>
+                    <ColorModeProvider>
+                        <DirectionManager>
+                            <GlobalStyle/>
+                            <Head lang={node.langcode} meta={node.field_vactory_meta_tags}/>
+                            <Layout {...props}>{element}</Layout>
+                        </DirectionManager>
+                    </ColorModeProvider>
+                </VactoryIconProvider>
             </ThemeProvider>
         )
     } else {

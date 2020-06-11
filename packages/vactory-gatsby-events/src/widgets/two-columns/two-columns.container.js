@@ -13,9 +13,7 @@ export const TwoColumnsContainer = ({ data }) => {
     null
   );
   const description = <Wysiwyg html={raw_description} />;
-  const url = get(data, "components.0.link.url", null);
-  const splitArr = url.split("/");
-  const link = splitArr[splitArr.length - 1];
+  const link = get(data, "components.0.link.url", null);
   const link_label = get(data, "components.0.link.title", "");
   const posts = data.data.map((post) => {
     return {
