@@ -9,7 +9,9 @@ export const TwoColumnsContainer = ({ data }) => {
   const title = get(data, 'components.0.title', '')
   const raw_description = get(data, 'components.0.description.value.#text', null)
   const description = <Wysiwyg html={raw_description} />
-  const link = get(data, 'components.0.link.url', null)
+  const url = get(data, 'components.0.link.url', null)
+  const splitArr = url.split('/')
+  const link = splitArr[splitArr.length - 1]
   const link_label = get(data, 'components.0.link.title', '')
   const posts = data.data.map((post) => {
     return {
