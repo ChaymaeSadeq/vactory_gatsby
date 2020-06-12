@@ -1,15 +1,15 @@
 import React from "react";
 import { Container, Row, Col } from "vactory-ui";
-import { CardEvents } from "vactory-gatsby-events";
+import { CardBlog } from "vactory-gatsby-blog";
 
-export const ThreeColumns = ({ posts }) => {
+export const TwoColumns = ({ posts }) => {
   return (
     <Container>
       <Row>
         {posts.map((node) => {
           return (
-            <Col key={node.id} xs={12} md={4}>
-              <CardEvents posts={node} />
+            <Col key={node.id} xs={12} md={6}>
+              <CardBlog posts={node} />
             </Col>
           );
         })}

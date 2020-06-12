@@ -55,7 +55,7 @@ module.exports = {
                 resource: "node/vactory_page_listing",
                 params: {
                     filter: {
-                        field_view_id: 'blogs'
+                        field_view_id: 'blog'
                     }
                 },
                 addContext: (node) => processors.addContext(node, postsParams.params, taxonomyParams.params),
