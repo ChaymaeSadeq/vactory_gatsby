@@ -206,7 +206,7 @@ exports.onCreatePage = ({page, actions}, pluginOptions) => {
 
         const node = {
             langcode: languages.defaultLanguage,
-            field_vactory_meta_tags: null
+            metatag_normalized: null
         };
 
         deletePage(page);

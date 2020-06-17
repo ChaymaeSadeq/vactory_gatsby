@@ -47,7 +47,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
 
       const requestParams = {
         ...postsQueryParams,
-        page: { limit: 4, offset: (pager - 1) * 4 },
+        page: { limit: 9, offset: (pager - 1) * 9 },
         ...categoryFilter,
       };
 
@@ -58,8 +58,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
           const normalizedNodes = normalizeNodes(res.data);
           setPosts(normalizedNodes);
           setIsLoading(false);
-          const total = res.meta.count;
-          setCount(total);
+          setCount(res.meta.count);
         })
         .catch((err) => {
           setIsLoading(false);

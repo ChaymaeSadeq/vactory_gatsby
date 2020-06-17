@@ -3,6 +3,7 @@ import { Box, Flex, Text, Image } from "vactory-ui";
 import { Link } from "vactory-gatsby-ui";
 import get from "lodash.get";
 import { ImageDefault } from "vactory-gatsby-ui";
+import { Truncate } from "vactory-gatsby-core";
 
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -23,11 +24,11 @@ const CardTitle = ({ sx, children, ...rest }) => {
 };
 
 const CardExcerpt = ({ children, ...rest }) => {
-  return (
-    <Text fontSize="14px" color="black800" {...rest}>
-      {children}
+    return <Text fontSize="14px" color="black800" {...rest}>
+        <Truncate lines={2} ellipsis={''}>
+            {children}
+        </Truncate>
     </Text>
-  );
 };
 
 const CardBody = ({ sx, children, ...rest }) => {
@@ -143,13 +144,11 @@ export const CardNews = (props) => {
             <CardDate>{date}</CardDate>
           </Flex>
           <CardTitle>{title}</CardTitle>
-          <CardExcerpt
-            dangerouslySetInnerHTML={{
-              __html: excerpt,
-            }}
-          />
-          <CardButton to={url}>Read more</CardButton>
+            <CardExcerpt>{excerpt}</CardExcerpt>
         </Box>
+          <Box p="medium">
+          <CardButton to={url}>Read more</CardButton>
+          </Box>
       </CardBody>
     </InternalCard>
   );

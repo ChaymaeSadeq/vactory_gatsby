@@ -1,28 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Helmet} from "react-helmet";
-// import {useTranslation} from "react-i18next";
 
 function Head({title = '', meta, lang = ''}) {
-    // const {i18n} = useTranslation();
-    const tags = (meta !== "") ? JSON.parse(meta) || [] : [];
-    let pageTitle = title || "";
-
-    if (tags.title && tags.title["#attributes"]) {
-        pageTitle = tags.title["#attributes"].content
-    }
-
-    // Delete unused.
-    if (tags.title) {
-        delete tags.title
-    }
-    if (tags.canonical_url) {
-        delete tags.canonical_url
-    }
-
+    let pageTitle = title;
     let metas = [];
-    Object.keys(tags).forEach(function (key) {
-        metas.push(tags[key]["#attributes"])
+    meta.forEach(function (value) {
+        if (value.tag === "meta") {
+            if (value.attributes.name === "title") {
+                pageTitle = value.attributes.content
+            } else {
+                metas.push(value.attributes)
+            }
+        }
     });
 
     return (
@@ -39,12 +29,11 @@ function Head({title = '', meta, lang = ''}) {
 
 Head.defaultProps = {
     title: "",
-    meta: "",
+    meta: [],
 };
 
 Head.propTypes = {
-    title: PropTypes.string,
-    meta: PropTypes.string,
+    meta: PropTypes.array,
 };
 
 export default Head

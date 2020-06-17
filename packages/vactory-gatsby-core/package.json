@@ -27,7 +27,9 @@
     "react-hook-form": "^5.7.2",
     "react-i18next": "^11.3.4",
     "react-redux": "^7.2.0",
+    "react-truncate": "^2.4.0",
     "redux": "^4.0.5",
+    "string-strip-html": "^4.4.7",
     "styled-components": "^5.1.0",
     "vactory-gatsby-api": "*",
     "vactory-gatsby-ui": "*"

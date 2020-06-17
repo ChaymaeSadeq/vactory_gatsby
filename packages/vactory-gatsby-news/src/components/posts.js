@@ -20,7 +20,8 @@ const Posts = ({ posts, current, onChange, count }) => {
       <Box p="medium">
         <Pagination
           total={count}
-          pageSize={4}
+          defaultPageSize={9}
+          pageSize={9}
           current={current}
           onChange={onChange}
         />

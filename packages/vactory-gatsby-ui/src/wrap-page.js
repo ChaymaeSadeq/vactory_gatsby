@@ -32,7 +32,7 @@ export const wrapPageElement = ({element, props}) => {
                     <ColorModeProvider>
                         <DirectionManager>
                             <GlobalStyle/>
-                            <Head lang={node.langcode} meta={node.field_vactory_meta_tags}/>
+                            <Head lang={node.langcode} meta={node.metatag_normalized}/>
                             <Layout {...props}>{element}</Layout>
                         </DirectionManager>
                     </ColorModeProvider>
