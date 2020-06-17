@@ -3,9 +3,9 @@ import get from 'lodash.get'
 import { Box, Heading, Button } from 'vactory-ui'
 import { Wysiwyg } from 'vactory-gatsby-ui'
 import { Link } from 'vactory-gatsby-ui'
-import { TwoColumns } from 'vactory-gatsby-academy'
+import { ThreeColumns } from 'vactory-gatsby-press-release'
 
-export const TwoColumnsContainer = ({ data }) => {
+export const ThreeColumnsContainer = ({ data }) => {
   const title = get(data, 'components.0.title', '')
   const raw_description = get(data, 'components.0.description.value.#text', null)
   const description = <Wysiwyg html={raw_description} />
@@ -17,8 +17,8 @@ export const TwoColumnsContainer = ({ data }) => {
     return {
       ...post,
       excerpt: get(post, 'excerpt.0.value'),
-      duration: get(post, 'duration.0.value', null),
       date: get(post, 'date.0.value', null),
+      file: get(post, 'file._default', null)
     }
   })
 
@@ -28,7 +28,7 @@ export const TwoColumnsContainer = ({ data }) => {
         <Heading level={2}>{title}</Heading>
         {raw_description.length > 0 && <div>{description}</div>}
       </Box>
-      <TwoColumns posts={posts} />
+      <ThreeColumns posts={posts} />
       <Box sx={{ 'text-align': 'center' }}>
         {link && (
           <Button as={Link} to={link}>
