@@ -1,5 +1,5 @@
 import React from "react";
-import { CardNews } from "vactory-gatsby-news";
+import { CardNews, imagesStyles } from "vactory-gatsby-news";
 import { Container, Row, Col, Box } from "vactory-ui";
 import {Pagination} from 'vactory-gatsby-ui'
 
@@ -11,7 +11,7 @@ const Posts = ({ posts, current, onChange, count }) => {
           {posts.map((node) => {
             return (
               <Col key={node.id} xs={12} sm={6} md={4}>
-                <CardNews {...node} />
+                <CardNews {...node} imageSettings={imagesStyles.threeColumns} />
               </Col>
             );
           })}

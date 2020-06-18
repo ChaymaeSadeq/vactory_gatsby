@@ -71,12 +71,12 @@ export const GmapA = (props) => {
             .then(res => {
                 setItems(res.data.items)
             })
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     // Check SSR
     useEffect(() => {
         setIsBrowser(isClient())
-    }, [isClient])
+    }, [isClient]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // SSR.
     if (!isBrowser) {

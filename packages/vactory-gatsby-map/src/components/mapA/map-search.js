@@ -77,7 +77,7 @@ export const MapSearch = ({items, onSelect}) => {
         onSelect(null, value)
     }
 
-    const handlePageClick = (data) => {
+    const handlePageClick = (data) => { // eslint-disable-line no-unused-vars
         const selected = data.selected
         setPageNumber(selected)
     }
@@ -106,11 +106,11 @@ export const MapSearch = ({items, onSelect}) => {
             <div className="map-search-result-wrapper">
                 {(currentResults.length > 0 && openSearchLayer) &&
                 <div className="map-search-result">
-                    <ul>
+                    <div className="map-search-result--list">
                         {
                             currentResults.map(({item}, index) => {
                                 return (
-                                    <li key={index} onClick={() => onSelectItem(item)}>
+                                    <div role="button" tabIndex="0" key={index} onKeyPress={() => onSelectItem(item)}>
                                         <div
                                             className="map-search-result-item d-flex align-items-center justify-content-between">
                                             <div>
@@ -125,11 +125,11 @@ export const MapSearch = ({items, onSelect}) => {
                                                 <img src={ImgSearchReslt} alt={item.name}/>
                                             </div>
                                         </div>
-                                    </li>
+                                    </div>
                                 )
                             })
                         }
-                    </ul>
+                    </div>
                 </div>
                 }
                 {(pageCount > 0 && currentResults.length > 0 && openSearchLayer) &&

@@ -24,7 +24,7 @@ import {
 } from "vactory-gatsby-press-release";
 
 import {DefaultContainer as MapDefaultContainer} from "vactory-gatsby-map";
-import {ExampleWidgetContainer} from "./example-widget/example-widget.container";
+import {ExampleWidgetContainer} from "../../widgets/example-widget/example-widget.container";
 
 const widgets = {
     ...WidgetsMapping,

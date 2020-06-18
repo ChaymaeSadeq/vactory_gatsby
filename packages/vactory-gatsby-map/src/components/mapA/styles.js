@@ -118,11 +118,11 @@ export const MapSearchForm = styled.div`
       overflow-x: hidden;
       padding: 0 8px 0 11px;
       
-      ul {
-        list-style-type: none;
+      .map-search-result--list {
+        // list-style-type: none;
         padding-left: 0;
         
-        li {
+        > div {
           border-bottom: 2px solid #eee;
           padding-bottom: 9px;
           padding-top: 9px;

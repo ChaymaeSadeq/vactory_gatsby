@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Flex, Text, Image } from "vactory-ui";
+import { Box, Flex, Text } from "vactory-ui";
 import { Link } from "vactory-gatsby-ui";
 import get from "lodash.get";
-import { ImageDefault } from "vactory-gatsby-ui";
-import { Truncate } from "vactory-gatsby-core";
+import { Picture } from "vactory-gatsby-ui";
 
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -25,9 +24,7 @@ const CardTitle = ({ sx, children, ...rest }) => {
 
 const CardExcerpt = ({ children, ...rest }) => {
     return <Text fontSize="14px" color="black800" {...rest}>
-        <Truncate lines={2} ellipsis={''}>
             {children}
-        </Truncate>
     </Text>
 };
 
@@ -40,6 +37,7 @@ const CardBody = ({ sx, children, ...rest }) => {
         flexDirection: "column",
         flexGrow: 1,
       }}
+      {...rest}
     >
       {children}
     </Box>
@@ -57,7 +55,7 @@ const InternalCard = ({sx, children, ...rest}) => {
         fontFamily: 'montserrat',
         marginBottom: '16px',
         width: '100%'
-    }}>
+    }} {...rest}>
         {children}
     </Box>)
 };
@@ -132,22 +130,31 @@ export const CardNews = (props) => {
   const category = props.category;
   const excerpt = props.excerpt;
   const url = props.url;
-  const image = get(props, "image._default", ImageDefault);
+  const image = get(props, "image", null);
+  const imageSettings = get(props, "imageSettings", null);
 
   return (
-    <InternalCard>
-      <CardBody>
-        <Image src={image} />
-        <Box p="medium">
-          <Flex mb="16px">
+    <InternalCard className="card">
+      <CardBody className="card-body">
+          <Picture
+              file={image}
+              sizes={imageSettings.sizes}
+              alt={title}
+              width={imageSettings.width}
+              height={imageSettings.height}
+              ratio={imageSettings.ratio}
+              className="card-image"
+          />
+        <Box p="medium" className="box">
+          <Flex mb="16px" className="flex">
             <CardTag>{category}</CardTag>
             <CardDate>{date}</CardDate>
           </Flex>
-          <CardTitle>{title}</CardTitle>
-            <CardExcerpt>{excerpt}</CardExcerpt>
+          <CardTitle className="card-title">{title}</CardTitle>
+            <CardExcerpt className="card-excerpt">{excerpt}</CardExcerpt>
         </Box>
-          <Box p="medium">
-          <CardButton to={url}>Read more</CardButton>
+          <Box p="medium" className="box">
+          <CardButton className="card-button" to={url}>Read more</CardButton>
           </Box>
       </CardBody>
     </InternalCard>
