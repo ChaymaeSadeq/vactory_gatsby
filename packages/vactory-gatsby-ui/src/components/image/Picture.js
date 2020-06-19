@@ -33,11 +33,12 @@ export const Picture = (props) => {
 
     const sources = sizes.reverse().map((size, i) => {
         const imageStyle = styles.find(style => style.name === size.name);
-        let url = `${backendURL}sites/default/files/styles/${imageStyle.name}/public/${encodeURI(uri)}`;
+        const imageStyleName = `decoupled_image_${imageStyle.width}_${imageStyle.height}`;
+        let url = `${backendURL}sites/default/files/styles/${imageStyleName}/public/${encodeURI(uri)}`;
 
         if (debug.enabled) {
             // Delay image loading.
-            url = `${debug.delayURL}${backendURL}sites/default/files/styles/${imageStyle.name}/public/${encodeURI(uri)}`;
+            url = `${debug.delayURL}${backendURL}sites/default/files/styles/${imageStyleName}/public/${encodeURI(uri)}`;
         }
 
         return {

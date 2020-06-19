@@ -1,6 +1,6 @@
 import React from 'react'
 import {Flex} from 'vactory-ui'
-import {CardNews, imagesStyles} from 'vactory-gatsby-news'
+import {CardNews, imageLayoutStyles} from 'vactory-gatsby-news'
 
 export const TwoColumns = ({posts}) => {
     return (
@@ -9,7 +9,7 @@ export const TwoColumns = ({posts}) => {
                 {posts.map(node => {
                     return (
                         <Flex key={node.key} px="8px" width={[1, 1 / 2, 1 / 2]}>
-                            <CardNews {...node} imageSettings={imagesStyles.twoColumns} />
+                            <CardNews {...node} imageSettings={imageLayoutStyles.twoColumns} />
                         </Flex>
                     )
                 })}
