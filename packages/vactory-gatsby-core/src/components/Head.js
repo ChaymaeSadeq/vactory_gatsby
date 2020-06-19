@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import {Helmet} from "react-helmet";
 
-function Head({title = '', meta, lang = ''}) {
+function Head({title = '', meta = [], lang = ''}) {
     let pageTitle = title;
     let metas = [];
     meta.forEach(function (value) {
