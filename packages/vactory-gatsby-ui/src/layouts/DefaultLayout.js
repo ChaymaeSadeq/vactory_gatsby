@@ -6,12 +6,9 @@ import {
     BannersTemplate
 } from 'vactory-gatsby-ui'
 
-// import {GmapA as Map} from 'vactory-gatsby-map'
-
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
     return (
         <>
-            {/*<Map mapKey={null} />*/}
             <Header pageInfo={pageInfo} currentLanguage={node.langcode}/>
             {node.internal_node_banner &&
             <BannersTemplate

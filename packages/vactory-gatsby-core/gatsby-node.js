@@ -28,6 +28,7 @@ exports.onPreInit = async (_, pluginOptions) => {
 exports.onPreBootstrap = async ({store}, pluginOptions) => {
     const enabledMenus = appConfig.menus;
     const widgetsConfig = appConfig.widgets;
+    const imageStyles = appConfig.images.styles || [];
     const {program} = store.getState();
     let i18nTranslations = {
         resources: {},
@@ -72,6 +73,9 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
     } catch (err) {
         console.error(err)
     }
+
+    // Process image styles.
+    await createImageStyles(imageStyles);
 
     // Get breadcrumbs.
     console.log(chalk.green("[\u2713] Source Breadcrumbs"));
@@ -206,7 +210,7 @@ exports.onCreatePage = ({page, actions}, pluginOptions) => {
 
         const node = {
             langcode: languages.defaultLanguage,
-            field_vactory_meta_tags: null
+            metatag_normalized: null
         };
 
         deletePage(page);
@@ -233,4 +237,28 @@ exports.createPages = ({actions}, pluginOptions) => {
         force: true,
         statusCode: 301,
     })
+};
+
+const createImageStyles = async (styles) => {
+    console.log(chalk.green("[\u2713] Prepare image styles"));
+
+    for (const style of styles) {
+        try {
+            await api.getRest('app-image/create-style', {
+                params: {
+                    width: style.width,
+                    height: style.height,
+                }
+            }, false);
+
+            console.log(chalk.blue(`[\u25E6] ${style.name}`));
+        }
+        catch (error) {
+            console.log(chalk.red(`[\u25E6] ${style.name}`));
+            if (error.response) {
+                console.error(error.response.data)
+
+            }
+        }
+    }
 };
