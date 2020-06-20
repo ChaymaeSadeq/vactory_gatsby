@@ -1,7 +1,7 @@
 import React from "react"
 import {Picture as ResponsivePicture} from 'react-responsive-picture';
 import isClient from "is-client"
-import {AppSettings} from "vactory-gatsby-core"
+import {AppSettings, ImageStyles} from "vactory-gatsby-core"
 import AspectRatio from 'react-aspect-ratio';
 import LazyLoad from 'react-lazyload';
 
@@ -11,7 +11,7 @@ export const Picture = (props) => {
         delayURL: "http://localhost:4567/1000/" // npm install -g deelay
     };
     const backendURL = AppSettings.api.url;
-    const styles = AppSettings.images.styles;
+    const styles = ImageStyles;
     const {
         file: {
             // fid,
@@ -50,7 +50,8 @@ export const Picture = (props) => {
     const imageStyle = {
         maxWidth: '100%',
         height: 'auto',
-        width: '100%'
+        width: '100%',
+        display: 'block'
     };
 
     const aspectRatioStyle = {

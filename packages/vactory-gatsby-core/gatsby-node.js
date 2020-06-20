@@ -5,6 +5,8 @@ const os = require('os');
 const chalk = require("chalk");
 const esmRequire = require('esm')(module);
 const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
+const astDynamicField = require("./src/ast/dynamicField");
+const astImageStyles = require("./src/ast/imageStyles");
 
 /**
  * Only one instance of this is allowed.
@@ -27,18 +29,9 @@ exports.onPreInit = async (_, pluginOptions) => {
 
 exports.onPreBootstrap = async ({store}, pluginOptions) => {
     const enabledMenus = appConfig.menus;
-    const widgetsConfig = appConfig.widgets;
-    const imageStyles = appConfig.images.styles || [];
-    const {program} = store.getState();
     let i18nTranslations = {
         resources: {},
     };
-
-    if (!widgetsConfig.pathToWidgetsMappingFile) {
-        throw new Error(
-            '[vactory-gatsby-core]: missing required option "pathToWidgetsMappingFile"',
-        );
-    }
 
     // Save Configuration
     const configurationFile = `${__dirname}/.tmp/appConfig.json`;
@@ -75,7 +68,7 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
     }
 
     // Process image styles.
-    await createImageStyles(imageStyles);
+    await createImageStyles();
 
     // Get breadcrumbs.
     console.log(chalk.green("[\u2713] Source Breadcrumbs"));
@@ -108,45 +101,8 @@ exports.onPreBootstrap = async ({store}, pluginOptions) => {
     }
 
     // Widgets mapping.
-    // The reason why we load these in core is that custom projects only include core plugin.
-    // They do not call the ui plugin.
-    const customWidgetMappingFile = path.isAbsolute(widgetsConfig.pathToWidgetsMappingFile)
-        ? widgetsConfig.pathToWidgetsMappingFile
-        : path.join(program.directory, widgetsConfig.pathToWidgetsMappingFile);
-
-    const customWidgetAmpMappingFile = path.isAbsolute(widgetsConfig.pathToAMPWidgetsMappingFile)
-        ? widgetsConfig.pathToAMPWidgetsMappingFile
-        : path.join(program.directory, widgetsConfig.pathToAMPWidgetsMappingFile);
-
-    const customWidgetFile = `${__dirname}/.tmp/widgetsMapping.js`;
-    const customWidgetAMPFile = `${__dirname}/.tmp/widgetsMapping.amp.js`;
-
-    let customWidgetModuleContent = `export {default as WidgetsMapping} from "${customWidgetMappingFile}"`;
-    if (os.platform() === 'win32') {
-        customWidgetModuleContent = customWidgetModuleContent.split('\\').join('\\\\');
-    }
-
-    let customWidgetAmpModuleContent = `export {default as WidgetsAmpMapping} from "${customWidgetAmpMappingFile}"`;
-    if (os.platform() === 'win32') {
-        customWidgetAmpModuleContent = customWidgetAmpModuleContent.split('\\').join('\\\\');
-    }
-
-    try {
-        await fse.ensureFile(customWidgetFile);
-        await fse.writeFileSync(customWidgetFile, customWidgetModuleContent);
-    } catch (err) {
-        console.error(err)
-    }
-    ;
-
-    try {
-        await fse.ensureFile(customWidgetAMPFile);
-        await fse.writeFileSync(customWidgetAMPFile, customWidgetAmpModuleContent);
-    } catch (err) {
-        console.error(err)
-    }
-    ;
-
+    astDynamicField.generateCombinedFile('widgets.mapping.js',`${__dirname}/.tmp/widgetsMapping.js`);
+    astDynamicField.generateCombinedFile('widgets.mapping.amp.js',`${__dirname}/.tmp/widgetsMapping.amp.js`);
 
     // Menus
     console.log(chalk.green("[\u2713] Source Menus"));
@@ -239,7 +195,9 @@ exports.createPages = ({actions}, pluginOptions) => {
     })
 };
 
-const createImageStyles = async (styles) => {
+const createImageStyles = async () => {
+    await astImageStyles.generateCombinedFile('image-styles.js',`${__dirname}/.tmp/imageStylesMapping.js`);
+    const styles = esmRequire(`${__dirname}/.tmp/imageStylesMapping.js`).default;
     console.log(chalk.green("[\u2713] Prepare image styles"));
 
     for (const style of styles) {
@@ -252,8 +210,7 @@ const createImageStyles = async (styles) => {
             }, false);
 
             console.log(chalk.blue(`[\u25E6] ${style.name}`));
-        }
-        catch (error) {
+        } catch (error) {
             console.log(chalk.red(`[\u25E6] ${style.name}`));
             if (error.response) {
                 console.error(error.response.data)

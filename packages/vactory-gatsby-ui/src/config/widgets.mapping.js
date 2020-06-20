@@ -1,10 +1,3 @@
-/*import {
-    TabsContainer,
-    AccordionContainer,
-    AncreContainer,
-    BannerAContainer
-} from "vactory-gatsby-ui";*/
-
 import {TabsContainer} from "vactory-gatsby-ui";
 import {AccordionContainer} from "vactory-gatsby-ui";
 import {AncreContainer} from "vactory-gatsby-ui";

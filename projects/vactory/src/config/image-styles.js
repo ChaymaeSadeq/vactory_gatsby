@@ -1,4 +1,4 @@
-export const CONFIG_IMAGE_STYLES = [
+export const imageStyles = [
     {
         name: "decoupled_image_424_238",
         width: 424,
@@ -220,5 +220,5 @@ export const CONFIG_IMAGE_STYLES = [
         width: 546,
         height: 358,
         operation: "scale_crop",
-    },
+    }
 ];
