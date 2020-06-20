@@ -8,7 +8,7 @@ import LazyLoad from 'react-lazyload';
 export const Picture = (props) => {
     const debug = {
         enabled: false,
-        delayURL: "http://localhost:4567/1000/" // npm install -g deelay
+        delayURL: "http://localhost:4567/5000/" // npm install -g deelay
     };
     const backendURL = AppSettings.api.url;
     const styles = ImageStyles;
