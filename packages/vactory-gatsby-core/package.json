@@ -37,6 +37,8 @@
     "styled-components": "^5.1.0",
     "truncate": "^2.1.0",
     "vactory-gatsby-api": "*",
+    "vactory-gatsby-search": "*",
+    "vactory-gatsby-sitemap": "*",
     "vactory-gatsby-ui": "*"
   }
 }
