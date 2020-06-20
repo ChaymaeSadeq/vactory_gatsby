@@ -31,6 +31,5 @@ module.exports = {
         `vactory-gatsby-ui`,
         `vactory-gatsby-page`,
         `vactory-gatsby-sitemap`,
-        `vactory-gatsby-search`
     ]
 };
