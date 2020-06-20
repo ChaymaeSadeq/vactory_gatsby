@@ -3,7 +3,7 @@ import get from "lodash.get";
 import { Box, Heading, Button } from "vactory-ui";
 import { Wysiwyg } from "vactory-gatsby-ui";
 import { Link } from "vactory-gatsby-ui";
-import { TwoColumns } from "vactory-gatsby-blog";
+import { TwoColumns } from "vactory-gatsby-events";
 
 export const TwoColumnsContainer = ({ data }) => {
   const title = get(data, "components.0.title", "");
@@ -19,6 +19,7 @@ export const TwoColumnsContainer = ({ data }) => {
     return {
       ...post,
       excerpt: get(post, "excerpt.0.value"),
+      dateInterval: get(post, "dateInterval.0", null),
     };
   });
 

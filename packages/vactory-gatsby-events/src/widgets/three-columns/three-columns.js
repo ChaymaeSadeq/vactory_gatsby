@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'vactory-ui'
-import { CardBlog } from 'vactory-gatsby-blog'
+import { CardEvents } from 'vactory-gatsby-events'
 
 export const ThreeColumns = ({ posts }) => {
   return (
@@ -9,7 +9,7 @@ export const ThreeColumns = ({ posts }) => {
         {posts.map((node) => {
           return (
             <Col key={node.id} xs={12} md={4}>
-              <CardBlog posts={node} />
+              <CardEvents posts={node} />
             </Col>
           )
         })}
