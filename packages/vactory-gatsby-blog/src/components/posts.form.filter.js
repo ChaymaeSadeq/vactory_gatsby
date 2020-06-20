@@ -1,27 +1,44 @@
-import React from "react"
-import {useTranslation} from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Select, Box, Label, Flex } from "vactory-ui";
 
-const PostsFormFilter = ({terms, value, handleChange}) => {
-    const { t } = useTranslation();
+const PostsFormFilter = ({
+  terms,
+  cities,
+  value,
+  handleChangeCategory,
+  handleChangeCity,
+}) => {
+  const { t } = useTranslation();
+  console.log(cities);
+  return (
+    <Box pt="10px" pb="30px" px="xsmall">
+      <Flex flexDirection="row">
+        <Flex flexDirection="column" mx="xsmall">
+          <Label htmlFor="blog-category" mb="xsmall">
+            {t("Thématique")}
+          </Label>
+          <Select
+            id="blog-category"
+            onBlur={null}
+            onChange={(e) => handleChangeCategory(e)}
+            defaultValue={value}
+          >
+            <option value="all">{t("Tous les thématiques")}</option>
+            {terms.map((term) => {
+              return (
+                <option key={term.id} value={term.id}>
+                  {term.name}
+                </option>
+              );
+            })}
+          </Select>
+        </Flex>
 
-    return (
-        <div>
-            <label htmlFor="blog-category">{t('Thématique')}</label>
-            <select
-                id="blog-category"
-                onBlur={null}
-                onChange={(e) => handleChange(e.target.value)}
-                defaultValue={value}
-            >
-                <option value="all">{t('Tous les thématiques')}</option>
-                {terms.map(term => {
-                    return (
-                        <option key={term.id} value={term.id}>{term.name}</option>
-                    )
-                })}
-            </select>
-        </div>
-    )
+       
+      </Flex>
+    </Box>
+  );
 };
 
-export default PostsFormFilter
+export default PostsFormFilter;

@@ -6,9 +6,10 @@ exports.nodeProcessor = async (node) => {
 
 exports.addContext = async (node, postsParams, taxonomyParams) => {
     let context = {};
-
-    context.nodes = await api.get('node/blog', postsParams, node.langcode);
+    const nodeResponse = await api.getResponse('node/blog', postsParams, node.langcode);
+    context.nodes = nodeResponse.data
+    context.pageCount = nodeResponse.meta.count
     context.terms = await api.get('taxonomy_term/blog_category', taxonomyParams, node.langcode);
-
+   
     return context
 };
