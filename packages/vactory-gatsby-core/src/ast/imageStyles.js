@@ -8,12 +8,15 @@ const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const t = require("@babel/types");
 const fixture = require('./fixtures/image-styles.code');
+const appConfig = require(path.join(process.cwd(), "gatsby-config.js"));
 
 // @todo: check if extension enabled.
 exports.generateCombinedFile = (lookupMappingFile, fileToSave) => {
     console.log(chalk.green("[\u2713] Generate Image Styles Mapping file"));
 
     let widgetProperties;
+    const internalPlugins = ['vactory-gatsby-ui'];
+    const enabledPlugins = internalPlugins.concat(appConfig.plugins);
     const projectFolder = path.resolve(process.cwd());
     const packagesFolder = `${path.resolve(process.cwd(), '../..')}/packages`;
     const combinedAst = parser(fixture.fixtureCode, {sourceType: 'module'});
@@ -26,11 +29,23 @@ exports.generateCombinedFile = (lookupMappingFile, fileToSave) => {
     });
 
     // Scan for widgets.mapping.js
-    const packagesFiles = glob.sync(`**/${lookupMappingFile}`, {
+    const allPackagesFiles = glob.sync(`**/${lookupMappingFile}`, {
         cwd: packagesFolder,
         absolute: true,
         nodir: true
     });
+
+    const enabledPackagesFiles = allPackagesFiles.filter(path => {
+        let found = false;
+        enabledPlugins.forEach(plugin => {
+            if (path.includes(plugin)) {
+                found = true
+            }
+        });
+
+        return found;
+    });
+
 
     const projectFile = glob.sync(`**/${lookupMappingFile}`, {
         cwd: projectFolder,
@@ -39,7 +54,7 @@ exports.generateCombinedFile = (lookupMappingFile, fileToSave) => {
     });
 
     // Add project widgets.mapping.js as a last item in order to allow override.s
-    const files = packagesFiles.concat(projectFile);
+    const files = enabledPackagesFiles.concat(projectFile);
 
     // Combine imports & widgets.
     files.forEach(filepath => {

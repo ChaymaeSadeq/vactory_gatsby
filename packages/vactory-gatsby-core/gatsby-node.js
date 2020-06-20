@@ -1,7 +1,6 @@
 const api = require('vactory-gatsby-api');
 const fse = require('fs-extra');
 const path = require('path');
-const os = require('os');
 const chalk = require("chalk");
 const esmRequire = require('esm')(module);
 const appConfig = esmRequire(path.join(process.cwd(), "gatsby-vactory-config.js")).default;
