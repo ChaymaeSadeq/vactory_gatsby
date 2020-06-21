@@ -3,6 +3,7 @@ import {CONFIG_MANIFEST} from './src/config/manifest'
 import {CONFIG_FONT} from './src/config/fonts'
 import {CONFIG_MENUS} from './src/config/menus'
 import {CONFIG_PROGRESS_BAR} from './src/config/progress-bar'
+import {CONFIG_API_KEYS} from './src/config/api-keys'
 
 export default {
     api: {
@@ -12,6 +13,7 @@ export default {
         },
     },
     frontendURL: process.env.GATSBY_FRONTEND_URL,
+    keys: CONFIG_API_KEYS,
     languages: CONFIG_LANGAUGES,
     menus: CONFIG_MENUS,
     manifest: CONFIG_MANIFEST,

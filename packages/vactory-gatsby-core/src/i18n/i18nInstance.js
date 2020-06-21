@@ -16,6 +16,7 @@ i18n
         initImmediate: false,
         // ns: ["translations"],
         // defaultNS: "translations",
+        nsSeparator: "/:/",
         interpolation: {
             escapeValue: false
         },
