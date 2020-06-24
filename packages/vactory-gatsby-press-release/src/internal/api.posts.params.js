@@ -1,7 +1,7 @@
 // Listing.
 export const params = {
     page: {
-        limit: 4,
+        limit: 9,
         offset: 0,
     },
     sort: "-created",

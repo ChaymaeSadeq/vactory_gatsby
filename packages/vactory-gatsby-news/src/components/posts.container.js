@@ -47,7 +47,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
 
       const requestParams = {
         ...postsQueryParams,
-        page: { limit: 9, offset: (pager - 1) * 9 },
+        page: { limit: postsQueryParams.page.limit, offset: (pager - 1) * postsQueryParams.page.limit },
         ...categoryFilter,
       };
 

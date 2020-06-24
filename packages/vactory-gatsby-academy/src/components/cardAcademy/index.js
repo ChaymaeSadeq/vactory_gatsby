@@ -1,8 +1,8 @@
 import React from 'react'
-import { Box, Text, Image, Button } from 'vactory-ui'
+import { Box, Text, Button } from 'vactory-ui'
 import { Link } from 'gatsby'
 import get from 'lodash.get'
-import { ImageDefault } from 'vactory-gatsby-ui'
+import { Picture } from "vactory-gatsby-ui";
 
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -151,7 +151,8 @@ export const CardAcademy = (props) => {
   const instructor = props.instructor
   const duration = props.duration
   const url = props.url
-  const image = get(props, 'image._default', ImageDefault)
+  const image = get(props, 'image')
+    const imageSettings = get(props, "imageSettings", null);
 
   return (
     <Box height="100%"  pb='16px'>
@@ -160,9 +161,15 @@ export const CardAcademy = (props) => {
           <CardImage>
             {/* <AddToFavorite /> */}
             <AcademyDuration>Durée {duration && duration.length > 0 ? duration : 'indéterminée'}</AcademyDuration>
-            <Box width={[1]} height="244px">
-              <Image src={image} width={[1]} height="100%" />
-            </Box>
+              <Picture
+                  file={image}
+                  sizes={imageSettings.sizes}
+                  alt={title}
+                  width={imageSettings.width}
+                  height={imageSettings.height}
+                  ratio={imageSettings.ratio}
+                  className="card-image"
+              />
           </CardImage>
           <Box sx={{ p: 'medium' }}>
             <CardTitle>{title}</CardTitle>

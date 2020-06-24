@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardAcademy } from 'vactory-gatsby-academy'
+import { CardAcademy, imageLayoutStyles, postsQueryParams } from 'vactory-gatsby-academy'
 import { Container, Row, Col, Pagination, Box } from 'vactory-ui'
 
 const Posts = ({ posts, current, onChange, count }) => {
@@ -10,7 +10,7 @@ const Posts = ({ posts, current, onChange, count }) => {
           {posts.map((node) => {
             return (
               <Col key={node.id} xs={12} sm={6} md={4}>
-                <CardAcademy {...node} />
+                <CardAcademy {...node} imageSettings={imageLayoutStyles.threeColumns} />
               </Col>
             )
           })}
@@ -20,7 +20,8 @@ const Posts = ({ posts, current, onChange, count }) => {
         <Box p="medium">
           <Pagination
             total={count}
-            pageSize={4}
+            defaultPageSize={postsQueryParams.page.limit}
+            pageSize={postsQueryParams.page.limit}
             current={current}
             onChange={onChange}
           />

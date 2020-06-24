@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardPressReleaseOneRow } from 'vactory-gatsby-press-release'
+import { CardPressReleaseOneRow, postsQueryParams } from 'vactory-gatsby-press-release'
 import { Col, Container, Row, Pagination, Box } from 'vactory-ui'
 
 const Posts = ({ posts, current, onChange, count }) => {
@@ -20,7 +20,7 @@ const Posts = ({ posts, current, onChange, count }) => {
         <Box p="medium">
           <Pagination
             total={count}
-            pageSize={4}
+            pageSize={postsQueryParams.page.limit}
             current={current}
             onChange={onChange}
           />
