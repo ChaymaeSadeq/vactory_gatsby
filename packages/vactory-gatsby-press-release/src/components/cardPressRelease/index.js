@@ -1,8 +1,8 @@
 import React from 'react'
-import { Box, Flex, Text, Image, Button, Col } from 'vactory-ui'
+import { Box, Flex, Text, Button, Col } from 'vactory-ui'
 import get from 'lodash.get'
 import { useTranslation } from 'react-i18next'
-import { ImageDefault } from 'vactory-gatsby-ui'
+import { Picture } from 'vactory-gatsby-ui'
 
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
@@ -112,15 +112,22 @@ export const CardPressRelease = (props) => {
   const category = props.category
   const excerpt = props.excerpt
   const file = props.file
-  const image = get(props, 'image._default', ImageDefault)
+  const image = get(props, 'image')
+  const imageSettings = get(props, 'imageSettings', null)
 
   return (
     <Box height="100%" pb="16px">
       <Card height="100%">
         <CardBody>
-          <Box width="100%" height="244px">
-            <Image src={image} width="100%" height="100%" />
-          </Box>
+          <Picture
+            file={image}
+            sizes={imageSettings.sizes}
+            alt={title}
+            width={imageSettings.width}
+            height={imageSettings.height}
+            ratio={imageSettings.ratio}
+            className="card-image"
+          />
           <Box sx={{ p: 'medium', flexGrow: 1 }}>
             <CardTitle>{title}</CardTitle>
             <Flex mb="medium">
@@ -159,7 +166,8 @@ export const CardPressReleaseOneRow = (props) => {
   const category = props.category
   const excerpt = props.excerpt
   const file = props.file
-  const image = get(props, 'image._default', ImageDefault)
+  const image = get(props, 'image')
+  const imageSettings = get(props, 'imageSettings', null)
 
   return (
     <Card>
@@ -167,7 +175,15 @@ export const CardPressReleaseOneRow = (props) => {
         <Flex flexDirection={['column', 'column', 'row']}>
           <Col xs={12} md={5}>
             <Box>
-              <Image src={image} width="100%" maxHeight="260px" />
+              <Picture
+                file={image}
+                sizes={imageSettings.sizes}
+                alt={title}
+                width={imageSettings.width}
+                height={imageSettings.height}
+                ratio={imageSettings.ratio}
+                className="card-image"
+              />
             </Box>
           </Col>
           <Flex flexDirection="column">
