@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, Flex, Image, Button, Text } from "vactory-ui";
+import { Box, Flex, Button, Text } from "vactory-ui";
 import { Link } from "gatsby";
-import get from 'lodash.get'
-import { ImageDefault } from 'vactory-gatsby-ui'
+import get from "lodash.get";
+import { Picture } from "vactory-gatsby-ui";
 const CardTitle = ({ sx, children, ...rest }) => {
   return (
     <Box
@@ -66,7 +66,7 @@ const Date = ({ sx, children }) => (
       fontWeight: "bold",
       borderRadius: "small",
       // py: "1%",
-       px: "5%",
+      px: "5%",
     }}
   >
     {children}
@@ -129,8 +129,8 @@ const Card = ({ sx, children, ...rest }) => {
         fontFamily: "montserrat",
         marginBottom: "16px",
         boxShadow: 2,
-        width:'100%',
-        height:'100%'
+        width: "100%",
+        height: "100%",
       }}
     >
       {children}
@@ -138,44 +138,54 @@ const Card = ({ sx, children, ...rest }) => {
   );
 };
 export const CardEvents = (props) => {
-  
+  const title = props.title;
+  const image = get(props, "image");
+  const imageSettings = get(props, "imageSettings", null);
   const { posts } = props;
-  const image = get(props, 'posts.image._default', ImageDefault)
+  //const image = get(props, 'posts.image._default', ImageDefault)
   const beginDate = dateCalc(posts.dateInterval.value);
   const endDate = dateCalc(posts.dateInterval.end_value);
   return (
     <Card>
-        <Hoover>
-          <Date>
-            <Bx>{beginDate[2]}</Bx>
-            <Bx sx={{ fontSize: "20px" }}>{beginDate[1]}</Bx>
-            <Bx>-</Bx>
-            <Bx>{endDate[2]}</Bx>
-            <Bx sx={{ fontSize: "20px" }}>{endDate[1]}</Bx>
-          </Date>
-          <Image src={image} />
-        </Hoover>
-        <Box p="medium">
-          <CardTitle>{posts.title}</CardTitle>
-          <Flex mb="16px">
-            <CapitalCardTag sx={{ backgroundColor: "info500" }}>
-              {posts.category}
-            </CapitalCardTag>
-            <CapitalCardTag sx={{ backgroundColor: "danger500" }}>
-              {posts.city}
-            </CapitalCardTag>
-          </Flex>
-          <CardExcerpt
-            dangerouslySetInnerHTML={{
-              __html: posts.excerpt,
-            }}
-          />
-        </Box>
-        <Box p="medium" mt="auto">
-          <Link to={posts.url} style={{ textDecoration: "none" }}>
-            <Button fill="info">Read more</Button>
-          </Link>
-        </Box>
+      <Hoover>
+        <Date>
+          <Bx>{beginDate[2]}</Bx>
+          <Bx sx={{ fontSize: "20px" }}>{beginDate[1]}</Bx>
+          <Bx>-</Bx>
+          <Bx>{endDate[2]}</Bx>
+          <Bx sx={{ fontSize: "20px" }}>{endDate[1]}</Bx>
+        </Date>
+        <Picture
+          file={image}
+          sizes={imageSettings.sizes}
+          alt={title}
+          width={imageSettings.width}
+          height={imageSettings.height}
+          ratio={imageSettings.ratio}
+          className="card-image"
+        />
+      </Hoover>
+      <Box p="medium">
+        <CardTitle>{posts.title}</CardTitle>
+        <Flex mb="16px">
+          <CapitalCardTag sx={{ backgroundColor: "info500" }}>
+            {posts.category}
+          </CapitalCardTag>
+          <CapitalCardTag sx={{ backgroundColor: "danger500" }}>
+            {posts.city}
+          </CapitalCardTag>
+        </Flex>
+        <CardExcerpt
+          dangerouslySetInnerHTML={{
+            __html: posts.excerpt,
+          }}
+        />
+      </Box>
+      <Box p="medium" mt="auto">
+        <Link to={posts.url} style={{ textDecoration: "none" }}>
+          <Button fill="info">Read more</Button>
+        </Link>
+      </Box>
     </Card>
   );
 };
