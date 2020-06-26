@@ -4,19 +4,18 @@ import { Box, Heading, Button } from 'vactory-ui'
 import { Wysiwyg } from 'vactory-gatsby-ui'
 import { Link } from 'vactory-gatsby-ui'
 import { TwoColumns } from 'vactory-gatsby-press-release'
+import {stripHtml, truncate} from 'vactory-gatsby-core'
 
 export const TwoColumnsContainer = ({ data }) => {
   const title = get(data, 'components.0.title', '')
   const raw_description = get(data, 'components.0.description.value.#text', null)
   const description = <Wysiwyg html={raw_description} />
-  const url = get(data, 'components.0.link.url', null)
-  const splitArr = url.split('/')
-  const link = splitArr[splitArr.length - 1]
+  const link = get(data, 'components.0.link.url', null)
   const link_label = get(data, 'components.0.link.title', '')
   const posts = data.data.map((post) => {
     return {
       ...post,
-      excerpt: get(post, 'excerpt.0.value'),
+        excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 200),
       date: get(post, 'date.0.value', null),
       file: get(post, 'file._default', null)
     }
