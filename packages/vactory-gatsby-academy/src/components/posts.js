@@ -1,6 +1,11 @@
 import React from 'react'
-import { CardAcademy, imageLayoutStyles, postsQueryParams } from 'vactory-gatsby-academy'
-import { Container, Row, Col, Pagination, Box } from 'vactory-ui'
+import {
+  CardAcademy,
+  imageLayoutStyles,
+  postsQueryParams,
+} from 'vactory-gatsby-academy'
+import { Container, Row, Col, Box } from 'vactory-ui'
+import { Pagination } from 'vactory-gatsby-ui'
 
 const Posts = ({ posts, current, onChange, count }) => {
   return (
@@ -10,7 +15,10 @@ const Posts = ({ posts, current, onChange, count }) => {
           {posts.map((node) => {
             return (
               <Col key={node.id} xs={12} sm={6} md={4}>
-                <CardAcademy {...node} imageSettings={imageLayoutStyles.threeColumns} />
+                <CardAcademy
+                  {...node}
+                  imageSettings={imageLayoutStyles.threeColumns}
+                />
               </Col>
             )
           })}
