@@ -1,6 +1,9 @@
 import React from 'react'
 import { Container, Row, Col } from 'vactory-ui'
-import { CardPressRelease } from 'vactory-gatsby-press-release'
+import {
+  CardPressRelease,
+  imageLayoutStyles,
+} from 'vactory-gatsby-press-release'
 
 export const ThreeColumns = ({ posts }) => {
   return (
@@ -8,8 +11,11 @@ export const ThreeColumns = ({ posts }) => {
       <Row>
         {posts.map((node) => {
           return (
-            <Col key={node.id} xs={12} md={4}>
-              <CardPressRelease {...node} />
+            <Col key={node.key} xs={12} md={4}>
+              <CardPressRelease
+                {...node}
+                imageSettings={imageLayoutStyles.threeColumns}
+              />
             </Col>
           )
         })}
