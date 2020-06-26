@@ -91,7 +91,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
         {posts.length > 0 && (
           <PostsPage
             count={count}
-            current={pager}
+            pager={pager}
             handlePaginationChange={handlePaginationChange}
             posts={posts}
           />
