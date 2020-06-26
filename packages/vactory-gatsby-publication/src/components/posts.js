@@ -1,6 +1,11 @@
 import React from "react";
 import { Publication } from "vactory-gatsby-publication";
-import { Col, Pagination, Box, Container, Row } from "vactory-ui";
+import { Col, Box, Container, Row } from "vactory-ui";
+import {
+  Pagination,
+  imageLayoutStyles,
+  postsQueryParams,
+} from "vactory-gatsby-ui";
 
 const Posts = ({ posts, handlePaginationChange, pager, count }) => {
   return (
@@ -10,7 +15,10 @@ const Posts = ({ posts, handlePaginationChange, pager, count }) => {
           {posts.map((node) => {
             return (
               <Col key={node.id} xs={12} sm={6} md={4}>
-                <Publication {...node} />
+                <Publication
+                  {...node}
+                  imageSettings={imageLayoutStyles.threeColumns}
+                />
               </Col>
             );
           })}
@@ -20,7 +28,8 @@ const Posts = ({ posts, handlePaginationChange, pager, count }) => {
         <Box p="medium">
           <Pagination
             total={count}
-            pageSize={4}
+            defaultPageSize={postsQueryParams.page.limit}
+            pageSize={postsQueryParams.page.limit}
             current={pager}
             onChange={handlePaginationChange}
           />

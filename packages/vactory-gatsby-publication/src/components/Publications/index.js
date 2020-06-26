@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Image, Text, Button } from "vactory-ui";
+import { Box, Text, Button } from "vactory-ui";
 import get from "lodash.get";
-import { ImageDefault } from "vactory-gatsby-ui";
+import { Picture } from "vactory-gatsby-ui";
 import { useTranslation } from "react-i18next";
 
 const CapitalCardTitle = ({ sx, children, ...rest }) => {
@@ -43,12 +43,10 @@ const CapitalCardTag = ({ children }) => (
       display: "inline-flex",
       fontSize: "10px",
       fontWeight: "600",
-      //textcolor: "primary800",
       backgroundColor: "info500",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: "xsmall",
-      //textTransform: "uppercase",
       p: "2.8px 7px",
       color: "white",
       marginBottom: "16px",
@@ -94,6 +92,7 @@ const Card = ({ sx, children, ...rest }) => {
         fontFamily: "montserrat",
         marginBottom: "16px",
         width: "100%",
+        height: "100%",
         boxShadow: "2",
       }}
       {...rest}
@@ -104,27 +103,36 @@ const Card = ({ sx, children, ...rest }) => {
 };
 
 export const Publication = (props) => {
-    const { t } = useTranslation();
-    const title = props.title;
+  const { t } = useTranslation();
+  const title = props.title;
   const excerpt = props.excerpt;
-  const image = get(props, "image._default", ImageDefault);
+  const image = get(props, "image");
   const category = props.category;
   const file = props.file;
   const date = props.date;
+  const imageSettings = get(props, "imageSettings", null);
 
   return (
     <Box pb="16px">
       <Card>
         <CardBody>
-          <Image src={image} />
+          <Picture
+            file={image}
+            sizes={imageSettings.sizes}
+            alt={title}
+            width={imageSettings.width}
+            height={imageSettings.height}
+            ratio={imageSettings.ratio}
+            className="card-image"
+          />
           <Box padding="medium">
             <CapitalCardTitle>{title}</CapitalCardTitle>
-              <CapitalCardDate>{date}</CapitalCardDate>
+            <CapitalCardDate>{date}</CapitalCardDate>
 
-              <div>
-                  <CapitalCardTag>{category}</CapitalCardTag>
-              </div>
-              <CardExcerpt
+            <div>
+              <CapitalCardTag>{category}</CapitalCardTag>
+            </div>
+            <CardExcerpt
               dangerouslySetInnerHTML={{
                 __html: excerpt,
               }}
