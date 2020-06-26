@@ -3,7 +3,6 @@ import { Publication } from "vactory-gatsby-publication";
 import { Col, Pagination, Box, Container, Row } from "vactory-ui";
 
 const Posts = ({ posts, handlePaginationChange, pager, count }) => {
-  console.log(count);
   return (
     <div>
       <Container>
