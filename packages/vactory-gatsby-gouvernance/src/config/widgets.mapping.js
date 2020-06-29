@@ -1,5 +1,9 @@
-import {DefaultContainer as MapDefaultContainer} from "vactory-gatsby-map";
+import {
+    TabsContainer as GovTabsContainer,
+    SliderContainer as GovSliderContainer
+} from "vactory-gatsby-gouvernance";
 
 export const widgets = {
-    'vactory_locator:default': MapDefaultContainer,
+    'vactory_gouvernance:tabs': GovTabsContainer,
+    'vactory_gouvernance:slider': GovSliderContainer
 };
