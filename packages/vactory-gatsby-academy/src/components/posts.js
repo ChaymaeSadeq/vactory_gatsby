@@ -2,14 +2,11 @@ import React from 'react'
 import {
   CardAcademy,
   imageLayoutStyles,
-  postsQueryParams,
 } from 'vactory-gatsby-academy'
-import { Container, Row, Col, Box } from 'vactory-ui'
-import { Pagination } from 'vactory-gatsby-ui'
+import { Container, Row, Col } from 'vactory-ui'
 
-const Posts = ({ posts, current, onChange, count }) => {
+const Posts = ({ posts }) => {
   return (
-    <div>
       <Container>
         <Row>
           {posts.map((node) => {
@@ -24,18 +21,6 @@ const Posts = ({ posts, current, onChange, count }) => {
           })}
         </Row>
       </Container>
-      {count > 4 && (
-        <Box p="medium">
-          <Pagination
-            total={count}
-            defaultPageSize={postsQueryParams.page.limit}
-            pageSize={postsQueryParams.page.limit}
-            current={current}
-            onChange={onChange}
-          />
-        </Box>
-      )}
-    </div>
   )
 }
 

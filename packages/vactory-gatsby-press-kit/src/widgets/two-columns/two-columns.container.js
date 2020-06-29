@@ -4,6 +4,7 @@ import { Box, Heading, Button } from 'vactory-ui'
 import { Wysiwyg } from 'vactory-gatsby-ui'
 import { Link } from 'vactory-gatsby-ui'
 import { TwoColumns } from 'vactory-gatsby-press-kit'
+import {stripHtml, truncate} from 'vactory-gatsby-core'
 
 export const TwoColumnsContainer = ({ data }) => {
   const title = get(data, 'components.0.title', '')
@@ -18,8 +19,8 @@ export const TwoColumnsContainer = ({ data }) => {
   const posts = data.data.map((post) => {
     return {
       ...post,
-      excerpt: get(post, 'excerpt.0.value'),
-      date: get(post, 'date.0.value', null),
+        excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 200),
+        date: get(post, 'date.0.value', null),
       file: get(post, 'file._default', null),
     }
   })

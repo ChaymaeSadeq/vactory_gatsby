@@ -15,7 +15,7 @@ export const TwoColumnsContainer = ({data}) => {
     const posts = data.data.map(post => {
         return {
             ...post,
-            excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 100),
+            excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 200),
             date: get(post, 'date.0.value', null),
         }
     });

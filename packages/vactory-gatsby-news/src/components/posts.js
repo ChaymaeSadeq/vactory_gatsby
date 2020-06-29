@@ -1,11 +1,9 @@
 import React from "react";
-import { CardNews, imageLayoutStyles, postsQueryParams } from "vactory-gatsby-news";
-import { Container, Row, Col, Box } from "vactory-ui";
-import {Pagination} from 'vactory-gatsby-ui'
+import { CardNews, imageLayoutStyles } from "vactory-gatsby-news";
+import { Container, Row, Col } from "vactory-ui";
 
-const Posts = ({ posts, current, onChange, count }) => {
+const Posts = ({ posts }) => {
   return (
-    <div>
       <Container>
         <Row>
           {posts.map((node) => {
@@ -17,16 +15,6 @@ const Posts = ({ posts, current, onChange, count }) => {
           })}
         </Row>
       </Container>
-      <Box p="medium">
-        <Pagination
-          total={count}
-          defaultPageSize={postsQueryParams.page.limit}
-          pageSize={postsQueryParams.page.limit}
-          current={current}
-          onChange={onChange}
-        />
-      </Box>
-    </div>
   );
 };
 

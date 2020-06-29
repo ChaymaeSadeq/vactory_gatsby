@@ -5,15 +5,18 @@ import {Helmet} from "react-helmet";
 function Head({title = '', meta = [], lang = ''}) {
     let pageTitle = title;
     let metas = [];
-    meta.forEach(function (value) {
-        if (value.tag === "meta") {
-            if (value.attributes.name === "title") {
-                pageTitle = value.attributes.content
-            } else {
-                metas.push(value.attributes)
+
+    if (meta) {
+        meta.forEach(function (value) {
+            if (value.tag === "meta") {
+                if (value.attributes.name === "title") {
+                    pageTitle = value.attributes.content
+                } else {
+                    metas.push(value.attributes)
+                }
             }
-        }
-    });
+        });
+    }
 
     return (
         <Helmet

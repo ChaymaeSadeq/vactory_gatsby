@@ -2,14 +2,11 @@ import React from 'react'
 import {
   CardPressReleaseOneRow,
   imageLayoutStyles,
-  postsQueryParams,
 } from 'vactory-gatsby-press-release'
-import { Col, Container, Row, Box } from 'vactory-ui'
-import { Pagination } from 'vactory-gatsby-ui'
+import { Col, Container, Row } from 'vactory-ui'
 
-const Posts = ({ posts, current, onChange, count }) => {
+const Posts = ({ posts }) => {
   return (
-    <div>
       <Container>
         {posts.map((node) => {
           return (
@@ -24,18 +21,6 @@ const Posts = ({ posts, current, onChange, count }) => {
           )
         })}
       </Container>
-      {count > 4 && (
-        <Box p="medium">
-          <Pagination
-            total={count}
-            defaultPageSize={postsQueryParams.page.limit}
-            pageSize={postsQueryParams.page.limit}
-            current={current}
-            onChange={onChange}
-          />
-        </Box>
-      )}
-    </div>
   )
 }
 

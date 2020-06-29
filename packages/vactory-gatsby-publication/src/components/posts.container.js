@@ -9,7 +9,7 @@ import {
   PostsFormFilter,
 } from "vactory-gatsby-publication";
 import { Heading, Container, Paragraph } from "vactory-ui";
-import { LoadingOverlay } from "vactory-gatsby-ui";
+import {LoadingOverlay, Pagination} from "vactory-gatsby-ui";
 
 const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
   const { t } = useTranslation();
@@ -102,6 +102,15 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
           </Paragraph>
         )}
       </LoadingOverlay>
+      {count > postsQueryParams.page.limit && (
+          <Pagination
+              total={count}
+              defaultPageSize={postsQueryParams.page.limit}
+              pageSize={postsQueryParams.page.limit}
+              current={pager}
+              onChange={handlePaginationChange}
+          />
+      )}
     </Container>
   );
 };
