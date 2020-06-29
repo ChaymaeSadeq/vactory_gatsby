@@ -1,17 +1,17 @@
 import React from "react";
 import { Container, Row, Col } from "vactory-ui";
-import { CardEvents, imageLayoutStyles } from "vactory-gatsby-events";
+import { CardBlog, imageLayoutStyles } from "vactory-gatsby-blog";
 
-export const TwoColumns = ({ posts }) => {
+export const ThreeColumns = ({ posts }) => {
   return (
     <Container>
       <Row>
         {posts.map((node) => {
           return (
-            <Col key={node.id} xs={12} md={6}>
-              <CardEvents
+            <Col key={node.id} xs={12} md={4}>
+              <CardBlog
                 {...node}
-                imageSettings={imageLayoutStyles.twoColumns}
+                imageSettings={imageLayoutStyles.threeColumns}
               />
             </Col>
           );

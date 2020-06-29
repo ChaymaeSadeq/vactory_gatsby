@@ -1,6 +1,6 @@
-import React from 'react'
-import { Container, Row, Col } from 'vactory-ui'
-import { CardEvents } from 'vactory-gatsby-events'
+import React from "react";
+import { Container, Row, Col } from "vactory-ui";
+import { CardEvents, imageLayoutStyles } from "vactory-gatsby-events";
 
 export const ThreeColumns = ({ posts }) => {
   return (
@@ -9,11 +9,14 @@ export const ThreeColumns = ({ posts }) => {
         {posts.map((node) => {
           return (
             <Col key={node.id} xs={12} md={4}>
-              <CardEvents posts={node} />
+              <CardEvents
+                {...node}
+                imageSettings={imageLayoutStyles.threeColumns}
+              />
             </Col>
-          )
+          );
         })}
       </Row>
     </Container>
-  )
-}
+  );
+};
