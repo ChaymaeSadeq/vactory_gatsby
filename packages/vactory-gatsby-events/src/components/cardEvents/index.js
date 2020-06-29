@@ -141,10 +141,8 @@ export const CardEvents = (props) => {
   const title = props.title;
   const image = get(props, "image");
   const imageSettings = get(props, "imageSettings", null);
-  const { posts } = props;
-  //const image = get(props, 'posts.image._default', ImageDefault)
-  const beginDate = dateCalc(posts.dateInterval.value);
-  const endDate = dateCalc(posts.dateInterval.end_value);
+  const beginDate = dateCalc(props.dateInterval.value);
+  const endDate = dateCalc(props.dateInterval.end_value);
   return (
     <Card>
       <Hoover>
@@ -166,23 +164,23 @@ export const CardEvents = (props) => {
         />
       </Hoover>
       <Box p="medium">
-        <CardTitle>{posts.title}</CardTitle>
+        <CardTitle>{props.title}</CardTitle>
         <Flex mb="16px">
           <CapitalCardTag sx={{ backgroundColor: "info500" }}>
-            {posts.category}
+            {props.category}
           </CapitalCardTag>
           <CapitalCardTag sx={{ backgroundColor: "danger500" }}>
-            {posts.city}
+            {props.city}
           </CapitalCardTag>
         </Flex>
         <CardExcerpt
           dangerouslySetInnerHTML={{
-            __html: posts.excerpt,
+            __html: props.excerpt,
           }}
         />
       </Box>
       <Box p="medium" mt="auto">
-        <Link to={posts.url} style={{ textDecoration: "none" }}>
+        <Link to={props.url} style={{ textDecoration: "none" }}>
           <Button fill="info">Read more</Button>
         </Link>
       </Box>

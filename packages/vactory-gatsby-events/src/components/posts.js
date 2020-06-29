@@ -16,7 +16,7 @@ const Posts = ({ posts, current, onChange, count }) => {
             return (
               <Col key={node.id} xs={12} sm={6} md={4}>
                 <CardEvents
-                  posts={node}
+                  {...node}
                   imageSettings={imageLayoutStyles.threeColumns}
                 />
               </Col>
