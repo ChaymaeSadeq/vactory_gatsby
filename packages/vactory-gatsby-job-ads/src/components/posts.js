@@ -1,31 +1,21 @@
-import React, {Fragment} from "react"
-import {Link} from "gatsby"
+import React from 'react'
+import { CardJobAdsOneRow } from 'vactory-gatsby-job-ads'
+import { Col, Container, Row } from 'vactory-ui'
 
-const Posts = ({posts}) => {
-    return (
-        <div>
-            <main>
-                {posts.map(node => {
-                    const title = node.title;
-                    const url = node.url;
-
-                    return (
-                        <Fragment key={node.id}>
-                            <div>
-                                <h2
-                                >
-                                    {title}
-                                </h2>
-                                <small>{node.date}</small>
-                                <p>{node.jobDescription}</p>
-                                <Link to={url}>Read more</Link>
-                            </div>
-                        </Fragment>
-                    )
-                })}
-            </main>
-        </div>
-    )
-};
+const Posts = ({ posts }) => {
+  return (
+    <Container>
+      {posts.map((node) => {
+        return (
+          <Row key={node.id}>
+            <Col xs={12}>
+              <CardJobAdsOneRow {...node} />
+            </Col>
+          </Row>
+        )
+      })}
+    </Container>
+  )
+}
 
 export default Posts
