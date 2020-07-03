@@ -88,27 +88,31 @@ export const Comments = ({entity_uid, type_content, uid, perPage = 10}) => {
                 <Heading level={4}>{t("Poster un commentaire")}</Heading>
             </Box>
 
-            <CommentForm entity_uid={entity_uid} type_content={type_content} />
+            <CommentForm entity_uid={entity_uid} type_content={type_content}/>
 
             <LoadingOverlay active={isLoading}>
+                {pageItems.length > 0 &&
                 <Box>
-                    <Heading level={6}>{totalComments} {t("Commentaires")}</Heading>
+                    <Box>
+                        <Heading level={6}>{totalComments} {t("Commentaires")}</Heading>
+                    </Box>
+                    <StyledCommentsList>
+                        <InfiniteScroll
+                            ref={scroller}
+                            pageStart={0}
+                            initialLoad={false}
+                            loadMore={handleLoadMore}
+                            hasMore={hasMore}
+                            threshold={250}>
+                            {
+                                pageItems.map((entry, index) => {
+                                    return <Comment key={index} comment={entry} uid={uid} type_content={type_content}/>
+                                })
+                            }
+                        </InfiniteScroll>
+                    </StyledCommentsList>
                 </Box>
-                <StyledCommentsList>
-                    <InfiniteScroll
-                        ref={scroller}
-                        pageStart={0}
-                        initialLoad={false}
-                        loadMore={handleLoadMore}
-                        hasMore={hasMore}
-                        threshold={250}>
-                        {
-                            pageItems.map((entry, index) => {
-                                return <Comment key={index} comment={entry} uid={uid} type_content={type_content}/>
-                            })
-                        }
-                    </InfiniteScroll>
-                </StyledCommentsList>
+                }
             </LoadingOverlay>
         </Container>
     )
