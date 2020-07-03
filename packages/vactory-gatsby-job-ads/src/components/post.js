@@ -4,8 +4,8 @@ import {Button} from 'vactory-ui'
 import {Link} from 'vactory-gatsby-ui'
 
 const Post = ({post}) => {
+    const formUrl = post.path.alias + '/form/';
     const {t} = useTranslation();
-
     return (
         <div>
             <main>
@@ -14,7 +14,7 @@ const Post = ({post}) => {
                 {/*    {post.date}*/}
                 {/*</p>*/}
                 {/*<div>{post.body}</div>*/}
-                <Button as={Link} to="/fr/jobs/job-2/form">{t('Postuler')}</Button>
+                <Button as={Link} to={formUrl}>{t('Postuler')}</Button>
             </main>
         </div>
     )

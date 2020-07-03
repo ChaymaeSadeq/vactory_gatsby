@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next"
 import {Box, Label, Input, Button, Text, Layer, Flex} from 'vactory-ui'
-import {useWebformSubmit} from "vactory-gatsby-core";
+import {AppSettings, useWebformSubmit} from "vactory-gatsby-core";
 import ReCaptcha from "react-google-recaptcha"
 
 const RequiredAsterisk = () => <Text mx={'5px'} as="span" fontWeight="bold" color="#ef3d25">(*)</Text>;
@@ -33,7 +33,8 @@ const SuccessMessageLayer = () => {
 };
 
 const PostApplyForm = ({post}) => {
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
+    const currentLanguage = i18n.language;
     const {handleWebformRemoteSubmit, webformFetch} = useWebformSubmit();
     const {register, handleSubmit, watch, errors, setValue, reset} = useForm();
     const formId = 'job_application';
@@ -127,8 +128,8 @@ const PostApplyForm = ({post}) => {
 
                     <Box my="xsmall" px="xsmall">
                         <ReCaptcha
-                            theme="dark"
-                            sitekey={'6LeFj98UAAAAAOkhk1iDNHJN073gLrnPduOv10QZ'}
+                            sitekey={AppSettings.keys.reCaptcha}
+                            hl={currentLanguage}
                             ref={(e) => {
                                 recaptchaRef.current = e;
                                 register(e, {
