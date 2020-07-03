@@ -116,6 +116,7 @@ export const Publication = (props) => {
     <Box pb="16px">
       <Card>
         <CardBody>
+            <Box className="card-image">
           <Picture
             file={image}
             sizes={imageSettings.sizes}
@@ -125,6 +126,7 @@ export const Publication = (props) => {
             ratio={imageSettings.ratio}
             className="card-image"
           />
+            </Box>
           <Box padding="medium">
             <CapitalCardTitle>{title}</CapitalCardTitle>
             <CapitalCardDate>{date}</CapitalCardDate>
