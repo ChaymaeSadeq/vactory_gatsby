@@ -2,6 +2,7 @@ import React from "react"
 import {Box, Header, Layer, Button, Icon, Flex} from "vactory-ui";
 import {
     MenuA as MenuNavigation,
+    SearchA as SearchBox,
     LanguageSelectorA as LanguageSelector,
     Link
 } from 'vactory-gatsby-ui'
@@ -61,6 +62,7 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
                     </Box>
                 </Box>
                 <Box display={['none', 'none', 'block']}><MenuNavigation/></Box>
+                <Box><SearchBox/></Box>
                 <LanguageSelector currentLanguage={currentLanguage} pageInfo={pageInfo}/>
                 <Box display={['block', null, 'none']} color="gray900"><MenuButton
                     onClick={() => setShowSidebarMenu(true)}/> </Box>

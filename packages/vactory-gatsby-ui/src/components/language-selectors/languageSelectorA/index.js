@@ -1,12 +1,10 @@
 import React, {useState, useRef} from "react"
-// import {useTranslation} from "react-i18next";
 import {AppSettings} from 'vactory-gatsby-core'
 import {Icon, Drop, Flex, Box} from 'vactory-ui'
 
 export const LanguageSelectorA = ({pageInfo, currentLanguage}) => {
     const [showDrop, setShowDrop] = useState(false);
     const targetRef = useRef();
-    // const {t} = useTranslation();
     const languages = AppSettings.languages.languageLabels;
     const count = languages.length;
 
