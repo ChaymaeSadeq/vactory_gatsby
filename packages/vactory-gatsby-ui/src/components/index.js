@@ -1,4 +1,4 @@
-export * from './image';
+export * from './picture';
 export * from './link';
 export * from './pagination'
 export * from './loading-overlay'
