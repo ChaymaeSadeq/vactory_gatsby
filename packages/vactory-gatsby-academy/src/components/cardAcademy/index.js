@@ -46,7 +46,7 @@ const AcademyDuration = ({ sx, children, ...rest }) => {
         position: 'absolute',
         left: '0px',
         top: '0px',
-        zIndex: 1000,
+        zIndex: 2,
         bg: 'info500',
         px: 'medium',
         py: 'xsmall',
