@@ -5,6 +5,7 @@ import {Wysiwyg} from "vactory-gatsby-ui";
 import {Link} from 'vactory-gatsby-ui'
 import {GmapA} from 'vactory-gatsby-map'
 import LazyLoad from 'react-lazyload';
+import {AppSettings} from "vactory-gatsby-core"
 
 export const DefaultContainer = ({data}) => {
     const title = get(data, 'components.0.title', '');
@@ -23,7 +24,7 @@ export const DefaultContainer = ({data}) => {
             </Box>
             <Box>
                 <LazyLoad once>
-                    <GmapA/>
+                    <GmapA mapKey={AppSettings.keys.gmap}/>
                 </LazyLoad>
             </Box>
             <Box sx={{
