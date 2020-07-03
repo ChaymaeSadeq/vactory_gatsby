@@ -62,8 +62,8 @@ export const CommentForm = ({entity_uid, cid = null, type_content}) => {
         };
 
         const comment = CreateData({
-            // name: isAuthenticated ? null : values.nom,
-            name: values.nom,
+            // name: isAuthenticated ? null : values.name,
+            name: values.name,
             body: values.body,
             captcha: values.captcha_response,
             entity_id: entity_uid,
