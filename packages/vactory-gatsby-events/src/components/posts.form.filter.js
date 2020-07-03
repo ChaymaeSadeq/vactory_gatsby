@@ -10,7 +10,6 @@ const PostsFormFilter = ({
   handleChangeCity,
 }) => {
   const { t } = useTranslation();
-  console.log(cities);
   return (
     <Box pt="10px" pb="30px" px="xsmall">
       <Flex flexDirection="row">
