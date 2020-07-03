@@ -61,8 +61,13 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
                         <Link color="primary500" to={`/${currentLanguage}`}>VACTORY</Link>
                     </Box>
                 </Box>
-                <Box display={['none', 'none', 'block']}><MenuNavigation/></Box>
-                <Box><SearchBox/></Box>
+                <Box
+                    flexGrow={1}
+                    justifyContent="center"
+                    display={['none', 'none', 'flex']}>
+                    <MenuNavigation/>
+                </Box>
+                <Box mx="10px"><SearchBox/></Box>
                 <LanguageSelector currentLanguage={currentLanguage} pageInfo={pageInfo}/>
                 <Box display={['block', null, 'none']} color="gray900"><MenuButton
                     onClick={() => setShowSidebarMenu(true)}/> </Box>
