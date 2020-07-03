@@ -119,6 +119,7 @@ export const CardPressKit = (props) => {
     <Box height="100%" pb="16px">
       <Card height="100%">
         <CardBody>
+            <Box className="card-image">
           <Picture
             file={image}
             sizes={imageSettings.sizes}
@@ -128,6 +129,7 @@ export const CardPressKit = (props) => {
             ratio={imageSettings.ratio}
             className="card-image"
           />
+            </Box>
 
           <Box sx={{ p: 'medium', flexGrow: 1 }}>
             <CardTitle>{title}</CardTitle>

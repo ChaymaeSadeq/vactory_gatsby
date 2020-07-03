@@ -120,6 +120,7 @@ export const CardBlog = (props) => {
   return (
     <InternalCard className="card">
       <CardBody className="card-body">
+          <Box className="card-image">
           <Picture
               file={image}
               sizes={imageSettings.sizes}
@@ -129,6 +130,7 @@ export const CardBlog = (props) => {
               ratio={imageSettings.ratio}
               className="card-image"
           />
+          </Box>
         <Box p="medium" className="box">
           <Flex mb="16px" className="flex">
             <CardTag>{category}</CardTag>
