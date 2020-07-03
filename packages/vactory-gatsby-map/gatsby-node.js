@@ -14,12 +14,12 @@ exports.onPreBootstrap = async () => {
 
     let items = [];
     try {
-        // items = await api.getAll('locator_entity/vactory_locator', {}, appConfig.languages.defaultLanguage);
-        items = await api.get('locator_entity/vactory_locator', {
-            fields: {
-                "locator_entity--vactory_locator": "drupal_internal__id,name,field_locator_adress,field_locator_fax,field_locator_info,field_locator_phone,field_locator_phone_2",
-            }
-        }, appConfig.languages.defaultLanguage);
+        items = await api.getAll('locator_entity/vactory_locator', {}, appConfig.languages.defaultLanguage);
+        // items = await api.get('locator_entity/vactory_locator', {
+        //     fields: {
+        //         "locator_entity--vactory_locator": "drupal_internal__id,name,field_locator_adress,field_locator_fax,field_locator_info,field_locator_phone,field_locator_phone_2",
+        //     }
+        // }, appConfig.languages.defaultLanguage);
     } catch (error) {
         console.error(error);
         return;
