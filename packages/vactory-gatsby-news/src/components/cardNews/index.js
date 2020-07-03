@@ -136,15 +136,17 @@ export const CardNews = (props) => {
   return (
     <InternalCard className="card">
       <CardBody className="card-body">
-          <Picture
-              file={image}
-              sizes={imageSettings.sizes}
-              alt={title}
-              width={imageSettings.width}
-              height={imageSettings.height}
-              ratio={imageSettings.ratio}
-              className="card-image"
-          />
+          <Box className="card-image">
+              <Picture
+                  file={image}
+                  sizes={imageSettings.sizes}
+                  alt={title}
+                  width={imageSettings.width}
+                  height={imageSettings.height}
+                  ratio={imageSettings.ratio}
+                  className="card-image"
+              />
+          </Box>
         <Box p="medium" className="box">
           <Flex mb="16px" className="flex">
             <CardTag>{category}</CardTag>
