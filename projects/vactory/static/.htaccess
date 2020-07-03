@@ -607,11 +607,3 @@ FileETag None
 # ----------------------------------------------------------------------
 # | Custom Rules                                                       |
 # ----------------------------------------------------------------------
-
-## HTPASSWD - Protected Area ###
-<If "%{HTTP_HOST} == 'stg.lapreprod.com'">
-  AuthType Basic
-  AuthName "Area - Protected"
-  AuthUserFile /home/USER_OWNER/public_html/.htpasswd
-  require valid-user
-</If>
