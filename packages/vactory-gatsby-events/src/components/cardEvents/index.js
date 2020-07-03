@@ -60,7 +60,7 @@ const Date = ({ sx, children }) => (
       position: "absolute",
       right: "3%",
       top: "3%",
-      zIndex: "1000",
+      zIndex: 2,
       backgroundColor: "danger500",
       color: "white",
       fontWeight: "bold",
