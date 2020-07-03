@@ -3,7 +3,8 @@ import {
     HeaderA as Header,
     FooterA as Footer,
     Breadcrumb,
-    BannersTemplate
+    BannersTemplate,
+    CookieComplianceLayer
 } from 'vactory-gatsby-ui'
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
@@ -21,6 +22,7 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
                 {children}
             </main>
             <Footer/>
+            <CookieComplianceLayer />
         </>
     )
 }
