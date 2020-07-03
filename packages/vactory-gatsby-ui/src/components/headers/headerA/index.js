@@ -46,7 +46,7 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
 
     return (
         <Box>
-            <Header p="large" bg="white" boxShadow={1}>
+            <Header p="large" bg="white" boxShadow={1} sticky={true}>
                 <Box flexGrow={[1, 1, 0, 0]}>
                     <Box display="inline-block" textAlign="center" fontWeight="black" fontSize="14px"
                          sx={{
@@ -74,7 +74,9 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
                         modal={true}
                         responsive
                         plain={true}
-                        onClickOutside={() => setShowSidebarMenu(false)}>
+                        onClickOutside={() => setShowSidebarMenu(false)}
+                        onEsc={() => setShowSidebarMenu(false)}
+                    >
                         <Flex sx={{
                             backgroundColor: '#383838',
                             color: 'white',
