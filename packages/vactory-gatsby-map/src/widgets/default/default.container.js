@@ -4,6 +4,7 @@ import {Box, Heading, Button} from "vactory-ui"
 import {Wysiwyg} from "vactory-gatsby-ui";
 import {Link} from 'vactory-gatsby-ui'
 import {GmapA} from 'vactory-gatsby-map'
+import LazyLoad from 'react-lazyload';
 
 export const DefaultContainer = ({data}) => {
     const title = get(data, 'components.0.title', '');
@@ -21,7 +22,9 @@ export const DefaultContainer = ({data}) => {
                 {raw_description.length > 0 && <div>{description}</div>}
             </Box>
             <Box>
-                <GmapA/>
+                <LazyLoad once>
+                    <GmapA/>
+                </LazyLoad>
             </Box>
             <Box sx={{
                 'text-align': 'center'
