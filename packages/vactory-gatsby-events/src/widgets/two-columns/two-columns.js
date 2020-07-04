@@ -8,7 +8,7 @@ export const TwoColumns = ({ posts }) => {
       <Row>
         {posts.map((node) => {
           return (
-            <Col key={node.id} xs={12} md={6}>
+            <Col key={node.key} xs={12} md={6}>
               <CardEvents
                 {...node}
                 imageSettings={imageLayoutStyles.twoColumns}

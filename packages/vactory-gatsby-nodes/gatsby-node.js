@@ -17,6 +17,10 @@ exports.createPages = async ({store, actions: {createPage}}, {
 }) => {
     console.log(chalk.green("[\u2713] " + title));
 
+    // Preview config.
+    const previewEnabled = true;
+    const previewTemplate = path.resolve(__dirname, `src/templates/preview.js`);
+
     // @todo: benchmark this, maybe add cache to it.
     const {breadcrumbs} = await fse.readJson(`${__dirname}/../vactory-gatsby-core/.tmp/breadcrumbs.json`);
 
@@ -98,12 +102,50 @@ exports.createPages = async ({store, actions: {createPage}}, {
             // AMP.
             if (amp.enabled) {
                 createPage({
-                    path: path.join(pagePath, "/amp/"),
+                    path: path.join(node.path.alias, "/amp/"),
                     component: amp.template,
                     context: {
                         node: node,
                         pageInfo,
                         ...extraContext,
+                    },
+                });
+            }
+
+            // Preview.
+            if (previewEnabled) {
+                // Get package name.
+                const relativePath = path.relative(path.join(__dirname, '..'), template);
+                const parts = relativePath.split(path.sep);
+                let packageName = parts[0];
+                const previewFilePath = path.format({
+                    dir: `${path.resolve(path.join(__dirname, '..'))}/${packageName}/src/components`,
+                    base: 'preview.container.js'
+                });
+
+                // If no preview file is found.
+                // Fallback to default preview file.
+                const previewFileExist = await fse.exists(previewFilePath);
+                if (!previewFileExist) {
+                    packageName = 'vactory-gatsby-nodes';
+                    throw new Error(
+                        `[${packageName}] Preview file not found at ${previewFilePath}`
+                    )
+                }
+
+                createPage({
+                    path: path.join(node.path.alias, "/__preview/"),
+                    component: previewTemplate,
+                    context: {
+                        node: node,
+                        pageInfo,
+                        ...extraContext,
+                        previewConfig: {
+                            node_type: resource.split("/").pop(),
+                            resource,
+                            params,
+                            packageName,
+                        }
                     },
                 });
             }

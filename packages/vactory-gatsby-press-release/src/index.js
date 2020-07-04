@@ -9,3 +9,5 @@ export {
   CardPressRelease,
 } from './components/cardPressRelease'
 export * from './widgets'
+export {default as PostPage} from './components/post'
+export {default as PostContainer} from './components/post.container'

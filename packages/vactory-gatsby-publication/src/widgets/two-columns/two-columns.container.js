@@ -6,7 +6,6 @@ import { Link } from 'vactory-gatsby-ui'
 import { TwoColumns } from 'vactory-gatsby-publication'
 
 export const TwoColumnsContainer = ({ data }) => {
-    console.log('data' ,data)
   const title = get(data, 'components.0.title', '')
   const raw_description = get(data, 'components.0.description.value.#text', null)
   const description = <Wysiwyg html={raw_description} />

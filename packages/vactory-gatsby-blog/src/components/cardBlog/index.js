@@ -116,7 +116,7 @@ export const CardBlog = (props) => {
   const url = props.url;
   const image = get(props, "image");
   const imageSettings = get(props, "imageSettings", null);
-  console.log('settings',imageSettings)
+
   return (
     <InternalCard className="card">
       <CardBody className="card-body">

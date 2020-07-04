@@ -1,2 +1,2 @@
 export * from './search.posts'
-export * from './search.container'
+export {default as SearchContainer} from './search.container'
