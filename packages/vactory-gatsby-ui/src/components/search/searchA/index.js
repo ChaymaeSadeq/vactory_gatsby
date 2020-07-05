@@ -2,10 +2,12 @@ import React, {useState, useEffect} from "react"
 import {Box, SearchOverlay, Icon} from "vactory-ui";
 import {navigate} from "gatsby"
 import isClient from "is-client"
+import {useViewsAlias} from "vactory-gatsby-nodes";
 
 export const SearchA = () => {
     const [show, setShow] = useState(false);
     const [isBrowser, setIsBrowser] = useState(false);
+    const searchUrl = useViewsAlias('search');
 
     // Check SSR
     useEffect(() => {
@@ -26,7 +28,7 @@ export const SearchA = () => {
             </Box>
             {isBrowser &&
             <SearchOverlay onSubmit={q => {
-                navigate('/fr/recherche?q=' + q);
+                navigate(`${searchUrl}?q=${q}`);
                 setShow(false)
             }}
                            onClose={() => setShow(false)}
