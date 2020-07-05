@@ -2,6 +2,19 @@ const api = require('vactory-gatsby-api');
 const path = require("path");
 const chalk = require("chalk");
 const fse = require("fs-extra");
+const _ = require('lodash');
+const viewsConfigurationFile = `${__dirname}/.tmp/viewsConfig.json`;
+
+exports.onPreBootstrap = async () => {
+    try {
+        await fse.ensureFile(viewsConfigurationFile);
+        await fse.writeJson(viewsConfigurationFile, {
+            views: [],
+        })
+    } catch (err) {
+        console.error(err)
+    }
+};
 
 exports.createPages = async ({store, actions: {createPage}}, {
     title,
@@ -16,6 +29,11 @@ exports.createPages = async ({store, actions: {createPage}}, {
     addContext = null,
 }) => {
     console.log(chalk.green("[\u2713] " + title));
+
+    // Create a mapping file in order to get alias by view_id field.
+    // search > /fr/recherche + /ar/search
+    let viewsData = await fse.readJson(viewsConfigurationFile);
+    const view_id = _.get(params, 'filter.field_view_id');
 
     // Preview config.
     const previewEnabled = true;
@@ -88,6 +106,14 @@ exports.createPages = async ({store, actions: {createPage}}, {
                 extraContext = await addContext(node);
             }
 
+            if (view_id) {
+                viewsData.views.push({
+                    id: view_id,
+                    alias: node.path.alias,
+                    langcode: node.langcode,
+                })
+            }
+
             createPage({
                 path: node.path.alias,
                 component: template,
@@ -152,4 +178,7 @@ exports.createPages = async ({store, actions: {createPage}}, {
         }
 
     }
+
+    // Save views config.
+    await fse.writeJson(viewsConfigurationFile, viewsData)
 };
