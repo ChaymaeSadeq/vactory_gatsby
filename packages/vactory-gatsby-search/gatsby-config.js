@@ -1,7 +1,3 @@
-const esmRequire = require("esm")(module);
-const path = require('path');
-const fs = require('fs');
-
 // Templates.
 const SearchTemplate = require.resolve(`./src/components/search.container`);
 
