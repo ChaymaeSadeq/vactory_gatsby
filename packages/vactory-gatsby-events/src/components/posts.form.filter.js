@@ -12,8 +12,8 @@ const PostsFormFilter = ({
   const { t } = useTranslation();
   return (
     <Box pt="10px" pb="30px" px="xsmall">
-      <Flex flexDirection="row">
-        <Flex flexDirection="column" mx="xsmall">
+      <Flex flexDirection={['column', 'row']}>
+        <Flex flexDirection="column" mx="xsmall" mb={['10px', '0px']}>
           <Label htmlFor="events-category" mb="xsmall">
             {t("Thématique")}
           </Label>
