@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {UItheme} from 'vactory-gatsby-ui'
 
 export const MapContainer = styled.div`
   padding-top: 30px;
@@ -67,7 +68,11 @@ export const MapContainer = styled.div`
 `;
 
 export const MapSearchForm = styled.div`
-  width: 395px;
+  width: 100%;
+  
+  @media screen and (min-width: ${UItheme.breakpoints.sm}) {
+    width: 395px;
+  }
 
   .input-map-search-wrapper {
     background-color: #FFF;
