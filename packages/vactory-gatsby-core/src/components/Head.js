@@ -1,8 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Helmet} from "react-helmet";
+import {useTranslation} from "react-i18next"
 
 function Head({title = '', meta = [], lang = ''}) {
+    const {i18n} = useTranslation();
+    const currentLanguage = i18n.language;
+
     let pageTitle = title;
     let metas = [];
 
@@ -21,8 +25,8 @@ function Head({title = '', meta = [], lang = ''}) {
     return (
         <Helmet
             htmlAttributes={{
-                lang,
-                dir: lang === "ar" ? "rtl" : "ltr",
+                lang: currentLanguage,
+                dir: currentLanguage === "ar" ? "rtl" : "ltr",
             }}
             title={pageTitle}
             meta={metas}
