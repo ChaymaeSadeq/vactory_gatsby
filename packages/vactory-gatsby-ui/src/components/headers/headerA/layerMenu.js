@@ -56,7 +56,7 @@ export const LayerMenu = ({onClose}) => {
     return <Flex sx={{
         backgroundColor: '#383838',
         color: 'white',
-        height: '100%',
+        height: '100vh',
         flexDirection: 'column',
         width: '100%',
         fontSize: '17px',
