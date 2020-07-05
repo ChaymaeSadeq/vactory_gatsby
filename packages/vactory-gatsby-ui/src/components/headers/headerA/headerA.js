@@ -55,8 +55,7 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
                 </Box>
                 <Box mx="10px"><SearchBox/></Box>
                 <LanguageSelector currentLanguage={currentLanguage} pageInfo={pageInfo}/>
-                {/*<Box display={['block', null, 'none']} color="gray900">*/}
-                <Box color="gray900">
+                <Box display={['block', null, 'none']} color="gray900">
                     <MenuButton onClick={() => setShowSidebarMenu(true)}/>
                 </Box>
 

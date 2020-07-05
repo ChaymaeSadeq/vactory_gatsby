@@ -15,8 +15,8 @@ const PostsFormFilter = ({
 
   return (
     <Box pt="10px" pb="30px">
-      <Flex flexDirection="row">
-        <Flex flexDirection="column" mx="xsmall">
+      <Flex flexDirection={['column', 'row']}>
+        <Flex flexDirection="column" mx="xsmall" mb={['10px', '0px']}>
           <Label htmlFor="job-ads-professions" mb="xsmall">
             {t('Profession')}
           </Label>
@@ -38,7 +38,7 @@ const PostsFormFilter = ({
             })}
           </Select>
         </Flex>
-        <Flex flexDirection="column" mx="xsmall">
+        <Flex flexDirection="column" mx="xsmall" mb={['10px', '0px']}>
           <Label htmlFor="job-ads-contracts" mb="xsmall">
             {t('Type de contrat')}
           </Label>

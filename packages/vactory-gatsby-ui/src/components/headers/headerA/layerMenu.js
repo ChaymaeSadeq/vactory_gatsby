@@ -5,7 +5,12 @@ import {Link} from '../../link';
 import styled from "styled-components"
 
 const StyledMenuLink = styled(Link)`
-    color: white
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 35px 20px;
 `;
 
 const CloseButton = ({ size = 'large', ...props }) =>
@@ -66,12 +71,10 @@ export const LayerMenu = ({onClose}) => {
             {items.map(item => {
                 return (
                     <Flex key={item.id} borderTop="1px solid #fff">
-                        <Flex justifyContent="space-between" alignItems="center" width="100%" padding="35px 20px">
-                            <StyledMenuLink to={item.url}>
+                            <StyledMenuLink onClick={onClose} to={item.url}>
                                 <Text as="span">{item.title}</Text>
+                                <CaretButton />
                             </StyledMenuLink>
-                            <CaretButton />
-                        </Flex>
                     </Flex>
                 )
             })}
