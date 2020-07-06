@@ -11,9 +11,9 @@ module.exports = {
     plugins: [
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-remove-generator`,
-        // {
-        //     resolve: `gatsby-plugin-offline`,
-        // },
+        {
+            resolve: `gatsby-plugin-offline`,
+        },
         {
             resolve: `gatsby-plugin-react-redux`,
             options: {
