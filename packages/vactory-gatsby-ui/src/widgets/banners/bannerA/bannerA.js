@@ -18,7 +18,7 @@ export const BannerA = ({settings}) => {
             }}
         >
             <Container>
-                <Heading level="1">{settings.title}</Heading>
+                <Heading level="1" color={'white'}>{settings.title}</Heading>
                 <Box>{settings.description}</Box>
                 {settings.useBreadcrumb && settings.breadcrumbItems.length > 0 &&
                 <Breadcrumb items={settings.breadcrumbItems}/>
