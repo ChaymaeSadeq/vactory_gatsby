@@ -4,7 +4,8 @@ import {
     FooterA as Footer,
     Breadcrumb,
     BannersTemplate,
-    CookieComplianceLayer
+    CookieComplianceLayer,
+    OfflineDetector
 } from 'vactory-gatsby-ui'
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
@@ -23,6 +24,7 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             </main>
             <Footer/>
             <CookieComplianceLayer />
+            <OfflineDetector />
         </>
     )
 }
