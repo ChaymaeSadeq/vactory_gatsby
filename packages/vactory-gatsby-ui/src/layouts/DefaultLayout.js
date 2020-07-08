@@ -5,7 +5,8 @@ import {
     Breadcrumb,
     BannersTemplate,
     CookieComplianceLayer,
-    OfflineDetector
+    OfflineDetector,
+    BackToTop
 } from 'vactory-gatsby-ui'
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
@@ -25,6 +26,7 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             <Footer/>
             <CookieComplianceLayer />
             <OfflineDetector />
+            <BackToTop />
         </>
     )
 }
