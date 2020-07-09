@@ -8,6 +8,7 @@ export const ParagraphsController = (props) => {
         type,
         paragraph_identifier,
         paragraph_container,
+        paragraph_section,
         paragraph_css_class,
         paragraph_background_color = {color: {hexadecimal: null}},
         field_vactory_component = null,
@@ -33,6 +34,7 @@ export const ParagraphsController = (props) => {
         <ParagraphsContainer
             id={paragraph_identifier}
             layout={paragraph_container}
+            state={paragraph_section}
             style={{
                 backgroundColor: backgroundColor,
                 backgroundImage: backgroundImage

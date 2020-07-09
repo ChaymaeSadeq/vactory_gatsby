@@ -6,13 +6,15 @@ import {
     BannersTemplate,
     CookieComplianceLayer,
     OfflineDetector,
-    BackToTop
+    BackToTop,
+    StatePageSection
 } from 'vactory-gatsby-ui'
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
     return (
         <>
-            <Header pageInfo={pageInfo} currentLanguage={node.langcode}/>
+            <StatePageSection.Provider>
+            <Header pageInfo={pageInfo} currentLanguage={node.langcode} location={location}/>
             {node.internal_node_banner &&
             <BannersTemplate
                 widget={node.internal_node_banner}
@@ -23,6 +25,7 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             <main>
                 {children}
             </main>
+            </StatePageSection.Provider>
             <Footer/>
             <CookieComplianceLayer />
             <OfflineDetector />

@@ -3,6 +3,7 @@ export * from './src/components'
 export * from './src/widgets'
 export * from './src/controllers'
 export * from './src/layouts'
+export * from './src/state'
 
 export {default as WidgetsMapping} from './src/widgets/mapping'
 export {default as WidgetsAmpMapping} from './src/widgets/mapping.amp'

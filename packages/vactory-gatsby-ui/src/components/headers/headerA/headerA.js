@@ -5,9 +5,13 @@ import {
     SearchA as SearchBox,
     LanguageSelectorA as LanguageSelector,
     Link,
-    HeaderALayerMenu as LayerMenu
+    HeaderALayerMenu as LayerMenu,
+    StatePageSection
 } from 'vactory-gatsby-ui'
 import {useRtl} from "vactory-gatsby-core";
+import { motion, useAnimation } from 'framer-motion';
+
+const MotionHeader = motion.custom(Header);
 
 const MenuButton = ({size = 'large', ...props}) =>
     <Button {...props}
@@ -26,13 +30,44 @@ const MenuButton = ({size = 'large', ...props}) =>
         <Icon name="menu" size={size}/>
     </Button>;
 
-export const HeaderA = ({pageInfo, currentLanguage}) => {
+export const HeaderA = ({pageInfo, currentLanguage, location}) => {
+    const headerRef = React.useRef({
+        location: null,
+    });
     const [showSidebarMenu, setShowSidebarMenu] = React.useState();
     const isRtl = useRtl();
+    let pageSection = StatePageSection.useContainer();
+    const headerAnimationCtrls = useAnimation();
+    let variants = {
+        initial: { backgroundColor: '#ffffff' },
+        state2: { backgroundColor: '#333333' },
+        state3: { backgroundColor: '#ff6347' },
+    };
+
+    React.useEffect(() => {
+        if (!headerRef.current.location) {
+            headerRef.current.location = location;
+        }
+        else if (headerRef.current.location !== location) {
+            pageSection.setCurrentSection('initial');
+            headerRef.current.location = location
+        }
+        else {
+            headerAnimationCtrls.start(pageSection.section)
+        }
+    }, [pageSection]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Box>
-            <Header p="large" bg="white" boxShadow={1} sticky={true}>
+            <MotionHeader
+                animate={headerAnimationCtrls}
+                initial="initial"
+                variants={variants}
+                transition={{ ease: "easeOut", duration: 0.5 }}
+                p="large"
+                boxShadow={1}
+                sticky={true}
+            >
                 <Box flexGrow={[1, 1, 0, 0]}>
                     <Box display="inline-block" textAlign="center" fontWeight="black" fontSize="14px"
                          sx={{
@@ -72,7 +107,7 @@ export const HeaderA = ({pageInfo, currentLanguage}) => {
                         <LayerMenu onClose={() => setShowSidebarMenu(false)} />
                     </Layer>
                 )}
-            </Header>
+            </MotionHeader>
         </Box>
     );
 };

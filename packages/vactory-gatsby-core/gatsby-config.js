@@ -1,4 +1,4 @@
-const reduxCreateStore = require.resolve(`./src/state/createStore`);
+// const reduxCreateStore = require.resolve(`./src/state/createStore`);
 
 // Config
 const path = require('path');
@@ -55,12 +55,12 @@ module.exports = {
                 }
             }
         },
-        {
-            resolve: `gatsby-plugin-react-redux`,
-            options: {
-                pathToCreateStoreModule: reduxCreateStore,
-            },
-        },
+        // {
+        //     resolve: `gatsby-plugin-react-redux`,
+        //     options: {
+        //         pathToCreateStoreModule: reduxCreateStore,
+        //     },
+        // },
         {
             resolve: `gatsby-plugin-nprogress`,
             options: appConfig.progressBar,
