@@ -26,21 +26,7 @@ const Title = ({children, ...rest}) => {
     )
 };
 
-const WebShareWrapper = ({children}) => {
-    // Disable on SSR.
-    if (!isClient()) {
-        return null
-    }
-
-    // Check for support.
-    if (typeof navigator.share === 'undefined') {
-        return null;
-    }
-
-    return children
-};
-
-export const WebShare = ({title = '', text = '', url = ''}) => {
+export const InternalWebShare = ({title = '', text = '', url = ''}) => {
     const {t} = useTranslation();
     const [internalUrl, setInternalUrl] = React.useState(url);
 
@@ -69,13 +55,25 @@ export const WebShare = ({title = '', text = '', url = ''}) => {
     };
 
     return (
-        <WebShareWrapper>
-            <Flex flexDirection={['column', 'row']} alignItems="center">
-                <Title onClick={share}>
-                    <Box>{t('Vous avez aimé cette page ? Partagez la !')}</Box>
-                    <Icon mx='10px' name="international" size="30px"/>
-                </Title>
-            </Flex>
-        </WebShareWrapper>
+        <Flex flexDirection={['column', 'row']} alignItems="center">
+            <Title onClick={share}>
+                <Box>{t('Vous avez aimé cette page ? Partagez la !')}</Box>
+                <Icon mx='10px' name="international" size="30px"/>
+            </Title>
+        </Flex>
     )
 };
+
+export const WebShare = (props) => {
+    // Disable on SSR.
+    if (!isClient()) {
+        return null
+    }
+
+    // Check for support.
+    if (typeof navigator.share === 'undefined') {
+        return null;
+    }
+
+    return <InternalWebShare {...props} />
+}
