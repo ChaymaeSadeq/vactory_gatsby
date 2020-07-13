@@ -9,7 +9,6 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
     const language = i18n.language;
     const [posts, setPosts] = useState(null);
     const [moreLink, setMoreLink] = useState(null);
-    const [enabled, setEnabled] = useState(false);
     let internalTitle = title ? title : t('Articles similaires');
     let internalLinkLabel = linkLabel ? linkLabel : t('Voir plus');
 
@@ -65,20 +64,11 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
 
         loadNodes().then(({nodes, config}) => {
             setPosts(normalizer(nodes));
-            setEnabled(true);
             if (config.link_more && config.link_more.length > 0) {
                 setMoreLink(config.link_more)
             }
         }).catch(error => console.warn(error));
     }, [nid]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    if (!enabled) {
-        return null;
-    }
-
-    if (enabled && posts && posts.length <= 0) {
-        return null;
-    }
 
     let Markup = () => (
         <Row>
