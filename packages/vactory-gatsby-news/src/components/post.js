@@ -1,5 +1,5 @@
 import React from "react"
-import {SocialShare} from "vactory-gatsby-ui"
+import {SocialShare, WebShare} from "vactory-gatsby-ui"
 const Post = ({post}) => {
     return (
         <div>
@@ -10,6 +10,7 @@ const Post = ({post}) => {
                 {/*</p>*/}
                 {/*<div>{post.body}</div>*/}
                 <SocialShare />
+                <WebShare />
             </main>
         </div>
     )
