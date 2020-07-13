@@ -22,15 +22,19 @@ const Title = ({ sx, children, ...rest }) => {
 };
 
 export const SocialShare = ({ url = '' }) => {
-  const { t } = useTranslation()
-  let internalUrl = url
-  if (url.length <= 0 && typeof window !== 'undefined') {
-      internalUrl = window.location.href;
-      const canonicalElement = document.querySelector('link[rel=canonical]');
-      if (canonicalElement !== null) {
-          internalUrl = canonicalElement.href;
-      }
-  }
+  const { t } = useTranslation();
+  const [internalUrl, setInternalUrl] = React.useState(url);
+
+    React.useEffect(() => {
+        if (url.length <= 0 && typeof window !== 'undefined') {
+            setInternalUrl(window.location.href);
+            const canonicalElement = document.querySelector('link[rel=canonical]');
+            if (canonicalElement !== null) {
+                setInternalUrl(canonicalElement.href);
+            }
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <Flex flexDirection={['column', 'row']} alignItems="center">
       <Title>{t('Vous avez aimé cette page ? Partagez la !')}</Title>

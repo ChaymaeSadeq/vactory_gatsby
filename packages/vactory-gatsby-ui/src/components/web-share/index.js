@@ -26,9 +26,7 @@ const Title = ({children, ...rest}) => {
     )
 };
 
-export const WebShare = ({title = '', text = '', url = ''}) => {
-    const {t} = useTranslation();
-
+const WebShareWrapper = ({children}) => {
     // Disable on SSR.
     if (!isClient()) {
         return null
@@ -39,15 +37,26 @@ export const WebShare = ({title = '', text = '', url = ''}) => {
         return null;
     }
 
+    return children
+};
+
+export const WebShare = ({title = '', text = '', url = ''}) => {
+    const {t} = useTranslation();
+    const [internalUrl, setInternalUrl] = React.useState(url);
+
     // Share title
     let internalTitle = title.length > 0 ? title : document.title;
 
     // Share URL.
-    let internalUrl = url.length > 0 ? url : document.location.href;
-    const canonicalElement = document.querySelector('link[rel=canonical]');
-    if (canonicalElement !== null) {
-        internalUrl = canonicalElement.href;
-    }
+    React.useEffect(() => {
+        if (url.length <= 0 && typeof window !== 'undefined') {
+            setInternalUrl(window.location.href);
+            const canonicalElement = document.querySelector('link[rel=canonical]');
+            if (canonicalElement !== null) {
+                setInternalUrl(canonicalElement.href);
+            }
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const share = () => {
         navigator.share({
@@ -60,8 +69,13 @@ export const WebShare = ({title = '', text = '', url = ''}) => {
     };
 
     return (
-        <Flex flexDirection={['column', 'row']} alignItems="center">
-            <Title onClick={share}><Box>{t('Vous avez aimé cette page ? Partagez la !')}</Box> <Icon mx='10px' name="international" size="30px"/></Title>
-        </Flex>
+        <WebShareWrapper>
+            <Flex flexDirection={['column', 'row']} alignItems="center">
+                <Title onClick={share}>
+                    <Box>{t('Vous avez aimé cette page ? Partagez la !')}</Box>
+                    <Icon mx='10px' name="international" size="30px"/>
+                </Title>
+            </Flex>
+        </WebShareWrapper>
     )
 };
