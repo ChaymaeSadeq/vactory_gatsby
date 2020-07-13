@@ -1,6 +1,5 @@
 import React from 'react'
 import isClient from "is-client"
-import {Toast} from 'vactory-gatsby-ui';
 import {useTranslation} from "react-i18next"
 import {Box, Flex, Icon} from 'vactory-ui'
 
@@ -53,8 +52,6 @@ export const InternalWebShare = ({title = '', text = '', url = ''}) => {
             text: text,
             url: internalUrl,
         })
-            .then(() => Toast.success(t("Merci d'avoir partager le lien.")))
-            .catch(() => Toast.error(t("Une erreur s'est produite lors du partage")));
     };
 
     return (
