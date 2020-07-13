@@ -64,8 +64,8 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
         }
 
         loadNodes().then(({nodes, config}) => {
-            setEnabled(true);
             setPosts(normalizer(nodes));
+            setEnabled(true);
             if (config.link_more && config.link_more.length > 0) {
                 setMoreLink(config.link_more)
             }
@@ -76,7 +76,7 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
         return null;
     }
 
-    if (posts && posts.length <= 0) {
+    if (enabled && posts && posts.length <= 0) {
         return null;
     }
 
