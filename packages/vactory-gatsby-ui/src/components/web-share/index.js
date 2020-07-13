@@ -29,9 +29,7 @@ const Title = ({children, ...rest}) => {
 export const InternalWebShare = ({title = '', text = '', url = ''}) => {
     const {t} = useTranslation();
     const [internalUrl, setInternalUrl] = React.useState(url);
-
-    // Share title
-    let internalTitle = title.length > 0 ? title : document.title;
+    const [internalTitle, setInternalTitle] = React.useState(title);
 
     // Share URL.
     React.useEffect(() => {
@@ -42,6 +40,11 @@ export const InternalWebShare = ({title = '', text = '', url = ''}) => {
                 setInternalUrl(canonicalElement.href);
             }
         }
+
+        if (typeof window !== 'undefined') {
+            setInternalTitle(document.title)
+        }
+
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const share = () => {
