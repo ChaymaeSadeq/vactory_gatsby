@@ -76,6 +76,10 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
         return null;
     }
 
+    if (posts && posts.length <= 0) {
+        return null;
+    }
+
     let Markup = () => (
         <Row>
             {new Array(limit).fill().map((e, i) => {
