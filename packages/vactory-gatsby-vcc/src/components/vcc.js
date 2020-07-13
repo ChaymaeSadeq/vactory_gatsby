@@ -3,6 +3,7 @@ import Api from "vactory-gatsby-api";
 import {useTranslation} from "react-i18next"
 import {Box, Button, Container, Row, Col, Heading, MotionBox} from "vactory-ui";
 import {Link, CardContentLoader} from "vactory-gatsby-ui";
+import {mapOrder} from '../utils/mapOrder'
 
 export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams, renderNode, normalizer, limit = 3}) => {
     const {t, i18n} = useTranslation();
@@ -56,8 +57,9 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
             };
 
             const {data} = await Api.getResponse(`node/${resource}`, params, language);
+            let sortedNodes = mapOrder(data, ids, 'drupal_internal__nid');
             return {
-                nodes: data,
+                nodes: sortedNodes,
                 config
             };
         }
