@@ -19,7 +19,7 @@ const Title = ({ sx, children, ...rest }) => {
       {children}
     </Box>
   )
-}
+};
 
 export const SocialShare = ({ url = '' }) => {
   const { t } = useTranslation()
