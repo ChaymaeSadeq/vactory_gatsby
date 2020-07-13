@@ -10,13 +10,9 @@ const Title = ({ sx, children, ...rest }) => {
       sx={sx}
       __css={{
         fontSize: ['15px', null, '17px', null],
-        ineHeight: '28px',
-        fontWeight: 600,
-        letterSpacing: '0',
+        lineHeight: '28px',
+        fontWeight: 400,
         color: '#707070',
-        textTransform: 'uppercase',
-        py: ['medium', '45px'],
-        px: 'medium',
       }}
       {...rest}
     >
@@ -28,29 +24,34 @@ const Title = ({ sx, children, ...rest }) => {
 export const SocialShare = ({ url = '' }) => {
   const { t } = useTranslation()
   let internalUrl = url
-  if (url.length <= 0 && typeof window !== 'undefined')
-    internalUrl = window.location.href
+  if (url.length <= 0 && typeof window !== 'undefined') {
+      internalUrl = window.location.href;
+      const canonicalElement = document.querySelector('link[rel=canonical]');
+      if (canonicalElement !== null) {
+          internalUrl = canonicalElement.href;
+      }
+  }
   return (
-    <Flex flexDirection={['column', 'row']}>
-      <Title>{t('Partager sur')}</Title>
+    <Flex flexDirection={['column', 'row']} alignItems="center">
+      <Title>{t('Vous avez aimé cette page ? Partagez la !')}</Title>
       <Box display="flex" p="medium">
         <Share
           link={internalUrl}
           platform="facebook"
           icon="facebook"
-          color="info800"
+          color="#1875ec"
         />
         <Share
           link={internalUrl}
           platform="twitter"
           icon="twitter"
-          color="info400"
+          color="#219dec"
         />
         <Share
           link={internalUrl}
           platform="linkedin"
           icon="linkedin-i"
-          color="info600"
+          color="#1778b0"
         />
       </Box>
     </Flex>

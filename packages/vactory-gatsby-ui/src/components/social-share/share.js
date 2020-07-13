@@ -8,13 +8,16 @@ const LinkIcon = ({ icon, color, sx, children, ...rest }) => {
       as="span"
       __css={{
         display: 'flex',
-        border: '1px solid #707070',
+        border: '1px solid #e2e2e2',
         p: 'xsmall',
-        m: 'medium',
+        m: '3px',
         bg: 'white',
-        transform: 'rotate(45deg)',
+          '.icon': {
+            color: '#9c9c9c'
+          },
         '&:hover': {
           bg: color,
+          borderColor: color,
           '.icon': {
             fill: 'white',
           },
@@ -25,10 +28,9 @@ const LinkIcon = ({ icon, color, sx, children, ...rest }) => {
       <Icon
         className="icon"
         __css={{
-          transform: 'rotate(-45deg)',
         }}
         name={icon}
-        size="xlarge"
+        size="28px"
         color={color}
       />
     </Box>
