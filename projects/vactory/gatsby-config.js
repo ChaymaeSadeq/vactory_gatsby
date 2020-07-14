@@ -11,6 +11,7 @@ require('dotenv').config({
 module.exports = {
     plugins: [
         `vactory-gatsby-core`,
+        `vactory-gatsby-nextpre`,
         `vactory-gatsby-search`,
         `vactory-gatsby-map`,
         `vactory-gatsby-blog`,
