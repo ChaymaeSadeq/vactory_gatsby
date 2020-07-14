@@ -4,6 +4,7 @@ import isClient from "is-client"
 import {AppSettings, ImageStyles} from "vactory-gatsby-core"
 import AspectRatio from 'react-aspect-ratio';
 import LazyLoad from 'react-lazyload';
+import 'react-aspect-ratio/aspect-ratio.css'
 
 export const Picture = (props) => {
     const debug = {
