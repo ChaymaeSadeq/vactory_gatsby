@@ -10,12 +10,12 @@ export const ParagraphsController = (props) => {
         paragraph_container,
         paragraph_section,
         paragraph_css_class,
-        paragraph_background_color = {color: {hexadecimal: null}},
+        paragraph_background_color = null,
         field_vactory_component = null,
         paragraph_background_image = null
     } = props.data;
 
-    const backgroundColor = paragraph_background_color.color.hexadecimal;
+    const backgroundColor = paragraph_background_color;
     const backgroundImage = paragraph_background_image ?
         `url(${paragraph_background_image.thumbnail.uri.value._default})` :
         null;
