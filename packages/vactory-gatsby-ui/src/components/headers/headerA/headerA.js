@@ -8,7 +8,7 @@ import {
     HeaderALayerMenu as LayerMenu,
     StatePageSection
 } from 'vactory-gatsby-ui'
-import {useRtl} from "vactory-gatsby-core";
+import {useRtl, AuthUserProfile} from "vactory-gatsby-core";
 import { motion, useAnimation } from 'framer-motion';
 
 const MotionHeader = motion.custom(Header);
@@ -93,6 +93,8 @@ export const HeaderA = ({pageInfo, currentLanguage, location}) => {
                 <Box display={['block', null, 'none']} color="gray900">
                     <MenuButton onClick={() => setShowSidebarMenu(true)}/>
                 </Box>
+
+                <AuthUserProfile />
 
                 {showSidebarMenu && (
                     <Layer
