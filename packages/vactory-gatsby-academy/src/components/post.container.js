@@ -10,17 +10,43 @@ import { Paragraph } from 'vactory-ui'
 import { LoadingOverlay } from 'vactory-gatsby-ui'
 
 const PostContainer = ({ pageContext: { node } }) => {
-  console.log(node)
   const { t } = useTranslation()
   const normalizedNode = normalizeNode(node)
   const isFirstRun = useRef(true)
   const [post, setPost] = useState(normalizedNode)
   const [isLoading, setIsLoading] = useState(false)
+  const [rate, setRate] = useState({
+    vote_average: 0,
+    vote_count: 0,
+    hasVoted: false,
+  })
 
   useEffect(() => {
+    fetchRating()
     if (isFirstRun.current) {
       isFirstRun.current = false
       return
+    }
+
+    function fetchRating() {
+      Api.getRest(
+        `api/rate/results/node/${node.drupal_internal__nid}`,
+        {},
+        node.langcode,
+      )
+        .then((res) => {
+          if (res.data.status === true && res.data.hasVoted === true)
+            setRate({
+              ...res.data.fivestar,
+              hasVoted: true,
+              vote: res.data.vote,
+            })
+          else if (res.data.status === true && res.data.hasVoted === false)
+            setRate({ ...res.data.fivestar, hasVoted: false })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
 
     function fetchData() {
@@ -41,10 +67,57 @@ const PostContainer = ({ pageContext: { node } }) => {
     }
     fetchData()
   }, [node.langcode])
+
+  const handleVote = (rating) => {
+    Api.getRest(
+      `api/rate/node/${node.drupal_internal__nid}/fivestar/${rating}`,
+      {},
+      node.langcode,
+    )
+      .then((res) => {
+        if (res.data.status)
+          setRate({
+            ...rate,
+            hasVoted: true,
+            vote: rating,
+            ...res.data.fivestar,
+          })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const handleUnvote = () => {
+    Api.getRest(
+      `api/rate/undo/node/${node.drupal_internal__nid}`,
+      {},
+      node.langcode,
+    )
+      .then((res) => {
+        if (res.data.status === true && res.data.fivestar)
+          setRate({ hasVoted: false, ...res.data.fivestar })
+        else if (res.data.status === true)
+          setRate({ vote_average: 0, vote_count: 0, hasVoted: false })
+        else if (res.data.status === false)
+          setRate({ vote_average: 0, vote_count: 0, hasVoted: false })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <>
       <LoadingOverlay active={isLoading}>
-        {post && <PostPage {...post} />}
+        {post && (
+          <PostPage
+            {...post}
+            {...rate}
+            handleVote={handleVote}
+            handleUnvote={handleUnvote}
+          />
+        )}
         {!isLoading && !post && (
           <Paragraph my="medium" textAlign="center">
             {t('Aucun résultat trouvé')}
@@ -56,3 +129,7 @@ const PostContainer = ({ pageContext: { node } }) => {
 }
 
 export default PostContainer
+
+/**
+ * rate state
+ */

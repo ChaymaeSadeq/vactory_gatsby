@@ -16,6 +16,7 @@ import {
 } from 'vactory-ui'
 import get from 'lodash.get'
 import { SocialShare } from 'vactory-gatsby-ui'
+import Rating from 'react-rating'
 import FsLightbox from 'fslightbox-react'
 
 const Card = ({ sx, children, ...rest }) => {
@@ -98,26 +99,6 @@ const CardTag = ({ children }) => (
   </Box>
 )
 
-const Rating = ({ rating }) => {
-  let table = []
-  for (let i = 0; i < 5; i++) {
-    if (i < rating)
-      table.push(
-        <Icon key={i} name="star-full" color="warning500" size="medium" />,
-      )
-    else
-      table.push(
-        <Icon key={i} name="star-full" color="gray500" size="medium" />,
-      )
-  }
-  return (
-    <Flex py="1px" maxHeight="20px">
-      {table}
-      <CardInfo pl="small">Note ({rating}/5)</CardInfo>
-    </Flex>
-  )
-}
-
 const Title = ({ sx, children, ...rest }) => {
   return (
     <Box
@@ -130,6 +111,7 @@ const Title = ({ sx, children, ...rest }) => {
         letterSpacing: '0',
         color: '#707070',
         textTransform: 'uppercase',
+        mb: 'small',
       }}
       {...rest}
     >
@@ -138,29 +120,27 @@ const Title = ({ sx, children, ...rest }) => {
   )
 }
 
-const RateCourse = () => {
+const RateCourse = ({ setShowModal, handleVote, hasVoted, vote }) => {
   const { t } = useTranslation()
-  let table = []
-  for (let i = 0; i < 5; i++) {
-    table.push(
-      <Icon
-        __css={{
-          '&:hover': {
-            color: 'warning500',
-          },
-        }}
-        className="start"
-        key={i}
-        name="star-full"
-        color="gray300"
-        size={['xlarge', 'xxlarge']}
-      />,
-    )
-  }
   return (
-    <Flex justifyContent="center" flexDirection="column">
-      <Title>{t('Evaluer le cours')}</Title>
-      <Flex py="medium">{table}</Flex>
+    <Flex
+      mx="xxxlarge"
+      my="large"
+      justifyContent="center"
+      flexDirection="column"
+    >
+      <Title>{hasVoted ? t('Supprimer la note') : t('Evaluer ce cours')}</Title>
+      <Rating
+        initialRating={hasVoted ? vote : false}
+        readonly={hasVoted}
+        fractions={2}
+        onChange={(rate) => {
+          handleVote(rate)
+          setShowModal(false)
+        }}
+        emptySymbol={<Icon name="star-full" color="gray300" size="xlarge" />}
+        fullSymbol={<Icon name="star-full" color="warning500" size="xlarge" />}
+      />
     </Flex>
   )
 }
@@ -186,7 +166,13 @@ const ParagraphTitle = ({ sx, children, ...rest }) => {
   )
 }
 
-const Modal = ({ children, setShowModal }) => {
+const Modal = ({
+  children,
+  setShowModal,
+  isRating,
+  hasVoted,
+  handleUnvote,
+}) => {
   const { t } = useTranslation()
   return (
     <Layer position="bottom" onClickOutside={() => setShowModal(false)}>
@@ -198,13 +184,20 @@ const Modal = ({ children, setShowModal }) => {
         borderRadius="small"
       >
         {children}
-        <Flex mt="medium" justifyContent="flex-end">
+        <Flex mt="medium" mx="large" justifyContent="flex-end">
           <Button
             mx="small"
             outline="danger"
-            onClick={() => setShowModal(false)}
+            onClick={() => {
+              if (isRating && hasVoted) handleUnvote()
+              setShowModal(false)
+            }}
           >
-            {t('Annuler')}
+            {isRating
+              ? hasVoted
+                ? t('Supprimer')
+                : t('Annuler')
+              : t('Annuler')}
           </Button>
         </Flex>
       </Flex>
@@ -258,6 +251,10 @@ const Post = (props) => {
   const category = props.category
   const paragraphs = props.paragraphs
   const image = get(props, 'image', null)
+  const vote_average = get(props, 'vote_average', 0)
+  const vote_count = get(props, 'vote_count', 0)
+  const hasVoted = get(props, 'hasVoted', false)
+  const vote = get(props, 'vote', 0)
   const [showShareModal, setShowShareModal] = React.useState(false)
   const [showRateModal, setShowRateModal] = React.useState(false)
   const [toggler, setToggler] = React.useState(false)
@@ -273,7 +270,7 @@ const Post = (props) => {
             justifyContent: 'flex-end',
           }}
         >
-          <span>add to fav</span>
+          <span>add to favorite</span>
         </Box> */}
           <Row>
             <Col xs={12}>
@@ -299,7 +296,29 @@ const Post = (props) => {
                         flexDirection={['column', 'column', 'row']}
                       >
                         <CardTag>{category}</CardTag>
-                        <Rating rating={4} />
+                        <Flex py="1px" maxHeight="20px">
+                          <Rating
+                            initialRating={vote_average}
+                            readonly
+                            emptySymbol={
+                              <Icon
+                                name="star-full"
+                                color="gray500"
+                                size="medium"
+                              />
+                            }
+                            fullSymbol={
+                              <Icon
+                                name="star-full"
+                                color="warning500"
+                                size="medium"
+                              />
+                            }
+                          />
+                          <CardInfo pl="small">
+                            ({vote_count} {t('notes')})
+                          </CardInfo>
+                        </Flex>
                       </Flex>
                       <Flex flexDirection={['column', 'column', 'row']}>
                         <CardInfo>Créé par {instructor.name}</CardInfo>
@@ -378,11 +397,21 @@ const Post = (props) => {
                   outline="info"
                   onClick={() => setShowRateModal(true)}
                 >
-                  {t('Evaluer ce cours')}
+                  {hasVoted ? t('Supprimer la note') : t('Evaluer ce cours')}
                 </Button>
                 {showRateModal && (
-                  <Modal setShowModal={setShowRateModal}>
-                    <RateCourse />
+                  <Modal
+                    handleUnvote={props.handleUnvote}
+                    hasVoted={hasVoted}
+                    isRating={true}
+                    setShowModal={setShowRateModal}
+                  >
+                    <RateCourse
+                      setShowModal={setShowRateModal}
+                      handleVote={props.handleVote}
+                      hasVoted={hasVoted}
+                      vote={vote}
+                    />
                   </Modal>
                 )}
               </Flex>
