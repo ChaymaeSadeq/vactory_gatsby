@@ -1,0 +1,34 @@
+{
+  "name": "capital-azur",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Hamza Bahlaouane <h.bahlaouane@void.fr>",
+  "license": "MIT",
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "gatsby": "^2.20.12",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "vactory-gatsby-academy": "*",
+    "vactory-gatsby-annual-report": "*",
+    "vactory-gatsby-blog": "*",
+    "vactory-gatsby-comments": "*",
+    "vactory-gatsby-core": "*",
+    "vactory-gatsby-events": "*",
+    "vactory-gatsby-gouvernance": "*",
+    "vactory-gatsby-job-ads": "*",
+    "vactory-gatsby-map": "*",
+    "vactory-gatsby-news": "*",
+    "vactory-gatsby-press-kit": "*",
+    "vactory-gatsby-press-release": "*",
+    "vactory-gatsby-publication": "*",
+    "vactory-gatsby-search": "*"
+  },
+  "devDependencies": {
+    "hamburger-react": "^2.2.0"
+  }
+}
