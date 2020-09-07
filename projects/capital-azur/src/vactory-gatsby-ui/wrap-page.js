@@ -20,7 +20,6 @@ const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
 // const customIcons = mergeIcons(iconSet, customIconSet);
 const customIcons = customIconSet;
-window.theme = theme
 
 
 const VactoryGlobaltStyle = createGlobalStyle`

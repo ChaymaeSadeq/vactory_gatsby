@@ -22,6 +22,8 @@ colors.primary = colors.lightBlue;
 
 const shadows = {
     buttons: '0 12px 14px -5px rgba(191, 191, 191, .67)',
+    carouselCard: '0 50px 400px 20px rgba(0, 0, 0, .05)',
+    carouselCardActive: '0 10px 60px rgba(31, 121, 230, .2)',
 };
 
 
@@ -42,6 +44,7 @@ const heading = {
         fontSize: ['24px', null, '29px'],
         lineHeight: ['30px', null, '38px'],
         fontWeight: 'extraBold',
+        textTransform: 'uppercase',
     },
     slider: {
         fontSize: ['25px', null, '30px'],
@@ -125,7 +128,17 @@ const navs = {
 
 
 
+const boxes = {
+    intro: {
+        mx: [0, null, 180],
+        mb: 55,
+    }
+}
+
+
+
 export const theme = {
+    boxes,
     breakpoints,
     buttons,
     colors,

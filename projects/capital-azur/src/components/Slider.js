@@ -25,12 +25,18 @@ const arrowStyle = {
     }
 }
 
-const PrevArrow = props => <Arrow sx={{left: 'calc(50% - 1200px/2 - 32px)', ...arrowStyle}} {...props}>
+export const PrevArrow = props => <Arrow sx={{
+        left: [5, -25, -50, null, 'calc(50% - 1200px/2 - 32px)'],
+        ...arrowStyle
+    }} {...props}>
     <Icon name="chevron-left" size="36px" />
 </Arrow>
 
 
-const NextArrow = props => <Arrow sx={{right: 'calc(50% - 1200px/2 - 32px)', ...arrowStyle}} {...props}>
+export const NextArrow = props => <Arrow sx={{
+        right: [5, -25, -50, null, 'calc(50% - 1200px/2 - 32px)'],
+        ...arrowStyle
+    }} {...props}>
     <Icon name="chevron-right" size="36px" />
 </Arrow>
 

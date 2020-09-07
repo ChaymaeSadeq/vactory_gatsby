@@ -1,6 +1,7 @@
 import React from 'react';
 import {
 	Box,
+	Container,
     Flex,
     Footer,
 	Icon,
@@ -32,6 +33,7 @@ const FooterNavs = props =>  <Navs sx={{
 
 export const CapitalAzurFooter = () => {
     return (
+        <Container>
         <Footer sx={{
             backgroundColor: '#fff',
             fontFamily: 'montserrat',
@@ -81,5 +83,6 @@ export const CapitalAzurFooter = () => {
 
             </Flex>
         </Footer>
+        </Container>
     )
 }

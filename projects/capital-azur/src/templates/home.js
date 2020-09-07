@@ -3,6 +3,7 @@ import { Box, Button } from 'vactory-ui'
 import { CapitalAzurSlider } from '../components/Slider';
 import { TextSection } from '../components/TextSection';
 import { ImageAndTextSection } from '../components/ImageAndTextSection';
+import { CapitalAzurCarousel } from '../components/Carousel';
 import { Wysiwyg } from 'vactory-gatsby-ui';
 
 
@@ -33,6 +34,10 @@ const Home = () => {
 			title="LES FINTECHS AU SERVICE DE LA CROISSANCE EN AFRIQUE"
 			body={<Wysiwyg html={htmlContent[1]} />}
 			link={{href: '/', label: 'A propos de nous'}}
+		/>
+		<CapitalAzurCarousel
+			title='deS SERVicES inNoVAntS POur Un qUOTIDieN sImPlIFié.'
+			intro={<Wysiwyg html='Capital Azur accompagne l’ensemble de sa clientèle dans leurs projets à toutes les étapes de leurs vie.' />}
 		/>
 
 
