@@ -22,8 +22,8 @@ colors.primary = colors.lightBlue;
 
 const shadows = {
     buttons: '0 12px 14px -5px rgba(191, 191, 191, .67)',
-    carouselCard: '0 50px 400px 20px rgba(0, 0, 0, .05)',
-    carouselCardActive: '0 10px 60px rgba(31, 121, 230, .2)',
+    cards: '0 50px 400px 20px rgba(0, 0, 0, .05)',
+    cardsActive: '0 10px 60px rgba(31, 121, 230, .2)',
 };
 
 
@@ -72,7 +72,7 @@ const buttonsSharedStyle = {
     boxShadow: 'buttons',
     px: 33,
     py: 14,
-
+    transition: '.3s ease-in',
 }
 
 const buttons = {
@@ -130,7 +130,7 @@ const navs = {
 
 const boxes = {
     intro: {
-        mx: [0, null, 180],
+        mx: [0, null, 100, 180],
         mb: 55,
     }
 }

@@ -17,13 +17,13 @@ const CarouselCard = ({title, image, ...rest}) => <Box sx={{
     m: '60px 15px 30px',
     '&:hover > div': {
         transform: 'translateY(-30px)',
-        boxShadow: 'carouselCardActive',
+        boxShadow: 'cardsActive',
     }
 }}>
     <Flex __css={{
         mx: 'auto',
         bg: 'white',
-        boxShadow: 'carouselCard',
+        boxShadow: 'cards',
         width: 205,
         height: 215,
         justifyContent: 'flex-start',
@@ -97,7 +97,7 @@ export const CapitalAzurCarousel = ({title, intro, cards, ...rest}) => {
                 <Box variant='boxes.intro'>
                     <DashHeading mb={30}>{title}</DashHeading>
 
-                    <Paragraph>{intro}</Paragraph>
+                    <Paragraph as='div'>{intro}</Paragraph>
                 </Box>
 
                 <Slider {...settings} __css={{}}>
