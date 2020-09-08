@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Button } from 'vactory-ui'
+import { Box, Button, useMedia } from 'vactory-ui'
 import { CapitalAzurSlider } from '../components/Slider';
 import { TextSection } from '../components/TextSection';
 import { ImageAndTextSection } from '../components/ImageAndTextSection';
 import { CapitalAzurCarousel } from '../components/Carousel';
+import { Insights, InsightsCard } from '../components/Insights';
 import { Wysiwyg } from 'vactory-gatsby-ui';
 
 
@@ -22,6 +23,9 @@ vous voyez..`
 ];
 
 const Home = () => {
+	const isSm = useMedia('sm');
+	const isMd = useMedia('md');
+
 	return <>
 		<CapitalAzurSlider />
 		<TextSection
@@ -38,6 +42,11 @@ const Home = () => {
 		<CapitalAzurCarousel
 			title='deS SERVicES inNoVAntS POur Un qUOTIDieN sImPlIFié.'
 			intro={<Wysiwyg html='Capital Azur accompagne l’ensemble de sa clientèle dans leurs projets à toutes les étapes de leurs vie.' />}
+		/>
+		<Insights
+			title='inSights'
+			intro='Découvrez nos actualités, nos analyses et les points de vue de nos experts'
+			cards={ Array( isMd||isSm ? 4 : 3 ).fill(<InsightsCard />) }
 		/>
 
 
