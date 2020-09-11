@@ -5,6 +5,8 @@ import { TextSection } from '../components/TextSection';
 import { ImageAndTextSection } from '../components/ImageAndTextSection';
 import { CapitalAzurCarousel } from '../components/Carousel';
 import { Insights, InsightsCard } from '../components/Insights';
+import { EventsSlider } from '../components/EventsSlider';
+import { AccessSection } from '../components/AccessSection';
 import { Wysiwyg } from 'vactory-gatsby-ui';
 
 
@@ -48,10 +50,8 @@ const Home = () => {
 			intro='Découvrez nos actualités, nos analyses et les points de vue de nos experts'
 			cards={ Array( isMd||isSm ? 4 : 3 ).fill(<InsightsCard />) }
 		/>
-
-
-		<Box m='xxlarge' />
-		<h1>Test<Button fill="success">Read more</Button></h1>
+		<EventsSlider />
+		<AccessSection />
 	</>
 }
 

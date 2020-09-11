@@ -24,6 +24,7 @@ const shadows = {
     buttons: '0 12px 14px -5px rgba(191, 191, 191, .67)',
     cards: '0 50px 400px 20px rgba(0, 0, 0, .05)',
     cardsActive: '0 10px 60px rgba(31, 121, 230, .2)',
+    mapPin: '0 30px 400px 20px rgba(0, 0, 0, .07)',
 };
 
 
@@ -51,6 +52,12 @@ const heading = {
         lineHeight: ['30px', null, '38px'],
         fontWeight: 'extraBold',
     },
+    events: {
+        fontSize: ['15px', null, '20px'],
+        lineHeight: ['24px', null, '29px'],
+        fontWeight: 'bold',
+        color: 'black',
+    }
 };
 
 const text = {
@@ -58,6 +65,10 @@ const text = {
         fontSize: ['18px', null, '21px'],
         lineHeight: ['23px', null, '25px'],
         fontWeight: 'regular',
+    },
+    events: {
+        fontSize: ['15px', null, '16px'],
+        lineHeight: ['22px', null, '24px'],
     }
 
 };
@@ -85,7 +96,10 @@ const buttons = {
         ...buttonsSharedStyle,
         backgroundColor: 'white',
         color: 'lightBlue',
-        border: '1px solid currentColor',
+        border: '2px solid currentColor',
+        '&:hover': {
+            borderColor: 'currentColor',
+        }
     }
 };
 

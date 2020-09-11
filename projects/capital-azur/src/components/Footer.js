@@ -39,7 +39,7 @@ export const CapitalAzurFooter = () => {
             fontFamily: 'montserrat',
             display: 'flex',
             flexDirection: 'column',
-            mt: 'xxxlarge'
+            mt: 'xlarge'
         }} className="vf-footer1">
             <Flex sx={{
                 width: ['100%', '100%', '900px', '100%', '100%'],
