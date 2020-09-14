@@ -48,7 +48,7 @@ const Home = () => {
 		<Insights
 			title='inSights'
 			intro='Découvrez nos actualités, nos analyses et les points de vue de nos experts'
-			cards={ Array( isMd||isSm ? 4 : 3 ).map( i => <InsightsCard key={i} />) }
+			cards={ Array( isMd||isSm ? 4 : 3 ).fill().map( (e, i) => <InsightsCard key={i} />) }
 		/>
 		<EventsSlider />
 		<AccessSection />
