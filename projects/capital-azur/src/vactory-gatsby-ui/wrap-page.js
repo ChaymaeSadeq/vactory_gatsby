@@ -7,8 +7,8 @@ import {
     ColorModeProvider,
     DirectionManager,
     GlobalStyle,
-    mergeIcons,
-    iconSet,
+    //mergeIcons,
+    //iconSet,
     VactoryIconProvider
 } from 'vactory-ui';
 import {ThemeProvider, createGlobalStyle} from 'styled-components';

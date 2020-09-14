@@ -169,15 +169,18 @@ export const EventsSlider = () => {
         <Container>
             <Slider {...settings}>
 
-                {Array(3).fill(<Slide
-                    title='Capital Azur exposera à Seamless East Africa'
-                    description="Seamless East Africa est la principale conférence fintech d'Afrique de l'Est, qui se tiendra au Radisson Blu Hotel, à Nairobi, au Kenya"
-                    image='https://capital-azur.com/sites/default/files/2020-05/38e70ac1beba0588ca73eb1ab1957d60.jpg'
-                    date={{start: '22 mai', end: '28 mai'}}
-                    tag={[{color: 'red', label: 'Nairobi'},
-                        {color: 'primary', label: 'EXPOSITION'}]}
-                    action={{label: 'LIRE PLUS', href: '#!'}}
-                    />)}
+                {Array(3).map( i => <Slide
+                        key={i}
+                        title='Capital Azur exposera à Seamless East Africa'
+                        description="Seamless East Africa est la principale conférence fintech d'Afrique de l'Est, qui se tiendra au Radisson Blu Hotel, à Nairobi, au Kenya"
+                        image='https://capital-azur.com/sites/default/files/2020-05/38e70ac1beba0588ca73eb1ab1957d60.jpg'
+                        date={{start: '22 mai', end: '28 mai'}}
+                        tag={[{color: 'red', label: 'Nairobi'},
+                            {color: 'primary', label: 'EXPOSITION'}]}
+                        action={{label: 'LIRE PLUS', href: '#!'}}
+                        />
+                    )
+                }
 
 
             </Slider>

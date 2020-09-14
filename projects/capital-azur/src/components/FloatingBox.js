@@ -45,7 +45,9 @@ export const FloatingBox = ({plateforms=[
                     py: 5,
                 }} >
 
-                {plateforms.map( ({icon, link}) => <Link sx={{
+                {plateforms.map( ({icon, link}, i) => <Link
+                    key={i}
+                    sx={{
                         bg: 'primary',
                         p: 0,
                         transition: '.3s',

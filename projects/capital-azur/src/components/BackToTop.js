@@ -12,7 +12,6 @@ export const BackToTopButton = () => {
   }
 
   useEffect(() => {
-    console.log('effect run')
     window.addEventListener('scroll', adjustVisibility)
 
     return () => {

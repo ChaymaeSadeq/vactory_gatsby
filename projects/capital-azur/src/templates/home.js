@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, useMedia } from 'vactory-ui'
+import { useMedia } from 'vactory-ui'
 import { CapitalAzurSlider } from '../components/Slider';
 import { TextSection } from '../components/TextSection';
 import { ImageAndTextSection } from '../components/ImageAndTextSection';
@@ -48,7 +48,7 @@ const Home = () => {
 		<Insights
 			title='inSights'
 			intro='Découvrez nos actualités, nos analyses et les points de vue de nos experts'
-			cards={ Array( isMd||isSm ? 4 : 3 ).fill(<InsightsCard />) }
+			cards={ Array( isMd||isSm ? 4 : 3 ).map( i => <InsightsCard key={i} />) }
 		/>
 		<EventsSlider />
 		<AccessSection />

@@ -4,7 +4,6 @@ import {
     Container,
     Flex,
     Link,
-    Image,
 } from 'vactory-ui';
 import { DashHeading } from './Headings';
 
