@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { css, ThemeContext } from 'styled-components';
 import {
 	Anchor,
     Box,
@@ -40,118 +40,123 @@ export const NextArrow = ({right, ...props}) => <Arrow sx={{
     <Icon name="chevron-right" size="36px" />
 </Arrow>
 
+const barDotsStyle = css`
 
-export const Dots = dots => <Box
-    as="ul"
-    css={`
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: -35px;
-            position: relative;
+    @media (min-width: ${ p => p.theme.breakpoints.md }) {
+        max-width: 600px;
+        height: 4px;
+        transform: translateY(-100%);
+        margin: 0 auto;
+        position: static;
 
-            & > li {
-                height: 15px;
-                width: 15px;
-                border-radius: 50%;
-                transition: .3s ease;
-                margin: 0 10px;
-                border: 1px solid #e1efff;
-                box-shadow: 0 0 2px -2px rgba(0, 0, 0, .2);
-
-                button {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    font: 0/0 none;
-                    transition: inherit;
-                    border: 0;
-                    border-radius: inherit;
-                    background: #fff;
-                    padding: 0;
-                    outline: 0;
-
-                    &::after {
-                        content: '';
-                        display: block;
-                        transition: inherit;
-                        width: 100%;
-                        height: 100%;
-                        transform: scale(3);
-                        border-radius: inherit;
-                        box-shadow: 0 0 1px ${ p => p.theme.colors.primary};
-                        visibility: hidden;
-                        opacity: 0;
-                        background: ${ p => p.theme.colors.primary};
-                    }
-                }
-            }
-
-            & > li:hover {
-                button {
-                    cursor: pointer;
-                }
-            }
-
-            & > li.slick-active {
-                border-color: transparent;
-
-                button {
-                    background: ${ p => p.theme.colors.primary};
-                    &::after {
-                        transform: scale(1);
-                        opacity: 1;
-                        visibility: visible;
-                    }
-                }
-            }
-
-        @media (min-width: ${ p => p.theme.breakpoints.md }) {
-            max-width: 600px;
+        & > li {
+            flex: 1;
             height: 4px;
-            transform: translateY(-100%);
-            margin: 0 auto;
-            position: static;
+            box-shadow: none;
+            margin: 0;
+            border: 0;
 
-            & > li {
-                flex: 1;
-                height: 4px;
-                box-shadow: none;
-                margin: 0;
-                border: 0;
+            button {
+                background: rgba(0, 0, 0, .24);
+                border-radius: 0;
 
-                button {
-                    background: rgba(0, 0, 0, .24);
-                    border-radius: 0;
-
-                    &::after {
-                        content: none;
-                        display: none;
-                    }
-                }
-            }
-
-            & > li:hover {
-                height: 9px;
-
-                button {
-                    background: rgba(0, 0, 0, .3);
-                    border-radius: 10px;
-                }
-            }
-
-            & > li.slick-active {
-                height: 9px;
-
-                button {
-                    background: linear-gradient(to right, #017CFE 0%, #A2CFFF 100%);
-                    box-shadow: 0 6px 17px 4px rgba(33,168,255,0.20);
-                    border-radius: 10px;
+                &::after {
+                    content: none;
+                    display: none;
                 }
             }
         }
+
+        & > li:hover {
+            height: 9px;
+
+            button {
+                background: rgba(0, 0, 0, .3);
+                border-radius: 10px;
+            }
+        }
+
+        & > li.slick-active {
+            height: 9px;
+
+            button {
+                background: linear-gradient(to right, #017CFE 0%, #A2CFFF 100%);
+                box-shadow: 0 6px 17px 4px rgba(33,168,255,0.20);
+                border-radius: 10px;
+            }
+        }
+    }
+`
+
+
+export const Dots = (dots, bar=false) => <Box
+    as="ul"
+    css={`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -35px;
+        position: relative;
+
+        & > li {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            transition: .3s ease;
+            margin: 0 10px;
+            border: 1px solid #e1efff;
+            box-shadow: 0 0 2px -2px rgba(0, 0, 0, .2);
+
+            button {
+                display: block;
+                width: 100%;
+                height: 100%;
+                font: 0/0 none;
+                transition: inherit;
+                border: 0;
+                border-radius: inherit;
+                background: #fff;
+                padding: 0;
+                outline: 0;
+
+                &::after {
+                    content: '';
+                    display: block;
+                    transition: inherit;
+                    width: 100%;
+                    height: 100%;
+                    transform: scale(3);
+                    border-radius: inherit;
+                    box-shadow: 0 0 1px ${ p => p.theme.colors.primary};
+                    visibility: hidden;
+                    opacity: 0;
+                    background: ${ p => p.theme.colors.primary};
+                }
+            }
+        }
+
+        & > li:hover {
+            button {
+                cursor: pointer;
+            }
+        }
+
+        & > li.slick-active {
+            border-color: transparent;
+
+            button {
+                background: ${ p => p.theme.colors.primary};
+                &::after {
+                    transform: scale(1);
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+        ${ bar ? barDotsStyle : null }
     `}
 >
     {dots}
@@ -220,7 +225,7 @@ export const CapitalAzurSlider = () => {
         arrows: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
-        appendDots: Dots,
+        appendDots: (dots) => Dots(dots, true),
         afterChange: (index) => {
             setCurrent(index);
         },

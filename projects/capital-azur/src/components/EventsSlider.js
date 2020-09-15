@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeContext } from 'styled-components';
 import {
     Box,
     Flex,
@@ -9,7 +10,7 @@ import {
     Slider,
     Text,
 } from 'vactory-ui';
-import {PrevArrow, NextArrow} from './Slider';
+import {Dots, PrevArrow, NextArrow} from './Slider';
 import {Container} from './Container';
 
 const Tag = ({color, ...props}) => <Text
@@ -73,8 +74,7 @@ export const Slide = ({
         }}>
             <Box width={[1, null, 1/3]} sx={{
                 position: 'relative',
-                borderTopLeftRadius: 'inherit',
-                borderBottomLeftRadius: 'inherit',
+                borderRadius: ['8px 8px 0 0', null, '8px 0 0 8px'],
                 overflow: 'hidden',
                 }}>
                 <Image src={image} alt={''} sx={{
@@ -110,57 +110,31 @@ export const Slide = ({
 }
 
 export const EventsSlider = () => {
+    const theme = React.useContext(ThemeContext);
 
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
         nextArrow: <NextArrow right={[-25, -40, -50, 'calc(50% - 950px/2)']} />,
         prevArrow: <PrevArrow left={[-25, -40, -50, 'calc(50% - 950px/2)']} />,
-        appendDots: dots => <Box
-            as="ul"
-            __css={{
-                display: 'flex',
-                justifyContent: 'center',
+        appendDots: (dots) => React.cloneElement(
+            Dots(dots),
+            {css: {
+                marginTop: '10px !important'
+            }}
+        ),
 
-                '& > li': {
-                    font: '0/0 none',
-                    background: 'white',
-                    width: 15,
-                    height: 15,
-                    borderRadius: '50%',
-                    mx: 10,
-                    overflow: 'hidden',
-
-                    'button': {
-                        font: 'inherit',
-                        width: '100%',
-                        height: '100%',
-                        bg: 'transparent',
-                        border: 0,
-                        borderRadius: 'inherit',
-                        transform: 'scale(3)',
-                        opacity: 0,
-                        transition: '.5s ease',
-                    }
-                },
-                '& > li:hover': {
-                    'button': {
-                        cursor: 'pointer',
-                    }
-                },
-                '& > li.slick-active': {
-                    overflow: 'visible',
-                    'button': {
-                        bg: 'primary',
-                        transform: 'scale(1)',
-                        opacity: 1,
-                    }
-                },
-        }} >{dots}</Box>,
+        responsive: [
+            {
+                breakpoint: parseInt(theme.breakpoints.md),
+                settings: {
+                    arrows: false,
+                }
+            }
+        ]
     }
     return <Box sx={{
         bg: '#f4f8f8',

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 import {
     Box,
 	Container,
