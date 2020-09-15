@@ -41,7 +41,7 @@ export const NextArrow = ({right, ...props}) => <Arrow sx={{
 </Arrow>
 
 
-const Dots = dots => <Box
+export const Dots = dots => <Box
     as="ul"
     css={`
             display: flex;
