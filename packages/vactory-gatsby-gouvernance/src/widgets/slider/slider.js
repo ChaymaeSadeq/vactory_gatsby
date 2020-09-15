@@ -5,6 +5,8 @@ import {default as SlickSlider} from "react-slick";
 import styled from "styled-components"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { imageLayoutStyles } from "vactory-gatsby-gouvernance";
+
 
 const StyledSlickSlider = styled(SlickSlider)`   
     /*.slick-track {
@@ -59,7 +61,7 @@ export const Slider = ({posts}) => {
             {posts.map(node => {
                 return (
                     <Box key={node.key} px="8px">
-                        <CardGouvernance {...node} />
+                        <CardGouvernance {...node} imagesettings={imageLayoutStyles.slider}/>
                     </Box>
                 )
             })}
