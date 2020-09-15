@@ -57,6 +57,13 @@ const heading = {
         lineHeight: ['24px', null, '29px'],
         fontWeight: 'bold',
         color: 'black',
+    },
+    banner: {
+        fontSize: '29px',
+        lineHeight: '40px',
+        fontWeight: 'bold',
+        letterSpacing: '.55px',
+        textTransform: 'uppercase',
     }
 };
 
