@@ -24,12 +24,12 @@ const Nav = ({asButton, active, ...props}) => {
 
 	let styleProperties = {
 		fontSize: '11px',
-		lineHeight: '30px',
-		fontWeight: '800',
+		lineHeight: '32px',
+		fontWeight: active ? 'extraBold' : 'medium',
 		textTransform: 'uppercase',
 		position: 'relative',
 		paddingX: 'medium',
-		paddingY: 'xsmall',
+		paddingY: 0,
 		color: active ? 'lightBlue' : 'black',
 		transition: '.2s',
 
@@ -52,11 +52,15 @@ const Nav = ({asButton, active, ...props}) => {
 	}
 
 	let ButtonStyleProperties = {
+		fontWeight: 'medium',
 		bg: 'darkBlue',
         color: 'white',
         border: '1px solid darkBlue',
 		borderRadius: 'large',
-		ml: 'small',
+		ml: 15,
+		pl: 9,
+		pr: 18,
+		py: 4,
         boxShadow: '0 10px 14px -5px rgba(191, 191, 191, .67)',
 		transition: '.3s ease-in',
 
@@ -105,14 +109,14 @@ const Navs = props => {
 
 export const CapitalAzurHeader = () => {
 	const [menuOpened, openCloseMenu] = useState(false);
-	const isDownMd = useMedia(`(max-width: ${theme.breakpoints.md})`);
+	const isUpLg = useMedia(`(min-width: ${theme.breakpoints.lg})`);
 
 
-	return <Header px="large" py="xsmall" bg="white" boxShadow={1}>
-			<ViewModeProvider value={isDownMd ? 'mobile' : 'desktop'}>
+	return <Header px="large" py={5} bg="white" boxShadow={1}>
+			<ViewModeProvider value={isUpLg ? 'desktop' : 'mobile'}>
 			<Container as={Flex} alignItems='center'>
 				<Anchor href="/" ml="small" mr="auto">
-					<Image src={capital_azur_logo} alt="Capital Azur Logo" height="64px" display="block" />
+					<Image src={capital_azur_logo} alt="Capital Azur Logo" height="82px" display="block" />
 				</Anchor>
 
 				<Navs menuOpened={menuOpened} onClickOutside={() => openCloseMenu(false)} className={"navs"} p={0}>
@@ -125,7 +129,7 @@ export const CapitalAzurHeader = () => {
 					</Nav>
 				</Navs>
 				
-				{ isDownMd && <Hamburger toggled={menuOpened} toggle={openCloseMenu} />}
+				{ !isUpLg && <Hamburger toggled={menuOpened} toggle={openCloseMenu} />}
 			</Container>
 			</ViewModeProvider>
 		</Header>;

@@ -51,8 +51,13 @@ export const FloatingBox = ({plateforms=[
                         bg: 'primary',
                         p: 0,
                         transition: '.3s',
+                        border: 0,
+                        '&:hover': {
+                            bg: 'primary',
+                            color: 'darkBlue',
+                        }
                     }} href={link} target='_blank'>
-                    <Icon name={icon} size='22px' color='white' sx={{
+                    <Icon name={icon} size='22px' sx={{
                         mx: 'auto',
                         my: 10,
                     }} />
