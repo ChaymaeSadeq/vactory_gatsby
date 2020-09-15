@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import {
     Box,
 	Container,
@@ -10,20 +10,21 @@ import {
     Slider,
 } from 'vactory-ui';
 import { DashHeading } from './Headings';
-import { PrevArrow, NextArrow } from './Slider';
+import { Dots, PrevArrow, NextArrow } from './Slider';
 
 
-const CarouselCard = ({title, image, ...rest}) => <Box sx={{
-    m: '60px 15px 30px',
+const CarouselCard = ({title, image, link, ...rest}) => <Box sx={{
+    mt: 60,
+    mb: 30,
     '&:hover > div': {
         transform: 'translateY(-30px)',
         boxShadow: 'cardsActive',
     }
 }}>
     <Flex __css={{
-        mx: 'auto',
+        mx: [15, null, 'auto'],
         bg: 'white',
-        boxShadow: 'cards',
+        boxShadow: 'cardsLight',
         width: 205,
         height: 215,
         justifyContent: 'flex-start',
@@ -39,7 +40,7 @@ const CarouselCard = ({title, image, ...rest}) => <Box sx={{
             mb: 40,
         }} />
 
-        <Text sx={{
+        <Text href={link ? link : null} as={link ? 'a' : null} sx={{
             fontSize: '16px',
             lineHeight: '24px',
             fontWeight: 'semiBold',
@@ -59,34 +60,44 @@ export const CapitalAzurCarousel = ({title, intro, cards, ...rest}) => {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
+        nextArrow: <NextArrow right={-64} />,
+        prevArrow: <PrevArrow left={-64} />,
+        appendDots: (dots) => React.cloneElement(
+            Dots(dots),
+            {css: {
+                marginTop: '10px !important'
+            }}
+        ),
 
         responsive: [
-          {
-            breakpoint: parseInt(theme.breakpoints.lg.replace('px', '')),
-            settings: {
-                slidesToShow: 3,
+            {
+                breakpoint: parseInt(theme.breakpoints.lg), // 992
+                settings: {
+                    slidesToShow: 3,
+                    centerMode: true,
+                    centerPadding: '0px',
+                }
+            },
+            {
+                breakpoint: parseInt(theme.breakpoints.md), // 768
+                settings: {
+                    dots: true,
+                    arrows: false,
+                    slidesToShow: 1,
+                    centerMode: true,
+                    centerPadding: '20px',
+                    variableWidth: true,
+                }
             }
-          },
-          {
-            breakpoint: parseInt(theme.breakpoints.md.replace('px', '')),
-            settings: {
-                slidesToShow: 2,
-            }
-          },
-          {
-            breakpoint: parseInt(theme.breakpoints.sm.replace('px', '')),
-            settings: {
-                slidesToShow: 1,
-            }
-          }
         ]
     }
 
 
 
-    return <Box bg='#f4f8f8'>
+    return <Box sx={{
+            bg: '#f4f8f8',
+            overflow: 'hidden', // to prevent y-scroll because of carousel btns
+        }}>
         <Container>
             <Box sx={{
                 padding: '85px 0',

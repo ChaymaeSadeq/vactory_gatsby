@@ -23,6 +23,7 @@ colors.primary = colors.lightBlue;
 const shadows = {
     buttons: '0 12px 14px -5px rgba(191, 191, 191, .67)',
     cards: '0 50px 400px 20px rgba(0, 0, 0, .05)',
+    cardsLight: '0 5px 40px 2px rgba(0, 0, 0, .05)',
     cardsActive: '0 10px 60px rgba(31, 121, 230, .2)',
     mapPin: '0 30px 400px 20px rgba(0, 0, 0, .07)',
 };
