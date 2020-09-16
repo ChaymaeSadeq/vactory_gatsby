@@ -1,22 +1,32 @@
 import React from 'react';
 import {
+    Anchor,
 	Box,
 	Container,
     Flex,
     Footer,
 	Icon,
 	Nav,
-	Navs,
+    Navs,
+    Text,
 } from 'vactory-ui';
 
 
 const FooterNav = props =>  <Nav sx={{
-    color: 'inherit',
-    p: 0,
-    px: [0, '16px'],
-    borderRight: ['0', '1px solid rgba(0,0,0,0.19)'],
+    fontSize: 11,
+    lineHeight: '20px',
+    fontWeight: 'medium',
+    letterSpacing: .21,
+    textTransform: 'uppercase',
+    color: '#000',
+    padding: 0,
+    paddingX: [0, null, null, '16px'],
+    borderRight: ['0', null, null, '1px solid rgba(0,0,0,0.19)'],
     m:0,
-    mb: ['12px', '0'],
+    mb: ['12px', null, null, '0'],
+    '&:hover': {
+        color: 'primary',
+    },
     '&:last-child' : {
         borderRight: 0,
         pr: 0,
@@ -28,8 +38,24 @@ const FooterNavs = props =>  <Navs sx={{
         p: 0,
         m:0,
         width:"100%",
-        alignItems: 'baseline'
+        alignItems: 'baseline',
+        flexDirection: ['column !important', null, null, 'row !important'],
         }}>{props.children}</Navs>
+
+
+const SocialIcon = ({name, link='#', ...rest}) => {
+    return <Anchor href={link} sx={{
+        mr: 16,
+        color: 'primary',
+        transition: '.3s',
+        '&:hover': {
+            color: 'black',
+        }
+        }} {...rest}>
+        <Icon name={name} size="24px" />
+    </Anchor>
+}
+
 
 export const CapitalAzurFooter = () => {
     return (
@@ -42,33 +68,47 @@ export const CapitalAzurFooter = () => {
             mt: 'xlarge'
         }} className="vf-footer1">
             <Flex sx={{
-                width: ['100%', '100%', '900px', '100%', '100%'],
-                display: 'flex',
+                width: '100%',
                 flexDirection: 'column',
             }}>
                 <Flex sx={{
                     fontSize: "14px",
                     color: '#000000',
-                    flexDirection: ['column', 'row'],
+                    flexDirection: ['column', null, null, 'row'],
                     justifyContent: 'space-between',
-                    alignItems: ['baseline', 'center'],
+                    alignItems: ['flex-start', null, null, 'center'],
                     p: '23px 12px',
                 }}>
-                    <Flex mb={['16px', '0px']} className="vf-footer1__social-media">
-                        <Box mr="16px"><Icon name="linkedin" size="24px" color="#017CFE" /></Box>
-                        <Box mr="16px"><Icon name="youtube" size="24px" color="#017CFE" /></Box>
-                        <Box mr="16px"><Icon name="twitter" size="24px" color="#017CFE" /></Box>
+                    <Flex className="vf-footer1__social-media" sx={{
+                            mb: ['16px', '0px'],
+                            flexWrap: 'wrap',
+                            width: ['100%', null, null, 'auto'],
+                            justifyContent: 'center',
+                        }}>
+                        <Text display={{lg: 'none'}} sx={{
+                            mb: 7.5,
+                            flex: '1 100%',
+                            textAlign: 'center',
+                            fontWeight: 'semiBold',
+                        }}>Follow us</Text>
+                        <SocialIcon name="youtube" link="#" />
+                        <SocialIcon name="linkedin" link="#" />
+                        <SocialIcon name="facebook" link="#" />
                     </Flex>
                     <Flex className="vf-footer1__nav-menu">
                         <FooterNavs>
-                           <FooterNav>Nous Contacter</FooterNav>
-                           <FooterNav>Mentions Légales</FooterNav>
-                           <FooterNav>Plan du Site</FooterNav>
+                           <FooterNav link='#'>Nous Contacter</FooterNav>
+                           <FooterNav link='#'>Appels d'offres</FooterNav>
+                           <FooterNav link='#'>Nous rejoindre</FooterNav>
+                           <FooterNav link='#'>Glossaire</FooterNav>
+                           <FooterNav link='#'>Mentions Légales</FooterNav>
                         </FooterNavs>
                     </Flex>
                 </Flex>
 
-                <Flex sx={{
+                <Flex 
+                    display={{_: 'none !important', lg: 'flex !important'}}
+                    sx={{
                     fontSize: "11px",
                     color: '#017CFE',
                     flexDirection: ['column', 'row'],
