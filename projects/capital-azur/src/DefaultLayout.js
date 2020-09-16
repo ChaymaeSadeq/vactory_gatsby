@@ -11,7 +11,7 @@ import { useMedia } from 'vactory-ui';
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
     const theme = React.useContext(ThemeContext);
-    const upMd = useMedia(`(min-width: ${theme.breakpoints.md})`)
+    const upLg = useMedia(`(min-width: ${theme.breakpoints.lg})`)
 
     return (
         <>
@@ -22,7 +22,7 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             </main>
             </StatePageSection.Provider>
             <CapitalAzurFooter/>
-            {upMd && <FloatingBox />}
+            {upLg && <FloatingBox />}
             <BackToTopButton />
         </>
     )

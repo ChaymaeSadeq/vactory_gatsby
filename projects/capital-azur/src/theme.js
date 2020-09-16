@@ -158,6 +158,14 @@ const boxes = {
 }
 
 
+const layer = {
+    overlay: {
+        opacity: '.68 !important',
+        backgroundColor: 'black',
+    }
+}
+
+
 
 export const theme = {
     boxes,
@@ -168,6 +176,7 @@ export const theme = {
     fontSizes,
     heading,
     navs,
+    layer,
     shadows,
     text,
 };
