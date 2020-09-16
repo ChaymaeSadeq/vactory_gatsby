@@ -9,15 +9,15 @@ export const BreadCrumb = ({path, ...rest}) => <Box sx={{
     lineHeight: '22px',
     fontWeight: 'medium',
 }}>
-    {path.map( (element, i) => <>
+    {path.map( (element, i) => <React.Fragment key={i}>
         { i !== 0 && <> > </> }
         <Anchor sx={{
             '&:hover': {
                 textDecoration: 'underline',
             }
-        }} href={element.link} key={i}>
+        }} href={element.link}>
             {element.text}
         </Anchor>
-        </> )
+        </React.Fragment> )
     }
 </Box>
