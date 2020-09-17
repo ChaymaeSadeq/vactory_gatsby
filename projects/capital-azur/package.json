@@ -26,7 +26,8 @@
     "vactory-gatsby-press-kit": "*",
     "vactory-gatsby-press-release": "*",
     "vactory-gatsby-publication": "*",
-    "vactory-gatsby-search": "*"
+    "vactory-gatsby-search": "*",
+    "vactory-gatsby-tender": "*"
   },
   "devDependencies": {
     "hamburger-react": "^2.2.0"
