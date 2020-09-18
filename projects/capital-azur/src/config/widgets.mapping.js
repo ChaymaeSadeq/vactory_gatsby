@@ -10,7 +10,7 @@ import {
   GouvernanceWidgetContainer,
   TestimonyWidgetContainer,
   KeyFiguresWidgetContainer,
-} from 'vactory'
+} from 'capital-azur'
 
 const widgets = {
   'vactory_bootstrap:5': ExampleWidgetContainer,

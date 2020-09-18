@@ -6,13 +6,22 @@ import {
     Link,
 } from 'vactory-ui';
 import { DashHeading } from './Headings';
+import { AccessSection } from './AccessSection';
 
+export const ImageAndTextSection = ({image, title, body, link, mode=0, ...rest}) => {
+    if (mode === 1)
+        return <AccessSection
+            title={title}
+            paragraph={body}
+            backgroundImage={image}
+            action={link}
+            {...rest}
+        />
 
-export const ImageAndTextSection = ({image, title, body, link, ...rest}) => {
     return <Box sx={{
         bg: 'lightBlue',
         color: 'white',
-    }}>
+    }} {...rest}>
         <Container>
             <Flex sx={{
                 maxWidth: ['90%', null, null, 'unset'],

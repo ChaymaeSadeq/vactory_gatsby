@@ -209,7 +209,7 @@ const Slide = ({title, description, bgImage, bgColor, link, linkLabel="En Savoir
 }
 
 
-export const CapitalAzurSlider = () => {
+export const CapitalAzurSlider = ({slides, ...rest}) => {
     const [current, setCurrent] = useState(-1);
     const theme = useContext(ThemeContext);
     let autoplaySpeed = 5000;
@@ -250,28 +250,18 @@ export const CapitalAzurSlider = () => {
     }
 
     return <Slider {...settings} __css={{style}}>
-        <Slide 
-            isCurrent={current === 0}
-            title="Covid-19"
-            description="Capital Azur accompagne ses clients Professionnels"
-            bgImage="https://capital-azur.com/sites/default/files/2020-05/3.jpg"
-            bgColor="#e1c6cd"
-            link="://" />
-        <Slide 
-            isCurrent={current === 1}
-            title="Capital Azur, votre banque en ligne"
-            description=" Application mobile, Banque en ligne : Découvrez une nouvelle expérience de navigation au cœur de vos comptes bancaires."
-            bgImage="https://capital-azur.com/sites/default/files/2020-05/1.jpg"
-            bgColor="#c9dbdb"
-            linkLabel="Gerer vos comptes"
-            link="://" />
-        <Slide 
-            isCurrent={current === 2}
-            title="COVID-19 : Professionnels et Entreprises : Capital Azur vous accompagne"
-            description="COVID-19 : Professionnels et Entreprises : Capital Azur vous accompagne"
-            bgImage="https://capital-azur.com/sites/default/files/2020-05/slider-pro.png"
-            bgColor="#54b8b9"
-            link="://" />
+
+        {slides.map( (slide, i) => <Slide
+            key={i}
+            isCurrent={current === i}
+            title={slide.title}
+            description={slide.description}
+            link={slide.link}
+            linkLabel={slide.link_label || "En Savoir Plus"}
+            bgImage={slide.image}
+            bgColor={null}
+            />
+        )}
 
     </Slider>
 }

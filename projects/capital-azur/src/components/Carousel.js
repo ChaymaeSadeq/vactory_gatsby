@@ -2,14 +2,11 @@ import React from 'react';
 import { ThemeContext } from 'styled-components';
 import {
     Box,
-	Container,
     Flex,
     Image,
     Text,
-    Paragraph,
     Slider,
 } from 'vactory-ui';
-import { DashHeading } from './Headings';
 import { Dots, PrevArrow, NextArrow } from './Slider';
 
 
@@ -49,7 +46,7 @@ const CarouselCard = ({title, image, link, ...rest}) => <Box sx={{
     </Flex>
 </Box>;
 
-export const CapitalAzurCarousel = ({title, intro, cards, ...rest}) => {
+export const CapitalAzurCarousel = ({cards, ...rest}) => {
     const theme = React.useContext(ThemeContext);
 
     const settings = {
@@ -94,46 +91,14 @@ export const CapitalAzurCarousel = ({title, intro, cards, ...rest}) => {
 
 
 
-    return <Box sx={{
-            bg: '#f4f8f8',
-            overflow: 'hidden', // to prevent y-scroll because of carousel btns
-        }}>
-        <Container>
-            <Box sx={{
-                padding: '85px 0',
-                maxWidth: ['90%', null, 'unset'],
-                mx: 'auto'
-            }}>
-
-                <Box variant='boxes.intro'>
-                    <DashHeading mb={30}>{title}</DashHeading>
-
-                    <Paragraph as='div'>{intro}</Paragraph>
-                </Box>
-
-                <Slider {...settings} __css={{}}>
-                    <CarouselCard
-                        title='Comptes & Cartes'
-                        image='https://capital-azur.com/sites/default/files/2020-05/18.png' />
-
-                    <CarouselCard
-                        title='Epargne'
-                        image='https://capital-azur.com/sites/default/files/2020-05/17.png' />
-
-
-                    <CarouselCard
-                        title='Crédit'
-                        image='https://capital-azur.com/sites/default/files/2020-05/16_0.png' />
-
-
-                    <CarouselCard
-                        title='Assurance'
-                        image='https://capital-azur.com/sites/default/files/2020-05/18.png' />
-
-                </Slider>
-            </Box>
-        </Container>
-    </Box>
+    return <Slider {...settings} {...rest}>
+        {cards.map( (card, i) => <CarouselCard
+            key={i}
+            title={card.title}
+            image={card.image}
+            link={card.link} />
+        )}
+    </Slider>
 
 
 

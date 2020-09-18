@@ -74,8 +74,8 @@ const CapitalCardDate = ({ children }) => <Box __css={{
     ml: '10px'
 }}>{children}</Box>
 
-const CapitalCardButton = ({ children }) => <Box
-    as="button"
+const CapitalCardButton = (props) => <Box
+    as="a"
     __css={{
         display: 'inline-flex',
         fontSize: "14px",
@@ -93,24 +93,24 @@ const CapitalCardButton = ({ children }) => <Box
         '&:hover': {
             cursor: 'pointer'
         }
-    }}>{children}</Box>
+    }} {...props}/>
 
 
-export const InsightsCard = ({tag, date, image, title, link, ...rest}) => {
+export const InsightCard = ({tag, date, image, title, link, link_label, ...rest}) => {
     return <Box width={[1, 1/2, null, 1/3]}>
             <Card sx={{
                 m: 15,
                 boxShadow: 'cards',
             }}>
                 <CardBody>
-                    <Image src={'https://capital-azur.com/sites/default/files/2020-05/13.jpg'} />
+                    <Image src={image} />
                     <Box p='medium'>
                         <Flex mb="16px">
-                            <CapitalCardTag>ACTUALITE</CapitalCardTag>
-                            <CapitalCardDate>15/01/08</CapitalCardDate>
+                            <CapitalCardTag>{tag}</CapitalCardTag>
+                            <CapitalCardDate>{date}</CapitalCardDate>
                         </Flex>
-                        <CapitalCardTitle>Crise du Coronavirus Capital Azur accompagne ses clients Professionnels et Entreprises</CapitalCardTitle>
-                        <CapitalCardButton>Lire Plus</CapitalCardButton>
+                        <CapitalCardTitle>{title}</CapitalCardTitle>
+                        <CapitalCardButton href={link}>{link_label}</CapitalCardButton>
                     </Box>
                 </CardBody>
             </Card>

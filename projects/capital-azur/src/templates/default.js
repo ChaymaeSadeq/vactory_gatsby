@@ -1,7 +1,7 @@
 import React from 'react';
-import {
-	Box,
-} from 'vactory-ui';
+// import {
+// 	Box,
+// } from 'vactory-ui';
 import {AccessSection} from '../components/AccessSection';
 import {Banner} from '../components/Banner';
 import {CapitalAzurAccordion} from '../components/Accordion';

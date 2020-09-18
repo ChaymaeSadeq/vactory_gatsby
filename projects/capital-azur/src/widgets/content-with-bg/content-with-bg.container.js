@@ -11,6 +11,7 @@ export const ContentWithBgContainer = ({data}) => {
     items.link = get(data, 'components.0.link.url', null)
     items.link_label = get(data, 'components.0.link.title', '')
     items.image = get(data, 'components.0.image.0._default', null)
+    items.mode = get(data, 'components.0.mode', 0)
     
-    return <ContentWithBg {...items}/>
+    return <ContentWithBg {...items} />
 };

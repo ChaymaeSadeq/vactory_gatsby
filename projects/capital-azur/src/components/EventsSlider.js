@@ -11,14 +11,13 @@ import {
     Text,
 } from 'vactory-ui';
 import {Dots, PrevArrow, NextArrow} from './Slider';
-import {Container} from './Container';
 
 const Tag = ({color, ...props}) => <Text
-    sx={{
+    __css={{
         color: 'white',
         bg: color,
-        fontSize: 9,
-        fontWeight: 'extraBold',
+        fontSize: 10,
+        fontWeight: 'bold',
         lineHeight: '20px',
         borderRadius: 20,
         py: 2.5,
@@ -58,11 +57,11 @@ const TimeSpan = ({start, end, ...props}) => {
 
 export const Slide = ({ 
         image,
-        date={start: '22 mai', end: '29 mai'},
+        date,
         description,
         title,
-        tags=[{label: 'EXPOSITION', color: 'primary'},
-              {label: 'Nairobi', color: 'red'}],
+        tag,
+        location,
         action,
     }) => {
 
@@ -80,7 +79,7 @@ export const Slide = ({
                 <Image src={image} alt={''} sx={{
                     height: '100%',
                     width: '100%',
-                    ObjectFit: 'cover',
+                    objectFit: 'cover',
                     objectPosition: 'center',
                 }} />
                 <TimeSpan start={date.start} end={date.end} />
@@ -91,15 +90,19 @@ export const Slide = ({
                     variant: 'heading.events',
                     mb: [10, null, 15],
                 }}>{title}</Heading>
-                <Box>{
-                    tags.map( ({color, label}, i) => <Tag key={i} color={color}>{label}</Tag> )
-                }</Box>
+
+                <Box>
+                    <Tag color='primary' sx={{textTransform:'uppercase'}}>{tag}</Tag>
+                    <Tag color='red'>{location}</Tag>
+                </Box>
+
                 <Paragraph sx={{
                     my: [10, null, 15],
                     variant: 'text.events',
                 }}>
                     {description}
                 </Paragraph>
+
                 <Link sx={{
                     mt: 'auto',
                     variant: 'buttons.primary',
@@ -109,7 +112,7 @@ export const Slide = ({
     </Box>
 }
 
-export const EventsSlider = () => {
+export const EventsSlider = ({events, ...rest}) => {
     const theme = React.useContext(ThemeContext);
 
     const settings = {
@@ -136,28 +139,22 @@ export const EventsSlider = () => {
             }
         ]
     }
-    return <Box sx={{
-        bg: '#f4f8f8',
-        py: 50,
-    }}>
-        <Container>
-            <Slider {...settings}>
+    return <Slider {...settings}>
 
-                {Array(3).fill().map( (e, i) => <Slide
-                        key={i}
-                        title='Capital Azur exposera à Seamless East Africa'
-                        description="Seamless East Africa est la principale conférence fintech d'Afrique de l'Est, qui se tiendra au Radisson Blu Hotel, à Nairobi, au Kenya"
-                        image='https://capital-azur.com/sites/default/files/2020-05/38e70ac1beba0588ca73eb1ab1957d60.jpg'
-                        date={{start: '22 mai', end: '28 mai'}}
-                        tags={[{color: 'red', label: 'Nairobi'},
-                            {color: 'primary', label: 'EXPOSITION'}]}
-                        action={{label: 'LIRE PLUS', href: '#!'}}
-                        />
-                    )
-                }
+        {events.map( (event, i) => <Slide
+            key={event.key}
+            title={event.title}
+            description={event.excerpt}
+            image={event.image}
+            date={event.date}
+            tag={event.category}
+            location={event.city}
+            action={{
+                href: event.url,
+                label: 'Lire Plus'
+            }}
+            />
+        )}
 
-
-            </Slider>
-        </Container>
-    </Box>
+    </Slider>
 }
