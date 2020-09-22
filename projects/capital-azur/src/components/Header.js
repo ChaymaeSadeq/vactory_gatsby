@@ -13,13 +13,14 @@ import {
 } from 'vactory-ui';
 import { Squash as Hamburger } from 'hamburger-react';
 import { theme } from '../theme';
+import { useMenu } from 'vactory-gatsby-core'
 import capital_azur_logo from '../images/capital-azur-logo.png';
 
 
 const ViewModeContext = createContext('desktop');
 const ViewModeProvider = ViewModeContext.Provider;
 
-const Nav = ({asButton, active, ...props}) => {
+const Nav = ({asButton, icon, active, ...props}) => {
 	const viewMode = useContext(ViewModeContext);
 
 	let styleProperties = {
@@ -81,14 +82,13 @@ const Nav = ({asButton, active, ...props}) => {
 		ButtonStyleProperties['mt'] = 0;
 	}
 
-	if ( asButton ) {
-		return <DefaultNav 
-					sx={{...styleProperties, ...ButtonStyleProperties}} 
-					{...props} />
-	}
-	else {
-		return <DefaultNav sx={styleProperties} {...props} />
-	}
+	return <DefaultNav sx={{
+			...styleProperties,
+			...( asButton ? ButtonStyleProperties : {} ),
+		}} {...props}>
+		{props.children}
+		{icon && <Icon name="lock" size="15px" sx={{ ml: "medium", verticalAlign: "text-bottom" }} />}
+	</DefaultNav>
 }
 
 const Navs = props => {
@@ -123,7 +123,7 @@ const Logo = props => {
 export const CapitalAzurHeader = () => {
 	const [menuOpened, openCloseMenu] = useState(false);
 	const isUpLg = useMedia(`(min-width: ${theme.breakpoints.lg})`);
-
+	const menuItems = useMenu('main');
 
 	return <Header px="large" py={5} bg="white" boxShadow={1}>
 			<ViewModeProvider value={isUpLg ? 'desktop' : 'mobile'}>
@@ -138,9 +138,13 @@ export const CapitalAzurHeader = () => {
 						borderBottom: '1px solid currentColor',
 						width: 'calc(100% - 24px)',
 						}} />}
-					<Nav href="/produits-services">Produits & Services</Nav>
-					<Nav href="#">Nous connaître</Nav>
-					<Nav href="#" active={true}>Insights</Nav>
+					{menuItems.map( item => <Nav
+						key={item.id}
+						href={item.url}
+						//asButton={item.asButton}
+						icon={item.icon}
+						>{item.title}</Nav>
+					)}
 					<Nav href="#" asButton={true}>
 						Banque digitale
 						<Icon name="lock" size="15px" sx={{ ml: "medium", verticalAlign: "text-bottom" }} />

@@ -5,7 +5,8 @@ import {
 import { ThemeContext } from 'styled-components';
 import {CapitalAzurHeader} from './components/Header'
 import {CapitalAzurFooter} from './components/Footer'
-import {FloatingBox} from './components/FloatingBox'
+import {SocialMediaToolbox} from './components/SocialMediaToolbox'
+import {FloatingToolbox} from './components/FloatingToolbox'
 import {BackToTopButton} from './components/BackToTop'
 import { useMedia } from 'vactory-ui';
 
@@ -22,7 +23,8 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             </main>
             </StatePageSection.Provider>
             <CapitalAzurFooter/>
-            {upLg && <FloatingBox />}
+            {upLg && <SocialMediaToolbox />}
+            {upLg && <FloatingToolbox />}
             <BackToTopButton />
         </>
     )

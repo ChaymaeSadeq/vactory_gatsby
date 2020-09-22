@@ -108,6 +108,33 @@ const buttons = {
         '&:hover': {
             borderColor: 'currentColor',
         }
+    },
+    dashPrefixed: {
+        background: 'transparent',
+        color: 'lightBlue',
+        position: 'relative',
+        border: 0,
+        fontWeight: 'semiBold',
+        pl: [35, 48, 59],
+        transition: '.3s ease-in',
+        fontSize: 14,
+        lineHeight: '24px',
+
+        '&:hover': {
+            color: '#0157b2',
+            background: 'transparent',
+        },
+
+        '&::after': {
+            content: '""',
+            display: 'block',
+            width: [20, 33, '44px'],
+            height: '2px',
+            backgroundColor: 'lightBlue',
+            position: 'absolute',
+            top: [12, null, '16px'],
+            left: 0,
+        }
     }
 };
 
@@ -154,6 +181,9 @@ const boxes = {
     intro: {
         mx: [0, null, 100, 180],
         mb: 55,
+        '&:empty': {
+            display: 'none'
+        }
     }
 }
 

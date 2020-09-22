@@ -9,7 +9,7 @@ import { DashHeading } from './Headings';
 import { AccessSection } from './AccessSection';
 
 export const ImageAndTextSection = ({image, title, body, link, mode=0, ...rest}) => {
-    if (mode === 1)
+    if (mode === 1 && false)
         return <AccessSection
             title={title}
             paragraph={body}
@@ -31,7 +31,7 @@ export const ImageAndTextSection = ({image, title, body, link, mode=0, ...rest})
                 <Box sx={{
                     flexBasis: ['100%', null, null, '50%'],
                     pb: ['83%', null, null, 0],
-                    order: [1, null, null, 0],
+                    order: [1, null, null, mode == 1 ? 1 : 0],
                     backgroundImage: `url(${image})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: ['0 0', null, null, '-10px 215px', '-110px 65px'],
@@ -52,11 +52,12 @@ export const ImageAndTextSection = ({image, title, body, link, mode=0, ...rest})
                         lineHeight: '28px',
                         letterSpacing: .3,
                     }}>{body}</Box>
-                    <Link sx={{
+                    { ( link.href || link.label ) && <Link sx={{
                             variant:'buttons.white',
                             mt: 30,
                             alignSelf: 'flex-start',
                         }} href={link.href}>{link.label}</Link>
+                    }
                 </Flex>
             </Flex>
         </Container>

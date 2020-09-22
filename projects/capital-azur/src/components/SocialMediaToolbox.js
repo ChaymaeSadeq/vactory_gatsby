@@ -5,29 +5,15 @@ import {
     Layer,
     Link,
 } from 'vactory-ui';
+import { useMenu } from 'vactory-gatsby-core'
 
-export const FloatingBox = ({plateforms=[
-    {
-        icon: 'facebook',
-        link: '//facebook.com'
-    },
-    {
-        icon: 'twitter',
-        link: '//twitter.com'
-    },
-    {
-        icon: 'youtube',
-        link: '//youtube.com'
-    },
-    {
-        icon: 'linkedin',
-        link: '//linkedin.com'
-    }
-    ], ...rest}) => {
+export const SocialMediaToolbox = (props) => {
+    const plateforms = useMenu('social-media');
+
     return <Layer
         animation='fadeIn'
         full='horizontal'
-        position="right"
+        position="left"
         modal={false}
         plain={true}
         css={{
@@ -45,8 +31,8 @@ export const FloatingBox = ({plateforms=[
                     py: 5,
                 }} >
 
-                {plateforms.map( ({icon, link}, i) => <Link
-                    key={i}
+                {plateforms.map( (plateform) => <Link
+                    key={plateform.id}
                     sx={{
                         bg: 'primary',
                         p: 0,
@@ -56,8 +42,8 @@ export const FloatingBox = ({plateforms=[
                             bg: 'primary',
                             color: 'darkBlue',
                         }
-                    }} href={link} target='_blank'>
-                    <Icon name={icon} size='22px' sx={{
+                    }} href={plateform.url} {...plateform.options.attributes} >
+                    <Icon name={plateform.title.toLocaleLowerCase()} size='22px' sx={{
                         mx: 'auto',
                         my: 10,
                     }} />

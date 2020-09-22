@@ -5,14 +5,16 @@ import {
 	Container,
     Flex,
     Footer,
-	Icon,
+    Icon,
 	Nav,
     Navs,
     Text,
 } from 'vactory-ui';
+import { useMenu } from 'vactory-gatsby-core'
 
 
-const FooterNav = props =>  <Nav sx={{
+const FooterNav = props =>  <Nav
+    as={Anchor} sx={{
     fontSize: 11,
     lineHeight: '20px',
     fontWeight: 'medium',
@@ -32,7 +34,7 @@ const FooterNav = props =>  <Nav sx={{
         pr: 0,
         m: 0
     }
-    }}>{props.children}</Nav>
+    }} {...props}/>
 
 const FooterNavs = props =>  <Navs sx={{
         p: 0,
@@ -58,6 +60,8 @@ const SocialIcon = ({name, link='#', ...rest}) => {
 
 
 export const CapitalAzurFooter = () => {
+    const menuItems = useMenu('footer');
+
     return (
         <Container>
         <Footer sx={{
@@ -97,11 +101,14 @@ export const CapitalAzurFooter = () => {
                     </Flex>
                     <Flex className="vf-footer1__nav-menu">
                         <FooterNavs>
-                           <FooterNav link='#'>Nous Contacter</FooterNav>
-                           <FooterNav link='#'>Appels d'offres</FooterNav>
-                           <FooterNav link='#'>Nous rejoindre</FooterNav>
-                           <FooterNav link='#'>Glossaire</FooterNav>
-                           <FooterNav link='#'>Mentions Légales</FooterNav>
+                            {menuItems.map(
+                                item => <FooterNav
+                                    key={item.id}
+                                    href={item.url}
+                                    { ...('attributes' in item.options ? item.options.attributes : {})}>
+                                {item.title}
+                                </FooterNav>
+                            )}
                         </FooterNavs>
                     </Flex>
                 </Flex>

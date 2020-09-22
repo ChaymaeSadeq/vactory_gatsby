@@ -1,18 +1,41 @@
 import React from 'react'
-import { Link } from 'vactory-gatsby-ui'
+import {
+  Box,
+  Container,
+  Link,
+  Paragraph,
+} from 'vactory-ui'
+import { DashHeading } from '../../components/Headings';
+import { KeyNumbers } from '../../components/KeyNumber'
 
-export const KeyFiguresWidget = ({ fields, extra_field }) => {
-  return (
-    <div>
-      {fields.map((item, i) => {
-        return (
-          <div key={i}>
-            <div>{item.chiffre} {item.chiffre_alt}</div>
-            <h1>{item.title}</h1>
-          </div>
-        )
-      })}
-      <Link to={extra_field.link}>{extra_field.link_label}</Link>
-    </div>
-  )
+export const KeyNumbersSection = ({ action, numbers, title, intro, ...rest }) => {
+
+  return <Box sx={{
+    backgroundColor: '#f2f6f6',
+    py: 90,
+  }} {...rest}>
+    <Container>
+      <Box sx={{}}>
+
+        <Box variant='boxes.intro'>
+          {title && <DashHeading mb={30}>{title}</DashHeading>}
+          {intro && <Paragraph as='div'>{intro}</Paragraph>}
+        </Box>
+
+        <KeyNumbers numbers={numbers} />
+
+        { (action.label || action.href) && <Link sx={{
+            mt: 70,
+            mx: 'auto',
+            width: 'fit-content',
+            display: 'flex',
+            variant: 'buttons.white',
+          }} href={action.href} >
+            {action.label}
+          </Link>
+			  }
+
+      </Box>
+    </Container>
+  </Box>
 }
