@@ -1,6 +1,8 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState } from 'react';
+import get from 'lodash.get';
 import {
 	Anchor,
+	Box,
 	Container,
 	Flex,
 	Header,
@@ -9,19 +11,14 @@ import {
 	Layer,
 	Nav as DefaultNav,
 	Navs as DefaultNavs,
-	useMedia,
 } from 'vactory-ui';
 import { Squash as Hamburger } from 'hamburger-react';
-import { theme } from '../theme';
 import { useMenu } from 'vactory-gatsby-core'
 import capital_azur_logo from '../images/capital-azur-logo.png';
 
 
-const ViewModeContext = createContext('desktop');
-const ViewModeProvider = ViewModeContext.Provider;
 
 const Nav = ({asButton, icon, active, ...props}) => {
-	const viewMode = useContext(ViewModeContext);
 
 	let styleProperties = {
 		fontSize: '11px',
@@ -36,7 +33,18 @@ const Nav = ({asButton, icon, active, ...props}) => {
 
 		'&:hover': {
 			color: 'primary',
-		}
+		},
+
+		'&:not(:first-of-type)::before': {
+			content: [null, null, null, '""'],
+			display: 'block',
+			width: '1px',
+			height: '16px',
+			top: 'calc(50% - 16px/2)',
+			left: '-1px',
+			bg: 'rgba(0, 0, 0, .16)',
+			position: 'absolute',
+		},
 	}
 
 	let ButtonStyleProperties = {
@@ -53,7 +61,8 @@ const Nav = ({asButton, icon, active, ...props}) => {
 		transition: '.3s ease-in',
 		width: 'calc(100% - 24px)',
 		textAlign: 'center',
-		mt: 10,
+		mt: [10, null, null, 0],
+		width: [null, null, null, 'auto'],
 
 		'&:not(:first-of-type)::before': {
 			content: 'none',
@@ -66,22 +75,6 @@ const Nav = ({asButton, icon, active, ...props}) => {
 		},
 	}
 
-	if ( viewMode === 'desktop' ) {
-		styleProperties['&:not(:first-of-type)::before'] = {
-			content: '""',
-			display: 'block',
-			width: '1px',
-			height: '16px',
-			top: 'calc(50% - 16px/2)',
-			left: '-1px',
-			bg: 'rgba(0, 0, 0, .16)',
-			position: 'absolute',
-		}
-
-		ButtonStyleProperties['width'] = 'auto';
-		ButtonStyleProperties['mt'] = 0;
-	}
-
 	return <DefaultNav sx={{
 			...styleProperties,
 			...( asButton ? ButtonStyleProperties : {} ),
@@ -91,27 +84,54 @@ const Nav = ({asButton, icon, active, ...props}) => {
 	</DefaultNav>
 }
 
-const Navs = props => {
-	const viewMode = useContext(ViewModeContext);
+const navsMap = ( list ) => {
+	return list.map( item => <Nav
+		key={item.id}
+		href={item.url}
+		asButton={get(item, 'options.attributes.class', '').indexOf('as-btn') > -1}
+		icon={get(item, 'options.attributes.icon', null)}
+		target={get(item, 'options.attributes.target', null)}
+		> {item.title} </Nav>
+	)
+}
 
-	if ( viewMode === 'desktop' ) 
-		return <DefaultNavs {...props} />
-	
-	return (
-		props.menuOpened &&
+const DesktopNavs = ({menuItems, ...rest}) => {
+	return <DefaultNavs p={0} {...rest}>
+		{ navsMap(menuItems) }
+	</DefaultNavs>
+}
+
+const MobileNavs = (props) => {
+
+	return (props.menuOpened &&
 		<Layer 
+			className="menu-layer"
 			position="left"
 			full="vertical"
-			onClickOutside={props.onClickOutside} >
+			onClickOutside={() => props.menuHandler(false)} >
+
 			<DefaultNavs sx={{
+				p: 0,
 				flexDirection: 'column !important',
 				alignItems: 'flex-start',
 				minHeight: '100vh',
 				width: '250px',
 				backgroundColor: 'white',
-			}} {...props} />
+			}}>
+				<Logo sx={{
+					display: {lg: 'none'},
+					mx: 12,
+					mb: 20,
+					color: 'lightBlue',
+					borderBottom: '1px solid currentColor',
+					width: 'calc(100% - 24px)',
+					}} />
+
+				{ navsMap(props.menuItems) }
+
+			</DefaultNavs>
 		</Layer>
-	);
+	)
 }
 
 const Logo = props => {
@@ -122,37 +142,29 @@ const Logo = props => {
 
 export const CapitalAzurHeader = () => {
 	const [menuOpened, openCloseMenu] = useState(false);
-	const isUpLg = useMedia(`(min-width: ${theme.breakpoints.lg})`);
 	const menuItems = useMenu('main');
 
 	return <Header px="large" py={5} bg="white" boxShadow={1}>
-			<ViewModeProvider value={isUpLg ? 'desktop' : 'mobile'}>
 			<Container as={Flex} alignItems='center'>
 				<Logo />
 
-				<Navs menuOpened={menuOpened} onClickOutside={() => openCloseMenu(false)} className={"navs"} p={0}>
-					{ !isUpLg && <Logo sx={{
-						mx: 12,
-						mb: 20,
-						color: 'lightBlue',
-						borderBottom: '1px solid currentColor',
-						width: 'calc(100% - 24px)',
-						}} />}
-					{menuItems.map( item => <Nav
-						key={item.id}
-						href={item.url}
-						//asButton={item.asButton}
-						icon={item.icon}
-						>{item.title}</Nav>
-					)}
-					<Nav href="#" asButton={true}>
-						Banque digitale
-						<Icon name="lock" size="15px" sx={{ ml: "medium", verticalAlign: "text-bottom" }} />
-					</Nav>
-				</Navs>
+				{/* Desktop menu */}
+				<Box display={{_: 'none', lg: 'block'}}>
+					<DesktopNavs menuItems={menuItems} />
+				</Box>
+
+				{/* Mobile menu */}
+				<Box display={{lg: 'none'}}>
+					<MobileNavs
+						className={"navs"}
+						menuItems={menuItems}
+						menuOpened={menuOpened}
+						menuHandler={openCloseMenu} />
+				</Box>
 				
-				{ !isUpLg && <Hamburger toggled={menuOpened} toggle={openCloseMenu} />}
+				<Box display={{lg: 'none'}} >
+					<Hamburger toggled={menuOpened} toggle={openCloseMenu} />
+				</Box>
 			</Container>
-			</ViewModeProvider>
 		</Header>;
 }
