@@ -4,7 +4,7 @@ import { Wysiwyg } from 'vactory-gatsby-ui'
 import { ServiceCards } from './service-cards'
 
 export const ServiceCardsContainer = ({ data }) => {
-  const title = get(data, 'extra_field.title.value.#text',  'I want my own title field')
+  const title = get(data, 'extra_field.title',  null)
   const intro = get(data, 'extra_field.intro.value.#text', null)
   const cards = data.components.map((item) => ({
       ...item,

@@ -31,7 +31,7 @@ export const ImageAndTextSection = ({image, title, body, link, mode=0, ...rest})
                 <Box sx={{
                     flexBasis: ['100%', null, null, '50%'],
                     pb: ['83%', null, null, 0],
-                    order: [1, null, null, mode == 1 ? 1 : 0],
+                    order: [1, null, null, mode === 1 ? 1 : 0],
                     backgroundImage: `url(${image})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: ['0 0', null, null, '-10px 215px', '-110px 65px'],

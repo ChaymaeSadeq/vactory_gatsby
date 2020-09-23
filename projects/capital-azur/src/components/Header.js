@@ -59,10 +59,9 @@ const Nav = ({asButton, icon, active, ...props}) => {
 		py: 4,
         boxShadow: '0 10px 14px -5px rgba(191, 191, 191, .67)',
 		transition: '.3s ease-in',
-		width: 'calc(100% - 24px)',
+		width: ['calc(100% - 24px)', null, null, 'auto'],
 		textAlign: 'center',
 		mt: [10, null, null, 0],
-		width: [null, null, null, 'auto'],
 
 		'&:not(:first-of-type)::before': {
 			content: 'none',

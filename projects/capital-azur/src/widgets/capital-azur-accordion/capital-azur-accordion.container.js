@@ -2,7 +2,6 @@ import React from 'react'
 import get from 'lodash.get';
 import {Wysiwyg} from "vactory-gatsby-ui";
 import {AccordionSection} from "./capital-azur-accordion";
-import {Box, Heading} from "vactory-ui";
 
 export const CapitalAzurAccordionContainer = ({data}) => {
 

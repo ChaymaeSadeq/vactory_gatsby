@@ -1,5 +1,6 @@
 import React from "react"
 import {
+    BannersTemplate,
     StatePageSection
 } from 'vactory-gatsby-ui'
 import { ThemeContext } from 'styled-components';
@@ -18,6 +19,13 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
         <>
             <StatePageSection.Provider>
             <CapitalAzurHeader/>
+
+            {node.internal_node_banner &&
+            <BannersTemplate
+                widget={node.internal_node_banner}
+                node={node}
+                breadcrumbItems={(breadcrumb && breadcrumb.length > 0) ? breadcrumb : [] }/>
+            }
             <main>
                 {children}
             </main>
