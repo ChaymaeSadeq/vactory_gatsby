@@ -72,7 +72,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
   return (
     <Container>
       <Heading px="xsmall" level={2}>
-        {t("Actualités, Analyses et points de vue de nos experts")}
+        {JSON.parse(node.field_settings).intro}
       </Heading>
       <PostsFormFilter
         terms={normalizedCategories}
