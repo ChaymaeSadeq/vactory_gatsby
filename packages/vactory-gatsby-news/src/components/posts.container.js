@@ -69,11 +69,15 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
     fetchData();
   }, [selectedTerm, node.langcode, pager]);
 
+  const extraData = (typeof node.field_settings !== "undefined") ? JSON.parse(node.field_settings) : [];
+
+
   return (
     <Container>
-      <Heading px="xsmall" level={2}>
-        {JSON.parse(node.field_settings).intro}
-      </Heading>
+      {extraData['intro'] && (
+        <Heading px="xsmall" level={2}>
+          {extraData['intro']}
+        </Heading>)}
       <PostsFormFilter
         terms={normalizedCategories}
         value={selectedTerm}
