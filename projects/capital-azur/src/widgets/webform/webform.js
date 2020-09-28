@@ -37,10 +37,11 @@ export const Webform = () => {
     const currentLanguage = i18n.language;
     const {handleWebformRemoteSubmit, webformFetch} = useWebformSubmit();
     const {register, handleSubmit, watch, errors, setValue, reset} = useForm();
-    const formId = 'job_application';
+    const formId = 'nous_contacter';
     const recaptchaRef = React.createRef();
 
     const onSubmit = data => {
+        console.log(data)
         handleWebformRemoteSubmit(data);
     };
 
@@ -54,7 +55,6 @@ export const Webform = () => {
     return (
         <div>
             <main>
-                <h2>Apply form</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input type="hidden" name="webform_id" ref={register} value={formId}/>
                     <input type="hidden" name="captcha_response" ref={register} value='Google no captcha'/>
@@ -98,31 +98,14 @@ export const Webform = () => {
                         />
                         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                     </Box>
-
-                    <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor="email_confirmation">{t('Confirmation adresse mail')}
-                            <RequiredAsterisk/></Label>
-                        <Input
-                            name="email_confirmation"
-                            id="email_confirmation"
-                            status={errors.email_confirmation ? 'danger' : null}
-                            ref={register({
-                                validate: (value) => {
-                                    return value === watch("email")
-                                },
-                            })}
-                        />
-                        {errors.email_confirmation && <ErrorMessage>{t("L'adresse mail est incorrecte")}</ErrorMessage>}
-                    </Box>
                         
                     <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor={'demand'}>{t('Nature de la demande')}</Label>
+                        <Label mb="xsmall" htmlFor={'demande'}>{t('Nature de la demande')}</Label>
                         <Select
-                            type='select'
-                            name="demand"
-                            id='demand'
-                            //status={errors.demand ? 'danger' : null}
-                            //ref={register({required: t("Le champs 'Nature de la demande' est requis")})}
+                            type="select"
+                            name="demande"
+                            id='demande'
+                            ref={register}
                         >
                             <option value="aucun">{t('Aucun(e)')}</option>
                             <option value="reclamation">{t('Réclamation')}</option>
@@ -130,7 +113,6 @@ export const Webform = () => {
                             <option value="rendez-vous">{t('Prendre un rendez-vous')}</option>
                             <option value="presse">{t('Presse')}</option>
                         </Select>
-                        {errors.demand && <ErrorMessage>{errors.demand.message}</ErrorMessage>}
                     </Box>
 
                     <Box my="xsmall" px="xsmall">
