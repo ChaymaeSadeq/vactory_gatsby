@@ -37,7 +37,7 @@ const PostApplyForm = ({post}) => {
     const currentLanguage = i18n.language;
     const {handleWebformRemoteSubmit, webformFetch} = useWebformSubmit();
     const {register, handleSubmit, watch, errors, setValue, reset} = useForm();
-    const formId = 'job_application';
+    const formId = 'appel_d_offre';
     const recaptchaRef = React.createRef();
 
     const onSubmit = data => {
@@ -61,26 +61,26 @@ const PostApplyForm = ({post}) => {
                     <input type="hidden" name="captcha_response" ref={register} value='Google no captcha'/>
 
                     <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor={'first_name'}>{t('Prénom')} <RequiredAsterisk/></Label>
+                        <Label mb="xsmall" htmlFor="nom">{t('Nom')} <RequiredAsterisk/></Label>
                         <Input
-                            type='text'
-                            name="first_name"
-                            id='first_name'
-                            status={errors.first_name ? 'danger' : null}
-                            ref={register({required: t("Le champs 'Prénom' est requis")})}
+                            name="nom"
+                            id="nom"
+                            status={errors.nom ? 'danger' : null}
+                            ref={register({required: t("Le champs 'Nom' est requis")})}
                         />
-                        {errors.first_name && <ErrorMessage>{errors.first_name.message}</ErrorMessage>}
+                        {errors.nom && <ErrorMessage>{errors.nom.message}</ErrorMessage>}
                     </Box>
 
                     <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor="last_name">{t('Nom')} <RequiredAsterisk/></Label>
+                        <Label mb="xsmall" htmlFor={'prenom'}>{t('Prénom')} <RequiredAsterisk/></Label>
                         <Input
-                            name="last_name"
-                            id="last_name"
-                            status={errors.last_name ? 'danger' : null}
-                            ref={register({required: t("Le champs 'Nom' est requis")})}
+                            type='text'
+                            name="prenom"
+                            id='prenom'
+                            status={errors.prenom ? 'danger' : null}
+                            ref={register({required: t("Le champs 'Prénom' est requis")})}
                         />
-                        {errors.last_name && <ErrorMessage>{errors.last_name.message}</ErrorMessage>}
+                        {errors.prenom && <ErrorMessage>{errors.prenom.message}</ErrorMessage>}
                     </Box>
 
                     <Box my="xsmall" px="xsmall">
@@ -94,11 +94,11 @@ const PostApplyForm = ({post}) => {
                     </Box>
 
                     <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor="addresse">{t('Addresse')}</Label>
+                        <Label mb="xsmall" htmlFor="adresse">{t('Adresse')}</Label>
                         <Input
-                            name="addresse"
-                            id="addresse"
-                            status={errors.addresse ? 'danger' : null}
+                            name="adresse"
+                            id="adresse"
+                            status={errors.adresse ? 'danger' : null}
                             ref={register}
                         />
                     </Box>
@@ -121,22 +121,6 @@ const PostApplyForm = ({post}) => {
                     </Box>
 
                     <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor="email_confirmation">{t('Confirmation adresse mail')}
-                            <RequiredAsterisk/></Label>
-                        <Input
-                            name="email_confirmation"
-                            id="email_confirmation"
-                            status={errors.email_confirmation ? 'danger' : null}
-                            ref={register({
-                                validate: (value) => {
-                                    return value === watch("email")
-                                },
-                            })}
-                        />
-                        {errors.email_confirmation && <ErrorMessage>{t("L'adresse mail est incorrecte")}</ErrorMessage>}
-                    </Box>
-
-                    <Box my="xsmall" px="xsmall">
                         <Label mb="xsmall" htmlFor="raison_sociale">{t('Raison Sociale')} <RequiredAsterisk/></Label>
                         <Input
                             name="raison_sociale"
@@ -156,16 +140,6 @@ const PostApplyForm = ({post}) => {
                             ref={register({required: t("Le champs 'Ville' est requis")})}
                         />
                         {errors.ville && <ErrorMessage>{errors.ville.message}</ErrorMessage>}
-                    </Box>
-
-                    <Box my="xsmall" px="xsmall">
-                        <Label mb="xsmall" htmlFor="message">{t('Message')}</Label>
-                        <Input
-                            as={'textarea'}
-                            name="message"
-                            id="message"
-                            ref={register}
-                        />
                     </Box>
 
                     <Box my="xsmall" px="xsmall">
