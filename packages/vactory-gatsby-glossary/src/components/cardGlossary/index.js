@@ -36,7 +36,6 @@ const CardExcerpt = ({ children, ...rest }) => {
 
 export const CardGlossary = (props) => {
   const { posts ,langue} = props;
-  console.log(langue)
   const Card = ({ sx, children, ...rest }) => {
     return (
       <Box
