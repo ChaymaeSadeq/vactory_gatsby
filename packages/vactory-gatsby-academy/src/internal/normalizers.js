@@ -18,6 +18,24 @@ export const normalizeNodes = (nodes) => {
     }));
 };
 
+export const normalizeDFNodes = (nodes) => {
+    return nodes.map(post => ({
+        id: post.id,
+        title: post.title,
+        url: get(post, 'url', null),
+        // comment: get(post, 'comment.last_comment_name', null),
+        // courseSupport: get(post, 'field_vactory_media_document', null),
+        date: get(post, 'field_vactory_date', null),
+        duration: get(post, 'duration', null),
+        // instructor: get(post, 'field_vactory_instructor.display_name', null),
+        // language: get(post, 'field_vactory_academy_language', null),
+        excerpt: get(post, 'excerpt', null),
+        category: get(post, 'category', null),
+        image: get(post, 'image', null),
+        // video: get(post, 'field_vactory_youtube_videos', null),
+    }));
+};
+
 export const normalizeTerms = (terms) => {
     return terms.map(term => ({
         id: term.drupal_internal__tid,

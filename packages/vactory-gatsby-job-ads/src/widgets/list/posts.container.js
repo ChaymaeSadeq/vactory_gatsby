@@ -4,21 +4,17 @@ import Api from 'vactory-gatsby-api'
 import {
   postsQueryParams,
   normalizeNodes,
-  normalizeTerms,
+  normalizeDFNodes,
   PostsPage,
   PostsFormFilter,
 } from 'vactory-gatsby-job-ads'
 import { Heading, Container, Paragraph } from 'vactory-ui'
 import { LoadingOverlay, Pagination } from 'vactory-gatsby-ui'
 
-const PostsContainer = ({
-  pageContext: { node, nodes, cities, contracts, professions, pageCount },
-}) => {
-  const { t } = useTranslation()
-  const normalizedCities = normalizeTerms(cities)
-  const normalizedContracts = normalizeTerms(contracts)
-  const normalizedProfessions = normalizeTerms(professions)
-  const normalizedNodes = normalizeNodes(nodes)
+const PostsContainer = ({nodes, cities, contracts, professions, pageCount}) => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language
+  const normalizedNodes = normalizeDFNodes(nodes)
 
   const isFirstRun = useRef(true)
   const [posts, setPosts] = useState(normalizedNodes)
@@ -91,7 +87,7 @@ const PostsContainer = ({
 
       setIsLoading(true)
 
-      Api.getResponse('node/job_ads', requestParams, node.langcode)
+      Api.getResponse('node/job_ads', requestParams, currentLanguage)
         .then((res) => {
           const normalizedNodes = normalizeNodes(res.data)
           const total = res.meta.count
@@ -106,7 +102,7 @@ const PostsContainer = ({
     }
 
     fetchData()
-  }, [selectedCity, selectedContract, selectedProfession, node.langcode, pager])
+  }, [selectedCity, selectedContract, selectedProfession, currentLanguage, pager])
 
   return (
     <Container>
@@ -114,9 +110,9 @@ const PostsContainer = ({
         {t('Job Ads')}
       </Heading>
       <PostsFormFilter
-        cities={normalizedCities}
-        contracts={normalizedContracts}
-        professions={normalizedProfessions}
+        cities={cities}
+        contracts={contracts}
+        professions={professions}
         value={selectedCity}
         handleChangeCity={handleChangeCity}
         handleChangeContract={handleChangeContract}

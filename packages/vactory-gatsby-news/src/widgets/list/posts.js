@@ -3,6 +3,7 @@ import { CardNews, imageLayoutStyles } from "vactory-gatsby-news";
 import { Container, Row, Col } from "vactory-ui";
 
 const Posts = ({ posts }) => {
+    // console.log(posts)
   return (
       <Container>
         <Row>

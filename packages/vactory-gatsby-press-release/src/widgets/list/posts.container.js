@@ -4,17 +4,17 @@ import Api from 'vactory-gatsby-api'
 import {
   postsQueryParams,
   normalizeNodes,
-  normalizeTerms,
+  normalizeDFNodes,
   PostsPage,
   PostsFormFilter,
 } from 'vactory-gatsby-press-release'
 import { Heading, Container, Paragraph } from 'vactory-ui'
 import {LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
 
-const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
-  const { t } = useTranslation()
-  const normalizedCategories = normalizeTerms(terms)
-  const normalizedNodes = normalizeNodes(nodes)
+const PostsContainer = ({ pageCount, nodes, terms }) => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language
+  const normalizedNodes = normalizeDFNodes(nodes)
 
   const isFirstRun = useRef(true)
   const [posts, setPosts] = useState(normalizedNodes)
@@ -61,7 +61,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
 
       setIsLoading(true)
 
-      Api.getResponse('node/press_release', requestParams, node.langcode)
+      Api.getResponse('node/press_release', requestParams, currentLanguage)
         .then((res) => {
           const normalizedNodes = normalizeNodes(res.data)
           const total = res.meta.count
@@ -76,7 +76,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
     }
 
     fetchData()
-  }, [selectedTerm, node.langcode, pager])
+  }, [selectedTerm, currentLanguage, pager])
 
   return (
     <Container>
@@ -85,7 +85,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
       </Heading>
 
       <PostsFormFilter
-        terms={normalizedCategories}
+        terms={terms}
         value={selectedTerm}
         handleChange={handleChange}
       />

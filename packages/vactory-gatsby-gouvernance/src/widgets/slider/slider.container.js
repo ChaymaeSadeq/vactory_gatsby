@@ -6,16 +6,16 @@ import {Link} from 'vactory-gatsby-ui'
 import {Slider} from 'vactory-gatsby-gouvernance'
 
 export const SliderContainer = ({data}) => {
+    const nodes = get(data, 'components.0.views.data.nodes', []);
     const title = get(data, 'components.0.title', '');
     const raw_description = get(data, 'components.0.description.value.#text', null);
     const description = <Wysiwyg html={raw_description}/>;
     const link = get(data, 'components.0.link.url', null);
     const link_label = get(data, 'components.0.link.title', '');
-    const posts = data.data.map(post => {
+    const posts = nodes.map(post => {
         return {
             ...post,
             excerpt: get(post, 'excerpt.0.value'),
-            date: get(post, 'date.0.value', null),
         }
     });
 

@@ -27,7 +27,7 @@ const PostsFormFilter = ({
             {terms.map((term) => {
               return (
                 <option key={term.id} value={term.id}>
-                  {term.name}
+                  {term.label}
                 </option>
               );
             })}
@@ -48,7 +48,7 @@ const PostsFormFilter = ({
             {cities.map((term) => {
               return (
                 <option key={term.id} value={term.id}>
-                  {term.name}
+                  {term.label}
                 </option>
               );
             })}

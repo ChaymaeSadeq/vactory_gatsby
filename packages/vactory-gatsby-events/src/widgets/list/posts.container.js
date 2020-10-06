@@ -6,20 +6,19 @@ import {LoadingOverlay, Pagination} from "vactory-gatsby-ui";
 import {
   postsQueryParams,
   normalizeNodes,
-  normalizeTerms,
+  normalizeDFNodes,
   PostsPage,
   PostsFormFilter,
-} from "vactory-gatsby-blog";
+} from "vactory-gatsby-events";
 
-const PostsContainer = ({
-  pageContext: { node, nodes, terms, pageCount },
-}) => {
-  const { t } = useTranslation();
-  const normalizedCategories = normalizeTerms(terms);
-  const normalizedNodes = normalizeNodes(nodes);
+const PostsContainer = ({ nodes, categories, cities, pageCount }) => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
+  const normalizedNodes = normalizeDFNodes(nodes);
   const isFirstRun = useRef(true);
   const [posts, setPosts] = useState(normalizedNodes);
   const [selectedTerm, setSelectedTerm] = useState("all");
+  const [selectedCity, setSelectedCity] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
   const [pager, setPager] = useState(1);
   const [count, setCount] = useState(pageCount);
@@ -32,7 +31,10 @@ const PostsContainer = ({
     setPager(1);
   };
 
-
+  const handleChangeCity = (tid) => {
+    setSelectedCity(tid);
+    setPager(1);
+  };
 
   useEffect(() => {
     if (isFirstRun.current) {
@@ -48,12 +50,18 @@ const PostsContainer = ({
         "filter[category][condition][value]": selectedTerm,
       };
 
-
+      let cityFilter = {
+        "filter[city][condition][path]":
+          "field_vactory_taxonomy_2.drupal_internal__tid",
+        "filter[city][condition][operator]": "=",
+        "filter[city][condition][value]": selectedCity,
+      };
 
       if (selectedTerm === "all") {
         categoryFilter = {};
       }
 
+      if (selectedCity === "all") cityFilter = {};
 
       const requestParams = {
         ...postsQueryParams,
@@ -62,11 +70,12 @@ const PostsContainer = ({
           offset: (pager - 1) * postsQueryParams.page.limit,
         },
         ...categoryFilter,
+        ...cityFilter,
       };
 
       setIsLoading(true);
 
-      Api.getResponse("node/blog", requestParams, node.langcode)
+      Api.getResponse("node/events", requestParams, currentLanguage)
         .then((res) => {
           const normalizedNodes = normalizeNodes(res.data);
           setPosts(normalizedNodes);
@@ -81,17 +90,19 @@ const PostsContainer = ({
     }
 
     fetchData();
-  }, [selectedTerm, node.langcode, pager]);
+  }, [selectedTerm, selectedCity, currentLanguage, pager]);
 
   return (
     <Container>
       <Heading px="xsmall" level={2}>
-        {t("Blogs")}
+        {t("Events")}
       </Heading>
       <PostsFormFilter
-        terms={normalizedCategories}
+        cities={cities}
+        terms={categories}
         value={selectedTerm}
         handleChangeCategory={handleChangeCategory}
+        handleChangeCity={handleChangeCity}
       />
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (

@@ -48,8 +48,8 @@ const InternalCard = ({sx, children, ...rest}) => {
 
 export const CardGouvernance = (props) => {
     const title = props.title;
-    const role_title = props.role;
-    const image = props.image._thumbnail;
+    const role_title = props.role.label;
+    const image = props.image.gouvernance_thumbnail;
 
     return (
         <InternalCard>

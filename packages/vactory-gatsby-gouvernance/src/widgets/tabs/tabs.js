@@ -6,10 +6,10 @@ export const Tabs = ({posts, terms}) => {
     return (
         <BaseTabs variant="cardType">
             {terms.map(term => {
-                const termPosts = posts.filter(post => post.role_id === term.id)
+                const termPosts = posts.filter(post => post.role.id === term.id)
 
                 return (
-                    <Tab title={term.name} key={term.id}>
+                    <Tab title={term.label} key={term.id}>
                         <Flex flexWrap="wrap">
                             {termPosts.map(node => {
                                 return (

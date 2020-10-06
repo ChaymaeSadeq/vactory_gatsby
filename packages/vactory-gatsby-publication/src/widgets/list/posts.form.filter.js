@@ -18,7 +18,7 @@ const PostsFormFilter = ({terms, value, handleChange}) => {
                 <option value="all">{t('Tous les thématiques')}</option>
                 {terms.map(term => {
                     return (
-                        <option key={term.id} value={term.id}>{term.name}</option>
+                        <option key={term.id} value={term.id}>{term.label}</option>
                     )
                 })}
             </Select>

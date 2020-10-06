@@ -1,32 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Api from "vactory-gatsby-api";
-import { Heading, Container, Paragraph } from "vactory-ui";
-import { LoadingOverlay, Pagination } from "vactory-gatsby-ui";
 import {
   postsQueryParams,
   normalizeNodes,
-  normalizeTerms,
+  normalizeDFNodes,
   PostsPage,
   PostsFormFilter,
-} from "vactory-gatsby-news";
+} from "vactory-gatsby-publication";
+import { Heading, Container, Paragraph } from "vactory-ui";
+import {LoadingOverlay, Pagination} from "vactory-gatsby-ui";
 
-const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
-  const { t } = useTranslation();
-  const normalizedCategories = normalizeTerms(terms);
-  const normalizedNodes = normalizeNodes(nodes);
+const PostsContainer = ({ pageCount, nodes, terms }) => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
+  const normalizedNodes = normalizeDFNodes(nodes);
+
   const isFirstRun = useRef(true);
+  const [count, setCount] = useState(pageCount);
   const [posts, setPosts] = useState(normalizedNodes);
+  const [pager, setPager] = useState(1);
   const [selectedTerm, setSelectedTerm] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
-  const [pager, setPager] = useState(1);
-  const [count, setCount] = useState(pageCount);
+
   const handleChange = (tid) => {
     setSelectedTerm(tid);
+    setPager(1);
   };
+
   const handlePaginationChange = (selected) => {
     setPager(selected);
   };
+
   useEffect(() => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
@@ -53,12 +58,13 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
 
       setIsLoading(true);
 
-      Api.getResponse("node/vactory_news", requestParams, node.langcode)
+      Api.getResponse("node/publication", requestParams, currentLanguage)
         .then((res) => {
           const normalizedNodes = normalizeNodes(res.data);
+          const total = res.meta.count;
           setPosts(normalizedNodes);
+          setCount(total);
           setIsLoading(false);
-          setCount(res.meta.count);
         })
         .catch((err) => {
           setIsLoading(false);
@@ -67,21 +73,27 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
     }
 
     fetchData();
-  }, [selectedTerm, node.langcode, pager]);
+  }, [selectedTerm, currentLanguage, pager]);
 
   return (
     <Container>
       <Heading px="xsmall" level={2}>
-        {t("News")}
+        {t("Publications")}
       </Heading>
+
       <PostsFormFilter
-        terms={normalizedCategories}
+        terms={terms}
         value={selectedTerm}
         handleChange={handleChange}
       />
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (
-          <PostsPage posts={posts} />
+          <PostsPage
+            count={count}
+            pager={pager}
+            handlePaginationChange={handlePaginationChange}
+            posts={posts}
+          />
         )}
         {!isLoading && posts.length <= 0 && (
           <Paragraph my="medium" textAlign="center">
@@ -90,17 +102,16 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
         )}
       </LoadingOverlay>
       {count > postsQueryParams.page.limit && (
-            <Pagination
-                total={count}
-                defaultPageSize={postsQueryParams.page.limit}
-                pageSize={postsQueryParams.page.limit}
-                current={pager}
-                onChange={handlePaginationChange}
-            />
+          <Pagination
+              total={count}
+              defaultPageSize={postsQueryParams.page.limit}
+              pageSize={postsQueryParams.page.limit}
+              current={pager}
+              onChange={handlePaginationChange}
+          />
       )}
     </Container>
   );
-
 };
 
 export default PostsContainer;

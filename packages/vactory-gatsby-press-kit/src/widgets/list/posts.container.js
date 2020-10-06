@@ -4,24 +4,23 @@ import Api from 'vactory-gatsby-api'
 import {
   postsQueryParams,
   normalizeNodes,
-  normalizeTerms,
+  normalizeDFNodes,
   PostsPage,
   PostsFormFilter,
-} from 'vactory-gatsby-academy'
+} from 'vactory-gatsby-press-kit'
 import { Heading, Container, Paragraph } from 'vactory-ui'
-import {LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
+import { LoadingOverlay, Pagination } from 'vactory-gatsby-ui'
 
-const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
-  const { t } = useTranslation()
-  const normalizedCategories = normalizeTerms(terms)
-  const normalizedNodes = normalizeNodes(nodes)
+const PostsContainer = ({ pageCount, nodes, terms }) => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
+  const normalizedNodes = normalizeDFNodes(nodes)
   const isFirstRun = useRef(true)
   const [posts, setPosts] = useState(normalizedNodes)
   const [selectedTerm, setSelectedTerm] = useState('all')
   const [isLoading, setIsLoading] = useState(false)
   const [pager, setPager] = useState(1)
   const [count, setCount] = useState(pageCount)
-
   const handleChange = (tid) => {
     setSelectedTerm(tid)
     setPager(1)
@@ -51,12 +50,16 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
 
       const requestParams = {
         ...postsQueryParams,
-        page: { limit: postsQueryParams.page.limit, offset: (pager - 1) * postsQueryParams.page.limit },
+        page: {
+          limit: postsQueryParams.page.limit,
+          offset: (pager - 1) * postsQueryParams.page.limit,
+        },
         ...categoryFilter,
       }
 
       setIsLoading(true)
-      Api.getResponse('node/academy', requestParams, node.langcode)
+
+      Api.getResponse('node/press_kit', requestParams, currentLanguage)
         .then((res) => {
           const normalizedNodes = normalizeNodes(res.data)
           const total = res.meta.count
@@ -69,16 +72,18 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
           console.log(err)
         })
     }
+
     fetchData()
-  }, [selectedTerm, node.langcode, pager])
+  }, [selectedTerm, currentLanguage, pager])
 
   return (
     <Container>
       <Heading px="xsmall" level={2}>
-        {t('Academy')}
+        {t('Press Kits')}
       </Heading>
+
       <PostsFormFilter
-        terms={normalizedCategories}
+        terms={terms}
         value={selectedTerm}
         handleChange={handleChange}
       />
@@ -92,6 +97,7 @@ const PostsContainer = ({ pageContext: { pageCount, node, nodes, terms } }) => {
           </Paragraph>
         )}
       </LoadingOverlay>
+
       {count > postsQueryParams.page.limit && (
             <Pagination
                 total={count}

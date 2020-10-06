@@ -18,7 +18,7 @@ const PostsFormFilter = ({ terms, value, handleChange }) => {
         {terms.map((term) => {
           return (
             <option key={term.id} value={term.id}>
-              {term.name}
+              {term.label}
             </option>
           )
         })}

@@ -12,6 +12,17 @@ export const normalizeNodes = (nodes) => {
     }));
 };
 
+export const normalizeDFNodes = (nodes) => {
+    return nodes.map(post => ({
+        id: post.id,
+        title: post.title,
+        url: get(post, 'url', '#.'),
+        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), 100),
+        category: get(post, 'category.label', null),
+        image: get(post, 'image', null)
+    }));
+};
+
 export const normalizeTerms = (terms) => {
     return terms.map(term => ({
         id: term.drupal_internal__tid,

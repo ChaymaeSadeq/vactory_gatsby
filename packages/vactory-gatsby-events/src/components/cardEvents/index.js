@@ -97,6 +97,9 @@ const Bx = ({ sx, children }) => (
 );
 
 const dateCalc = (date) => {
+    if (!date) {
+        return "";
+    }
   var mS = [
     "Jan",
     "Feb",

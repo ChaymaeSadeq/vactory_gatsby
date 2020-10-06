@@ -8,7 +8,7 @@ export const ThreeColumns = ({ posts }) => {
       <Row>
         {posts.map((node) => {
           return (
-            <Col key={node.key} xs={12} md={4}>
+            <Col key={node.id} xs={12} md={4}>
               <CardBlog
                 {...node}
                 imageSettings={imageLayoutStyles.threeColumns}
