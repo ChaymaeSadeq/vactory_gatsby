@@ -33,5 +33,23 @@ export const imageStyles = [
         height: 235,
         operation: "scale_crop",
     },
+    {
+        name: "academy_image_100_100",
+        width: 100,
+        height: 100,
+        operation: "scale_crop",
+    },
+    {
+        name: "academy_image_300_200",
+        width: 300,
+        height: 200,
+        operation: "scale_crop",
+    },
+    {
+        name: "academy_image_600_400",
+        width: 600,
+        height: 400,
+        operation: "scale_crop",
+    },
 ];
 
