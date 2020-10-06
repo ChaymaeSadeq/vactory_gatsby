@@ -18,11 +18,15 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
   const isFirstRun = useRef(true);
   const [posts, setPosts] = useState(normalizedNodes);
   const [selectedTerm, setSelectedTerm] = useState("all");
+  const [selectedSort, setSelectedSort] = useState("-created");
   const [isLoading, setIsLoading] = useState(false);
   const [pager, setPager] = useState(1);
   const [count, setCount] = useState(pageCount);
   const handleChange = (tid) => {
     setSelectedTerm(tid);
+  };
+  const handleChangeSort = (tid) => {
+    setSelectedSort(tid);
   };
   const handlePaginationChange = (selected) => {
     setPager(selected);
@@ -49,6 +53,7 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
         ...postsQueryParams,
         page: { limit: postsQueryParams.page.limit, offset: (pager - 1) * postsQueryParams.page.limit },
         ...categoryFilter,
+        sort: selectedSort,
       };
 
       setIsLoading(true);
@@ -67,17 +72,23 @@ const PostsContainer = ({ pageContext: { node, nodes, terms, pageCount } }) => {
     }
 
     fetchData();
-  }, [selectedTerm, node.langcode, pager]);
+  }, [selectedTerm, selectedSort, node.langcode, pager]);
+
+  const extraData = (typeof node.field_settings !== "undefined") ? JSON.parse(node.field_settings) : [];
+
 
   return (
     <Container>
-      <Heading px="xsmall" level={2}>
-        {t("News")}
-      </Heading>
+      {extraData['intro'] && (
+        <Heading px="xsmall" level={2}>
+          {extraData['intro']}
+        </Heading>)}
       <PostsFormFilter
         terms={normalizedCategories}
         value={selectedTerm}
+        sort={selectedSort}
         handleChange={handleChange}
+        handleChangeSort={handleChangeSort}
       />
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (

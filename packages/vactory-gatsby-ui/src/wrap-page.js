@@ -27,15 +27,17 @@ const VactoryGlobaltStyle = createGlobalStyle`
 `;
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');
-    // const pageInfo = get(props, 'pageContext.pageInfo');
-    // const location = get(props, 'location');
+    let dir = 'ltr'
+    if (node) {
+        dir = node.langcode === 'ar' ? 'rtl' : 'ltr';
+    }
 
     if (node) {
         return (
             <ThemeProvider theme={theme}>
                 <VactoryIconProvider value={customIcons}>
                     <ColorModeProvider>
-                        <DirectionManager>
+                        <DirectionManager dir={dir}>
                             <GlobalStyle/>
                             <VactoryGlobaltStyle/>
                             <Head lang={node.langcode} meta={node.metatag_normalized}/>

@@ -7,3 +7,5 @@ export {default as WidgetsAmpMapping} from './.tmp/widgetsMapping.amp'
 export * from './src/hooks'
 export {baseTruncate as truncate}
 export {default as stripHtml} from "string-strip-html";
+export * from './src/components/auth'
+export {AuthContext} from './src/auth/authProvider'
