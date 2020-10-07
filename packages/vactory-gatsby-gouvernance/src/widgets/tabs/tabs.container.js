@@ -16,7 +16,8 @@ export const TabsContainer = ({data}) => {
     const posts = nodes.map(post => {
         return {
             ...post,
-            excerpt: get(post, 'excerpt.0.value'),
+            excerpt: get(post, 'excerpt'),
+            role: get(post, 'role.label'),
         }
     });
 

@@ -19,11 +19,15 @@ const PostsContainer = ({ nodes, terms, pageCount }) => {
   const isFirstRun = useRef(true);
   const [posts, setPosts] = useState(normalizedNodes);
   const [selectedTerm, setSelectedTerm] = useState("all");
+  const [selectedSort, setSelectedSort] = useState("-created");
   const [isLoading, setIsLoading] = useState(false);
   const [pager, setPager] = useState(1);
   const [count, setCount] = useState(pageCount);
   const handleChange = (tid) => {
     setSelectedTerm(tid);
+  };
+  const handleChangeSort = (tid) => {
+    setSelectedSort(tid);
   };
   const handlePaginationChange = (selected) => {
     setPager(selected);
@@ -50,6 +54,7 @@ const PostsContainer = ({ nodes, terms, pageCount }) => {
         ...postsQueryParams,
         page: { limit: postsQueryParams.page.limit, offset: (pager - 1) * postsQueryParams.page.limit },
         ...categoryFilter,
+        sort: selectedSort,
       };
 
       setIsLoading(true);
@@ -68,17 +73,16 @@ const PostsContainer = ({ nodes, terms, pageCount }) => {
     }
 
     fetchData();
-  }, [selectedTerm, currentLanguage, pager]);
+  }, [selectedTerm, selectedSort, currentLanguage, pager]);
 
   return (
     <Container>
-      <Heading px="xsmall" level={2}>
-        {t("News")}
-      </Heading>
       <PostsFormFilter
         terms={terms}
         value={selectedTerm}
+        sort={selectedSort}
         handleChange={handleChange}
+        handleChangeSort={handleChangeSort}
       />
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (
