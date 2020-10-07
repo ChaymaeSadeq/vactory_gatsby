@@ -35,12 +35,12 @@ const CardExcerpt = ({ children, ...rest }) => {
 };
 
 export const CardGlossary = (props) => {
-  const { posts ,langue} = props;
+  const { posts } = props;
   const Card = ({ sx, children, ...rest }) => {
     return (
       <Box
         sx={sx}
-        
+
         __css={{
           boxShadow: "3",
           background: "white",
@@ -48,7 +48,7 @@ export const CardGlossary = (props) => {
           flexDirection: "column",
           overflow: "hidden",
           fontFamily: "montserrat",
-          maxWidth: langue === "ar" ? "1075px" : "1093px",
+          // maxWidth: langue === "ar" ? "1075px" : "1093px",
           p:"xxlarge",
           mb:"medium"
         }}
@@ -58,15 +58,15 @@ export const CardGlossary = (props) => {
       </Box>
     );
   };
- 
+
   const length = posts.length;
   return (
- 
+
       <Card>
         {posts &&
           posts.map((node,index) => {
             return (
-              <Box p="small" >
+              <Box key={node.id} p="small" >
                 <CardTitle>{node.title}</CardTitle>
                 <CardExcerpt
                 sx={{borderBottom : index !== length-1 ? "dotted" : "none"}}

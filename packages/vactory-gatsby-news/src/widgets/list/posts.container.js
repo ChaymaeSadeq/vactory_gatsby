@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Api from "vactory-gatsby-api";
-import { Heading, Container, Paragraph } from "vactory-ui";
+import { Container, Paragraph } from "vactory-ui";
 import { LoadingOverlay, Pagination } from "vactory-gatsby-ui";
 import {
   postsQueryParams,

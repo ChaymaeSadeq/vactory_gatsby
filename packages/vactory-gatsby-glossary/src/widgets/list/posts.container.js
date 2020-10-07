@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 import Api from "vactory-gatsby-api";
 import { useForm } from "react-hook-form";
 import {
-  Heading,
-  Container,
   Paragraph,
   Box,
   Input,
@@ -23,20 +21,21 @@ import {
   BFilter,
 } from "vactory-gatsby-glossary";
 
-const PostsContainer = ({ pageContext: { node } }) => {
-  const { t } = useTranslation();
+export const PostsContainer = () => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
+  const isArabic = (currentLanguage === "ar");
   const [posts, setPosts] = useState([]);
 
   const [selectedAlphabet, setSelectedAlphabet] = useState(
-    node.langcode === "ar" ? "أ" : "A"
+      isArabic ? "أ" : "A"
   );
   const [selectedKeyword, setSelectedKeyword] = useState(null);
   const [internalAlphabet] = useState(
-    node.langcode === "ar" ? arabicAlphabet : Alphabet
+      isArabic ? arabicAlphabet : Alphabet
   );
   const [isLoading, setIsLoading] = useState(false);
-  const message =
-    node.langcode === "ar" ? "لا يوجد نتائج" : "Aucun résultat trouvé";
+  const message = t("Aucun résultat trouvé");
   const handleChange = (alphabet) => {
     setSelectedAlphabet(alphabet);
     setSelectedKeyword(null);
@@ -48,7 +47,7 @@ const PostsContainer = ({ pageContext: { node } }) => {
   };
   const reset = () => {
     setSelectedKeyword(null);
-    setSelectedAlphabet(node.langcode === "ar" ? "أ" : "A");
+    setSelectedAlphabet(isArabic ? "أ" : "A");
   };
 
   useEffect(() => {
@@ -64,10 +63,10 @@ const PostsContainer = ({ pageContext: { node } }) => {
         "filter[label][condition][value]": selectedKeyword,
       };
 
-      if (node.langcode === "ar" && selectedAlphabet === "أ") {
+      if (isArabic && selectedAlphabet === "أ") {
         AlphabetFilter = AFilter;
       }
-      if (node.langcode === "ar" && selectedAlphabet === "ء") {
+      if (isArabic && selectedAlphabet === "ء") {
         AlphabetFilter = BFilter;
       }
       const Filter = selectedKeyword ? wordFilter : AlphabetFilter;
@@ -76,7 +75,7 @@ const PostsContainer = ({ pageContext: { node } }) => {
         ...Filter,
       };
       setIsLoading(true);
-      Api.getResponse("node/glossary", requestParams, node.langcode)
+      Api.getResponse("node/glossary", requestParams, currentLanguage)
         .then((res) => {
           const normalizedNodes = normalizeNodes(res.data);
           setPosts(normalizedNodes);
@@ -90,52 +89,49 @@ const PostsContainer = ({ pageContext: { node } }) => {
     }
 
     fetchData();
-  }, [selectedAlphabet, node.langcode, selectedKeyword]);
+  }, [selectedAlphabet, currentLanguage, selectedKeyword, isArabic]);
 
   return (
-    <Container>
-      <Heading px="xsmall" level={2} textAlign="center">
-        {t("Glossary")}
-      </Heading>
+    <div>
+      {/*<Heading px="xsmall" level={2} textAlign="center">*/}
+      {/*  {t("Glossary")}*/}
+      {/*</Heading>*/}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box pt="10px" pb="30px" px="xsmall" m="small">
+        <Box py="medium">
           <Flex
             flexDirection={["column", "row"]}
-            mx="xsmall"
             mb={["10px", "0px"]}
           >
             <Input
               type="text"
-              placeholder="keyword"
+              placeholder={t("Keyword")}
               m="small"
               name="keyword"
               id="keyword"
+              width="100%"
               ref={register}
             />
             <Button type={"submit"} m="xsmall">
-              Appliquer
+              {t("Appliquer")}
             </Button>
             <Button type={"reset"} bg="#868e96" m="xsmall" onClick={reset}>
-              Rénitialiser
+              {t("Rénitialiser")}
             </Button>
           </Flex>
         </Box>
       </form>
       <PostsFormFilter
-        langue={node.langcode}
         alphabet={internalAlphabet}
         handleChange={handleChange}
       />
       <LoadingOverlay active={isLoading}>
-        {posts.length > 0 && <PostsPage posts={posts} langue={node.langcode} />}
+        {posts.length > 0 && <PostsPage posts={posts} />}
         {!isLoading && posts.length <= 0 && (
           <Paragraph my="medium" textAlign="center">
             {message}
           </Paragraph>
         )}
       </LoadingOverlay>
-    </Container>
+    </div>
   );
 };
-
-export default PostsContainer;

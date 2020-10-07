@@ -2,13 +2,13 @@ import React from "react";
 import { CardGlossary } from "vactory-gatsby-glossary";
 import { Container, Row, Col } from "vactory-ui";
 
-const Posts = ({ posts,langue }) => {
+const Posts = ({ posts }) => {
   return (
     <div>
       <Container>
         <Row>
           <Col xs={12}>
-            <CardGlossary posts={posts} langue={langue}/>
+            <CardGlossary posts={posts}/>
           </Col>
         </Row>
       </Container>

@@ -1,9 +1,7 @@
 import get from 'lodash.get';
 
 export const normalizeNodes = (nodes) => {
-    console.log(nodes)
     return nodes.map(post => ({
-        
         id: post.drupal_internal__nid,
         title: post.title,
         url: get(post, 'path.alias', '#.'),
