@@ -65,7 +65,7 @@ const InternalCard = ({ sx, children, ...rest }) => {
 
 export const CardGouvernance = (props) => {
     const title = props.title;
-    const role_title = props.role;
+    const role_title = props.role.label;
   const image = get(props, "image", null);
   const imageSettings = get(props, "imagesettings", null);
 

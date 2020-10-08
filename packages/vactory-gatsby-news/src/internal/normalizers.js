@@ -12,12 +12,12 @@ export const normalizeNodes = (nodes) => {
     }));
 };
 
-export const normalizeDFNodes = (nodes) => {
+export const normalizeDFNodes = (nodes, excerptLimit = 100) => {
     return nodes.map(post => ({
         id: post.id,
         title: post.title,
         url: get(post, 'url', '#.'),
-        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), 100),
+        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), excerptLimit),
         category: get(post, 'category.label', null),
         image: get(post, 'image', null)
     }));

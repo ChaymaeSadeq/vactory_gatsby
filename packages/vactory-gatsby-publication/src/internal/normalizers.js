@@ -15,7 +15,6 @@ export const normalizeNodes = (nodes) => {
 };
 
 export const normalizeDFNodes = (nodes, excerptLimit = 100) => {
-  console.log(nodes);
   return nodes.map((post) => ({
     id: post.id,
     title: post.title,

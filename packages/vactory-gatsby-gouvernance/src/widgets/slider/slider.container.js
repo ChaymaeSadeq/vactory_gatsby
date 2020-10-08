@@ -16,7 +16,7 @@ export const SliderContainer = ({data}) => {
         return {
             ...post,
             excerpt: get(post, 'excerpt'),
-            role: get(post, 'role.label'),
+            role: get(post, 'role'),
         }
     });
 

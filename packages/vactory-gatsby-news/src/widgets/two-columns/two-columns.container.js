@@ -3,8 +3,7 @@ import get from 'lodash.get';
 import {Box, Heading, Button} from "vactory-ui"
 import {Wysiwyg} from "vactory-gatsby-ui";
 import {Link} from 'vactory-gatsby-ui'
-import {TwoColumns} from 'vactory-gatsby-news'
-import {stripHtml, truncate} from 'vactory-gatsby-core'
+import {normalizeDFNodes, TwoColumns} from 'vactory-gatsby-news'
 
 export const TwoColumnsContainer = ({data}) => {
     const nodes = get(data, 'components.0.views.data.nodes', []);
@@ -13,13 +12,7 @@ export const TwoColumnsContainer = ({data}) => {
     const description = <Wysiwyg html={raw_description}/>;
     const link = get(data, 'components.0.link.url', null);
     const link_label = get(data, 'components.0.link.title', '');
-    const posts = nodes.map(post => {
-        return {
-            ...post,
-            category: get(post, 'category.label', ''),
-            excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 200),
-        }
-    });
+    const posts = normalizeDFNodes(nodes, 200);
 
     return (
         <Box my={'30px'}>

@@ -17,7 +17,7 @@ export const TabsContainer = ({data}) => {
         return {
             ...post,
             excerpt: get(post, 'excerpt'),
-            role: get(post, 'role.label'),
+            role: get(post, 'role'),
         }
     });
 

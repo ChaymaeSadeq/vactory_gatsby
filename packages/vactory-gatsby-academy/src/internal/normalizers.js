@@ -45,7 +45,7 @@ export const normalizeDFNodes = (nodes) => {
         url: get(post, 'url', null),
         // comment: get(post, 'comment.last_comment_name', null),
         // courseSupport: get(post, 'field_vactory_media_document', null),
-        date: get(post, 'field_vactory_date', null),
+        date: get(post, 'date', null),
         duration: get(post, 'duration', null),
         // instructor: get(post, 'field_vactory_instructor.display_name', null),
         // language: get(post, 'field_vactory_academy_language', null),

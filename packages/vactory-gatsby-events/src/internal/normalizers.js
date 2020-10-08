@@ -14,7 +14,7 @@ export const normalizeNodes = (nodes) => {
     }));
 };
 
-export const normalizeDFNodes = (nodes) => {
+export const normalizeDFNodes = (nodes, excerptLimit = 100) => {
     return nodes.map(post => ({
         id: post.id,
         title: post.title,
@@ -23,7 +23,7 @@ export const normalizeDFNodes = (nodes) => {
             value: get(post,'dateInterval.date_start', null),
             end_value: get(post,'dateInterval.date_end', null),
         },
-        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), 100),
+        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), excerptLimit),
         category: get(post, 'category.label', null),
         city: get(post, 'city.label', null),
         image: get(post, 'image', null)
