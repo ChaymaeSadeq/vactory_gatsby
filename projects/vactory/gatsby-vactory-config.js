@@ -12,6 +12,7 @@ export default {
     },
     frontendURL: process.env.GATSBY_FRONTEND_URL,
     oidcClientId: process.env.GATSBY_OIDC_CLIENT_ID,
+    enableAuth: true,
     keys: CONFIG_API_KEYS,
     languages: CONFIG_LANGAUGES,
     menus: CONFIG_MENUS,

@@ -9,6 +9,14 @@ export const wrapRootElement = ({element, pageContext}, pluginOptions) => {
     const apiConfig = AppSettings.api;
     const lngConfig = AppSettings.languages;
 
+    if (typeof AppSettings.enableAuth === 'undefined' || !AppSettings.enableAuth) {
+        return (
+            <>
+                {element}
+            </>
+        )
+    }
+
     // Api configuration.
     Api.init(
         apiConfig.url,
