@@ -7,19 +7,18 @@ import { TwoColumns } from 'vactory-gatsby-academy'
 import {stripHtml, truncate} from 'vactory-gatsby-core'
 
 export const TwoColumnsContainer = ({ data }) => {
-  const title = get(data, 'components.0.title', '')
+    const nodes = get(data, 'components.0.views.data.nodes', []);
+    const title = get(data, 'components.0.title', '')
   const raw_description = get(data, 'components.0.description.value.#text', null)
   const description = <Wysiwyg html={raw_description} />
   const link = get(data, 'components.0.link.url', null)
   const link_label = get(data, 'components.0.link.title', '')
-  const posts = data.data.map((post) => {
+  const posts = nodes.map((post) => {
     return {
       ...post,
-        excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 200),
-      duration: get(post, 'duration.0.value', null),
-      date: get(post, 'date.0.value', null),
+        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), 200),
     }
-  })
+  });
 
   return (
     <Box mb='30px'>

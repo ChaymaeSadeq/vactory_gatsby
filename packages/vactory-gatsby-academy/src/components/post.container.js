@@ -66,7 +66,7 @@ const PostContainer = ({ pageContext: { node } }) => {
         })
     }
     fetchData()
-  }, [node.langcode])
+  }, [node.langcode]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleVote = (rating) => {
     Api.getRest(

@@ -3,24 +3,19 @@ import get from 'lodash.get'
 import { Box, Heading, Button } from 'vactory-ui'
 import { Wysiwyg } from 'vactory-gatsby-ui'
 import { Link } from 'vactory-gatsby-ui'
-import { ThreeColumns } from 'vactory-gatsby-events'
-import {stripHtml, truncate} from 'vactory-gatsby-core'
+import {normalizeDFNodes, ThreeColumns} from 'vactory-gatsby-events'
 
 export const ThreeColumnsContainer = ({ data }) => {
-  const title = get(data, 'components.0.title', '')
+    const nodes = get(data, 'components.0.views.data.nodes', []);
+    const title = get(data, 'components.0.title', '')
   const raw_description = get(data, 'components.0.description.value.#text', null)
   const description = <Wysiwyg html={raw_description} />
   const link = get(data, 'components.0.link.url', null)
   const link_label = get(data, 'components.0.link.title', '')
-  const posts = data.data.map((post) => {
-    return {
-      ...post,
-        excerpt: truncate(stripHtml(get(post, 'excerpt.0.value', '')), 100),
-      dateInterval: get(post, 'dateInterval.0', null),
-    }
-  })
+    const posts = normalizeDFNodes(nodes, 100);
 
-  return (
+
+    return (
     <Box mb='30px'>
       <Box sx={{ 'text-align': 'center' }}>
         <Heading level={2}>{title}</Heading>

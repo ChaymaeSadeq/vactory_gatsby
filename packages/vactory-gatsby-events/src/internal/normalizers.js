@@ -2,7 +2,6 @@ import get from 'lodash.get';
 import {stripHtml, truncate} from 'vactory-gatsby-core'
 
 export const normalizeNodes = (nodes) => {
-
     return nodes.map(post => ({
         id: post.drupal_internal__nid,
         title: post.title,
@@ -14,6 +13,23 @@ export const normalizeNodes = (nodes) => {
         image: get(post, 'field_vactory_media_image.thumbnail.uri.value', null)
     }));
 };
+
+export const normalizeDFNodes = (nodes, excerptLimit = 100) => {
+    return nodes.map(post => ({
+        id: post.id,
+        title: post.title,
+        url: get(post, 'url', null),
+        dateInterval: {
+            value: get(post,'dateInterval.date_start', null),
+            end_value: get(post,'dateInterval.date_end', null),
+        },
+        excerpt: truncate(stripHtml(get(post, 'excerpt', '')), excerptLimit),
+        category: get(post, 'category.label', null),
+        city: get(post, 'city.label', null),
+        image: get(post, 'image', null)
+    }));
+};
+
 
 export const normalizeTerms = (terms) => {
     return terms.map(term => ({
