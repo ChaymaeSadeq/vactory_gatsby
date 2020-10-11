@@ -20,7 +20,7 @@ import customIconSet from './custom-icons.json';
 const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
 const customIcons = mergeIcons(iconSet, customIconSet);
-console.log(customIcons)
+
 const VactoryGlobaltStyle = createGlobalStyle`
     a {
     text-decoration: none;
