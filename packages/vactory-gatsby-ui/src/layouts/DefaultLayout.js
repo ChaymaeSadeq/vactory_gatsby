@@ -2,8 +2,6 @@ import React from "react"
 import {
     HeaderA as Header,
     FooterA as Footer,
-    Toolbox,
-    SocialMediaMenu,
     Breadcrumb,
     BannersTemplate,
     CookieComplianceLayer,
@@ -27,8 +25,6 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             <main>
                 {children}
             </main>
-            <SocialMediaMenu />
-            <Toolbox />
             </StatePageSection.Provider>
             <Footer/>
             <CookieComplianceLayer />
