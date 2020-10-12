@@ -10,9 +10,10 @@ import {
     iconSet,
     VactoryIconProvider
 } from 'vactory-ui';
-import {ThemeProvider, createGlobalStyle} from 'styled-components';
+import {ThemeProvider} from 'styled-components';
 import deepmerge from 'deepmerge';
 
+import VactoryGlobaltStyle from './GlobalStyle'
 import {DefaultLayout as Layout} from './layout'
 import {theme as UiTheme} from './theme'
 import customIconSet from './custom-icons.json';
@@ -21,11 +22,6 @@ const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
 const customIcons = mergeIcons(iconSet, customIconSet);
 
-const VactoryGlobaltStyle = createGlobalStyle`
-    a {
-    text-decoration: none;
-    }
-`;
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');
     let dir = 'ltr'
