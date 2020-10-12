@@ -14,8 +14,21 @@ const colors = {
     lightBlue: '#017CFE',
     darkBlue: '#08286A',
 };
+
 colors.primary = colors.lightBlue;
+
+const buttons = {
+    fill: {
+        primary: {
+            backgroundColor: 'primary',
+            ':hover': {
+                backgroundColor: 'darkBlue',
+            }
+        }
+    }
+};
 
 export const theme = {
     colors,
+    buttons,
 };
