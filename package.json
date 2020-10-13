@@ -5,10 +5,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn workspace project build"
+    "build": "yarn workspace project build",
+    "syncpack:format": "syncpack format",
+    "syncpack:list": "syncpack list --prod --dev --peer",
+    "syncpack:mismatch": "syncpack list-mismatches",
+    "syncpack:mismatch:fix": "syncpack fix-mismatches"
   },
   "workspaces": [
     "projects/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "syncpack": "^5.6.10"
+  }
 }
