@@ -11,7 +11,7 @@
     "build": "yarn rollup"
   },
   "peerDependencies": {
-    "gatsby": "^2.6.0"
+    "gatsby": "^2.20.12"
   },
   "dependencies": {
     "kitsu": "^8.1.1",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.9.5",
     "babel-core": "^6.26.3",
     "babel-jest": "^25.3.0",

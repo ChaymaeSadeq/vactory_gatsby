@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
-    "gatsby": "^2.6.0"
+    "gatsby": "^2.20.12"
   },
   "dependencies": {
     "@react-google-maps/api": "^1.9.0",

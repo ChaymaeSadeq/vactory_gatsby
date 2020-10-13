@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
-    "gatsby": "^2.6.0"
+    "gatsby": "^2.20.12"
   },
   "dependencies": {
     "chalk": "^4.0.0",
