@@ -45,8 +45,6 @@ const pageContext = {
   }
 };
 
-console.log(theme.colors);
-
 addDecorator(storyFn =>  <ThemeProvider theme={theme}>
   <GlobalStyle />
   <VactoryGlobaltStyle />
