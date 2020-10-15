@@ -28,6 +28,12 @@ const buttons = {
     }
 };
 
+// const heading = {
+//     default: {
+//         fontSize: 'black500'
+//     }
+// };
+
 export const theme = {
     colors,
     buttons,
