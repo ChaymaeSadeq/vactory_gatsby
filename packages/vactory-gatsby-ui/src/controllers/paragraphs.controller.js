@@ -1,6 +1,6 @@
 import React from "react"
 import classNames from "classnames"
-import {ParagraphsContainer, ParagraphsTemplate} from "vactory-gatsby-ui"
+import {ParagraphsContainer, ParagraphsTemplate, ParagraphsMultiple} from "vactory-gatsby-ui"
 
 export const ParagraphsController = (props) => {
     const {hasAMP = false} = props;
@@ -12,6 +12,7 @@ export const ParagraphsController = (props) => {
         paragraph_css_class,
         paragraph_background_color = null,
         field_vactory_component = null,
+        field_vactory_paragraph_tab = null,
         paragraph_background_image = null
     } = props.data;
 
@@ -30,6 +31,16 @@ export const ParagraphsController = (props) => {
                 settings={JSON.parse(field_vactory_component.widget_data)}
             />
         </div>
+    }
+    else if (type === 'paragraph--vactory_paragraph_multi_template' && field_vactory_paragraph_tab) {
+        childComponent = <ParagraphsMultiple
+            type={props.data.field_multi_paragraph_type}
+            title={props.data.field_vactory_title}
+            introduction={props.data.field_paragraph_introduction}
+            cta={props.data.field_paragraphs_cta}
+            tabs={field_vactory_paragraph_tab}
+            hasAMP={hasAMP}
+        />
     }
 
     return (
