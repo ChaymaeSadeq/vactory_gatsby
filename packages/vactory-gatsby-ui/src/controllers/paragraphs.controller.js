@@ -23,11 +23,13 @@ export const ParagraphsController = (props) => {
     let childComponent;
 
     if (type === 'paragraph--vactory_component' && field_vactory_component) {
-        childComponent = <ParagraphsTemplate
-            id={field_vactory_component.widget_id}
-            hasAMP={hasAMP}
-            settings={JSON.parse(field_vactory_component.widget_data)}
-        />
+        childComponent = <div data-df-id={field_vactory_component.widget_id}>
+            <ParagraphsTemplate
+                id={field_vactory_component.widget_id}
+                hasAMP={hasAMP}
+                settings={JSON.parse(field_vactory_component.widget_data)}
+            />
+        </div>
     }
 
     return (
