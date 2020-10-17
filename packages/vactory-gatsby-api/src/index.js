@@ -1,7 +1,12 @@
-const Kitsu = require("kitsu");
-const https = require("https");
-const lodashGet = require("lodash.get");
-const url = require('url');
+import Kitsu from 'kitsu'      // ES Modules & Babel
+import https from 'https'
+import url from 'url'
+import lodashGet from 'lodash.get'
+
+// const Kitsu = require("kitsu");
+// const https = require("https");
+// const lodashGet = require("lodash.get");
+// const url = require('url');
 
 var Api = {
     kitsu: null,
@@ -17,7 +22,7 @@ var Api = {
  */
 Api.getAll = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
-        throw "API has not been initialized. call init()";
+        throw new Error("API has not been initialized. call init()");
     }
 
     const getData = async (items = [], rs, parameters = {}) => {
@@ -75,7 +80,7 @@ Api.getAll = async (model, params = {}, lang = null) => {
  */
 Api.get = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
-        throw "API has not been initialized. call init()";
+        throw new Error("API has not been initialized. call init()");
     }
 
     // Make a call.
@@ -102,7 +107,7 @@ Api.get = async (model, params = {}, lang = null) => {
 
 Api.getResponse = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
-        throw "API has not been initialized. call init()";
+        throw new Error("API has not been initialized. call init()");
     }
 
     // Make a call.
@@ -135,7 +140,7 @@ Api.getResponse = async (model, params = {}, lang = null) => {
  */
 Api.getRest = async (model, params = {}, lang = null) => {
     if (!Api.kitsu) {
-        throw "API has not been initialized. call init()";
+        throw new Error("API has not been initialized. call init()");
     }
 
     // Without language prefix.
@@ -165,7 +170,7 @@ Api.getRest = async (model, params = {}, lang = null) => {
  */
 Api.postRest = async (model, params = {}, lang = null, headers = {}) => {
     if (!Api.kitsu) {
-        throw "API has not been initialized. call init()";
+        throw new Error("API has not been initialized. call init()");
     }
 
     // Without language prefix.

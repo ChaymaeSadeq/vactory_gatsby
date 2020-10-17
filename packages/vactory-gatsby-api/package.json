@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": false,
-  "main": "lib/index.js",
-  "module": "lib/index.mjs",
+  "main": "lib/index.commonjs.js",
+  "module": "src/index.js",
   "scripts": {
     "rollup": "cross-env NODE_ENV=production rollup -c --environment BUILD:production",
     "build": "yarn rollup"
@@ -14,6 +14,7 @@
     "gatsby": "^2.20.12"
   },
   "dependencies": {
+    "@rollup/plugin-commonjs": "^15.1.0",
     "kitsu": "^8.1.1",
     "kitsu-core": "^8.1.1",
     "lodash.get": "^4.4.2"

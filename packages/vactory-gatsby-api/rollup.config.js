@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import local from 'rollup-plugin-local-resolve'
 import pkg from './package.json'
+import commonjs from '@rollup/plugin-commonjs';
 
 const {
     sharedExternals,
@@ -11,7 +12,9 @@ const {
 
 const external = [
     ...Object.keys(pkg.dependencies),
-    ...sharedExternals
+    ...sharedExternals,
+    'url',
+    'https'
 ]
 
 const globals = {
@@ -23,8 +26,9 @@ const globals = {
 
 const plugins = [
     local(),
+    commonjs(),
     terser()
-]
+];
 
 const pluginsMain = [
     babel(babelMain),
@@ -40,13 +44,14 @@ export default {
             file: pkg.main,
             format: 'cjs',
             sourcemap: false,
-            globals
-        },
-        {
-            file: pkg.module,
-            format: 'es',
-            sourcemap: false,
+            exports: 'auto',
             globals
         }
+        // {
+        //     file: pkg.module,
+        //     format: 'es',
+        //     sourcemap: false,
+        //     globals
+        // }
     ]
 }
