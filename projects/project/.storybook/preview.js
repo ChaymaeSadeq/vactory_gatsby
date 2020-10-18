@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import {action} from "@storybook/addon-actions"
 import {ThemeProvider} from 'styled-components'
 import {I18nextProvider} from "react-i18next"
-import {i18nInstance} from 'vactory-gatsby-core';
+import {AppSettings, i18nInstance} from 'vactory-gatsby-core';
 import {addDecorator} from '@storybook/react';
 import {
     theme as vactoryTheme,
@@ -17,6 +17,7 @@ import deepmerge from 'deepmerge';
 import VactoryGlobaltStyle from '../src/vactory-gatsby-ui/GlobalStyle'
 import {theme as UiTheme} from '../src/vactory-gatsby-ui/theme'
 import customIconSet from '../src/vactory-gatsby-ui/custom-icons';
+import Api from "vactory-gatsby-api";
 
 const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
@@ -70,6 +71,16 @@ export const globalTypes = {
 addDecorator((storyFn, context) => {
     const lng = context.globals.locale;
     const dir = lng === 'ar' ? 'rtl' : 'ltr';
+
+    const apiConfig = AppSettings.api;
+    const lngConfig = AppSettings.languages;
+
+    // Api configuration.
+    Api.init(
+        apiConfig.url,
+        apiConfig.headers,
+        lngConfig.availableLanguages
+    );
 
     React.useEffect(() => {
         i18nInstance.changeLanguage(lng)
