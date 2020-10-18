@@ -7,10 +7,6 @@ import LazyLoad from 'react-lazyload';
 import 'react-aspect-ratio/aspect-ratio.css'
 
 export const Picture = (props) => {
-    const debug = {
-        enabled: false,
-        delayURL: "http://localhost:4567/5000/" // npm install -g deelay
-    };
     const backendURL = AppSettings.api.url;
     const styles = ImageStyles;
     const {
@@ -25,6 +21,14 @@ export const Picture = (props) => {
         width,
         height,
         ratio,
+        imgStyle = null,
+        aspectRatioStyle = null,
+        disableLazy = false,
+        disableAspectRatio = false,
+        debug = {
+            enabled: false,
+            delayURL: "http://localhost:4567/5000/" // npm install -g deelay
+        },
         ...rest
     } = props;
 
@@ -48,20 +52,31 @@ export const Picture = (props) => {
         };
     }) || [];
 
-    const imageStyle = {
+    let imageStyle = imgStyle ? imgStyle : {
         maxWidth: '100%',
         height: 'auto',
         width: '100%',
         display: 'block'
     };
 
-    const aspectRatioStyle = {
+    if (imgStyle === false) {
+        imageStyle = null
+    }
+
+    let imageAspectRatioStyle = aspectRatioStyle ? aspectRatioStyle : {
         backgroundColor: '#f1f1f1',
     };
 
+    if (aspectRatioStyle === false) {
+        imageAspectRatioStyle = null
+    }
+
+    const AspectRatioComponent = disableAspectRatio === true ? 'div' : AspectRatio;
+    const LazyLoadComponent = disableLazy === true ? 'div' : LazyLoad;
+
     return (
-        <AspectRatio style={aspectRatioStyle} ratio={ratio}>
-            <LazyLoad once>
+        <AspectRatioComponent style={imageAspectRatioStyle} ratio={ratio}>
+            <LazyLoadComponent once>
                 <ResponsivePicture
                     sources={sources}
                     width={width}
@@ -70,8 +85,8 @@ export const Picture = (props) => {
                     style={imageStyle}
                     {...rest}
                 />
-            </LazyLoad>
-        </AspectRatio>
+            </LazyLoadComponent>
+        </AspectRatioComponent>
     )
 };
 
