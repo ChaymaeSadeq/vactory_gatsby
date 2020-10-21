@@ -19240,9 +19240,10 @@ v8-to-istanbul@^4.1.3:
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
 
-"vactory-ui@git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git":
-  version "0.1.1"
-  resolved "git+ssh://git@bitbucket.org:adminvoid/factory-react-ui.git#c19a4b02584466485dc039b7b6577c0d877f0a85"
+vactory-ui@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vactory-ui/-/vactory-ui-1.0.2.tgz#2a2201477a4ac6da6977dd5cd699cbcc24caabaa"
+  integrity sha512-LROXz37drGJTqDV4g1+fkWs29mOOX+4ndEG8Atunm5irYj+4RfsvVkoj5gTq9ewskxZHmIXr0GfqQ3rMm65/hA==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/prop-types" "^5.1.5"
