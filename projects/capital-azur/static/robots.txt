@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /backend/sites/default
-Disallow: /search
-Disallow: /backend
