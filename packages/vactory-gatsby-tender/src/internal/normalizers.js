@@ -15,3 +15,16 @@ export const normalizeNodes = (nodes) => {
     ),
   }));
 };
+
+export const normalizeDFNodes = (nodes) => {
+  return nodes.map((post) => ({
+    key: post.key,
+    id: post.id,
+    title: post.title,
+    url: get(post, "url", "#."),
+    date: get(post, "date.html_date", null),
+    excerpt: get(post, "excerpt", null),
+    reference: get(post, "reference", null),
+    invitation: get(post, "invitation", null),
+  }));
+};

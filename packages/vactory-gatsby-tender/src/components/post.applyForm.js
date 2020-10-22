@@ -36,7 +36,7 @@ const PostApplyForm = ({post}) => {
     const {t, i18n} = useTranslation();
     const currentLanguage = i18n.language;
     const {handleWebformRemoteSubmit, webformFetch} = useWebformSubmit();
-    const {register, handleSubmit, watch, errors, setValue, reset} = useForm();
+    const {register, handleSubmit, errors, setValue, reset} = useForm();
     const formId = 'appel_d_offre';
     const recaptchaRef = React.createRef();
 
