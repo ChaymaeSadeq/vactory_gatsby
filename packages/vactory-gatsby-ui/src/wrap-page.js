@@ -27,9 +27,18 @@ const VactoryGlobaltStyle = createGlobalStyle`
 `;
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');
-    let dir = 'ltr'
+    let dir = 'ltr';
+    let settings = {};
     if (node) {
         dir = node.langcode === 'ar' ? 'rtl' : 'ltr';
+
+        if (node.node_settings && node.node_settings.length > 0) {
+            try {
+                settings = JSON.parse(node.node_settings);
+            } catch(e) {
+                console.warn("[Node] you passed a wrong JSON String to node_settings.")
+            }
+        }
     }
 
     if (node) {
@@ -41,7 +50,7 @@ export const wrapPageElement = ({element, props}) => {
                             <GlobalStyle/>
                             <VactoryGlobaltStyle/>
                             <Head lang={node.langcode} meta={node.metatag_normalized}/>
-                            <Layout {...props}>{element}</Layout>
+                            <Layout nodeSettings={settings} {...props}>{element}</Layout>
                         </DirectionManager>
                     </ColorModeProvider>
                 </VactoryIconProvider>
