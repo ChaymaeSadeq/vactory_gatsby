@@ -46,7 +46,7 @@ export const Ancre = ({items}) => {
                     <Select
                         id='factory-ancre'
                         name='factory-ancre'
-                        onChange={(value) => jumpTo(value)}
+                        onChange={(e) => jumpTo(e.currentTarget.value)}
                     >
                         {items.map((item, index) => {
                             return (

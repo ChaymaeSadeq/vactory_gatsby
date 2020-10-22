@@ -14,7 +14,7 @@ const PostsFormFilter = ({ terms, value, handleChange }) => {
         id="press-kit-theme"
         onBlur={null}
         onChange={(e) => {
-          handleChange(e)
+          handleChange(e.currentTarget.value)
         }}
         defaultValue={value}
       >

@@ -11,7 +11,7 @@ const PostsFormFilter = ({ terms, value, handleChange }) => {
       <Select
         id="academy-themes"
         onBlur={null}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => handleChange(e.currentTarget.value)}
         defaultValue={value}
       >
         <option value="all">{t('Tous les thématiques')}</option>

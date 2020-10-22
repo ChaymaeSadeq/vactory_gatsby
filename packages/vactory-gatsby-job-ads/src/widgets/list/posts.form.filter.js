@@ -24,7 +24,7 @@ const PostsFormFilter = ({
             id="job-ads-professions"
             onBlur={null}
             onChange={(e) => {
-              handleChangeProfession(e)
+              handleChangeProfession(e.currentTarget.value)
             }}
             defaultValue={value}
           >
@@ -46,7 +46,7 @@ const PostsFormFilter = ({
             id="job-ads-contracts"
             onBlur={null}
             onChange={(e) => {
-              handleChangeContract(e)
+              handleChangeContract(e.currentTarget.value)
             }}
             defaultValue={value}
           >
@@ -68,7 +68,7 @@ const PostsFormFilter = ({
             id="job-ads-cities"
             onBlur={null}
             onChange={(e) => {
-              handleChangeCity(e)
+              handleChangeCity(e.currentTarget.value)
             }}
             defaultValue={value}
           >
