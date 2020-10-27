@@ -25,6 +25,7 @@ const customIcons = mergeIcons(iconSet, customIconSet);
 
 export const parameters = {
     actions: {argTypesRegex: "^on[A-Z].*"},
+    controls: { expanded: true },
 };
 
 // Gatsby's Link overrides:
