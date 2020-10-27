@@ -5,7 +5,7 @@ import {ChiffreCleWrapper} from "./chiffreCleWrapper";
 export const ChiffreCleContainer = ({data}) => {
     const intro = get(data, 'extra_field.intro')
     const bigTitle = get(data, "extra_field.bigTitle")
-    const colCount = get(data, "extra_fields.group_options.colCount")
+    const colCount = get(data, "extra_field.group_options.colCount")
     const items = data.components.map((item) => {
         return {
             number: get(item, "number"),

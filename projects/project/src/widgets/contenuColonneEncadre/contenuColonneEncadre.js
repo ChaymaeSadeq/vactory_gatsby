@@ -1,5 +1,6 @@
 import React from "react";
 import {Box, Heading, Image, Button as Permalink} from "vactory-ui";
+//import { Wysiwyg, Picture } from 'vactory-gatsby-ui'
 import { Wysiwyg } from 'vactory-gatsby-ui'
 
 

@@ -10,8 +10,6 @@ import {
     ContenuHalfSideContainer,
     ContenuInlineRowsContainer,
     VideoYoutubeContainer
-
-
 } from "project";
 
 const widgets = {

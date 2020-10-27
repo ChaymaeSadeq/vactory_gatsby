@@ -63,7 +63,7 @@ export const VideoYoutube = ({videoId, image, hideImage, isPopUp, description}) 
                 <Youtube {...youtubeOption} videoId={videoId}/>
                 }
                 {(isShowVideo && isPopUp) &&
-                <Layer animation={'fadeIn'} onClickOutside={() => setShow(false)}>
+                <Layer animation={'fadeIn'} onClickOutside={() => handleShowVideo(false)}>
                     <Box textAlign="right">
                         <Icon onClick={() => handleShowVideo(false)} name="add-simple" size="30px" color="white"/>
                         <Youtube {...youtubeOption} videoId={videoId}/>

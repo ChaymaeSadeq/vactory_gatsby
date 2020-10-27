@@ -1,5 +1,4 @@
 import React from "react";
-import {Wysiwyg} from "vactory-gatsby-ui";
 import {Box, Heading, Link, Flex, Paragraph} from 'vactory-ui'
 
 export const ContenuHalfSide = ({title, description, cta_text, cta_url, inversed, centercontent}) => {
