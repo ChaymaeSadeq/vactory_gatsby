@@ -12,7 +12,6 @@ export const ContenuInlineContainer = ({data}) => {
     const activeBorderImage = get(data, 'components.0.group_options.activeBorderImage');
     const inversed = get(data, 'components.0.group_options.inversed');
     const colImage = get(data, 'components.0.group_options.colCount')
-    console.log('colImage', colImage);
 
     return (
         <ContenuInline imgUrl={imgUrl} title={title} description={description} cta_text={cta_text} cta_url={cta_url}

@@ -6,6 +6,12 @@ import {
     ContenuInlineContainer,
     ContenuPictoInlineContainer,
     ContenuLibreContainer,
+    ChiffreCleContainer,
+    ContenuHalfSideContainer,
+    ContenuInlineRowsContainer,
+    VideoYoutubeContainer
+
+
 } from "project";
 
 const widgets = {
@@ -16,6 +22,10 @@ const widgets = {
     'vactory_widgets_ui:contenu-inline': ContenuInlineContainer,
     'vactory_widgets_ui:contenu-picto-inline': ContenuPictoInlineContainer,
     'vactory_widgets_ui:contenu-libre': ContenuLibreContainer,
+    'vactory_widgets_ui:chiffre-cle': ChiffreCleContainer,
+    'vactory_widgets_ui:contenu-half-side': ContenuHalfSideContainer,
+    'vactory_widgets_ui:contenu-inline-rows':ContenuInlineRowsContainer,
+    'vactory_widgets_ui:video-youtube': VideoYoutubeContainer,
 };
 
 export default widgets

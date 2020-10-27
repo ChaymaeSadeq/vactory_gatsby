@@ -3,14 +3,14 @@ import {withKnobs, boolean, select, text} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
 import {DirectionManager} from "vactory-ui";
 import {ContenuColonneEncadreWrapper} from "../contenuColonneEncadreWrapper";
-import {Container} from "vactory-ui";
+import {Container, Box} from "vactory-ui";
 
 const groupId = 'Options';
 const groupRtl = "Version arabe"
 const activeRtl = false
 const colsNumbers = [2, 3, 4];
 
-export const Variant1 = () => {
+export const Variant1 = ({backgroundColor = "#fff", width}) => {
     const rtl = boolean('Activer RTl', activeRtl, groupRtl)
     const data = !rtl ? {
             bigTitle: "This is the big title",
@@ -62,14 +62,16 @@ export const Variant1 = () => {
         }
     return (
         <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
-                                    intro={data.intro}
-                                    colCount={data.colCount}
-                                    items={data.items}
-                                    centercontent={data.centercontent}
-                />
-            </Container>
+            <Box backgroundColor={backgroundColor}>
+                <Container>
+                    <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
+                                                  intro={data.intro}
+                                                  colCount={width}
+                                                  items={data.items}
+                                                  centercontent={data.centercontent}
+                    />
+                </Container>
+            </Box>
         </DirectionManager>
     )
 }
@@ -127,10 +129,10 @@ export const Variant2 = () => {
         <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
             <Container>
                 <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
-                                    intro={data.intro}
-                                    colCount={data.colCount}
-                                    items={data.items}
-                                    centercontent={data.centercontent}
+                                              intro={data.intro}
+                                              colCount={data.colCount}
+                                              items={data.items}
+                                              centercontent={data.centercontent}
                 />
             </Container>
         </DirectionManager>
@@ -198,19 +200,29 @@ export const Variant3 = () => {
         <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
             <Container>
                 <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
-                                    intro={data.intro}
-                                    colCount={data.colCount}
-                                    items={data.items}
-                                    centercontent={data.centercontent}
+                                              intro={data.intro}
+                                              colCount={data.colCount}
+                                              items={data.items}
+                                              centercontent={data.centercontent}
                 />
             </Container>
         </DirectionManager>
     )
 }
 
+Variant1.args = {
+    //backgroundColor: '#e00',
+    width: 2,
+};
 
 export default {
     title: 'Dynamic Fields/Contenu en colonne encadré',
     decorators: [withKnobs],
+    argTypes: {
+        backgroundColor: {control: 'color'},
+        width: {
+            control: {type: 'range', min: 2, max: 4, step: 1},
+        },
+    },
 };
 
