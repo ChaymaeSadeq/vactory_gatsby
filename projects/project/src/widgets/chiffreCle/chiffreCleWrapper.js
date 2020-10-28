@@ -1,6 +1,7 @@
 import React from "react";
 import {ChiffreCle} from "./chiffreCle";
-import {Box, Heading, Paragraph, Row, Col, Slider, NextArrow, PrevArrow, theme, appendDots} from 'vactory-ui';
+import {Box, Heading, Paragraph, Row, Col, Slider, NextArrow, PrevArrow, appendDots} from 'vactory-ui';
+import {theme} from "../../vactory-gatsby-ui/theme";
 
 export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
     const settings = {
