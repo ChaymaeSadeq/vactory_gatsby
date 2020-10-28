@@ -1,9 +1,26 @@
 import React from "react";
-import {Box, Heading, Image, Button as Permalink} from "vactory-ui";
+import {Box, Heading, Button as Permalink} from "vactory-ui";
 import { Wysiwyg } from 'vactory-gatsby-ui'
+import {Picture} from "vactory-gatsby-ui";
+
+// @todo: à adapter selon colCount. Maybe move this imageStyles to .container.js file.
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_354_200",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_288_162",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 354,
+    height: 200,
+    ratio: 354 / 200
+};
 
 export const ContenuColonneImage = ({title, description, cta_url, cta_text, pictoImg, pictoImg_alt, activeBorder}) => {
-    console.log('pictoImg_alt', pictoImg_alt);
     return (
         <Box mb="large" padding={activeBorder? "xlarge" : "inherit"}
              borderStyle={activeBorder ? 'solid' : 'none'}
@@ -11,7 +28,17 @@ export const ContenuColonneImage = ({title, description, cta_url, cta_text, pict
              borderWidth={activeBorder ? 'medium' : 'none'}
         >
             {pictoImg &&
-            <Image src={pictoImg} alt={pictoImg_alt} mb="medium" width="100%"/>
+            <Box mb="medium">
+                <Picture
+                    file={pictoImg}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
+                    alt={pictoImg_alt}
+                    className="card-image"
+                />
+            </Box>
             }
             {title  &&
             <Heading level={3}>{title}</Heading>
