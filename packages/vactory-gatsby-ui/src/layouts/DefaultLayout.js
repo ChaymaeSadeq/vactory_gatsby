@@ -10,7 +10,7 @@ import {
     StatePageSection
 } from 'vactory-gatsby-ui'
 
-export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}}) => {
+export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}, nodeSettings}) => {
     return (
         <>
             <StatePageSection.Provider>

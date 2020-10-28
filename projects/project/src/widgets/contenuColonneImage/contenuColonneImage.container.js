@@ -3,7 +3,7 @@ import get from 'lodash.get'
 import {ContenuColonneImageWrapper} from './contenuColonneImageWrapper'
 
 export const ContenuColonneImageContainer = ({data}) => {
-    const centercontent = get(data, 'extra_field.centercontent')
+    const centercontent = get(data, 'extra_field.group_options.centercontent')
     const intro = get(data, 'extra_field.intro')
     const colCount = get(data, "extra_field.group_options.colCount")
     const bigTitle = get(data, "extra_field.bigTitle")
@@ -14,7 +14,7 @@ export const ContenuColonneImageContainer = ({data}) => {
             description: get(item, "description.value.#text"),
             cta_text: get(item, "link.title"),
             cta_url: get(item, "link.url"),
-            pictoImg: get(item, "pictoImg.0._default"),
+            pictoImg: get(item, "pictoImg.0"),
             pictoImg_alt: get(item, 'pictoImg_alt')
         }
     })

@@ -18,7 +18,7 @@ const PostsFormFilter = ({
           <Select
             id="blog-category"
             onBlur={null}
-            onChange={(e) => handleChangeCategory(e)}
+            onChange={(e) => handleChangeCategory(e.currentTarget.value)}
             defaultValue={value}
           >
             <option value="all">{t("Tous les thématiques")}</option>

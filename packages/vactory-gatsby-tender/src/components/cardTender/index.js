@@ -90,7 +90,6 @@ const Card = ({ sx, children, ...rest }) => {
 }
 
 export const CardTender = (props) => {
-  console.log(props)
   const { t } = useTranslation()
 
   const { title, reference, date, excerpt, url } = props

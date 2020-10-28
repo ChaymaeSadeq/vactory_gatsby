@@ -46,6 +46,10 @@ window.___navigate = pathname => {
     action("NavigateTo:")(pathname)
 };
 
+// Used to detect storybook.
+global.__IS_STORYBOOK__ = true;
+
+
 const pageContext = {
     node: {
         langcode: 'fr',

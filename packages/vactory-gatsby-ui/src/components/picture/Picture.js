@@ -32,25 +32,48 @@ export const Picture = (props) => {
         ...rest
     } = props;
 
-    if (!isClient()) {
+    const isStorybookEnv = typeof __IS_STORYBOOK__ !== "undefined";
+
+    if (!isClient() && !isStorybookEnv) {
         return <img src={_lqip} width={width} height={height} alt={alt}/>
     }
 
-    const sources = sizes.reverse().map((size, i) => {
-        const imageStyle = styles.find(style => style.name === size.name);
-        const imageStyleName = `decoupled_image_${imageStyle.width}_${imageStyle.height}`;
-        let url = `${backendURL}sites/default/files/styles/${imageStyleName}/public/${encodeURI(uri)}`;
+    let sources = [];
+    if (isStorybookEnv) {
+        console.log(sizes)
+        sources = sizes.reverse().map((size, i) => {
+            const imageStyle = styles.find(style => style.name === size.name);
+            let url = `https://placehold.it/${imageStyle.width}x${imageStyle.height}?text=${imageStyle.name}`;
 
-        if (debug.enabled) {
-            // Delay image loading.
-            url = `${debug.delayURL}${backendURL}sites/default/files/styles/${imageStyleName}/public/${encodeURI(uri)}`;
-        }
+            if (debug.enabled) {
+                // Delay image loading.
+                url = `${debug.delayURL}${url}`;
+            }
 
-        return {
-            srcSet: url || "",
-            media: size.media || ""
-        };
-    }) || [];
+            return {
+                srcSet: url || "",
+                media: size.media || ""
+            };
+        }) || [];
+        console.log(sources)
+    }
+    else {
+        sources = sizes.reverse().map((size, i) => {
+            const imageStyle = styles.find(style => style.name === size.name);
+            const imageStyleName = `decoupled_image_${imageStyle.width}_${imageStyle.height}`;
+            let url = `${backendURL}sites/default/files/styles/${imageStyleName}/public/${encodeURI(uri)}`;
+
+            if (debug.enabled) {
+                // Delay image loading.
+                url = `${debug.delayURL}${backendURL}sites/default/files/styles/${imageStyleName}/public/${encodeURI(uri)}`;
+            }
+
+            return {
+                srcSet: url || "",
+                media: size.media || ""
+            };
+        }) || [];
+    }
 
     let imageStyle = imgStyle ? imgStyle : {
         maxWidth: '100%',

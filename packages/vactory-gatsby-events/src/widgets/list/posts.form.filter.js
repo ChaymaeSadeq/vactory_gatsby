@@ -20,7 +20,7 @@ const PostsFormFilter = ({
           <Select
             id="events-category"
             onBlur={null}
-            onChange={(e) => handleChangeCategory(e)}
+            onChange={(e) => handleChangeCategory(e.currentTarget.value)}
             defaultValue={value}
           >
             <option value="all">{t("Tous les thématiques")}</option>
@@ -41,7 +41,7 @@ const PostsFormFilter = ({
           <Select
             id="events-cities"
             onBlur={null}
-            onChange={(e) => handleChangeCity(e)}
+            onChange={(e) => handleChangeCity(e.currentTarget.value)}
             defaultValue={value}
           >
             <option value="all">{t("Toutes les villes")}</option>

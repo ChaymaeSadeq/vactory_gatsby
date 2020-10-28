@@ -15,7 +15,7 @@ const PostsFormFilter = ({ terms, value, sort, handleChange, handleChangeSort })
           <Select
             id="news-category"
             onBlur={null}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChange(e.currentTarget.value)}
             defaultValue={value}
           >
             <option value="all">{t('Tous les thématiques')}</option>
@@ -35,7 +35,7 @@ const PostsFormFilter = ({ terms, value, sort, handleChange, handleChangeSort })
           <Select
             id="news-sort"
             onBlur={null}
-            onChange={(e) => handleChangeSort(e)}
+            onChange={(e) => handleChangeSort(e.currentTarget.value)}
             defaultValue={sort}
           >
             <option value="created">{t('Tri Ascendant')}</option>
