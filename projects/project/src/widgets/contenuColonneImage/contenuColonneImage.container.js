@@ -5,9 +5,9 @@ import {ContenuColonneImageWrapper} from './contenuColonneImageWrapper'
 export const ContenuColonneImageContainer = ({data}) => {
     const centercontent = get(data, 'extra_field.centercontent')
     const intro = get(data, 'extra_field.intro')
-    const colCount = get(data, "extra_field.colCount")
+    const colCount = get(data, "extra_field.group_options.colCount")
     const bigTitle = get(data, "extra_field.bigTitle")
-    const activeBorder = get(data, "extra_field.activeBorder")
+    const activeBorder = get(data, "extra_field.group_options.activeBorder")
     const items = data.components.map((item) => {
         return {
             title: get(item, "title"),
