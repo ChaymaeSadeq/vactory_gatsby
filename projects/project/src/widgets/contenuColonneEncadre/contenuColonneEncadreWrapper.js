@@ -7,6 +7,7 @@ export const ContenuColonneEncadreWrapper = ({bigTitle, intro, colCount, items, 
     const number_cols = 12 / colCount
     return (
         <Box>
+            <Heading sx={{color: 'red'}} level="1">Contenu colonne encadre</Heading>
             {(bigTitle || intro) &&
             <Box mb={30}>
                 {bigTitle &&

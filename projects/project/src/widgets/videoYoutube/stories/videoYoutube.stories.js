@@ -15,7 +15,7 @@ export const Variant1 = () => {
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
         <Container>
-            <VideoYoutube videoId="C2p-peir5Qw" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
+            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
                           description={rtl ? description_ar : description}/>
         </Container>
     )
@@ -26,7 +26,7 @@ export const Variant2 = () => {
     const isPopUp = boolean("Video dans une popup", true, groupId)
     return (
         <Container>
-            <VideoYoutube videoId="C2p-peir5Qw" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
+            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
                           description={rtl ? description_ar : description}/>
         </Container>
     )
@@ -37,7 +37,7 @@ export const Variant3 = () => {
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
         <Container>
-            <VideoYoutube videoId="C2p-peir5Qw" image={ImageUrl} hideImage={true} isPopUp={isPopUp}
+            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={isPopUp}
                           description={rtl ? description_ar : description}/>
         </Container>
     )

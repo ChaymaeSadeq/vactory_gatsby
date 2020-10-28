@@ -1,8 +1,23 @@
 import React from "react";
-import {Wysiwyg} from 'vactory-gatsby-ui'
+import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
 import styled, {css} from "styled-components";
-import {Col, Row, Image, Box, Heading, Button as Permalink} from "vactory-ui";
+import {Col, Row, Box, Heading, Button as Permalink} from "vactory-ui";
 
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_354_200",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_288_162",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 354,
+    height: 200,
+    ratio: 354 / 200
+};
 
 const StyledRow = styled(Row)`
     ${props => props.inversed === true && css`
@@ -13,7 +28,7 @@ const StyledRow = styled(Row)`
     `}
 `
 
-export const ContenuInline = ({imgUrl, title, description, cta_text, cta_url, colImage, activeBorder, activeBorderImage, inversed}) => {
+export const ContenuInline = ({imgUrl, image_alt, title, description, cta_text, cta_url, colImage, activeBorder, activeBorderImage, inversed}) => {
     return (
         <Box
             p={activeBorder ? ["small", "small", "xlarge"] : 'inherit'}
@@ -30,7 +45,14 @@ export const ContenuInline = ({imgUrl, title, description, cta_text, cta_url, co
                          borderColor={activeBorderImage ? 'black' : 'none'}
                          borderWidth={activeBorderImage ? 'medium' : 'none'}
                     >
-                        <Image src={imgUrl} width={[1]}/>
+                        <Picture
+                            file={imgUrl}
+                            alt={image_alt}
+                            sizes={imageStyles.sizes}
+                            width={imageStyles.width}
+                            height={imageStyles.height}
+                            ratio={imageStyles.ratio}
+                        />
                     </Box>
                 </Col>
                 }

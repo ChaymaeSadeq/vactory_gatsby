@@ -2,8 +2,10 @@ import React from "react";
 import {ChiffreCle} from "./chiffreCle";
 import {Box, Heading, Paragraph, Row, Col, Slider, NextArrow, PrevArrow, appendDots} from 'vactory-ui';
 import {theme} from "../../vactory-gatsby-ui/theme";
+import {useRtl} from "vactory-gatsby-core";
 
 export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
+    const isRtl = useRtl()
     const settings = {
         dots: true,
         infinite: true,
@@ -13,8 +15,12 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
         arrows: true,
         centerMode: false,
         centerPadding: '0px',
-        nextArrow: <NextArrow color="black"/>,
-        prevArrow: <PrevArrow color="black"/>,
+        nextArrow: !isRtl ? <NextArrow color="black"
+                              sx={{right: ['calc((100% - 960px)/2 + 10px)',null,'calc((100% - 760px)/2 + 10px)','calc((100% - 960px)/2 + 10px)','calc((100% - 1140px)/2 + 10px)']}}/>:
+            <NextArrow color="black"
+                       sx={{left: ['calc((100% - 960px)/2 + 10px)',null,'calc((100% - 760px)/2 + 10px)','calc((100% - 960px)/2 + 10px)','calc((100% - 1140px)/2 + 10px)']}}/>,
+        prevArrow: !isRtl ? <PrevArrow color="black" sx={{left: ['calc((100% - 960px)/2 + 10px)',null,'calc((100% - 760px)/2 + 10px)','calc((100% - 960px)/2 + 10px)','calc((100% - 1140px)/2 + 10px)']}}/>:
+            <PrevArrow color="black" sx={{right: ['calc((100% - 960px)/2 + 10px)',null,'calc((100% - 760px)/2 + 10px)','calc((100% - 960px)/2 + 10px)','calc((100% - 1140px)/2 + 10px)']}}/>,
         dotsClass: 'slick-dots',
         appendDots: appendDots,
         responsive: [
