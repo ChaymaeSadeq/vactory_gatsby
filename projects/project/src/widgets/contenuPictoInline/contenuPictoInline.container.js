@@ -13,8 +13,7 @@ export const ContenuPictoInlineContainer = ({data}) => {
             description: get(item, "description.value.#text"),
             cta_text: get(item, "link.title"),
             cta_url: get(item, "link.url"),
-            imgUrl: get(item, "imgUrl.0"),
-            image_alt: get(item, 'pictoImg_alt'),
+            imgUrl: get(item, "imgUrl.0._default"),
         }
     })
     return (

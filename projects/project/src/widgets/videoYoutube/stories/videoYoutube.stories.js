@@ -1,47 +1,51 @@
 import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
-import {Container} from 'vactory-ui';
+import {DirectionManager, Container} from 'vactory-ui';
 import {VideoYoutube} from "../videoYoutube";
 import ImageUrl from "../../assets/img1.jpg"
-import {useRtl} from "vactory-gatsby-core";
 
 
+const groupRtl = "Version arabe"
 const groupId = "options"
-const description = "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, eveniet impedit ipsa placeat quis repellendus sed. Aliquam amet autem consequuntur deserunt eius id laborum nam, quaerat quam rerum? Alias, iste?</p>"
-const description_ar = "<p>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت</p>"
+const activeRtl = false
+const description="<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, eveniet impedit ipsa placeat quis repellendus sed. Aliquam amet autem consequuntur deserunt eius id laborum nam, quaerat quam rerum? Alias, iste?</p>"
 
 export const Variant1 = () => {
-    const rtl = useRtl()
+    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
-        <Container>
-            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
-                          description={rtl ? description_ar : description}/>
-        </Container>
+        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
+            <Container>
+                <VideoYoutube videoId="C2p-peir5Qw" image={ImageUrl} hideImage={false} isPopUp={isPopUp} description={description} />
+            </Container>
+        </DirectionManager>
     )
 }
 
 export const Variant2 = () => {
-    const rtl = useRtl()
+    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
     const isPopUp = boolean("Video dans une popup", true, groupId)
     return (
-        <Container>
-            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
-                          description={rtl ? description_ar : description}/>
-        </Container>
+        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
+            <Container>
+                <VideoYoutube videoId="C2p-peir5Qw" image={ImageUrl} hideImage={false} isPopUp={isPopUp} description={description} />
+            </Container>
+        </DirectionManager>
     )
 }
 
 export const Variant3 = () => {
-    const rtl = useRtl()
+    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
-        <Container>
-            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={isPopUp}
-                          description={rtl ? description_ar : description}/>
-        </Container>
+        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
+            <Container>
+                <VideoYoutube videoId="C2p-peir5Qw" image={ImageUrl} hideImage={true} isPopUp={isPopUp} description={description} />
+            </Container>
+        </DirectionManager>
     )
 }
+
 
 
 export default {

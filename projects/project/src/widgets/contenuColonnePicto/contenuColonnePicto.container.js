@@ -13,8 +13,7 @@ export const ContenuColonnePictoContainer = ({data}) => {
             description: get(item, "description.value.#text"),
             cta_text: get(item, "link.title"),
             cta_url: get(item, "link.url"),
-            pictoImg: get(item, "pictoImg.0"),
-            image_alt: get(item, 'pictoImg_alt')
+            pictoImg: get(item, "pictoImg.0._default"),
         }
     })
 
