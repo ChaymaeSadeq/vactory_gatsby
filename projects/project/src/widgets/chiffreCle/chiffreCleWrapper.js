@@ -1,8 +1,9 @@
 import React from "react";
 import {ChiffreCle} from "./chiffreCle";
-import {Box, Heading, Paragraph, Row, Col, Slider, NextArrow, PrevArrow, appendDots} from 'vactory-ui';
+import {Box, Row, Col, Slider, NextArrow, PrevArrow, appendDots} from 'vactory-ui';
 import {theme} from "../../vactory-gatsby-ui/theme";
 import {useRtl} from "vactory-gatsby-core";
+import {TemplateWrapper} from '../../composants'
 
 export const ChiffreCleSlider = ({items}) => {
     const isRtl = useRtl()
@@ -58,17 +59,7 @@ export const ChiffreCleSlider = ({items}) => {
 
 export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
     return (
-        <Box>
-            {(bigTitle || intro) &&
-            <Box mb={30}>
-                {bigTitle &&
-                <Heading level={2}>{bigTitle}</Heading>
-                }
-                {intro &&
-                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
-                }
-            </Box>
-            }
+        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             {items.length <= colCount &&
             <>
                 <Box display={['none', null, 'block']}>
@@ -90,6 +81,6 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
             {items.length > colCount &&
             <ChiffreCleSlider items={items}/>
             }
-        </Box>
+        </TemplateWrapper>
     )
 }

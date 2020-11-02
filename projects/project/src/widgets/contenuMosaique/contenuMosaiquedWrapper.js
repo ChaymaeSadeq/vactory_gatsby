@@ -1,22 +1,13 @@
 import React from "react";
-import {Box, Heading, Paragraph} from "vactory-ui";
+import {Box} from "vactory-ui";
 import {ContenuMosaique} from "./contenuMosaique";
+import {TemplateWrapper} from "../../composants/template-wrapper";
 
 export const ContenuMosaiquedWrapper = ({centercontent, intro, bigTitle, activeBorder, items}) => {
     const contentTextAlignClass = centercontent ? "center" : "left"
     const contentWithBorder = activeBorder
     return (
-        <Box>
-            {(bigTitle || intro) &&
-            <Box mb={30}>
-                {bigTitle &&
-                <Heading level={2}>{bigTitle}</Heading>
-                }
-                {intro &&
-                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
-                }
-            </Box>
-            }
+        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             <Box
                 borderWidth={contentWithBorder ? 'medium' : 'none'}
                 borderStyle={contentWithBorder ? 'solid' : 'none'}
@@ -36,6 +27,6 @@ export const ContenuMosaiquedWrapper = ({centercontent, intro, bigTitle, activeB
                     })
                 }
             </Box>
-        </Box>
+        </TemplateWrapper>
     )
 }

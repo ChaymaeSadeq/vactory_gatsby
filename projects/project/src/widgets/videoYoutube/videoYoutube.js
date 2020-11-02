@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import Youtube from "react-youtube"
 import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
 import {Box, Flex, Icon, Layer} from 'vactory-ui'
+import {TemplateWrapper} from "../../composants/template-wrapper";
 
 const imageStyles = {
     sizes: [
@@ -32,7 +33,7 @@ export const VideoYoutube = ({videoId, image, image_alt, hideImage, isPopUp, des
     }
 
     return (
-        <Box>
+        <TemplateWrapper>
             <Flex
                 borderWidth="large"
                 borderStyle="solid"
@@ -93,6 +94,6 @@ export const VideoYoutube = ({videoId, image, image_alt, hideImage, isPopUp, des
                 <Wysiwyg html={description}/>
             </Box>
             }
-        </Box>
+        </TemplateWrapper>
     )
 }
