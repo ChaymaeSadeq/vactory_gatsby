@@ -1,12 +1,21 @@
 import React from "react";
-import {Col, Row} from "vactory-ui";
+import {Box, Col, Heading, Paragraph, Row} from "vactory-ui";
 import {ContenuPictoInline} from "./contenuPictoInline";
-import {TemplateWrapper} from "../../composants/template-wrapper";
 
 export const ContenuPictoInlineWrapper = ({colCount, centercontent, bigTitle, intro, items}) => {
     const number_cols = 12 / colCount
     return (
-        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
+        <Box>
+            {(bigTitle || intro) &&
+            <Box mb={30}>
+                {bigTitle &&
+                <Heading level={2}>{bigTitle}</Heading>
+                }
+                {intro &&
+                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
+                }
+            </Box>
+            }
             <Row>
                 {items.map((item, index) => {
                     return (
@@ -16,6 +25,6 @@ export const ContenuPictoInlineWrapper = ({colCount, centercontent, bigTitle, in
                     )
                 })}
             </Row>
-        </TemplateWrapper>
+        </Box>
     )
 }

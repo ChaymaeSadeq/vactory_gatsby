@@ -2,15 +2,16 @@ import React from 'react';
 import {withKnobs, boolean, select, text} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
 import {ContenuPictoInlineWrapper} from "../contenuPictoInlineWrapper";
-import {Container} from "vactory-ui";
-import {useRtl} from "vactory-gatsby-core";
+import {DirectionManager, Container} from "vactory-ui";
 
 const groupId = 'Options';
+const groupRtl = "Version arabe"
+const activeRtl = false
 const colsNumbers = [2, 3, 4];
 
 
 export const Variant1 = () => {
-    const rtl = useRtl()
+    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
     const data = !rtl ? {
             colCount: select("Nombre des colonnes", colsNumbers, 2, groupId),
             centercontent: boolean('Center content with picto', false, groupId),
@@ -64,14 +65,16 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <Container>
-            <ContenuPictoInlineWrapper {...data} />
-        </Container>
+        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
+            <Container>
+                <ContenuPictoInlineWrapper {...data} />
+            </Container>
+        </DirectionManager>
     )
 }
 
 export const Variant2 = () => {
-    const rtl = useRtl()
+    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
     const data = !rtl ? {
             bigTitle: "This is the big title",
             intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
@@ -121,9 +124,11 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <Container>
-            <ContenuPictoInlineWrapper {...data} />
-        </Container>
+        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
+            <Container>
+                <ContenuPictoInlineWrapper {...data} />
+            </Container>
+        </DirectionManager>
     )
 }
 

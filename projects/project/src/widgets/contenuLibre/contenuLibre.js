@@ -1,13 +1,9 @@
 import React from "react";
-//import {Wysiwyg} from "vactory-gatsby-ui";
-import {Wysiwyg} from "../../utilites";
-import {TemplateWrapper} from "../../composants/template-wrapper";
+import {Wysiwyg} from "vactory-gatsby-ui";
 
 
 export const ContenuLibre = ({content}) => {
     return (
-        <TemplateWrapper>
-            <Wysiwyg html={content}/>
-        </TemplateWrapper>
+        <Wysiwyg html={content}/>
     )
 }
