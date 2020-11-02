@@ -35,7 +35,6 @@ const Encadre = ({sx, children, ...rest}) => {
 
 
 export const ContenuColonneEncadre = ({title, description, cta_url, cta_text, pictoImg, image_alt}) => {
-    console.log('pictoImg', pictoImg);
     return (
         <Encadre>
             {pictoImg &&
