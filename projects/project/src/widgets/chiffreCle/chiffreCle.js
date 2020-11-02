@@ -20,7 +20,6 @@ export const ChiffreCle = ({number, word_before, word_after, description}) => {
             px: 'small',
             textAlign: 'center',
         }}>
-            <h1>this is chiffre cle</h1>
             <Box>
                 {(word_before || word_after || number) &&
                 <Paragraph sx={ChiffreCss}>

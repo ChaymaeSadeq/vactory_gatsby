@@ -1,22 +1,26 @@
 import React, {useState} from "react"
 import Youtube from "react-youtube"
-import { Wysiwyg } from 'vactory-gatsby-ui'
-import {Image, Box, Icon, Layer} from 'vactory-ui'
-import styled from 'styled-components'
+import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
+import {Box, Flex, Icon, Layer} from 'vactory-ui'
+import {TemplateWrapper} from "../../composants/template-wrapper";
 
-const IframeWrapper = styled(Box)`
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:before {
-        content: '';
-        display: block;
-        padding-top: 56.25%;
-    }
-`
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_1124_632",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_354_199",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 354,
+    height: 200,
+    ratio: 16 / 9
+};
 
-export const VideoYoutube = ({videoId, image, hideImage, isPopUp, description}) => {
+export const VideoYoutube = ({videoId, image, image_alt, hideImage, isPopUp, description}) => {
 
     const [isShowVideo, handleShowVideo] = useState((hideImage) ? true : false)
 
@@ -29,33 +33,47 @@ export const VideoYoutube = ({videoId, image, hideImage, isPopUp, description}) 
     }
 
     return (
-        <Box>
-            <IframeWrapper
+        <TemplateWrapper>
+            <Flex
                 borderWidth="large"
                 borderStyle="solid"
                 borderColor="black"
+                alignItems="center"
+                justifyContent="center"
                 sx={{
-                    " iframe": {
+                    position: 'relative',
+                    "& iframe": {
                         width: "100%",
                         height: "100%",
                         position: "absolute",
                         top: '0px',
                         left: '0px',
+                    },
+                    '&:before': {
+                        content: '""',
+                        display: 'block',
+                        paddingTop: '56.25%',
+                    },
+                    "& .react-aspect-ratio-placeholder": {
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: '0px',
+                        left: '0px',
+                        zIndex: '-1',
                     }
                 }}
                 onClick={() => !isShowVideo ? handleShowVideo(true) : null} position="relative">
                 {((!isShowVideo && !isPopUp) || isPopUp) &&
                 <>
                     <Icon name="play" size="60px" color="white"/>
-                    <Image src={image}
-                           sx={{
-                               width: "100%",
-                               height: "100%",
-                               position: "absolute",
-                               top: '0px',
-                               left: '0px',
-                               zIndex: '-1',
-                           }}
+                    <Picture
+                        file={image}
+                        alt={image_alt}
+                        sizes={imageStyles.sizes}
+                        width={imageStyles.width}
+                        height={imageStyles.height}
+                        ratio={imageStyles.ratio}
                     />
                 </>
                 }
@@ -70,12 +88,12 @@ export const VideoYoutube = ({videoId, image, hideImage, isPopUp, description}) 
                     </Box>
                 </Layer>
                 }
-            </IframeWrapper>
+            </Flex>
             {description &&
-                <Box mt="20px">
-                    <Wysiwyg html={description} />
-                </Box>
+            <Box mt="20px">
+                <Wysiwyg html={description}/>
+            </Box>
             }
-        </Box>
+        </TemplateWrapper>
     )
 }

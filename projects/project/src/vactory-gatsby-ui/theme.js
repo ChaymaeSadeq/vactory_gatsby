@@ -37,4 +37,5 @@ const buttons = {
 export const theme = {
     colors,
     buttons,
+    breakpoints,
 };

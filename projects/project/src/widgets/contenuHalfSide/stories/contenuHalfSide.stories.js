@@ -1,14 +1,13 @@
 import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
-import {Container, Box, DirectionManager} from "vactory-ui";
+import {Container, Box} from "vactory-ui";
 import {ContenuHalfSide} from "../contenuHalfSide";
+import {useRtl} from "vactory-gatsby-core";
 
 const groupId = 'Options';
-const groupRtl = "Version arabe"
-const activeRtl = false
 
 export const Variant1 = ({backgroundColor}) => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const inversed = boolean('inversed', true, groupId)
     const centercontent = boolean('Centrer le contenu', false, groupId)
     const data = !rtl ? {
@@ -28,18 +27,16 @@ export const Variant1 = ({backgroundColor}) => {
             centercontent: centercontent,
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Box backgroundColor={backgroundColor}>
-                <Container>
-                    <ContenuHalfSide {...data} />
-                </Container>
-            </Box>
-        </DirectionManager>
+        <Box backgroundColor={backgroundColor}>
+            <Container>
+                <ContenuHalfSide {...data} />
+            </Container>
+        </Box>
     )
 }
 
 export const Variant2 = ({backgroundColor}) => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const inversed = boolean('inversed', false, groupId)
     const centercontent = boolean('Centrer le contenu', false, groupId)
     const data = !rtl ? {
@@ -59,18 +56,16 @@ export const Variant2 = ({backgroundColor}) => {
             centercontent: centercontent,
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Box backgroundColor={backgroundColor}>
-                <Container>
-                    <ContenuHalfSide {...data} />
-                </Container>
-            </Box>
-        </DirectionManager>
+        <Box backgroundColor={backgroundColor}>
+            <Container>
+                <ContenuHalfSide {...data} />
+            </Container>
+        </Box>
     )
 }
 
 export const Variant3 = ({backgroundColor}) => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const inversed = boolean('inversed', false, groupId)
     const centercontent = boolean('Centrer le contenu', true, groupId)
     const data = !rtl ? {
@@ -90,13 +85,11 @@ export const Variant3 = ({backgroundColor}) => {
             centercontent: centercontent,
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Box backgroundColor={backgroundColor}>
-                <Container>
-                    <ContenuHalfSide {...data} />
-                </Container>
-            </Box>
-        </DirectionManager>
+        <Box backgroundColor={backgroundColor}>
+            <Container>
+                <ContenuHalfSide {...data} />
+            </Container>
+        </Box>
     )
 }
 

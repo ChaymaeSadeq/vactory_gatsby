@@ -1,17 +1,17 @@
 import React from 'react';
 import {withKnobs, boolean, select, text} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
-import {DirectionManager} from "vactory-ui";
 import {ContenuColonneEncadreWrapper} from "../contenuColonneEncadreWrapper";
 import {Container, Box} from "vactory-ui";
+import {useRtl} from 'vactory-gatsby-core'
+
+
 
 const groupId = 'Options';
-const groupRtl = "Version arabe"
-const activeRtl = false
 const colsNumbers = [2, 3, 4];
 
 export const Variant1 = ({backgroundColor = "#fff", width}) => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const data = !rtl ? {
             bigTitle: "This is the big title",
             intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
@@ -61,22 +61,20 @@ export const Variant1 = ({backgroundColor = "#fff", width}) => {
             ]
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Box backgroundColor={backgroundColor}>
-                <Container>
-                    <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
-                                                  intro={data.intro}
-                                                  colCount={width}
-                                                  items={data.items}
-                                                  centercontent={data.centercontent}
-                    />
-                </Container>
-            </Box>
-        </DirectionManager>
+        <Box backgroundColor={backgroundColor}>
+            <Container>
+                <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
+                                              intro={data.intro}
+                                              colCount={width}
+                                              items={data.items}
+                                              centercontent={data.centercontent}
+                />
+            </Container>
+        </Box>
     )
 }
 export const Variant2 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const data = !rtl ? {
             colCount: select("Numbers of cols", colsNumbers, 3, groupId),
             centercontent: boolean("Centrer le contenu", true, groupId),
@@ -126,20 +124,18 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
-                                              intro={data.intro}
-                                              colCount={data.colCount}
-                                              items={data.items}
-                                              centercontent={data.centercontent}
-                />
-            </Container>
-        </DirectionManager>
+        <Container>
+            <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
+                                          intro={data.intro}
+                                          colCount={data.colCount}
+                                          items={data.items}
+                                          centercontent={data.centercontent}
+            />
+        </Container>
     )
 }
 export const Variant3 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const data = !rtl ? {
             bigTitle: "This is the big title",
             intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
@@ -197,16 +193,14 @@ export const Variant3 = () => {
             ]
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
-                                              intro={data.intro}
-                                              colCount={data.colCount}
-                                              items={data.items}
-                                              centercontent={data.centercontent}
-                />
-            </Container>
-        </DirectionManager>
+        <Container>
+            <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
+                                          intro={data.intro}
+                                          colCount={data.colCount}
+                                          items={data.items}
+                                          centercontent={data.centercontent}
+            />
+        </Container>
     )
 }
 
