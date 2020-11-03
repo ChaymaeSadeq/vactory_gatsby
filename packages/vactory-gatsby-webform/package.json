@@ -1,0 +1,28 @@
+{
+  "name": "vactory-gatsby-webform",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.20.12"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "vactory-gatsby-core": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-react": "^7.12.1",
+    "@storybook/addon-actions": "^6.0.28",
+    "@storybook/addon-essentials": "^6.0.28",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/react": "^6.0.28",
+    "babel-loader": "^8.1.0",
+    "react-is": "^17.0.1"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006 --no-dll",
+    "build-storybook": "build-storybook --no-dll"
+  }
+}
