@@ -1,7 +1,24 @@
 import React from "react";
 import styled, {css} from "styled-components";
-import {Box, Heading, Button as Permalink, Row, Col, Image, greaterThan} from "vactory-ui";
-import {Wysiwyg} from 'vactory-gatsby-ui'
+import {Box, Heading, Button as Permalink, Row, Col, greaterThan} from "vactory-ui";
+import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
+
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_354_200",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_288_162",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 354,
+    height: 200,
+    ratio: 354 / 200
+};
+
 
 const StyledRow = styled(Row)`
     text-align: ${props => props.textAlign};
@@ -40,7 +57,7 @@ const ColContent = styled(Col)`
 `
 
 
-export const ContenuMosaique = ({imgUrl, title, description, cta_text, cta_url, textAlign, inversed, activeBorder}) => {
+export const ContenuMosaique = ({imgUrl, image_alt, title, description, cta_text, cta_url, textAlign, inversed, activeBorder}) => {
 
     return (
         <StyledRow textAlign={textAlign} inversed={inversed} activeBorder={activeBorder}>
@@ -49,12 +66,13 @@ export const ContenuMosaique = ({imgUrl, title, description, cta_text, cta_url, 
                     p="0"
                     inversed={inversed}
                     activeBorder={activeBorder}>
-                <Image src={imgUrl}
-                       sx={{
-                           width: '100%',
-                           height: '100%',
-                           objectFit: 'cover',
-                       }}
+                <Picture
+                    file={imgUrl}
+                    alt={image_alt}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
                 />
             </ColImg>
             }

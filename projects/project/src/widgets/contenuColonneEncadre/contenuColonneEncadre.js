@@ -1,8 +1,23 @@
 import React from "react";
-import {Box, Heading, Image, Button as Permalink} from "vactory-ui";
-//import { Wysiwyg, Picture } from 'vactory-gatsby-ui'
-import { Wysiwyg } from 'vactory-gatsby-ui'
+import {Box, Heading, Button as Permalink} from "vactory-ui";
+import { Wysiwyg, Picture } from 'vactory-gatsby-ui'
 
+
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_60_60",
+            media: "(min-width: 768px)"
+        },
+        {
+            name: "decoupled_image_60_60",
+            media: "(max-width: 767px)"
+        }
+    ],
+    width: 60,
+    height: 60,
+    ratio: 60 / 60
+};
 
 const Encadre = ({sx, children, ...rest}) => {
     return (<Box sx={sx} __css={{
@@ -19,11 +34,21 @@ const Encadre = ({sx, children, ...rest}) => {
 }
 
 
-export const ContenuColonneEncadre = ({title, description, cta_url, cta_text, pictoImg}) => {
+export const ContenuColonneEncadre = ({title, description, cta_url, cta_text, pictoImg, image_alt}) => {
     return (
         <Encadre>
             {pictoImg &&
-            <Image src={pictoImg} width="60px"/>
+                <Box mx='auto' width={imageStyles.width} height={imageStyles.height}>
+                <Picture
+                    file={pictoImg}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
+                    alt={image_alt}
+                />
+                </Box>
+
             }
             {title &&
             <Heading level={3}>{title}</Heading>

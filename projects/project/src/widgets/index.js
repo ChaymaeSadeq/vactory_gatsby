@@ -9,3 +9,6 @@ export * from "./chiffreCle"
 export * from './contenuHalfSide'
 export * from './contenuInlineRows'
 export * from './videoYoutube'
+export * from './teamsColonnes'
+export * from './teamsColonnesInline'
+export * from './contentTeamsColonnes'

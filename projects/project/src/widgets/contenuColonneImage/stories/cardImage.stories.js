@@ -1,17 +1,15 @@
 import React from 'react';
 import {withKnobs, select, boolean} from "@storybook/addon-knobs";
 import imageContent from "../../assets/image.png"
-import {DirectionManager} from "vactory-ui";
 import {ContenuColonneImageWrapper} from "../contenuColonneImageWrapper"
 import {Container} from "vactory-ui";
+import {useRtl} from "vactory-gatsby-core";
 
 const groupId = 'Options';
-const groupRtl = "Version arabe"
-const activeRtl = true
 const colsNumbers = [2, 3, 4];
 
 export const Variant1 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl()
     const data = !rtl ? {
             bigTitle: "This is the big title",
             intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
@@ -73,21 +71,19 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuColonneImageWrapper bigTitle={data.bigTitle}
-                                  intro={data.intro}
-                                  colCount={data.colCount}
-                                  items={data.items}
-                                  centercontent={data.centercontent}
-                                  activeBorder={data.activeBorder}
-                />
-            </Container>
-        </DirectionManager>
+        <Container>
+            <ContenuColonneImageWrapper bigTitle={data.bigTitle}
+                                        intro={data.intro}
+                                        colCount={data.colCount}
+                                        items={data.items}
+                                        centercontent={data.centercontent}
+                                        activeBorder={data.activeBorder}
+            />
+        </Container>
     )
 }
 export const Variant2 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl()
     const data = {
         colCount: select("Nombres de colonnes", colsNumbers, 4, groupId),
         centercontent: boolean('Centrer le contenu', false, groupId),
@@ -108,21 +104,19 @@ export const Variant2 = () => {
         ]
     }
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuColonneImageWrapper bigTitle={data.bigTitle}
-                                  intro={data.intro}
-                                  colCount={data.colCount}
-                                  items={data.items}
-                                  centercontent={data.centercontent}
-                                  activeBorder={data.activeBorder}
-                />
-            </Container>
-        </DirectionManager>
+        <Container>
+            <ContenuColonneImageWrapper bigTitle={data.bigTitle}
+                                        intro={data.intro}
+                                        colCount={data.colCount}
+                                        items={data.items}
+                                        centercontent={data.centercontent}
+                                        activeBorder={data.activeBorder}
+            />
+        </Container>
     )
 }
 export const Variant3 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl()
     const data = !rtl ? {
             colCount: select("Nombres de colonnes", colsNumbers, 2, groupId),
             centercontent: boolean('Centrer le contenu', false, groupId),
@@ -154,17 +148,15 @@ export const Variant3 = () => {
             ]
         }
     return (
-        <DirectionManager dir={rtl ? "rtl" : "ltr"}>
-            <Container>
-                <ContenuColonneImageWrapper bigTitle={data.bigTitle}
-                                  intro={data.intro}
-                                  colCount={data.colCount}
-                                  items={data.items}
-                                  centercontent={data.centercontent}
-                                  activeBorder={data.activeBorder}
-                />
-            </Container>
-        </DirectionManager>
+        <Container>
+            <ContenuColonneImageWrapper bigTitle={data.bigTitle}
+                                        intro={data.intro}
+                                        colCount={data.colCount}
+                                        items={data.items}
+                                        centercontent={data.centercontent}
+                                        activeBorder={data.activeBorder}
+            />
+        </Container>
     )
 }
 

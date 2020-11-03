@@ -1,22 +1,13 @@
 import React from "react";
-import {Box, Col, Heading, Paragraph, Row} from "vactory-ui";
+import {Col, Row} from "vactory-ui";
 import {ContenuColonneEncadre} from "./contenuColonneEncadre";
+import {TemplateWrapper} from "../../composants/template-wrapper";
 
 export const ContenuColonneEncadreWrapper = ({bigTitle, intro, colCount, items, centercontent}) => {
     const contentTextAlignClass = centercontent ? 'center' : 'left';
     const number_cols = 12 / colCount
     return (
-        <Box>
-            {(bigTitle || intro) &&
-            <Box mb={30}>
-                {bigTitle &&
-                <Heading level={2}>{bigTitle}</Heading>
-                }
-                {intro &&
-                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
-                }
-            </Box>
-            }
+        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             <Row>
                 {
                     items.map((item, index) => {
@@ -28,6 +19,6 @@ export const ContenuColonneEncadreWrapper = ({bigTitle, intro, colCount, items, 
                     })
                 }
             </Row>
-        </Box>
+        </TemplateWrapper>
     )
 }
