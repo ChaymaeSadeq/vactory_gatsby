@@ -8,7 +8,7 @@ export const TwoColumns = ({posts}) => {
             <Flex flexWrap="wrap">
                 {posts.map(node => {
                     return (
-                        <Flex key={node.key} px="8px" width={[1, 1 / 2, 1 / 2]}>
+                        <Flex key={node.id} px="8px" width={[1, 1 / 2, 1 / 2]}>
                             <CardNews {...node} imageSettings={imageLayoutStyles.twoColumns} />
                         </Flex>
                     )

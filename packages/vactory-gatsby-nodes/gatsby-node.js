@@ -119,6 +119,7 @@ exports.createPages = async ({store, actions: {createPage}}, {
                 component: template,
                 context: {
                     node: node,
+                    hasAMP: false,
                     breadcrumb: nodeBreadcrumbItems,
                     pageInfo,
                     ...extraContext,
@@ -132,6 +133,8 @@ exports.createPages = async ({store, actions: {createPage}}, {
                     component: amp.template,
                     context: {
                         node: node,
+                        hasAMP: true,
+                        breadcrumb: nodeBreadcrumbItems,
                         pageInfo,
                         ...extraContext,
                     },

@@ -2,7 +2,7 @@ import React from "react"
 import {SocialShare, WebShare, Wysiwyg} from "vactory-gatsby-ui"
 import {VCC} from "vactory-gatsby-vcc"
 import {NextPre} from "vactory-gatsby-nextpre"
-import {CardNews, imageLayoutStyles, normalizeNodes, postsQueryParams} from "vactory-gatsby-news"
+import {CardNews, imageLayoutStyles, normalizeNodes, postsQueryParams, PostSchema} from "vactory-gatsby-news"
 import {Box, Container, Row, Col, Heading, Text} from "vactory-ui";
 
 const Post = ({post}) => {
@@ -10,6 +10,11 @@ const Post = ({post}) => {
 
     return (
         <div>
+            <PostSchema
+                headline={post.title}
+                datePublished={post.field_vactory_date}
+                imageURL={post.field_vactory_media_image.thumbnail.uri.value._default}
+            />
             <Container>
                 <Row>
                     <Col>
