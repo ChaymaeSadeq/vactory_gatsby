@@ -16,16 +16,22 @@ export const Variant1 = () => {
             colCount: 3,
             items: [
                 {
+                    imageUrl: '/kd',
+                    image_alt: 'image alt',
                     number: 1000,
                     word_before: 'N',
                     description: 'Lorem ipsum dolor',
                 },
                 {
+                    imageUrl: '/kd',
+                    image_alt: 'image alt',
                     number: 1000,
                     word_before: 'N',
                     description: 'Lorem ipsum dolor',
                 },
                 {
+                    imageUrl: '/kd',
+                    image_alt: 'image alt',
                     number: 953,
                     word_after: '%',
                     description: 'Lorem ipsum dolor',

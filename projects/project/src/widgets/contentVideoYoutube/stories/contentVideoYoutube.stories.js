@@ -1,7 +1,7 @@
 import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
 import {Container} from 'vactory-ui';
-import {VideoYoutube} from "../videoYoutube";
+import {ContentVideoYoutube} from "../contentVideoYoutube";
 import ImageUrl from "../../assets/img1.jpg"
 import {useRtl} from "vactory-gatsby-core";
 
@@ -15,8 +15,8 @@ export const Variant1 = () => {
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
         <Container>
-            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
-                          description={rtl ? description_ar : description}/>
+            <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
+                                 description={rtl ? description_ar : description}/>
         </Container>
     )
 }
@@ -26,8 +26,8 @@ export const Variant2 = () => {
     const isPopUp = boolean("Video dans une popup", true, groupId)
     return (
         <Container>
-            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
-                          description={rtl ? description_ar : description}/>
+            <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
+                                 description={rtl ? description_ar : description}/>
         </Container>
     )
 }
@@ -37,15 +37,15 @@ export const Variant3 = () => {
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
         <Container>
-            <VideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={isPopUp}
-                          description={rtl ? description_ar : description}/>
+            <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={isPopUp}
+                                 description={rtl ? description_ar : description}/>
         </Container>
     )
 }
 
 
 export default {
-    title: 'Dynamic Fields/youtube video',
+    title: 'Dynamic Fields/Content avec youtube video',
     decorators: [withKnobs],
 };
 

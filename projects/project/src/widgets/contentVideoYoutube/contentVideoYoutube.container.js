@@ -1,9 +1,8 @@
 import React from "react";
 import get from 'lodash.get'
-import {VideoYoutube} from "./videoYoutube";
-// videoId, image, hideImage, isPopUp
+import {ContentVideoYoutube} from "./contentVideoYoutube";
 
-export const VideoYoutubeContainer = ({data}) => {
+export const ContentVideoYoutubeContainer = ({data}) => {
     const videoId = get(data, 'components.0.videoId')
     const image = get(data, 'components.0.image.0')
     const image_alt = get(data, 'components.0.image_alt')
@@ -11,6 +10,6 @@ export const VideoYoutubeContainer = ({data}) => {
     const isPopUp = get(data, "components.0.group_options.bigTitle")
     const description = get(data, "components.0.description.value.#text")
     return (
-        <VideoYoutube videoId={videoId} image={image} image_alt={image_alt} hideImage={hideImage} isPopUp={isPopUp} description={description} />
+        <ContentVideoYoutube videoId={videoId} image={image} image_alt={image_alt} hideImage={hideImage} isPopUp={isPopUp} description={description} />
     )
 }

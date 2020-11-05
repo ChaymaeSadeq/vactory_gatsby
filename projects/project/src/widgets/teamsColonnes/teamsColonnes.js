@@ -6,7 +6,7 @@ const imageStylesCyrcle = {
     sizes: [
         {
             name: "decoupled_image_200_200",
-            media: "(min-width: 8px)"
+            media: "(min-width: 0px)"
         },
     ],
     width: 200,

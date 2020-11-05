@@ -7,7 +7,7 @@ const imageStyles = {
     sizes: [
         {
             name: "decoupled_image_100_100",
-            media: "(min-width: 3px)"
+            media: "(min-width: 0px)"
         },
     ],
     width: 100,
@@ -15,10 +15,9 @@ const imageStyles = {
     ratio: 100 / 100
 };
 
-export const ContentTeamsColonnes = ({imageUrl, image_alt, name, role, description}) => {
-    console.log('ContentTeamsColonnes:imageUrl', imageUrl);
+export const TestimonaislColonnes = ({imageUrl, image_alt, name, role, description, inversed}) => {
     return (
-        <Box
+        <Flex
             mb="large"
             borderWidth="medium"
             borderStyle="solid"
@@ -26,8 +25,9 @@ export const ContentTeamsColonnes = ({imageUrl, image_alt, name, role, descripti
             py="xlarge"
             px="large"
             backgroundColor="white"
+            flexDirection={inversed ? 'column-reverse' : 'column'}
         >
-            <Flex alignItems="center" mb='medium'>
+            <Flex alignItems="center" mb={!inversed ? "medium" : null} mt={inversed ? "medium" : null}>
                 {imageUrl &&
                 <Box width={imageStyles.width}
                      borderRadius="rounded"
@@ -62,6 +62,6 @@ export const ContentTeamsColonnes = ({imageUrl, image_alt, name, role, descripti
             </Box>
             }
 
-        </Box>
+        </Flex>
     )
 }

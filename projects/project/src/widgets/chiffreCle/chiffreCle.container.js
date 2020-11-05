@@ -8,6 +8,8 @@ export const ChiffreCleContainer = ({data}) => {
     const colCount = get(data, "extra_field.group_options.colCount")
     const items = data.components.map((item) => {
         return {
+            imageUrl: get(item, 'imageUrl.0'),
+            image_alt: get(item, 'image_alt'),
             number: get(item, "number"),
             word_before: get(item, "word_before"),
             word_after: get(item, "word_after"),

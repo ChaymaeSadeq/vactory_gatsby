@@ -44,11 +44,11 @@ export const ChiffreCleSlider = ({items}) => {
         ]
     }
     return (
-        <Slider {...settings} mx={['0', null, '55px']}>
+        <Slider {...settings} mx={['0', null, 'xxlarge', 'xxxlarge']}>
             {items.map((item, index) => {
                 return (
-                    <Box key={index} px='15px'>
-                        <ChiffreCle key={index} {...item} />
+                    <Box key={index} px='xsmall'>
+                        <ChiffreCle {...item} />
                     </Box>
                 )
             })}
@@ -62,7 +62,7 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
         <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             {items.length <= colCount &&
             <>
-                <Box display={['none', null, 'block']}>
+                <Box display={items.length > 1 ? ['none', null, 'block'] : null}>
                     <Row>
                         {items.map((item, index) => {
                             return (
@@ -73,9 +73,11 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
                         })}
                     </Row>
                 </Box>
+                {items.length > 1 &&
                 <Box display={['block', null, 'none']}>
                     <ChiffreCleSlider items={items}/>
                 </Box>
+                }
             </>
             }
             {items.length > colCount &&

@@ -73,6 +73,8 @@ export const Variant1 = () => {
 export const Variant2 = () => {
     const rtl = useRtl();
     const data = !rtl ? {
+            bigTitle: "This is the big title",
+            intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
             colCount: select("Nombre des colonnes", colsNumbers, 2, groupId),
             centercontent: boolean("Centrer le contenu", false, groupId),
             items: [
@@ -95,6 +97,8 @@ export const Variant2 = () => {
             ]
         }
         : {
+            bigTitle: "هذا هو العنوان الكبير",
+            intro: "لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت",
             colCount: select("Nombre des colonnes", colsNumbers, 2, groupId),
             centercontent: boolean("Centrer le contenu", false, groupId),
             items: [
