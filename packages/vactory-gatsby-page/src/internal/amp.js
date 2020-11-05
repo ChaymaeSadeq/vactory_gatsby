@@ -1,1 +1,1 @@
-export const enabled = false;
+export const enabled = true;

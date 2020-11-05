@@ -1,3 +1,5 @@
 export { params as pageQueryParams} from './src/internal/api.page.params'
 export {default as PageContainer} from './src/components/page.container'
+export {default as PageAmpContainer} from './src/components/page.amp.container'
 export {default as Page} from './src/components/page'
+export {default as PageAmp} from './src/components/page.amp'
