@@ -19531,10 +19531,10 @@ v8-to-istanbul@^4.1.3:
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
 
-vactory-ui@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/vactory-ui/-/vactory-ui-1.0.4.tgz#9a1aa963a407a73bc72d3301b93ce1ddfc3a8630"
-  integrity sha512-AXq3N1zsgk7DF6ZqKkuHnd+vJrGHHve+yvhe5EZyGq83ynnZ2QTh8ZMCxQwKYi+ESpYeoP6cabsCUf3p4179oQ==
+vactory-ui@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vactory-ui/-/vactory-ui-1.0.5.tgz#e8fac08e79227f16a774699aa45499171203d107"
+  integrity sha512-l/MVVO6mKTva2ltokvDyddqTgMcud9VyYNoECUSf8ZX9ZLu+XKtupk+rE1a2QkNhbE7xZShhavhow8Gh2WRSQg==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/prop-types" "^5.1.5"
