@@ -3,6 +3,7 @@ import classNames from "classnames"
 import {Box, Label} from 'vactory-ui'
 import isClient from "is-client"
 import {FormControlContext} from '../context/FormControl'
+import {useStyles} from "..";
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -123,20 +124,18 @@ function useFormControlProvider(props) {
  * ♿️ Accessibility: Every form field should have a form label.
  */
 export const FormLabel = (props) => {
-    const {className, children, ...rest} = props;
+    const {className, children, showRequiredIndicator = true, ...rest} = props;
+    const styles = useStyles('formLabel');
     const field = useContext(FormControlContext);
 
     return (
         <Label
             className={classNames("ui-form__label", className)}
-            __css={{
-                display: "block",
-                textAlign: "left",
-            }}
+            __css={styles}
             {...rest}
         >
             {children}
-            {field.isRequired && <RequiredIndicator/>}
+            {field?.isRequired && showRequiredIndicator && <RequiredIndicator/>}
         </Label>
     );
 
@@ -153,6 +152,7 @@ export const FormLabel = (props) => {
 export const FormControl = (props) => {
     const {htmlProps, ...context} = useFormControlProvider(props);
     const _className = classNames("ui-form-control", props.className);
+    const styles = useStyles('formControl');
 
     return (
         <FormControlContext.Provider value={context}>
@@ -160,10 +160,7 @@ export const FormControl = (props) => {
                 role="group"
                 {...htmlProps}
                 className={_className}
-                __css={{
-                    width: "100%",
-                    position: "relative",
-                }}
+                __css={styles}
             />
         </FormControlContext.Provider>
     )
@@ -175,6 +172,8 @@ export const FormControl = (props) => {
  */
 export const RequiredIndicator = (props) => {
     const field = useContext(FormControlContext);
+    const styles = useStyles('requiredIndicator');
+
     if (!field?.isRequired) return null;
 
     const _className = classNames("ui-form__required-indicator", props.className);
@@ -184,7 +183,7 @@ export const RequiredIndicator = (props) => {
              role="presentation"
              aria-hidden
              {...props}
-             __css={{}}
+             __css={styles}
              className={_className}
              children={props.children || "*"}
         />
@@ -200,6 +199,7 @@ export const RequiredIndicator = (props) => {
  */
 export const FormHelperText = (props) => {
     const field = useContext(FormControlContext);
+    const styles = useStyles('helperText');
 
     if (field?.isInvalid) return null;
 
@@ -212,11 +212,11 @@ export const FormHelperText = (props) => {
         return () => field?.setHasHelpText.off()
     }, []);
 
-    const _className = classNames("chakra-form__helper-text", props.className);
+    const _className = classNames("ui-form__helper-text", props.className);
 
     return (
         <Box
-            __css={{}}
+            __css={styles}
             {...props}
             className={_className}
             id={props.id ?? field?.helpTextId}
@@ -230,20 +230,17 @@ export const FormHelperText = (props) => {
  */
 export const FormErrorMessage = (props, ref) => {
     const field = useContext(FormControlContext);
+    const styles = useStyles('errorMessage');
 
     if (!field?.isInvalid) return null;
 
-    const _className = classNames("chakra-form__error-message", props.className);
+    const _className = classNames("ui-form__error-message", props.className);
 
     return (
         <Box
             aria-live="polite"
             {...props}
-            __css={{
-                display: "flex",
-                alignItems: "center",
-                ...styles.errorText,
-            }}
+            __css={styles}
             className={_className}
             id={props.id ?? field?.feedbackId}
         />

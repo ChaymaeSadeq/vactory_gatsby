@@ -1,9 +1,11 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useContext} from 'react';
 import {Input} from 'vactory-ui';
 import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
 import {useStyles} from '../hooks/useStyles';
+import {toRegister} from '../utils/toRegister'
 import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormControls'
+import { useTranslation } from "react-i18next"
 
 export const TextField = ({
                               id,
@@ -15,12 +17,12 @@ export const TextField = ({
         placeholder,
         htmlInputType,
         helperText,
-        isRequired,
+        validation,
         shouldDisplay,
         styles = {},
     } = field;
-    // const fieldStyles = useStyles('textField', styles);
-
+    const fieldStyles = useStyles('textField', styles);
+    const { t } = useTranslation();
     const {register, watch} = useFormContext();
     const errorMessage = useErrorMessage(name, label);
     const values = watch({nest: true});
@@ -31,7 +33,7 @@ export const TextField = ({
     return isVisible ? (
         <FormControl
             key={`${name}-control`}
-            isRequired={isRequired}
+            isRequired={validation?.required}
             isInvalid={!!errorMessage}
         >
 
@@ -48,16 +50,17 @@ export const TextField = ({
                 type={htmlInputType || 'text'}
                 name={name}
                 aria-label={name}
-                ref={register}
+                ref={register(toRegister(label || name, validation, values, t))}
                 placeholder={placeholder}
+                {...fieldStyles?.input}
             />
 
             {!!helperText && (
-                <FormHelperText>
+                <FormHelperText {...fieldStyles?.helperText}>
                     {helperText}
                 </FormHelperText>
             )}
-            <FormErrorMessage>
+            <FormErrorMessage {...fieldStyles?.errorMessage}>
                 {errorMessage}
             </FormErrorMessage>
         </FormControl>

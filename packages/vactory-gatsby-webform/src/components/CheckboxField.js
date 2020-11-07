@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Checkbox} from 'vactory-ui';
+import {Checkbox, Box} from 'vactory-ui';
 import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
 import {useStyles} from '../hooks/useStyles';
@@ -10,14 +10,11 @@ export const CheckboxField = ({
                                   name,
                                   field,
                               }) => {
-    const { label, helperText, isRequired, shouldDisplay, styles = {} } = field;
-
-    const { register, watch } = useFormContext();
-
-    const values = watch({ nest: true });
-
+    const {label, helperText, isRequired, shouldDisplay, styles = {}, value = 1} = field;
+    const fieldStyles = useStyles('checkboxField', styles);
+    const {register, watch} = useFormContext();
+    const values = watch({nest: true});
     const errorMessage = useErrorMessage(name, label);
-
     const isVisible = useMemo(() => {
         return shouldDisplay ? shouldDisplay(values) : true;
     }, [values, shouldDisplay]);
@@ -29,30 +26,28 @@ export const CheckboxField = ({
             isInvalid={!!errorMessage}
         >
             {!!label && (
-                <FormLabel htmlFor={name}>
-                    {label}
-                </FormLabel>
-            )}
-            <div>
-                {field.checkboxes.map((checkbox, i) => (
-                    <div key={i}>
+                <Box>
+                    <FormLabel htmlFor={name} alignItems="center" {...fieldStyles?.label}>
                         <Checkbox
-                            key={checkbox.name}
                             name={name}
-                            value={checkbox.value}
+                            value={value}
+                            id={name}
                             ref={register}
-                            data-testid={`${id}-${checkbox.name}`}
+                            data-testid={`${id}-${name}`}
+                            {...fieldStyles?.input}
                         />
-                        {checkbox.label || checkbox.name}
-                    </div>
-                ))}
-            </div>
+
+                        {label}
+                    </FormLabel>
+                </Box>
+            )}
+
             {!!helperText && (
-                <FormHelperText>
+                <FormHelperText {...fieldStyles?.helperText}>
                     {helperText}
                 </FormHelperText>
             )}
-            <FormErrorMessage>
+            <FormErrorMessage  {...fieldStyles?.errorMessage}>
                 {errorMessage}
             </FormErrorMessage>
         </FormControl>

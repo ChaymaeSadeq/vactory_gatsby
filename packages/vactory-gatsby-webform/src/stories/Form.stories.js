@@ -1,7 +1,7 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import {action} from '@storybook/addon-actions';
 
-import { Form } from '../components/Form';
+import {Form} from '../components/Form';
 
 export default {
     title: 'Form',
@@ -10,12 +10,34 @@ export default {
 export const Default = () => (
     <Form
         schema={{
-            text: {
+            name: {
                 type: 'text',
                 label: 'Name',
                 placeholder: 'Name',
-                isRequired: true,
-                helperText: 'Hello World!'
+            },
+            email: {
+                type: 'text',
+                label: 'Email',
+                placeholder: 'admin@void.fr',
+                validation: {
+                    required: true,
+                    requiredError: 'Le champ email est requis',
+                    pattern: "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i",
+                    patternError: "Le mail n'est pas valide"
+                }
+            },
+            confirm_email: {
+                type: 'text',
+                label: 'Email Confirm',
+                placeholder: 'admin@void.fr',
+                validation: {
+                    required: true,
+                    requiredError: 'Le champ confirm email est requis',
+                    pattern: "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i",
+                    patternError: "Le champ confirm email n'est pas valide",
+                    sameAs: 'email',
+                    sameAsError: "Le champ confirm email doit être pareil que email."
+                }
             },
             about: {
                 type: 'textArea',
@@ -31,6 +53,12 @@ export const Default = () => (
                 type: 'text',
                 label: 'Phone Number',
                 htmlInputType: 'tel',
+                validation: {
+                    required: true,
+                    requiredError: 'Le champ Phone Number est requis',
+                    pattern: "/(\\+212|0)([ \\-_/]*)(\\d[ \\-_/]*){9}/",
+                    patternError: "Le champ 'Phone Number' n'est pas un numéro de téléphone Marocain valide",
+                }
             },
             select: {
                 type: 'select',
@@ -46,11 +74,36 @@ export const Default = () => (
                         value: 'Rather not say',
                     },
                 ],
+                validation: {
+                    required: true,
+                    requiredError: 'Le champ Gender est requis',
+                }
+            },
+            agree: {
+                type: 'checkbox',
+                label: 'Do you agree',
+                isRequired: true,
+            },
+            do_you_agree: {
+                type: 'radios',
+                label: 'Do you agree radio',
+                isRequired: true,
+                options: [
+                    {
+                        name: 'Yes',
+                        value: 'yes'
+                    },
+                    {
+                        name: 'No',
+                        value: 'no'
+                    },
+                ]
             },
             days: {
-                type: 'checkbox',
+                type: 'checkboxes',
                 label: 'Days of the Week',
-                checkboxes: [
+                isRequired: true,
+                options: [
                     {
                         name: 'Monday',
                         value: 'monday'
@@ -73,6 +126,25 @@ export const Default = () => (
                     },
                 ],
             },
+            captcha: {
+                type: 'captcha',
+                // label: 'Captcha',
+                helperText: 'Please check reCaptcha',
+                validation: {
+                    required: true,
+                    requiredError: 'Le champ reCaptcha est requis',
+                }
+            },
+        }}
+        styles={{
+            reCaptchaField: {
+                errorMessage: {
+                    color: 'warning500',
+                },
+            },
+            helperText: {
+
+            }
         }}
         handleSubmit={action('Submit')}
     />

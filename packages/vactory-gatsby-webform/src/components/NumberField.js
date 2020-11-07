@@ -4,22 +4,25 @@ import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
 import {useStyles} from '../hooks/useStyles';
 import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormControls'
+import { useTranslation } from "react-i18next"
+import {toRegister} from "../utils/toRegister";
 
 export const NumberField = ({
-                              id,
-                              name,
-                              field,
-                          }) => {
+                                id,
+                                name,
+                                field,
+                            }) => {
     const {
         label,
         placeholder,
         htmlInputType,
         helperText,
-        isRequired,
+        validation,
         shouldDisplay,
         styles = {},
     } = field;
-    // const fieldStyles = useStyles('textField', styles);
+    const fieldStyles = useStyles('numberField', styles);
+    const { t } = useTranslation();
 
     const {register, watch} = useFormContext();
     const errorMessage = useErrorMessage(name, label);
@@ -31,7 +34,7 @@ export const NumberField = ({
     return isVisible ? (
         <FormControl
             key={`${name}-control`}
-            isRequired={isRequired}
+            isRequired={validation?.required}
             isInvalid={!!errorMessage}
         >
 
@@ -48,16 +51,17 @@ export const NumberField = ({
                 type={htmlInputType || 'number'}
                 name={name}
                 aria-label={name}
-                ref={register}
+                ref={register(toRegister(label || name, validation, values, t))}
                 placeholder={placeholder}
+                {...fieldStyles?.input}
             />
 
             {!!helperText && (
-                <FormHelperText>
+                <FormHelperText {...fieldStyles?.helperText}>
                     {helperText}
                 </FormHelperText>
             )}
-            <FormErrorMessage>
+            <FormErrorMessage {...fieldStyles?.errorMessage}>
                 {errorMessage}
             </FormErrorMessage>
         </FormControl>
