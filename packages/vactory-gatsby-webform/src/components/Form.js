@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {useForm, FormContext, UseFormOptions} from 'react-hook-form';
-import {Box, Button, Text} from 'vactory-ui';
+import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';
 import {StyleCtx} from '../hooks/useStyles';
 import {defaultStyles} from './FormStyles'
@@ -12,8 +12,9 @@ import {CheckboxesField} from './CheckboxesField';
 import {RadiosField} from './RadiosField';
 import {SelectField} from './SelectField';
 import {ReCaptchaField} from './ReCaptchaField';
+import {useTranslation} from "react-i18next"
 
-const renderField = ([name, field]) => {
+const renderField = ([name, field], refsCollection) => {
     let Component = null;
 
     switch (field.type) {
@@ -54,7 +55,7 @@ const renderField = ([name, field]) => {
             Component = field.component;
             return (
                 <Box key={`${name}-container`}>
-                    <Component name={name} field={field} {...field.props} />
+                    <Component name={name} field={field} refsCollection={refsCollection} {...field.props} />
                 </Box>
             );
 
@@ -82,42 +83,54 @@ const renderField = ([name, field]) => {
 
     return (
         <Box key={`${name}-container`}>
-            <Component name={name} field={field}/>
+            <Component name={name} field={field} refsCollection={refsCollection}/>
         </Box>
     );
 };
 
 export const Form = ({
                          schema,
-                         handleSubmit,
+                         // handleSubmit,
                          formOptions,
                          overwriteDefaultStyles,
                          buttons,
                          styles = {},
                      }) => {
+    const {t} = useTranslation();
     const form = useForm(formOptions);
-    const baseStyles = useMemo(() => {
-        return overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
-    }, [styles, overwriteDefaultStyles]);
+    const refsCollection = {};
+    const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
+
+    const onSubmit = (data, e) => {
+        console.log(data, e);
+        console.log(refsCollection)
+        refsCollection?.reCaptcha?.current?.reset();
+    };
+
+    const resetForm = () => {
+        refsCollection?.reCaptcha?.current?.reset();
+    };
 
     return (<StyleCtx.Provider value={baseStyles}>
         <FormContext {...form}>
             <Box
                 as="form"
-                onSubmit={form.handleSubmit(handleSubmit)}
+                onSubmit={form.handleSubmit(onSubmit)}
                 {...baseStyles?.container}
             >
                 <Box>
-                    {Object.entries(schema).map(renderField)}
+                    {Object.entries(schema).map(field => renderField(field, refsCollection))}
                 </Box>
-                <Box {...baseStyles?.buttonGroup}>
+                <Box __css={baseStyles?.buttonGroup}>
                     {buttons?.reset?.hidden ? null : (
-                        <Button type="reset" {...baseStyles?.resetButton}>
+                        <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}>
                             {buttons?.reset?.text || 'Reset'}
                         </Button>
                     )}
                     <Button type="submit" {...baseStyles?.submitButton}>
-                        {buttons?.submit?.text || 'Submit'}
+                        {!!buttons?.submit?.leftIcon && <Icon mr="14px" name={buttons.submit.leftIcon}  __css={baseStyles?.submitButtonLeftIcon} size="14px"/>}
+                        {buttons?.submit?.text || t('Submit')}
+                        {!!buttons?.submit?.rightIcon && <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
                     </Button>
                 </Box>
             </Box>

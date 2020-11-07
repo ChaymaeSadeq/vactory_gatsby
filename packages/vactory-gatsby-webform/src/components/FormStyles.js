@@ -1,14 +1,13 @@
 export const defaultStyles = {
     container: {
         padding: 4,
-        maxWidth: '500px'
     },
     fieldSpacing: 6,
     buttonGroup: {
         marginTop: 4,
         display: 'flex',
         justifyContent: 'flex-end',
-        '& > *': {
+        '&& > *': {
             mr: '5px',
             '&:last-child': {
                 mr: 0
@@ -18,13 +17,26 @@ export const defaultStyles = {
     submitButton: {
         fill: 'primary',
     },
+    submitButtonRightIcon: {
+        size: '14px',
+        ml: '5px'
+    },
+    submitButtonLeftIcon: {
+        size: '14px',
+        mr: '5px'
+    },
     resetButton: {
         fill: 'basic',
     },
     formControl: {
         width: "100%",
         position: "relative",
-        mb: "medium"
+        mb: "medium",
+    },
+    formControlLayout: {
+        inner: {},
+        label: {},
+        field: {},
     },
     formLabel: {
         display: "block",
@@ -33,7 +45,7 @@ export const defaultStyles = {
         fontWeight: "medium",
     },
     errorMessage: {
-        mt: 1,
+        mt: '4px',
         color: "danger500",
         px: "1",
         lineHeight: "1em",
@@ -79,7 +91,7 @@ export const defaultStyles = {
         input: {
             mr: "8px"
         },
-        label: {
+        labelOptions: {
             fontWeight: "normal",
         }
     },
@@ -87,7 +99,7 @@ export const defaultStyles = {
         input: {
             mr: "8px"
         },
-        label: {
+        labelOptions: {
             fontWeight: "normal",
         }
     }

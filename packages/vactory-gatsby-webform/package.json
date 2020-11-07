@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "esm": "^3.2.25",
+    "lodash.merge": "^4.6.2",
     "vactory-gatsby-core": "*"
   },
   "devDependencies": {

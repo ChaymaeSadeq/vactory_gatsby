@@ -8,9 +8,7 @@ export const useStyles = (
 ) => {
     const baseStyles = useContext(StyleCtx);
 
-    return useMemo(() => {
-        return !!inlineStyles
-            ? {...baseStyles[type], ...inlineStyles}
-            : (baseStyles[type]);
-    }, [type, baseStyles, inlineStyles]);
+    return !!inlineStyles
+        ? {...baseStyles[type], ...inlineStyles}
+        : (baseStyles[type]);
 };

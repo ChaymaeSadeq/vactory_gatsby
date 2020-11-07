@@ -1,5 +1,6 @@
 import React, {useMemo, useEffect} from 'react';
-import {Input} from 'vactory-ui';
+import {Box} from 'vactory-ui';
+import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
 import ReCaptcha from "react-google-recaptcha"
 import {useTranslation} from "react-i18next"
@@ -13,22 +14,21 @@ export const ReCaptchaField = ({
                                    id,
                                    name,
                                    field,
+                                   refsCollection
                                }) => {
     const {
         label,
-        placeholder,
-        htmlInputType,
         helperText,
         validation,
         shouldDisplay,
         styles = {},
     } = field;
     const fieldStyles = useStyles('reCaptchaField', styles);
+    const formControlLayout = useStyles('formControlLayout', styles);
     const recaptchaRef = React.createRef();
     const {t, i18n} = useTranslation();
     const currentLanguage = i18n.language;
-
-    const {register, watch, setValue, clearErrors} = useFormContext();
+    const {register, watch, setValue} = useFormContext();
     const errorMessage = useErrorMessage("g-recaptcha-response", label);
     const values = watch({nest: true});
     const isVisible = useMemo(() => {
@@ -47,35 +47,45 @@ export const ReCaptchaField = ({
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
         >
-            {!!label && (
-                <FormLabel htmlFor={name}>
-                    {label}
-                </FormLabel>
-            )}
+            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
+                 __css={formControlLayout?.inner}>
+                {!!label && (
+                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
+                        <FormLabel htmlFor={name}>
+                            {label}
+                        </FormLabel>
+                    </Box>
+                )}
 
-            <ReCaptcha
-                sitekey={AppSettings.keys.reCaptcha}
-                hl={currentLanguage}
-                ref={recaptchaRef}
-                onChange={val => {
-                    setValue("g-recaptcha-response", val);
-                }}
-                onExpired={() => {
-                    setValue("g-recaptcha-response", null)
-                }}
-                onErrored={() => {
-                    setValue("g-recaptcha-response", null)
-                }}
-            />
+                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
+                    <ReCaptcha
+                        sitekey={AppSettings.keys.reCaptcha}
+                        hl={currentLanguage}
+                        ref={(e) => {
+                            recaptchaRef.current = e;
+                            refsCollection["reCaptcha"] = recaptchaRef
+                        }}
+                        onChange={val => {
+                            setValue("g-recaptcha-response", val);
+                        }}
+                        onExpired={() => {
+                            setValue("g-recaptcha-response", null)
+                        }}
+                        onErrored={() => {
+                            setValue("g-recaptcha-response", null)
+                        }}
+                    />
 
-            {!!helperText && (
-                <FormHelperText {...fieldStyles?.helperText}>
-                    {helperText}
-                </FormHelperText>
-            )}
-            <FormErrorMessage {...fieldStyles?.errorMessage}>
-                {errorMessage}
-            </FormErrorMessage>
+                    {!!helperText && (
+                        <FormHelperText {...fieldStyles?.helperText}>
+                            {helperText}
+                        </FormHelperText>
+                    )}
+                    <FormErrorMessage {...fieldStyles?.errorMessage}>
+                        {errorMessage}
+                    </FormErrorMessage>
+                </Box>
+            </Box>
         </FormControl>
     ) : null;
 };

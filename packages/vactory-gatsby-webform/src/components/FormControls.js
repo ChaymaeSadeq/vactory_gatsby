@@ -200,17 +200,16 @@ export const RequiredIndicator = (props) => {
 export const FormHelperText = (props) => {
     const field = useContext(FormControlContext);
     const styles = useStyles('helperText');
-
     if (field?.isInvalid) return null;
 
     /**
      * Notify the field context when the help text is rendered on
      * screen, so we can apply the correct `aria-describedby` to the field (e.g. input, textarea)
      */
-    useSafeLayoutEffect(() => {
-        field?.setHasHelpText.on();
-        return () => field?.setHasHelpText.off()
-    }, []);
+        // useSafeLayoutEffect(() => {
+        //     field?.setHasHelpText.on();
+        //     return () => field?.setHasHelpText.off()
+        // }, []);
 
     const _className = classNames("ui-form__helper-text", props.className);
 

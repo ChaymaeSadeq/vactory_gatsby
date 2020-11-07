@@ -1,17 +1,22 @@
 import React, {useMemo} from 'react';
-import {Radio} from 'vactory-ui';
+import {Box, Radio} from 'vactory-ui';
+import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
 import {useStyles} from '../hooks/useStyles';
 import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormControls'
+import {useTranslation} from "react-i18next"
+import {toRegister} from "../utils/toRegister";
 
 export const RadiosField = ({
                                 id,
                                 name,
                                 field,
                             }) => {
-    const {label, helperText, isRequired, shouldDisplay, styles = {}} = field;
+    const {label, helperText, validation, shouldDisplay, styles = {}} = field;
+    const {t} = useTranslation();
     const fieldStyles = useStyles('checkboxesField', styles);
+    const formControlLayout = useStyles('formControlLayout', styles);
     const {register, watch} = useFormContext();
     const values = watch({nest: true});
     const errorMessage = useErrorMessage(name, label);
@@ -22,45 +27,53 @@ export const RadiosField = ({
     return isVisible ? (
         <FormControl
             key={`${name}-control`}
-            isRequired={isRequired}
+            isRequired={validation?.required}
             isInvalid={!!errorMessage}
         >
-            {!!label && (
-                <FormLabel>
-                    {label}
-                </FormLabel>
-            )}
-            <div>
-                {field.options.map((radio, i) => (
-                    <div key={i}>
-                        <FormLabel htmlFor={radio.name}
-                                   showRequiredIndicator={false}
-                                   alignItems="center"
-                                   {...fieldStyles?.label}
-                        >
-                            <Radio
-                                mr="8px"
-                                key={radio.name}
-                                id={radio.name}
-                                name={name}
-                                value={radio.value}
-                                ref={register}
-                                data-testid={`${id}-${radio.name}`}
-                                {...fieldStyles?.input}
-                            />
-                            {radio.label || radio.name}
+            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
+                 __css={formControlLayout?.inner}>
+                {!!label && (
+                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
+                        <FormLabel {...fieldStyles?.label}>
+                            {label}
                         </FormLabel>
+                    </Box>
+                )}
+
+                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
+                    <div>
+                        {field.options.map((radio, i) => (
+                            <div key={i}>
+                                <FormLabel htmlFor={radio.name}
+                                           showRequiredIndicator={false}
+                                           alignItems="center"
+                                           {...fieldStyles?.labelOptions}
+                                >
+                                    <Radio
+                                        mr="8px"
+                                        key={radio.name}
+                                        id={radio.name}
+                                        name={name}
+                                        value={radio.value}
+                                        ref={register(toRegister(radio.label || radio.name, validation, values, t))}
+                                        data-testid={`${id}-${radio.name}`}
+                                        {...fieldStyles?.input}
+                                    />
+                                    {radio.label || radio.name}
+                                </FormLabel>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            {!!helperText && (
-                <FormHelperText {...fieldStyles?.helperText}>
-                    {helperText}
-                </FormHelperText>
-            )}
-            <FormErrorMessage {...fieldStyles?.errorMessage}>
-                {errorMessage}
-            </FormErrorMessage>
+                    {!!helperText && (
+                        <FormHelperText {...fieldStyles?.helperText}>
+                            {helperText}
+                        </FormHelperText>
+                    )}
+                    <FormErrorMessage {...fieldStyles?.errorMessage}>
+                        {errorMessage}
+                    </FormErrorMessage>
+                </Box>
+            </Box>
         </FormControl>
     ) : null;
 };

@@ -4,14 +4,18 @@ import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
 import {useStyles} from '../hooks/useStyles';
 import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormControls'
+import {useTranslation} from "react-i18next"
+import {toRegister} from "../utils/toRegister";
 
 export const CheckboxField = ({
                                   id,
                                   name,
                                   field,
                               }) => {
-    const {label, helperText, isRequired, shouldDisplay, styles = {}, value = 1} = field;
+    const {label, helperText, validation, shouldDisplay, styles = {}, value = 1} = field;
+    const {t} = useTranslation();
     const fieldStyles = useStyles('checkboxField', styles);
+    const formControlLayout = useStyles('formControlLayout', styles);
     const {register, watch} = useFormContext();
     const values = watch({nest: true});
     const errorMessage = useErrorMessage(name, label);
@@ -22,34 +26,40 @@ export const CheckboxField = ({
     return isVisible ? (
         <FormControl
             key={`${name}-control`}
-            isRequired={isRequired}
+            isRequired={validation?.required}
             isInvalid={!!errorMessage}
         >
-            {!!label && (
-                <Box>
-                    <FormLabel htmlFor={name} alignItems="center" {...fieldStyles?.label}>
-                        <Checkbox
-                            name={name}
-                            value={value}
-                            id={name}
-                            ref={register}
-                            data-testid={`${id}-${name}`}
-                            {...fieldStyles?.input}
-                        />
+            <Box className="ui-form__formControlInner ui-form__formControlInner_noLabel"
+                 __css={formControlLayout?.inner}>
+                <Box className="ui-form__formControlField" {...formControlLayout?.field}>
+                    {!!label && (
+                        <Box>
+                            <FormLabel htmlFor={name} alignItems="center" {...fieldStyles?.label}>
+                                <Checkbox
+                                    name={name}
+                                    value={value}
+                                    id={name}
+                                    ref={register(toRegister(label || name, validation, values, t))}
+                                    data-testid={`${id}-${name}`}
+                                    variant={!!errorMessage ? 'danger' : null}
+                                    {...fieldStyles?.input}
+                                />
 
-                        {label}
-                    </FormLabel>
+                                {label || name}
+                            </FormLabel>
+                        </Box>
+                    )}
+
+                    {!!helperText && (
+                        <FormHelperText {...fieldStyles?.helperText}>
+                            {helperText}
+                        </FormHelperText>
+                    )}
+                    <FormErrorMessage  {...fieldStyles?.errorMessage}>
+                        {errorMessage}
+                    </FormErrorMessage>
                 </Box>
-            )}
-
-            {!!helperText && (
-                <FormHelperText {...fieldStyles?.helperText}>
-                    {helperText}
-                </FormHelperText>
-            )}
-            <FormErrorMessage  {...fieldStyles?.errorMessage}>
-                {errorMessage}
-            </FormErrorMessage>
+            </Box>
         </FormControl>
     ) : null;
 };

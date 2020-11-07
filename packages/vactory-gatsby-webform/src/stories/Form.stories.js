@@ -82,12 +82,18 @@ export const Default = () => (
             agree: {
                 type: 'checkbox',
                 label: 'Do you agree',
-                isRequired: true,
+                validation: {
+                    required: true,
+                    requiredError: 'Ce champ est requis',
+                }
             },
             do_you_agree: {
                 type: 'radios',
                 label: 'Do you agree radio',
-                isRequired: true,
+                validation: {
+                    required: true,
+                    requiredError: 'Ce champ est requis',
+                },
                 options: [
                     {
                         name: 'Yes',
@@ -102,7 +108,10 @@ export const Default = () => (
             days: {
                 type: 'checkboxes',
                 label: 'Days of the Week',
-                isRequired: true,
+                validation: {
+                    required: true,
+                    requiredError: 'Ce champ est requis',
+                },
                 options: [
                     {
                         name: 'Monday',
@@ -142,9 +151,7 @@ export const Default = () => (
                     color: 'warning500',
                 },
             },
-            helperText: {
-
-            }
+            helperText: {}
         }}
         handleSubmit={action('Submit')}
     />
