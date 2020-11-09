@@ -83,20 +83,26 @@ export const Variant2 = () => {
                 {
                     title: "this is title 1",
                     description: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci at atque, exercitationem incidunt ipsa laboriosam.</p>",
-                    cta_text: 'Lire plus',
-                    cta_url: "/"
+                    link: {
+                        url: '/node/1',
+                        title: 'Lire plus'
+                    }
                 },
                 {
                     title: "this is title 2",
                     description: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci at atque, exercitationem incidunt ipsa laboriosam.</p>",
-                    cta_text: 'Lire plus',
-                    cta_url: "/"
+                    link: {
+                        url: '/node/1',
+                        title: 'Lire plus'
+                    }
                 },
                 {
                     title: "this is title 3",
                     description: "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci at atque, exercitationem incidunt ipsa laboriosam.</p>",
-                    cta_text: 'Lire plus',
-                    cta_url: "/"
+                    link: {
+                        url: '/node/1',
+                        title: 'Lire plus'
+                    }
                 },
             ]
         }
@@ -107,20 +113,26 @@ export const Variant2 = () => {
                 {
                     title: "هذا هو العنوان",
                     description: "<p>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت</p>",
-                    cta_text: 'اقرأ أكثر',
-                    cta_url: "/"
+                    link: {
+                        url: '/node/1',
+                        title: 'اقرأ أكثر',
+                    },
                 },
                 {
                     title: "هذا هو العنوان",
                     description: "<p>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت</p>",
-                    cta_text: 'اقرأ أكثر',
-                    cta_url: "/"
+                    link: {
+                        url: '/node/1',
+                        title: 'اقرأ أكثر',
+                    },
                 },
                 {
                     title: "هذا هو العنوان",
                     description: "<p>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت</p>",
-                    cta_text: 'اقرأ أكثر',
-                    cta_url: "/"
+                    link: {
+                        url: '/node/1',
+                        title: 'اقرأ أكثر',
+                    },
                 },
             ]
         }
