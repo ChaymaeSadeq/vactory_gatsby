@@ -1,7 +1,7 @@
 import React from 'react';
 import get from 'lodash.get';
 import {Head} from 'vactory-gatsby-core'
-import {DefaultLayout as Layout} from 'vactory-gatsby-ui'
+import {DefaultLayout as Layout, DefaultLayoutAmp as LayoutAMP} from 'vactory-gatsby-ui'
 import {
     theme as vactoryTheme,
     ColorModeProvider,
@@ -27,6 +27,7 @@ const VactoryGlobaltStyle = createGlobalStyle`
 `;
 export const wrapPageElement = ({element, props}) => {
     const node = get(props, 'pageContext.node');
+    const hasAMP = get(props, 'pageContext.hasAMP');
     let dir = 'ltr';
     let settings = {};
     if (node) {
@@ -50,7 +51,10 @@ export const wrapPageElement = ({element, props}) => {
                             <GlobalStyle/>
                             <VactoryGlobaltStyle/>
                             <Head lang={node.langcode} meta={node.metatag_normalized}/>
-                            <Layout nodeSettings={settings} {...props}>{element}</Layout>
+                            {
+                                hasAMP ? <LayoutAMP nodeSettings={settings} hasAMP={hasAMP} {...props}>{element}</LayoutAMP>
+                                    : <Layout nodeSettings={settings} hasAMP={hasAMP} {...props}>{element}</Layout>
+                            }
                         </DirectionManager>
                     </ColorModeProvider>
                 </VactoryIconProvider>
