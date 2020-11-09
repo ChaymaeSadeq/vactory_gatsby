@@ -16,8 +16,6 @@ export const TeamColonnesContainer = ({data}) => {
             description: get(item, 'description'),
         }))
     }
-
-    console.log('data_list', data_list);
     return (
         <TeamsColonnesWrapper {...data_list} />
     )

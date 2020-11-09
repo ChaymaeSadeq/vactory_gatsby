@@ -33,6 +33,7 @@ export const TestimonaislColonnes = ({imageUrl, image_alt, name, role, descripti
                      borderRadius="rounded"
                      overflow="hidden"
                      sx={{position: "relative"}}
+                     mb="medium"
                 >
                     <Picture
                         file={imageUrl}

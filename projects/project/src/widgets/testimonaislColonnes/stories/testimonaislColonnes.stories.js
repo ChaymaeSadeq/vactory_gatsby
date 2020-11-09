@@ -13,7 +13,7 @@ export const Variant1 = () => {
         bigTitle: "This is the big title",
         intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
         colCount: select("Numbers of cols", colsNumbers, 2, groupId),
-        inversed: false,
+        inversed: boolean('inversed', false, groupId),
         items: [
             {
                 imageUrl: "/image",
@@ -41,7 +41,7 @@ export const Variant1 = () => {
         bigTitle: "هذا هو العنوان الكبير",
         intro: "لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت",
         colCount: select("Numbers of cols", colsNumbers, 2, groupId),
-        inversed: false,
+        inversed: boolean('inversed', false, groupId),
         items: [
             {
                 imageUrl: "/image",
@@ -80,7 +80,7 @@ export const Variant2 = () => {
         bigTitle: "This is the big title",
         intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
         colCount: select("Numbers of cols", colsNumbers, 2, groupId),
-        inversed: true,
+        inversed: boolean('inversed', true, groupId),
         items: [
             {
                 imageUrl: "/image",
@@ -108,7 +108,7 @@ export const Variant2 = () => {
         bigTitle: "هذا هو العنوان الكبير",
         intro: "لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت",
         colCount: select("Numbers of cols", colsNumbers, 2, groupId),
-        inversed: true,
+        inversed: boolean('inversed', true, groupId),
         items: [
             {
                 imageUrl: "/image",

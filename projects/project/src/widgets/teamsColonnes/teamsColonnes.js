@@ -50,7 +50,7 @@ export const TeamsColonnes = ({imageUrl, image_alt, name, role, description, ima
                     ratio={CurrentImageStyle.ratio}
                 />
             </Box>
-            <Heading level={4} mb="0">{name}</Heading>
+            <Heading level={4} mb='0px'>{name}</Heading>
             <Paragraph fontSize="body" fontStyle="italic" lineHeight="body" level={5}>{role}</Paragraph>
             <Paragraph>{description}</Paragraph>
         </Box>

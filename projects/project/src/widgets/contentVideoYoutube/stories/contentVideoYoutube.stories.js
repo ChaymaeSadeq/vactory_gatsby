@@ -34,10 +34,9 @@ export const Variant2 = () => {
 
 export const Variant3 = () => {
     const rtl = useRtl()
-    const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
         <Container>
-            <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={isPopUp}
+            <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={false}
                                  description={rtl ? description_ar : description}/>
         </Container>
     )

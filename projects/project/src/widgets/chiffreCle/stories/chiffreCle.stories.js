@@ -25,7 +25,7 @@ export const Variant1 = () => {
                 {
                     imageUrl: '/kd',
                     image_alt: 'image alt',
-                    number: 1000,
+                    number: 75.39,
                     word_before: 'N',
                     description: 'Lorem ipsum dolor',
                 },

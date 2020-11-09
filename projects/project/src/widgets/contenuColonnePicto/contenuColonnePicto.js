@@ -22,7 +22,7 @@ export const ContenuColonnePicto = ({title, description, cta_url, cta_text, pict
     return (
         <Box mb={20}>
             {pictoImg &&
-            <Box width={imageStyles.width} mx="auto">
+            <Box width={imageStyles.width} mb="medium" mx="auto">
                 <Picture
                     file={pictoImg}
                     alt={image_alt}

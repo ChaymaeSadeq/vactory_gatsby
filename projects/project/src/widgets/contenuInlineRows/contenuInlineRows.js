@@ -34,6 +34,7 @@ export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, descripti
             <Box
                 pr={!inversed ? 'medium' : '0'}
                 pl={inversed ? 'medium' : '0'}
+                mb={['medium', '0']}
                 width="200px">
                 <Picture
                     file={pictoImg}

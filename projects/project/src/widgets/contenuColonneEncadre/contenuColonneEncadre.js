@@ -38,7 +38,7 @@ export const ContenuColonneEncadre = ({title, description, cta_url, cta_text, pi
     return (
         <Encadre>
             {pictoImg &&
-                <Box mx='auto' width={imageStyles.width} height={imageStyles.height}>
+                <Box mx='auto' mb="medium" width={imageStyles.width} height={imageStyles.height}>
                 <Picture
                     file={pictoImg}
                     sizes={imageStyles.sizes}

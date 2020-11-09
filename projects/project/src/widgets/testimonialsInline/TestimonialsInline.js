@@ -19,10 +19,11 @@ export const TestimonialsInline = ({imageUrl, image_alt, name, description, role
     const classRowInversed = inversed ? 'row-reverse' : 'row'
     return (
         <Flex flexDirection={['column', null, classRowInversed]} py="large" alignItems="center">
-            <Box minWidth={imageStyles.width} width={imageStyles.width} mx={['auto', null, '0']} mb={['medium', null]}
+            <Box minWidth={imageStyles.width} width={imageStyles.width} mx={['auto', null, '0']}
                  borderRadius="rounded"
                  overflow="hidden"
                  sx={{position: "relative"}}
+                 mb={['medium', null, '0px']}
             >
                 <Picture
                     file={imageUrl}

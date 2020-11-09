@@ -13,6 +13,7 @@
   "dependencies": {
     "@storybook/addon-controls": "^6.0.26",
     "@storybook/addon-knobs": "^6.0.26",
+    "animated-number-react": "^0.1.1",
     "dotenv": "^8.2.0",
     "gatsby": "^2.20.12",
     "react": "^16.12.0",

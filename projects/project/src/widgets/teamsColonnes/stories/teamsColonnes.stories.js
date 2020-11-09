@@ -12,7 +12,7 @@ export const Variant1 = () => {
     const data = !rtl ? {
         bigTitle: "This is the big title",
         intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
-        image_cyrcle: boolean("Centrer le contenu", false, groupId),
+        image_cyrcle: boolean("image_cyrcle", false, groupId),
         colCount: select("Numbers of cols", colsNumbers, 3, groupId),
         items: [
             {
@@ -40,7 +40,7 @@ export const Variant1 = () => {
     } : {
         bigTitle: "هذا هو العنوان الكبير",
         intro: "لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت",
-        image_cyrcle: boolean("Centrer le contenu", false, groupId),
+        image_cyrcle: boolean("image_cyrcle", false, groupId),
         colCount: select("Numbers of cols", colsNumbers, 3, groupId),
         items: [
             {
@@ -79,7 +79,7 @@ export const Variant2 = () => {
     const data = !rtl ? {
         bigTitle: "This is the big title",
         intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
-        image_cyrcle: boolean("Centrer le contenu", true, groupId),
+        image_cyrcle: boolean("image_cyrcle", true, groupId),
         colCount: select("Numbers of cols", colsNumbers, 3, groupId),
         items: [
             {
@@ -107,7 +107,7 @@ export const Variant2 = () => {
     } : {
         bigTitle: "هذا هو العنوان الكبير",
         intro: "لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت",
-        image_cyrcle: boolean("Centrer le contenu", true, groupId),
+        image_cyrcle: boolean("image_cyrcle", true, groupId),
         colCount: select("Numbers of cols", colsNumbers, 3, groupId),
         items: [
             {

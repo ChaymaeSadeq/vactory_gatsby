@@ -14,6 +14,7 @@ import {
     TeamColonnesInlineContainer,
     TestimonaislColonnesContainer,
     TestimonialsInlineContainer,
+    FullBackgroundSliderContainer
 } from "project";
 
 const widgets = {
@@ -32,6 +33,7 @@ const widgets = {
     'vactory_widgets_ui:teams-colonnes-inline': TeamColonnesInlineContainer,
     'vactory_widgets_ui:testimonials-colonne': TestimonaislColonnesContainer,
     'vactory_widgets_ui:testimonials-inline': TestimonialsInlineContainer,
+    'vactory_widgets_ui:full-background-slider': FullBackgroundSliderContainer
 };
 
 export default widgets

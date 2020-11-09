@@ -6,13 +6,47 @@ import {useRtl} from "vactory-gatsby-core";
 import {theme} from "../../vactory-gatsby-ui/theme";
 
 
+export const ContenuColonneImageWrapper = ({bigTitle, intro, colCount, centercontent, activeBorder, items}) => {
+    const contentTextAlignClass = centercontent ? "center" : "left"
+    const number_cols = 12 / colCount
+    return (
+        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
+            {items.length <= colCount &&
+            <>
+                <Box display={(items.length > 1) ? ['none', null, 'block'] : null}>
+                    <Row>
+                        {
+                            items.map((item, index) => {
+                                return (
+                                    <Col key={index} xs={12} sm={6} md={number_cols} textAlign={contentTextAlignClass}>
+                                        <ContenuColonneImage {...item} activeBorder={activeBorder}/>
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
+                </Box>
+                {items.length > 1 &&
+                <Box display={['block', null, 'none']}>
+                    <ContenuColonnesSlider slidetoShow={colCount} items={items}/>
+                </Box>
+                }
+            </>
+            }
+            {items.length > colCount &&
+            <ContenuColonnesSlider slidetoShow={colCount} items={items}/>
+            }
+        </TemplateWrapper>
+    )
+}
+
 const ContenuColonnesSlider = ({items, slidetoShow}) => {
     const isRtl = useRtl()
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: slidetoShow,
+        slidesToShow: parseInt(slidetoShow),
         slidesToScroll: 1,
         arrows: true,
         centerMode: false,
@@ -55,39 +89,5 @@ const ContenuColonnesSlider = ({items, slidetoShow}) => {
             })}
 
         </Slider>
-    )
-}
-
-export const ContenuColonneImageWrapper = ({bigTitle, intro, colCount, centercontent, activeBorder, items}) => {
-    const contentTextAlignClass = centercontent ? "center" : "left"
-    const number_cols = 12 / colCount
-    return (
-        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
-            {items.length <= colCount &&
-            <>
-                <Box display={(items.length > 1) ? ['none', null, 'block'] : null}>
-                    <Row>
-                        {
-                            items.map((item, index) => {
-                                return (
-                                    <Col key={index} xs={12} sm={6} md={number_cols} textAlign={contentTextAlignClass}>
-                                        <ContenuColonneImage {...item} activeBorder={activeBorder}/>
-                                    </Col>
-                                )
-                            })
-                        }
-                    </Row>
-                </Box>
-                {items.length > 1 &&
-                <Box display={['block', null, 'none']}>
-                    <ContenuColonnesSlider slidetoShow={colCount} items={items}/>
-                </Box>
-                }
-            </>
-            }
-            {items.length > colCount &&
-            <ContenuColonnesSlider slidetoShow={colCount} items={items}/>
-            }
-        </TemplateWrapper>
     )
 }

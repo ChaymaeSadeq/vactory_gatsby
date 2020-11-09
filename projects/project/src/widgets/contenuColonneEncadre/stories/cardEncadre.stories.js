@@ -1,5 +1,5 @@
 import React from 'react';
-import {withKnobs, boolean, select, text} from "@storybook/addon-knobs";
+import {withKnobs, boolean, select, text, color} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
 import {ContenuColonneEncadreWrapper} from "../contenuColonneEncadreWrapper";
 import {Container, Box} from "vactory-ui";
@@ -10,8 +10,9 @@ import {useRtl} from 'vactory-gatsby-core'
 const groupId = 'Options';
 const colsNumbers = [2, 3, 4];
 
-export const Variant1 = ({backgroundColor = "#fff", width}) => {
+export const Variant1 = () => {
     const rtl = useRtl();
+    const backgroundColor = color("Color", "#fff", groupId);
     const data = !rtl ? {
             bigTitle: "This is the big title",
             intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid at corporis, culpa dignissimos error explicabo incidunt inventore ipsa ipsum laborum maiores molestiae nihil nostrum possimus quaerat quia recusandae totam voluptatum!",
@@ -65,7 +66,7 @@ export const Variant1 = ({backgroundColor = "#fff", width}) => {
             <Container>
                 <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
                                               intro={data.intro}
-                                              colCount={width}
+                                              colCount={data.colCount}
                                               items={data.items}
                                               centercontent={data.centercontent}
                 />
@@ -204,19 +205,9 @@ export const Variant3 = () => {
     )
 }
 
-Variant1.args = {
-    //backgroundColor: '#e00',
-    width: 2,
-};
 
 export default {
     title: 'Dynamic Fields/Contenu en colonne encadré',
     decorators: [withKnobs],
-    argTypes: {
-        backgroundColor: {control: 'color'},
-        width: {
-            control: {type: 'range', min: 2, max: 4, step: 1},
-        },
-    },
 };
 

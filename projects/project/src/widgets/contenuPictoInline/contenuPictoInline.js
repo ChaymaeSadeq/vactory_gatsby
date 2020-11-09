@@ -18,7 +18,7 @@ export const ContenuPictoInline = ({imgUrl, image_alt, title, description, cente
     return (
         <Flex flexDirection={['column', 'row']} mb="small" alignItems={centercontent ? 'center' : 'flex-start'}>
             {imgUrl &&
-            <Box width={imageStyles.width} mx={['auto', '0']}>
+            <Box width={imageStyles.width} mb={['medium', '0']} mx={['auto', '0']}>
                 <Picture
                     file={imgUrl}
                     alt={image_alt}

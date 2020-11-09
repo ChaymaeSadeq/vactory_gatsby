@@ -1,6 +1,7 @@
 import React from "react";
 import {Box, Paragraph, Heading} from 'vactory-ui'
 import {Picture} from "vactory-gatsby-ui";
+import AnimatedNumber from "animated-number-react";
 
 const imageStyles = {
     sizes: [
@@ -23,9 +24,17 @@ const ChiffreCss = {
     lineHeight: ['40px', null, '50px'],
     color: 'black',
     fontWeight: "black",
+    " span": {
+        fontSize: ['40px', null, '50px'],
+        lineHeight: ['40px', null, '50px'],
+        color: 'black',
+        fontWeight: "black",
+    }
 }
 
 export const ChiffreCle = ({number, word_before, word_after, description, imageUrl, image_alt}) => {
+
+    const formatValue = (value) =>  value % 1 === 0 ? value.toFixed(0) : value.toFixed(2);
     return (
         <Box sx={{
             borderStyle: 'solid',
@@ -57,7 +66,9 @@ export const ChiffreCle = ({number, word_before, word_after, description, imageU
                     </Paragraph>
                     }
                     {number &&
-                    <Paragraph sx={ChiffreCss} mx='xxsmall' as="span">{number}</Paragraph>
+                    <Paragraph sx={ChiffreCss} mx='xxsmall' as="span">
+                        <AnimatedNumber value={number} formatValue={formatValue} duration="2000" />
+                    </Paragraph>
                     }
                     {word_after &&
                     <Paragraph sx={ChiffreCss} as="span">

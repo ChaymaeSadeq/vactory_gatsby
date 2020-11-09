@@ -11,7 +11,7 @@ const ContenuColonnePictoSlider = ({items, slidetoShow}) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: slidetoShow,
+        slidesToShow: parseInt(slidetoShow),
         slidesToScroll: 1,
         arrows: true,
         centerMode: false,
