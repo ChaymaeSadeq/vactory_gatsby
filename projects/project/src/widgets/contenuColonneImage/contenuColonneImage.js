@@ -3,29 +3,14 @@ import {Box, Heading, Button as Permalink} from "vactory-ui";
 import { Wysiwyg } from 'vactory-gatsby-ui'
 import {Picture} from "vactory-gatsby-ui";
 
-// @todo: à adapter selon colCount. Maybe move this imageStyles to .container.js file.
-const imageStyles = {
-    sizes: [
-        {
-            name: "decoupled_image_354_200",
-            media: "(max-width: 767px)"
-        },
-        {
-            name: "decoupled_image_288_162",
-            media: "(min-width: 768px)"
-        }
-    ],
-    width: 354,
-    height: 200,
-    ratio: 354 / 200
-};
-
-export const ContenuColonneImage = ({title, description, cta_url, cta_text, pictoImg, pictoImg_alt, activeBorder}) => {
+export const ContenuColonneImage = ({title, description, cta_url, cta_text, pictoImg, pictoImg_alt, activeBorder, imageStyles}) => {
+    console.log('imageStyles', imageStyles)
     return (
         <Box mb="large" padding={activeBorder? "xlarge" : "inherit"}
              borderStyle={activeBorder ? 'solid' : 'none'}
              borderColor={activeBorder ? 'black' : 'none'}
              borderWidth={activeBorder ? 'medium' : 'none'}
+             height="100%"
         >
             {pictoImg &&
             <Box mb="medium">

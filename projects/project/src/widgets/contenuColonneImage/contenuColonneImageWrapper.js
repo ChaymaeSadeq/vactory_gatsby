@@ -6,9 +6,63 @@ import {useRtl} from "vactory-gatsby-core";
 import {theme} from "../../vactory-gatsby-ui/theme";
 
 
+const imageStyles2Cols = {
+    sizes: [
+        {
+            name: "decoupled_image_466_262",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_288_162",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 466,
+    height: 262,
+    ratio: 466 / 262
+};
+const imageStyles3Cols = {
+    sizes: [
+        {
+            name: "decoupled_image_354_200",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_288_162",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 354,
+    height: 200,
+    ratio: 354 / 200
+};
+const imageStyles4Cols = {
+    sizes: [
+        {
+            name: "decoupled_image_252_142",
+            media: "(max-width: 767px)"
+        },
+        {
+            name: "decoupled_image_288_162",
+            media: "(min-width: 768px)"
+        }
+    ],
+    width: 252,
+    height: 142,
+    ratio: 252 / 142
+};
+
+
 export const ContenuColonneImageWrapper = ({bigTitle, intro, colCount, centercontent, activeBorder, items}) => {
     const contentTextAlignClass = centercontent ? "center" : "left"
     const number_cols = 12 / colCount
+    let imageStyles = imageStyles2Cols
+    if (colCount === 3) {
+        imageStyles = imageStyles3Cols
+    } else if (colCount === 4) {
+        imageStyles = imageStyles4Cols
+    }
+
     return (
         <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             {items.length <= colCount &&
@@ -19,7 +73,8 @@ export const ContenuColonneImageWrapper = ({bigTitle, intro, colCount, centercon
                             items.map((item, index) => {
                                 return (
                                     <Col key={index} xs={12} sm={6} md={number_cols} textAlign={contentTextAlignClass}>
-                                        <ContenuColonneImage {...item} activeBorder={activeBorder}/>
+                                        <ContenuColonneImage imageStyles={imageStyles} {...item}
+                                                             activeBorder={activeBorder}/>
                                     </Col>
                                 )
                             })
@@ -28,19 +83,19 @@ export const ContenuColonneImageWrapper = ({bigTitle, intro, colCount, centercon
                 </Box>
                 {items.length > 1 &&
                 <Box display={['block', null, 'none']}>
-                    <ContenuColonnesSlider slidetoShow={colCount} items={items}/>
+                    <ContenuColonnesSlider imageStyles={imageStyles} slidetoShow={colCount} items={items}/>
                 </Box>
                 }
             </>
             }
             {items.length > colCount &&
-            <ContenuColonnesSlider slidetoShow={colCount} items={items}/>
+            <ContenuColonnesSlider imageStyles={imageStyles} slidetoShow={colCount} items={items}/>
             }
         </TemplateWrapper>
     )
 }
 
-const ContenuColonnesSlider = ({items, slidetoShow}) => {
+const ContenuColonnesSlider = ({items, slidetoShow, imageStyles}) => {
     const isRtl = useRtl()
     const settings = {
         dots: true,
@@ -83,7 +138,7 @@ const ContenuColonnesSlider = ({items, slidetoShow}) => {
             {items.map((item, index) => {
                 return (
                     <Box key={index} px='xsmall'>
-                        <ContenuColonneImage {...item} />
+                        <ContenuColonneImage imageStyles={imageStyles} {...item} />
                     </Box>
                 )
             })}

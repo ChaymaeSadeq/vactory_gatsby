@@ -5,8 +5,8 @@ import {ContenuMosaiquedWrapper} from "./contenuMosaiquedWrapper";
 export const ContenuMosaiqueContainer = ({data}) => {
 
     const data_list = {
-        centercontent: get(data, 'extra_field.centercontent'),
-        activeBorder: get(data, 'extra_field.activeBorder'),
+        centercontent: get(data, 'extra_field.group_options.centercontent'),
+        activeBorder: get(data, 'extra_field.group_options.activeBorder'),
         intro: get(data, 'extra_field.intro'),
         bigTitle: get(data, "extra_field.bigTitle"),
         items: data.components.map((item) => {

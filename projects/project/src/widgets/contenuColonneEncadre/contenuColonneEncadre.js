@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Heading, Button as Permalink} from "vactory-ui";
+import {Box, Heading} from "vactory-ui";
 import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
 import {LinkUrl} from "../../composants/link-url";
 
@@ -8,12 +8,8 @@ const imageStyles = {
     sizes: [
         {
             name: "decoupled_image_60_60",
-            media: "(min-width: 768px)"
+            media: "(min-width: 0px)"
         },
-        {
-            name: "decoupled_image_60_60",
-            media: "(max-width: 767px)"
-        }
     ],
     width: 60,
     height: 60,

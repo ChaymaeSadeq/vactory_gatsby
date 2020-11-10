@@ -1,13 +1,12 @@
 import React from "react";
 import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
-import styled, {css} from "styled-components";
 import {Col, Row, Box, Heading, Button as Permalink} from "vactory-ui";
 import {TemplateWrapper} from "../../composants/template-wrapper";
 
 const imageStyles = {
     sizes: [
         {
-            name: "decoupled_image_354_200",
+            name: "decoupled_image_459_258",
             media: "(max-width: 767px)"
         },
         {
@@ -15,19 +14,10 @@ const imageStyles = {
             media: "(min-width: 768px)"
         }
     ],
-    width: 354,
-    height: 200,
-    ratio: 354 / 200
+    width: 459,
+    height: 258,
+    ratio: 459 / 258
 };
-
-const StyledRow = styled(Row)`
-    ${props => props.inversed === true && css`
-        flex-direction: row-reverse;
-    `}
-    ${props => props.inversed === false && css`
-        flex-direction: row;
-    `}
-`
 
 export const ContenuInline = ({imgUrl, image_alt, title, description, cta_text, cta_url, colImage, activeBorder, activeBorderImage, inversed}) => {
     return (
@@ -38,7 +28,9 @@ export const ContenuInline = ({imgUrl, image_alt, title, description, cta_text, 
                 borderWidth={activeBorder ? 'medium' : 'none'}
                 borderColor={activeBorder ? 'black' : 'none'}
             >
-                <StyledRow alignItems="center" inversed={inversed}>
+                <Row alignItems="center" sx={{
+                    flexDirection: inversed ? 'row-reverse' : 'row'
+                }}>
                     {imgUrl &&
                     <Col xs={12} sm={4} md={colImage}
                     >
@@ -73,7 +65,7 @@ export const ContenuInline = ({imgUrl, image_alt, title, description, cta_text, 
                             }
                         </Box>
                     </Col>
-                </StyledRow>
+                </Row>
             </Box>
         </TemplateWrapper>
     )

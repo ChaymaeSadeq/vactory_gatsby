@@ -7,7 +7,7 @@ export const TeamColonnesInlineContainer = ({data}) => {
         bigTitle: get(data, "extra_field.bigTitle"),
         intro: get(data, 'extra_field.intro'),
         colCount: get(data, "extra_field.group_options.colCount"),
-        activeBorder: get(data, 'extra_fields.group_options.activeBorder'),
+        activeBorder: get(data, 'extra_field.group_options.activeBorder'),
         items: data.components.map(item => ({
             imageUrl: get(item, 'imageUrl.0'),
             image_alt: get(item, 'image_alt'),

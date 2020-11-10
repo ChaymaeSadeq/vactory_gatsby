@@ -6,7 +6,7 @@ import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
 const imageStyles = {
     sizes: [
         {
-            name: "decoupled_image_354_200",
+            name: "decoupled_image_562_316",
             media: "(max-width: 767px)"
         },
         {
@@ -14,9 +14,9 @@ const imageStyles = {
             media: "(min-width: 768px)"
         }
     ],
-    width: 354,
-    height: 200,
-    ratio: 354 / 200
+    width: 562,
+    height: 316,
+    ratio: 562 / 316
 };
 
 
@@ -29,12 +29,6 @@ const StyledRow = styled(Row)`
             border-bottom: 6px solid black;
         }
      `}
-    ${props => !props.inversed && css`
-        flex-direction: row-reverse;
-    `}
-    ${props => props.inversed && css`
-        flex-direction: row;
-    `}
 `
 
 const ColImg = styled(Col)`
@@ -58,9 +52,12 @@ const ColContent = styled(Col)`
 
 
 export const ContenuMosaique = ({imgUrl, image_alt, title, description, cta_text, cta_url, textAlign, inversed, activeBorder}) => {
-
     return (
-        <StyledRow textAlign={textAlign} inversed={inversed} activeBorder={activeBorder}>
+        <StyledRow textAlign={textAlign} inversed={inversed} activeBorder={activeBorder}
+            sx={{
+                flexDirection: inversed ? 'row' : 'row-reverse'
+            }}
+        >
             {imgUrl &&
             <ColImg xs={12} sm={12} md={6}
                     p="0"

@@ -46,5 +46,29 @@ export const imageStyles = [
         width: 200,
         height: 200,
         operation: 'scale_crop',
+    },
+    {
+        name: "decoupled_image_466_262",
+        width: 466,
+        height: 262,
+        operation: 'scale_crop',
+    },
+    {
+        name: "decoupled_image_252_142",
+        width: 252,
+        height: 142,
+        operation: 'scale_crop',
+    },
+    {
+        name: "decoupled_image_459_258",
+        width: 459,
+        height: 258,
+        operation: 'scale_crop',
+    },
+    {
+        name: "decoupled_image_562_316",
+        width: 562,
+        height: 316,
+        operation: 'scale_crop'
     }
 ];

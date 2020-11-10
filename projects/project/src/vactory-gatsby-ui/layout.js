@@ -6,7 +6,7 @@ import {
 import {Box, Icon, Header, Heading, Text, Flex, Button} from 'vactory-ui'
 
 const HeaderExample = () => {
-    return <Header fixed={true} p="xlarge" bg="white" boxShadow={1}>
+    return <Header fixed={true} p="xlarge" bg="white" boxShadow={1} sx={{zIndex: '1'}}>
         <Flex alignItems="center" width={"100%"}>
             <Flex alignItems="center" flexGrow={1}>
                 <Icon name={"pacman"} color="primary" size="large"/>

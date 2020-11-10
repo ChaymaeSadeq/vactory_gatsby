@@ -9,7 +9,7 @@ export const ContentVideoYoutubeContainer = ({data}) => {
         image : get(data, 'components.0.image.0'),
         image_alt : get(data, 'components.0.image_alt'),
         hideImage : get(data, "components.0.group_options.hideImage"),
-        isPopUp : get(data, "components.0.group_options.bigTitle"),
+        isPopUp : get(data, "components.0.group_options.isPopUp"),
         description : get(data, "components.0.description.value.#text"),
     }
     return (

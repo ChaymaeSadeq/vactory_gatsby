@@ -22,7 +22,6 @@ const imageStyles = {
 };
 
 export const ContentVideoYoutube = ({videoId, image, image_alt, hideImage, isPopUp, description}) => {
-
     return (
         <TemplateWrapper>
             <VideoYoutube videoId={videoId} image={image} image_alt={image_alt}

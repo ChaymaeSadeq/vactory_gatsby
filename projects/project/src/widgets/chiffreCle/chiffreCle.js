@@ -33,7 +33,6 @@ const ChiffreCss = {
 }
 
 export const ChiffreCle = ({number, word_before, word_after, description, imageUrl, image_alt}) => {
-
     const formatValue = (value) =>  value % 1 === 0 ? value.toFixed(0) : value.toFixed(2);
     return (
         <Box sx={{
@@ -67,7 +66,7 @@ export const ChiffreCle = ({number, word_before, word_after, description, imageU
                     }
                     {number &&
                     <Paragraph sx={ChiffreCss} mx='xxsmall' as="span">
-                        <AnimatedNumber value={number} formatValue={formatValue} duration="2000" />
+                        <AnimatedNumber value={number} formatValue={(number)=> formatValue(number)} duration="2000" />
                     </Paragraph>
                     }
                     {word_after &&
