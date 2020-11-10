@@ -4,7 +4,6 @@ import { Wysiwyg } from 'vactory-gatsby-ui'
 import {Picture} from "vactory-gatsby-ui";
 
 export const ContenuColonneImage = ({title, description, cta_url, cta_text, pictoImg, pictoImg_alt, activeBorder, imageStyles}) => {
-    console.log('imageStyles', imageStyles)
     return (
         <Box mb="large" padding={activeBorder? "xlarge" : "inherit"}
              borderStyle={activeBorder ? 'solid' : 'none'}
