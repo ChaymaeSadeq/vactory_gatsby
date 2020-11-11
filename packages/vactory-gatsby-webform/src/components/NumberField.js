@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, forwardRef} from 'react';
 import {Box, Input} from 'vactory-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
@@ -8,11 +8,11 @@ import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormCo
 import {useTranslation} from "react-i18next"
 import {toRegister} from "../utils/toRegister";
 
-export const NumberField = ({
+export const NumberField = forwardRef(({
                                 id,
                                 name,
                                 field,
-                            }) => {
+                            }, ref) => {
     const {
         label,
         placeholder,
@@ -75,4 +75,4 @@ export const NumberField = ({
             </Box>
         </FormControl>
     ) : null;
-};
+});

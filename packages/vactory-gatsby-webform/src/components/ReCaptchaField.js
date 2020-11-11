@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect} from 'react';
+import React, {useMemo, useEffect, forwardRef, useImperativeHandle} from 'react';
 import {Box} from 'vactory-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
@@ -10,12 +10,11 @@ import {useStyles} from '../hooks/useStyles';
 import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormControls'
 import {toRegister} from "../utils/toRegister";
 
-export const ReCaptchaField = ({
-                                   id,
-                                   name,
-                                   field,
-                                   refsCollection
-                               }) => {
+export const ReCaptchaField = forwardRef(({
+                                              id,
+                                              name,
+                                              field,
+                                          }, ref) => {
     const {
         label,
         helperText,
@@ -35,11 +34,18 @@ export const ReCaptchaField = ({
         return shouldDisplay ? shouldDisplay(values) : true;
     }, [values, shouldDisplay]);
 
+    useImperativeHandle(ref, () => ({
+        reset: () => {
+            recaptchaRef?.current?.reset();
+            setValue("g-recaptcha-response", null)
+        }
+    }));
+
     useEffect(() => {
         register({
             name: "g-recaptcha-response",
         }, toRegister(label || name, validation, values, t))
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return isVisible ? (
         <FormControl
@@ -61,10 +67,7 @@ export const ReCaptchaField = ({
                     <ReCaptcha
                         sitekey={AppSettings.keys.reCaptcha}
                         hl={currentLanguage}
-                        ref={(e) => {
-                            recaptchaRef.current = e;
-                            refsCollection["reCaptcha"] = recaptchaRef
-                        }}
+                        ref={recaptchaRef}
                         onChange={val => {
                             setValue("g-recaptcha-response", val);
                         }}
@@ -88,4 +91,4 @@ export const ReCaptchaField = ({
             </Box>
         </FormControl>
     ) : null;
-};
+});

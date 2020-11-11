@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, forwardRef} from 'react';
 import {Box, Input} from 'vactory-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
@@ -8,11 +8,11 @@ import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormCo
 import {toRegister} from "../utils/toRegister";
 import {useStyles} from "..";
 
-export const TextAreaField = ({
+export const TextAreaField = forwardRef(({
                                   id,
                                   name,
                                   field,
-                              }) => {
+                              }, ref) => {
     const {
         label,
         placeholder,
@@ -71,4 +71,4 @@ export const TextAreaField = ({
             </Box>
         </FormControl>
     ) : null;
-};
+});

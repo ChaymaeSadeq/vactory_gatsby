@@ -1,0 +1,346 @@
+{
+  "webforms": [
+    {
+      "uuid": "4bccd105-0855-4af1-955e-f6eec9329b44",
+      "id": "contact",
+      "isOpen": true,
+      "locale": "fr",
+      "elements": {
+        "name": {
+          "validation": {
+            "required": true,
+            "requiredError": "Le champs nom est valide"
+          },
+          "type": "text",
+          "label": "Your Name",
+          "placeholder": "This is a placeholder",
+          "helperText": "This is a help text"
+        },
+        "email": {
+          "validation": {
+            "required": true,
+            "pattern": "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i",
+            "patternError": "Le champ Your Email n'est pas valide"
+          },
+          "type": "text",
+          "label": "Your Email"
+        },
+        "confirm_email": {
+          "type": "text",
+          "label": "Confirm Email",
+          "validation": {
+            "pattern": "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i",
+            "patternError": "Le champ Confirm Email n'est pas valide",
+            "sameAs": "email",
+            "sameAsError": "Le champ Confirm Email n'est pas valide"
+          }
+        },
+        "subject": {
+          "validation": {
+            "required": true,
+            "requiredError": "Sujet doit être requis"
+          },
+          "type": "text",
+          "label": "Subject"
+        },
+        "message": {
+          "validation": {
+            "required": true
+          },
+          "type": "textArea",
+          "label": "Message"
+        },
+        "category_news": {
+          "validation": {
+            "required": true,
+            "requiredError": "categorie is required"
+          },
+          "type": "select",
+          "label": "category news",
+          "emptyOption": "-- selectionner --",
+          "options": [
+            {
+              "label": "-- selectionner --",
+              "value": ""
+            },
+            {
+              "value": 4,
+              "label": "Actualités"
+            },
+            {
+              "value": 3,
+              "label": "Évenement"
+            },
+            {
+              "value": 1,
+              "label": "Finnance"
+            },
+            {
+              "value": 2,
+              "label": "Publication"
+            }
+          ]
+        },
+        "check_this_to_see_me": {
+          "type": "checkbox",
+          "label": "check this to see me"
+        },
+        "lien": {
+          "type": "text",
+          "label": "lien"
+        },
+        "checkboxes": {
+          "type": "checkboxes",
+          "label": "Checkboxes",
+          "options": [
+            {
+              "value": "Male",
+              "label": "Male"
+            },
+            {
+              "value": "Female",
+              "label": "Female"
+            },
+            {
+              "value": "all",
+              "label": "All of the above"
+            },
+            {
+              "value": "none",
+              "label": "None of the above"
+            }
+          ],
+          "optionsDisplay": "three_columns",
+          "optionsAll": true,
+          "optionsNone": true
+        },
+        "radios": {
+          "type": "radios",
+          "label": "Do you agree",
+          "options": [
+            {
+              "value": "No",
+              "label": "No"
+            },
+            {
+              "value": "Yes",
+              "label": "Yes"
+            }
+          ],
+          "optionsDisplay": "buttons"
+        },
+        "telephone": {
+          "type": "text",
+          "label": "Téléphone",
+          "htmlInputType": "tel"
+        },
+        "gender": {
+          "type": "select",
+          "label": "Gender",
+          "options": [
+            {
+              "label": "-- selectionner --",
+              "value": "nothing"
+            },
+            {
+              "value": "male",
+              "label": "Male"
+            },
+            {
+              "value": "female",
+              "label": "Female"
+            }
+          ],
+          "emptyOption": "-- selectionner --",
+          "emptyValue": "nothing"
+        },
+        "your_age": {
+          "type": "number",
+          "label": "Your age",
+          "readOnly": true,
+          "validation": {
+            "min": 15,
+            "max": 60
+          }
+        },
+        "captcha": {
+          "type": "captcha",
+          "validation": {
+            "required": true
+          }
+        }
+      }
+    },
+    {
+      "uuid": "4bccd105-0855-4af1-955e-f6eec9329b44",
+      "id": "contact",
+      "isOpen": true,
+      "locale": "ar",
+      "elements": {
+        "name": {
+          "validation": {
+            "required": true,
+            "requiredError": "Le champs nom est valide"
+          },
+          "type": "text",
+          "label": "اسمك",
+          "placeholder": "This is a placeholder",
+          "helperText": "هيلب تيكس"
+        },
+        "email": {
+          "validation": {
+            "required": true,
+            "pattern": "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i",
+            "patternError": "Le champ Your Email n'est pas valide"
+          },
+          "type": "text",
+          "label": "Your Email"
+        },
+        "confirm_email": {
+          "type": "text",
+          "label": "Confirm Email",
+          "validation": {
+            "pattern": "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i",
+            "patternError": "Le champ Confirm Email n'est pas valide",
+            "sameAs": "email",
+            "sameAsError": "Le champ Confirm Email n'est pas valide"
+          }
+        },
+        "subject": {
+          "validation": {
+            "required": true,
+            "requiredError": "Sujet doit être requis"
+          },
+          "type": "text",
+          "label": "Subject"
+        },
+        "message": {
+          "validation": {
+            "required": true
+          },
+          "type": "textArea",
+          "label": "Message"
+        },
+        "category_news": {
+          "validation": {
+            "required": true,
+            "requiredError": "categorie is required"
+          },
+          "type": "select",
+          "label": "category news",
+          "emptyOption": "-- selectionner --",
+          "options": [
+            {
+              "label": "-- selectionner --",
+              "value": ""
+            },
+            {
+              "value": 4,
+              "label": "احبار"
+            },
+            {
+              "value": 3,
+              "label": "Évenement"
+            },
+            {
+              "value": 1,
+              "label": "Finnance"
+            },
+            {
+              "value": 2,
+              "label": "Publication"
+            }
+          ]
+        },
+        "check_this_to_see_me": {
+          "type": "checkbox",
+          "label": "check this to see me"
+        },
+        "lien": {
+          "type": "text",
+          "label": "lien"
+        },
+        "checkboxes": {
+          "type": "checkboxes",
+          "label": "Checkboxes",
+          "options": [
+            {
+              "value": "Male",
+              "label": "Male"
+            },
+            {
+              "value": "Female",
+              "label": "Female"
+            },
+            {
+              "value": "all",
+              "label": "All of the above"
+            },
+            {
+              "value": "none",
+              "label": "None of the above"
+            }
+          ],
+          "optionsDisplay": "three_columns",
+          "optionsAll": true,
+          "optionsNone": true
+        },
+        "radios": {
+          "type": "radios",
+          "label": "Do you agree",
+          "options": [
+            {
+              "value": "No",
+              "label": "No"
+            },
+            {
+              "value": "Yes",
+              "label": "Yes"
+            }
+          ],
+          "optionsDisplay": "buttons"
+        },
+        "telephone": {
+          "type": "text",
+          "label": "Téléphone",
+          "htmlInputType": "tel"
+        },
+        "gender": {
+          "type": "select",
+          "label": "Gender",
+          "options": [
+            {
+              "label": "-- selectionner --",
+              "value": "nothing"
+            },
+            {
+              "value": "male",
+              "label": "Male"
+            },
+            {
+              "value": "female",
+              "label": "Female"
+            }
+          ],
+          "emptyOption": "-- selectionner --",
+          "emptyValue": "nothing"
+        },
+        "your_age": {
+          "type": "number",
+          "label": "Your age",
+          "readOnly": true,
+          "validation": {
+            "min": 15,
+            "max": 60
+          }
+        },
+        "captcha": {
+          "type": "captcha",
+          "validation": {
+            "required": true
+          }
+        }
+      }
+    }
+  ]
+}

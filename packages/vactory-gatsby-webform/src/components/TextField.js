@@ -1,4 +1,4 @@
-import React, {useMemo, useContext} from 'react';
+import React, {useMemo, forwardRef} from 'react';
 import {Box, Input} from 'vactory-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
@@ -8,11 +8,11 @@ import {toRegister} from '../utils/toRegister'
 import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormControls'
 import {useTranslation} from "react-i18next"
 
-export const TextField = ({
+export const TextField = forwardRef(({
                               id,
                               name,
                               field,
-                          }) => {
+                          }, ref) => {
     const {
         label,
         placeholder,
@@ -31,8 +31,6 @@ export const TextField = ({
     const isVisible = useMemo(() => {
         return shouldDisplay ? shouldDisplay(values) : true;
     }, [values, shouldDisplay]);
-
-    console.log(formControlLayout)
 
     return isVisible ? (
         <FormControl
@@ -77,4 +75,4 @@ export const TextField = ({
             </Box>
         </FormControl>
     ) : null;
-};
+});

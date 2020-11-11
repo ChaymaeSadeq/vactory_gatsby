@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, forwardRef} from 'react';
 import {Box, Select} from 'vactory-ui';
 import classNames from "classnames"
 import {useTranslation} from "react-i18next"
@@ -8,11 +8,11 @@ import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormCo
 import {toRegister} from "../utils/toRegister";
 import {useStyles} from "..";
 
-export const SelectField = ({
+export const SelectField = forwardRef(({
                                 id,
                                 name,
                                 field,
-                            }) => {
+                            }, ref) => {
     const {
         label,
         helperText,
@@ -73,4 +73,4 @@ export const SelectField = ({
             </Box>
         </FormControl>
     ) : null;
-};
+});

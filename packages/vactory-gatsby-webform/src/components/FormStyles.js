@@ -61,6 +61,12 @@ export const defaultStyles = {
         lineHeight: "normal",
         fontSize: "caption",
     },
+    helperTextSeparator: {
+        border: "none",
+        m: "5px 0",
+        height: "1px",
+        bg: "gray300"
+    },
     textField: {
         input: {
             width: '100%'
@@ -103,5 +109,4 @@ export const defaultStyles = {
             fontWeight: "normal",
         }
     }
-
 };

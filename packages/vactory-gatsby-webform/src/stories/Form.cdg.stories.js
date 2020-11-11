@@ -4,11 +4,12 @@ import {action} from '@storybook/addon-actions';
 import {Form} from '../components/Form';
 
 export default {
-    title: 'Form',
+    title: 'Form/CDG',
 };
 
 export const CDG = () => (
     <Form
+        webformId={"contact"}
         schema={{
             name: {
                 type: 'text',
@@ -109,37 +110,37 @@ export const CDG = () => (
             }
         }}
         styles={{
-            submitButton: {
-                outline:"primary",
-                borderRadius: "rounded",
-                width: "100%",
-                size: "large",
-                justifyContent: 'center',
-                pt: '10px',
-                pb: '10px',
-                transition: 'all .2s'
+            "submitButton": {
+                "outline": "primary",
+                "borderRadius": "rounded",
+                "width": "100%",
+                "size": "large",
+                "justifyContent": "center",
+                "pt": "10px",
+                "pb": "10px",
+                "transition": "all .2s"
             },
-            submitButtonLeftIcon: {
-                size: '18px',
+            "submitButtonLeftIcon": {
+                "size": "18px"
             },
-            formControlLayout: {
-                inner: {
-                    width: '100%',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between',
-                    '&&.ui-form__formControlInner_noLabel': {
-                        ml: ['0px', '33.33%'],
-                        width: 'auto'
+            "formControlLayout": {
+                "inner": {
+                    "width": "100%",
+                    "display": "flex",
+                    "flexWrap": "wrap",
+                    "justifyContent": "space-between",
+                    "&&.ui-form__formControlInner_noLabel": {
+                        "ml": ["0px", "33.33%"],
+                        "width": "auto"
                     }
                 },
-                label: {
-                    flexBasis: ['100%', '33.33%']
+                "label": {
+                    "flexBasis": ["100%", "33.33%"]
                 },
-                field: {
-                    flexGrow: 1
-                },
-            },
+                "field": {
+                    "flexGrow": 1
+                }
+            }
         }}
     />
 );

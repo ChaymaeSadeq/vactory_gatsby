@@ -1,5 +1,5 @@
-import React, {useMemo} from 'react';
-import {useForm, FormContext, UseFormOptions} from 'react-hook-form';
+import React, {useRef} from 'react';
+import {useForm, FormContext} from 'react-hook-form';
 import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';
 import {StyleCtx} from '../hooks/useStyles';
@@ -12,9 +12,10 @@ import {CheckboxesField} from './CheckboxesField';
 import {RadiosField} from './RadiosField';
 import {SelectField} from './SelectField';
 import {ReCaptchaField} from './ReCaptchaField';
+import {UploadField} from './UploadField';
 import {useTranslation} from "react-i18next"
 
-const renderField = ([name, field], refsCollection) => {
+const renderField = (webform_id, [name, field], internalRefs) => {
     let Component = null;
 
     switch (field.type) {
@@ -50,12 +51,20 @@ const renderField = ([name, field], refsCollection) => {
             Component = ReCaptchaField;
             break;
 
+        case 'upload':
+            Component = UploadField;
+            break;
 
         case 'custom':
             Component = field.component;
             return (
                 <Box key={`${name}-container`}>
-                    <Component name={name} field={field} refsCollection={refsCollection} {...field.props} />
+                    <Component
+                        name={name}
+                        webformId={webform_id}
+                        field={field}
+                        ref={r => (internalRefs.current[name] = r)}
+                        {...field.props} />
                 </Box>
             );
 
@@ -83,12 +92,18 @@ const renderField = ([name, field], refsCollection) => {
 
     return (
         <Box key={`${name}-container`}>
-            <Component name={name} field={field} refsCollection={refsCollection}/>
+            <Component
+                name={name}
+                webformId={webform_id}
+                field={field}
+                ref={r => (internalRefs.current[name] = r)}
+            />
         </Box>
     );
 };
 
 export const Form = ({
+                         webformId,
                          schema,
                          // handleSubmit,
                          formOptions,
@@ -98,17 +113,17 @@ export const Form = ({
                      }) => {
     const {t} = useTranslation();
     const form = useForm(formOptions);
-    const refsCollection = {};
+    const internalRefs = useRef({});
     const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
 
     const onSubmit = (data, e) => {
-        console.log(data, e);
-        console.log(refsCollection)
-        refsCollection?.reCaptcha?.current?.reset();
+        /* eslint-disable no-unused-expressions */
+        Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
     };
 
     const resetForm = () => {
-        refsCollection?.reCaptcha?.current?.reset();
+        /* eslint-disable no-unused-expressions */
+        Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
     };
 
     return (<StyleCtx.Provider value={baseStyles}>
@@ -119,7 +134,7 @@ export const Form = ({
                 {...baseStyles?.container}
             >
                 <Box>
-                    {Object.entries(schema).map(field => renderField(field, refsCollection))}
+                    {Object.entries(schema).map(field => renderField(webformId, field, internalRefs))}
                 </Box>
                 <Box __css={baseStyles?.buttonGroup}>
                     {buttons?.reset?.hidden ? null : (
@@ -128,9 +143,12 @@ export const Form = ({
                         </Button>
                     )}
                     <Button type="submit" {...baseStyles?.submitButton}>
-                        {!!buttons?.submit?.leftIcon && <Icon mr="14px" name={buttons.submit.leftIcon}  __css={baseStyles?.submitButtonLeftIcon} size="14px"/>}
+                        {!!buttons?.submit?.leftIcon &&
+                        <Icon mr="14px" name={buttons.submit.leftIcon} __css={baseStyles?.submitButtonLeftIcon}
+                              size="14px"/>}
                         {buttons?.submit?.text || t('Submit')}
-                        {!!buttons?.submit?.rightIcon && <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
+                        {!!buttons?.submit?.rightIcon &&
+                        <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
                     </Button>
                 </Box>
             </Box>

@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, forwardRef} from 'react';
 import {Checkbox, Box} from 'vactory-ui';
 import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
@@ -7,11 +7,11 @@ import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormCo
 import {useTranslation} from "react-i18next"
 import {toRegister} from "../utils/toRegister";
 
-export const CheckboxField = ({
+export const CheckboxField = forwardRef(({
                                   id,
                                   name,
                                   field,
-                              }) => {
+                              }, ref) => {
     const {label, helperText, validation, shouldDisplay, styles = {}, value = 1} = field;
     const {t} = useTranslation();
     const fieldStyles = useStyles('checkboxField', styles);
@@ -62,4 +62,4 @@ export const CheckboxField = ({
             </Box>
         </FormControl>
     ) : null;
-};
+});
