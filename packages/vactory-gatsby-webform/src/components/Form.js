@@ -125,13 +125,14 @@ export const Form = ({
     const onSubmit = async (data) => {
         data.webform_id = webformId;
         submitWebform(data);
+        resetForm();
     };
 
     const resetForm = () => {
         form.reset();
         /* eslint-disable no-unused-expressions */
         try {
-            // Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
+            Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
         } catch (err) {
         }
     };
