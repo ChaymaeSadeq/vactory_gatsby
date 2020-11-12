@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {useForm, FormContext} from 'react-hook-form';
 import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';

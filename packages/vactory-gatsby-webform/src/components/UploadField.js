@@ -40,7 +40,7 @@ export const UploadField = forwardRef(({
     const formControlLayout = useStyles('formControlLayout', styles);
     const helperTextSeparatorStyle = useStyles('helperTextSeparator', styles);
     const {t} = useTranslation();
-    const {register, unregister, watch, setValue, clearError, triggerValidation} = useFormContext();
+    const {register, unregister, watch, setValue, clearError} = useFormContext();
     const errorMessage = useErrorMessage(internalName, label);
     const values = watch({nest: true});
     const isVisible = useMemo(() => {
@@ -157,10 +157,6 @@ export const UploadField = forwardRef(({
 
         return () => unregister(internalName); // unregister input after component unmount
     }, [register, hasServerError, isUploading]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        triggerValidation(internalName)
-    }, [isUploading, hasServerError]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return isVisible ? (
         <FormControl

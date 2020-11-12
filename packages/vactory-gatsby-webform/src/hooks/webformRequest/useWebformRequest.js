@@ -1,4 +1,4 @@
-import React, {useCallback, useReducer} from "react"
+import {useCallback, useReducer} from "react"
 import Api from "vactory-gatsby-api"
 import get from 'lodash.get';
 import qs from "qs"
