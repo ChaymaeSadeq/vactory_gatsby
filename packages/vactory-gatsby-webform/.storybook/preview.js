@@ -7,12 +7,24 @@ import {
     iconSet,
     VactoryIconProvider,
 } from 'vactory-ui';
+import {AppSettings} from "vactory-gatsby-core";
+import Api from "vactory-gatsby-api";
 
 export const parameters = {
     actions: {argTypesRegex: "^on[A-Z].*"},
 };
 
 addDecorator((storyFn, context) => {
+    const apiConfig = AppSettings.api;
+    const lngConfig = AppSettings.languages;
+
+    // Api configuration.
+    Api.init(
+        apiConfig.url,
+        apiConfig.headers,
+        lngConfig.availableLanguages
+    );
+
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle/>

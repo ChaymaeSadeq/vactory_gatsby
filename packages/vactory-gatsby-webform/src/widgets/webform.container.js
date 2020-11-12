@@ -8,7 +8,7 @@ export const WebformWidgetContainer = ({data}) => {
     const webform_id = get(data, 'components.0.webform.id', null);
     let style = get(data, 'components.0.webform.style', "{}");
     let buttons = get(data, 'components.0.webform.buttons', "{}");
-    const component = get(data, 'components.0.component', null);
+    // const component = get(data, 'components.0.component', null);
     const title = get(data, 'extra_field.title', null);
     const raw_description = get(data, 'extra_field.intro.value.#text', null);
     const link = get(data, 'extra_field.link.url', null);

@@ -34,12 +34,13 @@ export const UploadField = forwardRef(({
     // Uploaded files.
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [isUploading, setIsUploading] = useState(false);
+    const [hasServerError, setHasServerError] = useState(false);
     // Fields Styles.
     const fieldStyles = useStyles('uploadField', styles);
     const formControlLayout = useStyles('formControlLayout', styles);
     const helperTextSeparatorStyle = useStyles('helperTextSeparator', styles);
     const {t} = useTranslation();
-    const {register, unregister, watch, setValue, clearError} = useFormContext();
+    const {register, unregister, watch, setValue, clearError, triggerValidation} = useFormContext();
     const errorMessage = useErrorMessage(internalName, label);
     const values = watch({nest: true});
     const isVisible = useMemo(() => {
@@ -75,7 +76,7 @@ export const UploadField = forwardRef(({
         let contentBuffer = await readFileAsync(file);
         const blob = new Blob([contentBuffer], {type: file.type});
         return {
-            url: urlUploadDocuments,
+            url: urlUploadDocuments + '?_format=json',
             body: blob,
             headers: {
                 "Content-Type": "application/octet-stream",
@@ -89,10 +90,25 @@ export const UploadField = forwardRef(({
         const fileRemove = rest.remove;
         if (status === 'uploading') {
             setIsUploading(true);
+            setHasServerError(false)
+        }
+
+        if (
+            status === "error_upload" ||
+            status === "removed" ||
+            status === "aborted" ||
+            status === "exception_upload" ||
+            status === "done") {
+            setIsUploading(false);
+        }
+
+        if (status === "error_upload") {
+            // Can't get an XHR response until
+            // https://github.com/fortana-co/react-dropzone-uploader/pull/25/files is resolved.
+            setHasServerError(true)
         }
 
         if (status === "removed") {
-            setIsUploading(false);
             setUploadedFiles(fids => fids.filter(item => item.id_internal !== meta.id));
             remove(fields.findIndex(item => item.id === meta.id));
             if (isMultiple === true) {
@@ -106,7 +122,6 @@ export const UploadField = forwardRef(({
         }
 
         if (status === "done") {
-            setIsUploading(false);
             const response = JSON.parse(xhr.response);
             if (response["fid"] && response["fid"][0]) {
                 const fid = response["fid"][0]["value"];
@@ -135,12 +150,17 @@ export const UploadField = forwardRef(({
     useEffect(() => {
         let fieldRegister = toRegister(label || name, validation, values, t);
         fieldRegister.validate = {
-            isPending: () => !isUploading || t('dropzone:Des fichiers sont en cours de chargement.')
+            isPending: () => !isUploading || t('dropzone:Des fichiers sont en cours de transfert.'),
+            hasError: () => !hasServerError || t("dropzone:Une erreur s'est produite, essayer avec un autre fichier.")
         };
         register({name: internalName}, fieldRegister);
 
         return () => unregister(internalName); // unregister input after component unmount
-    }, [register, isUploading]);
+    }, [register, hasServerError, isUploading]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        triggerValidation(internalName)
+    }, [isUploading, hasServerError]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return isVisible ? (
         <FormControl

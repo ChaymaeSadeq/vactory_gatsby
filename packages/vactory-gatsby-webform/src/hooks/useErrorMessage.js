@@ -1,17 +1,12 @@
-import { useMemo } from 'react';
-import { useFormContext } from 'react-hook-form';
+import {useFormContext} from 'react-hook-form';
 
 export const useErrorMessage = (name, label) => {
-    const { errors } = useFormContext();
+    const {errors} = useFormContext();
+    const error = errors[name];
+    if (!error) return undefined;
 
-    return useMemo(() => {
-        const error = errors[name];
+    const message = error.message;
 
-        if (!error) return undefined;
-
-        const message = error.message;
-
-        if (message) return message.replace(name, label || name);
-        return 'Field validation failed';
-    }, [errors, name, label]);
+    if (message) return message.replace(name, label || name);
+    return 'Field validation failed';
 };

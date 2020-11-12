@@ -32,6 +32,8 @@ export const TextField = forwardRef(({
         return shouldDisplay ? shouldDisplay(values) : true;
     }, [values, shouldDisplay]);
 
+    // console.log(errorMessage)
+
     return isVisible ? (
         <FormControl
             key={`${name}-control`}

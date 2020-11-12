@@ -9,7 +9,7 @@ export default {
 
 export const Default = () => (
     <Form
-        webformId={"contact"}
+        webformId={"test_form"}
         schema={{
             name: {
                 type: 'text',
@@ -141,14 +141,14 @@ export const Default = () => (
                 label: 'Images',
                 helperText: 'Please upload some images',
                 validation: {
-                    required: true,
-                    requiredError: 'Le champ Images est requis',
-                    maxSizeBytes: 5242880,
+                    // required: true,
+                    // requiredError: 'Le champ Images est requis',
+                    maxSizeBytes: 1024 * 1024 * 9,
                     extensions: ".gif,.jpg,.jpeg,.png",
                     maxFiles: 2
                 },
                 isMultiple: true,
-                maxSizeMb: "5",
+                maxSizeMb: "1",
                 extensionsClean: "gif jpg jpeg png"
             },
             // captcha: {

@@ -1,8 +1,8 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {useForm, FormContext} from 'react-hook-form';
 import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';
-import {StyleCtx} from '../hooks/useStyles';
+import {StyleCtx, useWebformRequest, FETCHING, SUCCESS, ERROR} from '../hooks';
 import {defaultStyles} from './FormStyles'
 import {TextField} from './TextField';
 import {TextAreaField} from './TextAreaField';
@@ -14,6 +14,8 @@ import {SelectField} from './SelectField';
 import {ReCaptchaField} from './ReCaptchaField';
 import {UploadField} from './UploadField';
 import {useTranslation} from "react-i18next"
+import {navigate} from "gatsby"
+import cogoToast from 'cogo-toast';
 
 const renderField = (webform_id, [name, field], internalRefs) => {
     let Component = null;
@@ -105,26 +107,68 @@ const renderField = (webform_id, [name, field], internalRefs) => {
 export const Form = ({
                          webformId,
                          schema,
-                         // handleSubmit,
+                         handleSubmit,
                          formOptions,
                          overwriteDefaultStyles,
                          buttons,
                          styles = {},
                      }) => {
     const {t} = useTranslation();
-    const form = useForm(formOptions);
+    const form = useForm({
+        validateCriteriaMode: "all" // you will need to enable validate all criteria mode
+    });
     const internalRefs = useRef({});
     const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
+    const [{status, response}, submitWebform] = useWebformRequest();
+    const isLoading = status === FETCHING
 
-    const onSubmit = (data, e) => {
-        /* eslint-disable no-unused-expressions */
-        Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
+    const onSubmit = async (data) => {
+        data.webform_id = webformId;
+        submitWebform(data);
     };
 
     const resetForm = () => {
+        form.reset();
         /* eslint-disable no-unused-expressions */
-        Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
+        try {
+            // Object.entries(schema).forEach(([name]) => internalRefs?.current?.[name]?.reset());
+        } catch (err) {
+        }
     };
+
+    useEffect(() => {
+        if (status === SUCCESS) {
+            if (
+                response?.data?.settings?.confirmation_type === 'page' ||
+                response?.data?.settings?.confirmation_type === 'inline' ||
+                response?.data?.settings?.confirmation_type === 'message' ||
+                response?.data?.settings?.confirmation_type === 'url_message' ||
+                response?.data?.settings?.confirmation_type === 'modal' ||
+                response?.data?.settings?.confirmation_type === 'none'
+            ) {
+                const confirmation_message = response?.data?.settings?.confirmation_message || t("Merci d'avoir rempli notre formulaire!")
+                const {hide} = cogoToast.success(confirmation_message, {
+                    hideAfter: 0,
+                    onClick: () => {
+                        hide();
+                    }
+                });
+            } else if (
+                response?.data?.settings?.confirmation_type === 'url'
+            ) {
+                const confirmation_url = response?.data?.settings?.confirmation_url || '/fr/';
+                navigate(confirmation_url)
+            }
+        }
+
+        if (status === ERROR) {
+            Object.entries(response).forEach(([name, message]) => {
+                form.setError(name, 'server', message)
+                // Internal name is used to target upload fields.
+                form.setError('__' + name + '_internal', 'server', message)
+            })
+        }
+    }, [status, form.errors]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (<StyleCtx.Provider value={baseStyles}>
         <FormContext {...form}>
@@ -138,11 +182,12 @@ export const Form = ({
                 </Box>
                 <Box __css={baseStyles?.buttonGroup}>
                     {buttons?.reset?.hidden ? null : (
-                        <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}>
+                        <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}
+                                disabled={isLoading}>
                             {buttons?.reset?.text || 'Reset'}
                         </Button>
                     )}
-                    <Button type="submit" {...baseStyles?.submitButton}>
+                    <Button type="submit" {...baseStyles?.submitButton} disabled={isLoading}>
                         {!!buttons?.submit?.leftIcon &&
                         <Icon mr="14px" name={buttons.submit.leftIcon} __css={baseStyles?.submitButtonLeftIcon}
                               size="14px"/>}

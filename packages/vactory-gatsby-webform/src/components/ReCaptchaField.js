@@ -36,6 +36,7 @@ export const ReCaptchaField = forwardRef(({
 
     useImperativeHandle(ref, () => ({
         reset: () => {
+            /* eslint-disable no-unused-expressions */
             recaptchaRef?.current?.reset();
             setValue("g-recaptcha-response", null)
         }
@@ -64,6 +65,8 @@ export const ReCaptchaField = forwardRef(({
                 )}
 
                 <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
+                    <input type="hidden" name="captcha_response" ref={register} value='Google no captcha'/>
+
                     <ReCaptcha
                         sitekey={AppSettings.keys.reCaptcha}
                         hl={currentLanguage}
