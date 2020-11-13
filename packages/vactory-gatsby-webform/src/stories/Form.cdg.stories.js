@@ -1,13 +1,13 @@
 import React from 'react';
 import {action} from '@storybook/addon-actions';
 
-import {Form} from '../components/Form';
+import {Form} from '../components';
 
 export default {
-    title: 'Form/CDG',
+    title: 'Form',
 };
 
-export const CDG = () => (
+export const Inline = () => (
     <Form
         webformId={"contact"}
         schema={{

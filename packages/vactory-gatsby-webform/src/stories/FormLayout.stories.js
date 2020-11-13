@@ -1,6 +1,6 @@
 import React from 'react';
-import {action} from '@storybook/addon-actions';
-import {Form} from '../components';
+import {Box, Button, Flex, Row, Col, Text} from 'vactory-ui';
+import {Form, RenderField} from '../components';
 
 export default {
     title: 'Form',
@@ -137,8 +137,8 @@ const schema = {
         label: 'Images',
         helperText: 'Please upload some images',
         validation: {
-            required: true,
-            requiredError: 'Le champ Images est requis',
+            // required: true,
+            // requiredError: 'Le champ Images est requis',
             maxSizeBytes: 1024 * 1024 * 9,
             extensions: ".gif,.jpg,.jpeg,.png",
             maxFiles: 2
@@ -158,20 +158,48 @@ const schema = {
     },
 };
 
-export const Default = () => {
+const styles = {
+    reCaptchaField: {
+        errorMessage: {
+            color: 'warning500',
+        },
+    },
+    helperText: {}
+}
+
+export const Layout = () => {
+    const render = (resetForm, isLoading, isSuccess, isError) => {
+        return (<Box>
+            {isSuccess && <Box>
+                <Text>Thank you for filling our form.</Text>
+            </Box>}
+            <RenderField field={['name', {
+                ...schema.name,
+                label: null
+            }]}/>
+
+            <Row>
+                <Col xs={12} md={6}>
+                    <RenderField field={['email', schema.email]}/>
+                </Col>
+                <Col xs={12} md={6}>
+                    <RenderField field={['confirm_email', schema.confirm_email]}/>
+                </Col>
+            </Row>
+
+            <Flex justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+                <RenderField field={['captcha', schema.captcha]}/>
+                <Button type="submit" disabled={isLoading}>Submit</Button>
+            </Flex>
+        </Box>)
+    }
+
     return (
         <Form
             webformId={"test_form"}
             schema={schema}
-            styles={{
-                reCaptchaField: {
-                    errorMessage: {
-                        color: 'warning500',
-                    },
-                },
-                helperText: {}
-            }}
-            handleSubmit={action('Submit')}
+            render={render}
+            styles={styles}
         />
     );
 };

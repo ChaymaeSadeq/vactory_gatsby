@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {useForm, FormContext} from 'react-hook-form';
+import {useForm, FormContext, useFormContext} from 'react-hook-form';
 import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';
 import {StyleCtx, useWebformRequest, FETCHING, SUCCESS, ERROR} from '../hooks';
@@ -17,7 +17,10 @@ import {useTranslation} from "react-i18next"
 import {navigate} from "gatsby"
 import cogoToast from 'cogo-toast';
 
-const renderField = (webform_id, [name, field], internalRefs) => {
+export const RenderField = (props) => {
+    const fieldData = props.field;
+    const [name, field] = fieldData;
+    const {webformId, internalRefs} = useFormContext();
     let Component = null;
 
     switch (field.type) {
@@ -63,7 +66,7 @@ const renderField = (webform_id, [name, field], internalRefs) => {
                 <Box key={`${name}-container`}>
                     <Component
                         name={name}
-                        webformId={webform_id}
+                        webformId={webformId}
                         field={field}
                         ref={r => (internalRefs.current[name] = r)}
                         {...field.props} />
@@ -96,7 +99,7 @@ const renderField = (webform_id, [name, field], internalRefs) => {
         <Box key={`${name}-container`}>
             <Component
                 name={name}
-                webformId={webform_id}
+                webformId={webformId}
                 field={field}
                 ref={r => (internalRefs.current[name] = r)}
             />
@@ -107,11 +110,11 @@ const renderField = (webform_id, [name, field], internalRefs) => {
 export const Form = ({
                          webformId,
                          schema,
-                         handleSubmit,
-                         formOptions,
                          overwriteDefaultStyles,
                          buttons,
                          styles = {},
+                         render,
+                         formatSubmitData = (data) => data,
                      }) => {
     const {t} = useTranslation();
     const form = useForm({
@@ -121,10 +124,13 @@ export const Form = ({
     const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
     const [{status, response}, submitWebform] = useWebformRequest();
     const isLoading = status === FETCHING
+    const isSuccess = status === SUCCESS
+    const isError = status === ERROR
 
     const onSubmit = async (data) => {
-        data.webform_id = webformId;
-        submitWebform(data);
+        let submit_data = formatSubmitData(data);
+        submit_data.webform_id = webformId;
+        submitWebform(submit_data);
         resetForm();
     };
 
@@ -172,31 +178,42 @@ export const Form = ({
     }, [status, form.errors]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (<StyleCtx.Provider value={baseStyles}>
-        <FormContext {...form}>
+        <FormContext webformId={webformId} internalRefs={internalRefs} {...form}>
             <Box
                 as="form"
                 onSubmit={form.handleSubmit(onSubmit)}
                 {...baseStyles?.container}
             >
-                <Box>
-                    {Object.entries(schema).map(field => renderField(webformId, field, internalRefs))}
-                </Box>
-                <Box __css={baseStyles?.buttonGroup}>
-                    {buttons?.reset?.hidden ? null : (
-                        <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}
-                                disabled={isLoading}>
-                            {buttons?.reset?.text || 'Reset'}
-                        </Button>
+                {render ? (<Box>
+                    {render(
+                        resetForm,
+                        isLoading,
+                        isSuccess,
+                        isError
                     )}
-                    <Button type="submit" {...baseStyles?.submitButton} disabled={isLoading}>
-                        {!!buttons?.submit?.leftIcon &&
-                        <Icon mr="14px" name={buttons.submit.leftIcon} __css={baseStyles?.submitButtonLeftIcon}
-                              size="14px"/>}
-                        {buttons?.submit?.text || t('Submit')}
-                        {!!buttons?.submit?.rightIcon &&
-                        <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
-                    </Button>
-                </Box>
+                </Box>) : (
+                    <Box>
+                        <Box>
+                            {Object.entries(schema).map((field, key) => <RenderField key={key} field={field}/>)}
+                        </Box>
+                        <Box __css={baseStyles?.buttonGroup}>
+                            {buttons?.reset?.hidden ? null : (
+                                <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}
+                                        disabled={isLoading}>
+                                    {buttons?.reset?.text || 'Reset'}
+                                </Button>
+                            )}
+                            <Button type="submit" {...baseStyles?.submitButton} disabled={isLoading}>
+                                {!!buttons?.submit?.leftIcon &&
+                                <Icon mr="14px" name={buttons.submit.leftIcon} __css={baseStyles?.submitButtonLeftIcon}
+                                      size="14px"/>}
+                                {buttons?.submit?.text || t('Submit')}
+                                {!!buttons?.submit?.rightIcon &&
+                                <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
+                            </Button>
+                        </Box>
+                    </Box>
+                )}
             </Box>
         </FormContext>
     </StyleCtx.Provider>)
