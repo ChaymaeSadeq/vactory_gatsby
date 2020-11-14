@@ -17,8 +17,8 @@ export const ParagraphsMultipleAccordion = ({items, ...rest}) => {
         <Box sx={{
             'text-align': 'center'
         }}>
-            {title.length > 0 && <Heading level={2}>{title}</Heading>}
-            {introduction.length > 0 && <div>{introduction}</div>}
+            {title && title !== "" && <Heading level={2}>{title}</Heading>}
+            {introduction && introduction !== "" && <div>{introduction}</div>}
         </Box>
         <Box my="large">
             <Accordion>
