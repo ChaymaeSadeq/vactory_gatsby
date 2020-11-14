@@ -2,9 +2,10 @@ import React, {useCallback} from "react"
 import Api from "vactory-gatsby-api"
 import get from 'lodash.get';
 import qs from "qs"
+import {useTranslation} from "react-i18next"
 
-export const useWebformSubmit = () => {
-    console.warn("[Deprecated] useWebformSubmit is deprecated in favor of useWebformSubmitter from vactory-gatsby-webform package.");
+export const useWebformSubmitter = () => {
+    const {i18n} = useTranslation();
     const [webformFetch, setWebformFetch] = React.useState({
         status: "idle",
         response: null,
@@ -26,7 +27,7 @@ export const useWebformSubmit = () => {
             Api.postRest(
                 '_webform',
                 qs.stringify(data),
-                false,
+                i18n.language,
                 {
                     headers: {
                         "content-type": "application/x-www-form-urlencoded"
@@ -51,7 +52,7 @@ export const useWebformSubmit = () => {
                     })
                 })
         },
-        [webformFetch.error, webformFetch.response],
+        [webformFetch.error, webformFetch.response, i18n],
     );
 
     return {

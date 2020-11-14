@@ -10,6 +10,7 @@ require('dotenv').config({
 
 module.exports = {
     plugins: [
-        `vactory-gatsby-core`
+        `vactory-gatsby-core`,
+        `vactory-gatsby-webform`
     ]
 };
