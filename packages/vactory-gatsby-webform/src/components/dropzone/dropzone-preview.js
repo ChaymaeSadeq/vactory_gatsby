@@ -39,7 +39,7 @@ export const DropzonePreview = (props) => {
             <div className={className} style={style}>
                 <span className="dzu-previewFileNameError">{title}</span>
                 {status === "error_file_size" &&
-                <span>{size < minSizeBytes ? t("dropzone:Fichier trop petit") : t("dropzone:Fichier trop gros")}</span>}
+                <span>{size < minSizeBytes ? t("webform:Fichier trop petit") : t("webform:Fichier trop gros")}</span>}
                 {status === "error_validation" && <span>{String(validationError)}</span>}
                 {canRemove && <span className="dzu-previewButton" style={iconByFn.remove} onClick={remove}/>}
             </div>
@@ -47,9 +47,9 @@ export const DropzonePreview = (props) => {
     }
 
     if (status === "error_upload_params" || status === "exception_upload" || status === "error_upload") {
-        title = `${title} ${t("dropzone:(échec du téléchargement)")}`
+        title = `${title} ${t("webform:(échec du téléchargement)")}`
     }
-    if (status === "aborted") title = `${title} ${t("dropzone:(annulé)")}`;
+    if (status === "aborted") title = `${title} ${t("webform:(annulé)")}`;
 
     return (
         <div className={className} style={style}>

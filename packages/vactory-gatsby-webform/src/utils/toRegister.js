@@ -7,7 +7,7 @@ export const toRegister = (fieldName, validation, values, t) => {
 
     if (validation?.required) {
         register.required = (validation?.requiredError) ?
-            t(validation?.requiredError) : t(`Le champ "${fieldName}" est requis.`)
+            t(validation?.requiredError) : t(`Webform: Le champ "${fieldName}" est requis.`)
     }
 
     if (validation?.pattern) {
@@ -16,13 +16,13 @@ export const toRegister = (fieldName, validation, values, t) => {
         register.pattern = {
             value: regex,
             message: (validation?.patternError) ?
-                t(validation.patternError) : t(`Le champ "${fieldName}" est invalid.`)
+                t(validation.patternError) : t(`Webform: Le champ "${fieldName}" est invalid.`)
         }
     }
 
     if (validation?.sameAs && values[validation?.sameAs]) {
         const message = (validation?.sameAsError) ?
-            t(validation.sameAsError) : t(`Le champ "${fieldName}" est invalid.`);
+            t(validation.sameAsError) : t(`Webform: Le champ "${fieldName}" est invalid.`);
         register.validate.sameAs = value => value === values[validation?.sameAs] || message
     }
 

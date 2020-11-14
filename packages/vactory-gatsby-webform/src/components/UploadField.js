@@ -150,8 +150,8 @@ export const UploadField = forwardRef(({
     useEffect(() => {
         let fieldRegister = toRegister(label || name, validation, values, t);
         fieldRegister.validate = {
-            isPending: () => !isUploading || t('dropzone:Des fichiers sont en cours de transfert.'),
-            hasError: () => !hasServerError || t("dropzone:Une erreur s'est produite, essayer avec un autre fichier.")
+            isPending: () => !isUploading || t('webform:Des fichiers sont en cours de transfert.'),
+            hasError: () => !hasServerError || t("webform:Une erreur s'est produite, essayez avec un autre fichier.")
         };
         register({name: internalName}, fieldRegister);
 
@@ -199,9 +199,9 @@ export const UploadField = forwardRef(({
                         onChangeStatus={handleChangeStatus}
                         accept={field?.validation?.extensions}
                         multiple={isMultiple}
-                        inputContent={t("dropzone:Faites glisser des fichiers ou cliquez pour parcourir")}
-                        inputWithFilesContent={t("dropzone:Ajouter des fichiers")}
-                        submitButtonContent={t("dropzone:Transférer")}
+                        inputContent={t("webform:Faites glisser des fichiers ou cliquez pour parcourir")}
+                        inputWithFilesContent={t("webform:Ajouter des fichiers")}
+                        submitButtonContent={t("webform:Transférer")}
                         maxFiles={field?.validation?.maxFiles ? field?.validation?.maxFiles : 1}
                         maxSizeBytes={field?.validation?.maxSizeBytes ? field?.validation?.maxSizeBytes : null}
                         PreviewComponent={props => <DropzonePreview {...props} />}
@@ -210,14 +210,14 @@ export const UploadField = forwardRef(({
                     <FormHelperText {...fieldStyles?.helperText}>
                         {!!helperText && <div>{helperText} <Box as={'hr'} {...helperTextSeparatorStyle} /></div>}
 
-                        {field.maxSizeMb && <p>{t("dropzone:Les fichiers ne doivent pas dépasser")}
-                            <strong> {field?.maxSizeMb} {t("Mo")}</strong>.</p>}
+                        {field.maxSizeMb && <p>{t("webform:Les fichiers ne doivent pas dépasser")}
+                            <strong> {field?.maxSizeMb} {t("webform:Mo")}</strong>.</p>}
 
-                        {field?.validation?.maxFiles && <p>{t("dropzone:Limité à ")}
-                            <strong> {field?.validation?.maxFiles} {t("Fichers")}</strong>.</p>}
+                        {field?.validation?.maxFiles && <p>{t("webform:Limité à ")}
+                            <strong> {field?.validation?.maxFiles} {t("webform:Fichiers")}</strong>.</p>}
 
                         {field?.extensionsClean &&
-                        <p>{t("dropzone:Extensions autorisées :")} <strong> {field?.extensionsClean}</strong>.</p>}
+                        <p>{t("webform:Extensions autorisées :")} <strong> {field?.extensionsClean}</strong>.</p>}
                     </FormHelperText>
                     <FormErrorMessage {...fieldStyles?.errorMessage}>
                         {errorMessage}

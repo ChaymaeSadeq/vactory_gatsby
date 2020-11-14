@@ -12,7 +12,7 @@ export const ModalMessage = ({message = '', onClose}) => {
             </Flex>
             <Flex mt="medium" justifyContent="flex-end">
                 <Button borderRadius="rounded" mx="small" variant="danger"
-                        onClick={onClose}>{t('Close')}</Button>
+                        onClick={onClose}>{t('webform:Close')}</Button>
             </Flex>
         </Flex>
     </Layer>

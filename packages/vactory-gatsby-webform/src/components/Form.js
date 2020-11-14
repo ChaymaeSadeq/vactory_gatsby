@@ -200,14 +200,14 @@ export const Form = ({
                             {buttons?.reset?.hidden ? null : (
                                 <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}
                                         disabled={isLoading}>
-                                    {buttons?.reset?.text || 'Reset'}
+                                    {buttons?.reset?.text || t('Webform:Reset')}
                                 </Button>
                             )}
                             <Button type="submit" {...baseStyles?.submitButton} disabled={isLoading}>
                                 {!!buttons?.submit?.leftIcon &&
                                 <Icon mr="14px" name={buttons.submit.leftIcon} __css={baseStyles?.submitButtonLeftIcon}
                                       size="14px"/>}
-                                {buttons?.submit?.text || t('Submit')}
+                                {buttons?.submit?.text || t('Webform:Submit')}
                                 {!!buttons?.submit?.rightIcon &&
                                 <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
                             </Button>
