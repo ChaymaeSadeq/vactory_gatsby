@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import {useForm, FormContext, useFormContext} from 'react-hook-form';
 import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';
-import {StyleCtx, useWebformRequest, FETCHING, SUCCESS, ERROR} from '../hooks';
+import {StyleCtx, useWebformRequest, FETCHING, SUCCESS, ERROR, idle} from '../hooks';
 import {defaultStyles} from './FormStyles'
 import {TextField} from './TextField';
 import {TextAreaField} from './TextAreaField';
@@ -122,7 +122,7 @@ export const Form = ({
     });
     const internalRefs = useRef({});
     const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
-    const [{status, response}, submitWebform] = useWebformRequest();
+    const [{status, response}, submitWebform, webformRequestDispatch] = useWebformRequest();
     const isLoading = status === FETCHING
     const isSuccess = status === SUCCESS
     const isError = status === ERROR
@@ -175,6 +175,8 @@ export const Form = ({
                 form.setError('__' + name + '_internal', 'server', message)
             })
         }
+
+        webformRequestDispatch(idle())
     }, [status, form.errors]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (<StyleCtx.Provider value={baseStyles}>

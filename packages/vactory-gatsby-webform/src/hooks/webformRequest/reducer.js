@@ -1,4 +1,4 @@
-import {FETCHING, SUCCESS, ERROR} from './actionTypes';
+import {FETCHING, SUCCESS, ERROR, IDLE} from './actionTypes';
 
 export const initialState = {
     status: null,
@@ -13,6 +13,8 @@ const reducer = (state = initialState, {type, response} = {}) => {
             return {...state, status: SUCCESS, response};
         case ERROR:
             return {...state, status: ERROR, response};
+        case IDLE:
+            return {...state, status: IDLE, response: null};
         default:
             return state;
     }

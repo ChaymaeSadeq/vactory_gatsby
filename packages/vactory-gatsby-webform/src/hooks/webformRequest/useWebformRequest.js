@@ -8,10 +8,10 @@ import {fetching, success, error} from './actionCreators';
 
 export const useWebformRequest = () => {
     const {i18n} = useTranslation();
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, webformRequestDispatch] = useReducer(reducer, initialState);
 
     const submitWebform = useCallback(async (data) => {
-        dispatch(fetching());
+        webformRequestDispatch(fetching());
         try {
             const response = await Api.postRest(
                 '_webform',
@@ -23,13 +23,13 @@ export const useWebformRequest = () => {
                     }
                 }
             );
-            dispatch(success(response));
+            webformRequestDispatch(success(response));
         } catch (e) {
             const apiErrorMessage = get(e,"response.data.error");
             const errorMessage = apiErrorMessage ? apiErrorMessage : e.message;
-            dispatch(error(errorMessage));
+            webformRequestDispatch(error(errorMessage));
         }
     }, [i18n.language]);
 
-    return [state, submitWebform];
+    return [state, submitWebform, webformRequestDispatch];
 };
