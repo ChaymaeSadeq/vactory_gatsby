@@ -15,7 +15,7 @@ const Template = ({label, ...rest}) => <Button {...rest}>{label}</Button>;
 export const Primary = Template.bind({});
 Primary.args = {
   variant: 'primary',
-  label: 'Button',
+  label: 'Button 2',
 };
 
 

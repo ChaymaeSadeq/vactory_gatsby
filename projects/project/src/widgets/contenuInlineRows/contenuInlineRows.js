@@ -1,8 +1,21 @@
 import React from "react";
-import {Flex, Box, Heading, Link, Image} from 'vactory-ui';
-import {Wysiwyg} from "vactory-gatsby-ui";
+import {Flex, Box, Heading, Link} from 'vactory-ui';
+import {Wysiwyg, Picture} from "vactory-gatsby-ui";
 
-export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, description, inversed}) => {
+
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_200_200",
+            media: "(min-width: 0px)"
+        }
+    ],
+    width: 200,
+    height: 200,
+    ratio: 200 / 200
+};
+
+export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, description, inversed, image_alt}) => {
     const inversedClass = inversed ? 'row-reverse' : 'row'
     return (
         <Flex flexDirection={['column', 'column', inversedClass]} alignItems="center"
@@ -17,8 +30,16 @@ export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, descripti
             <Box
                 pr={!inversed ? 'medium' : '0'}
                 pl={inversed ? 'medium' : '0'}
-                maxWidth="200px">
-                <Image src={pictoImg}/>
+                mb={['medium', '0']}
+                width="200px">
+                <Picture
+                    file={pictoImg}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
+                    alt={image_alt}
+                />
             </Box>
             }
             {(title || description) &&

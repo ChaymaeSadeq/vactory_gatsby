@@ -9,7 +9,12 @@ import {
     ChiffreCleContainer,
     ContenuHalfSideContainer,
     ContenuInlineRowsContainer,
-    VideoYoutubeContainer
+    ContentVideoYoutubeContainer,
+    TeamColonnesContainer,
+    TeamColonnesInlineContainer,
+    TestimonaislColonnesContainer,
+    TestimonialsInlineContainer,
+    FullBackgroundSliderContainer
 } from "project";
 
 const widgets = {
@@ -23,7 +28,12 @@ const widgets = {
     'vactory_widgets_ui:chiffre-cle': ChiffreCleContainer,
     'vactory_widgets_ui:contenu-half-side': ContenuHalfSideContainer,
     'vactory_widgets_ui:contenu-inline-rows':ContenuInlineRowsContainer,
-    'vactory_widgets_ui:video-youtube': VideoYoutubeContainer,
+    'vactory_widgets_ui:video-youtube': ContentVideoYoutubeContainer,
+    'vactory_widgets_ui:teams-colonnes': TeamColonnesContainer,
+    'vactory_widgets_ui:teams-colonnes-inline': TeamColonnesInlineContainer,
+    'vactory_widgets_ui:testimonials-colonne': TestimonaislColonnesContainer,
+    'vactory_widgets_ui:testimonials-inline': TestimonialsInlineContainer,
+    'vactory_widgets_ui:full-background-slider': FullBackgroundSliderContainer
 };
 
 export default widgets

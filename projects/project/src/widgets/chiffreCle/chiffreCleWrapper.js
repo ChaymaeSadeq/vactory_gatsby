@@ -1,8 +1,71 @@
 import React from "react";
 import {ChiffreCle} from "./chiffreCle";
-import {Box, Heading, Paragraph, Row, Col, Slider, NextArrow, PrevArrow, theme, appendDots} from 'vactory-ui';
+import {Box, Row, Col, Slider, NextArrow, PrevArrow} from 'vactory-ui';
+import {theme} from "../../vactory-gatsby-ui/theme";
+import {useRtl} from "vactory-gatsby-core";
+import {TemplateWrapper} from '../../composants'
 
-export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
+export const appendDots = dots => <Box
+    as="ul"
+    __css={{
+        bottom: 'auto',
+        display: 'block',
+        listStyle: 'none',
+        textAlign: 'center',
+        padding: 0,
+        margin: '1rem auto 0',
+
+        '& > li' : {
+            position: 'relative',
+            display: 'inline-block',
+            margin: '0 5px',
+            width: '12px',
+            height: '12px',
+            cursor: 'pointer',
+        },
+
+        '& > li > button' : {
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            outline: 0,
+            borderRadius: '50%',
+            backgroundColor: 'transparent',
+            textIndent: '-999em',
+            cursor: 'pointer',
+            position: 'absolute',
+            border: '1px solid',
+            borderColor: 'primary500',
+            padding: 0,
+        },
+        '& > li > button::after' : {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width:' 100%',
+            height: '100%',
+            visibility: 'hidden',
+            background: 'primary500',
+            borderRadius: '50%',
+            boxShadow: '0 0 1px #02afbc',
+            opacity: 0,
+            transform:' scale(2.5)',
+            transition: 'opacity .3s ease, transform .3s ease, visibility 0s .3s',
+        },
+        '& > li.slick-active > button::after' :{
+            visibility: 'visible',
+            opacity: 1,
+            backgroundColor: 'black',
+            transform: 'scale(1.5)',
+            transition: 'opacity .3s ease,transform .3s ease',
+        }
+    }}
+>{dots}</Box>
+
+export const ChiffreCleSlider = ({items}) => {
+    const isRtl = useRtl()
     const settings = {
         dots: true,
         infinite: true,
@@ -12,8 +75,14 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
         arrows: true,
         centerMode: false,
         centerPadding: '0px',
-        nextArrow: <NextArrow color="black"/>,
-        prevArrow: <PrevArrow color="black"/>,
+        nextArrow: !isRtl ? <NextArrow color="black"
+                                       sx={{right: ['calc((100% - 960px)/2 + 10px)', null, 'calc((100% - 760px)/2 + 10px)', 'calc((100% - 960px)/2 + 10px)', 'calc((100% - 1140px)/2 + 10px)']}}/> :
+            <NextArrow color="black"
+                       sx={{left: ['calc((100% - 960px)/2 + 10px)', null, 'calc((100% - 760px)/2 + 10px)', 'calc((100% - 960px)/2 + 10px)', 'calc((100% - 1140px)/2 + 10px)']}}/>,
+        prevArrow: !isRtl ? <PrevArrow color="black"
+                                       sx={{left: ['calc((100% - 960px)/2 + 10px)', null, 'calc((100% - 760px)/2 + 10px)', 'calc((100% - 960px)/2 + 10px)', 'calc((100% - 1140px)/2 + 10px)']}}/> :
+            <PrevArrow color="black"
+                       sx={{right: ['calc((100% - 960px)/2 + 10px)', null, 'calc((100% - 760px)/2 + 10px)', 'calc((100% - 960px)/2 + 10px)', 'calc((100% - 1140px)/2 + 10px)']}}/>,
         dotsClass: 'slick-dots',
         appendDots: appendDots,
         responsive: [
@@ -34,20 +103,25 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
         ]
     }
     return (
-        <Box>
-            {(bigTitle || intro) &&
-            <Box mb={30}>
-                {bigTitle &&
-                <Heading level={2}>{bigTitle}</Heading>
-                }
-                {intro &&
-                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
-                }
-            </Box>
-            }
+        <Slider {...settings} mx={['0', null, 'xxlarge', 'xxxlarge']}>
+            {items.map((item, index) => {
+                return (
+                    <Box key={index} px='xsmall'>
+                        <ChiffreCle {...item} />
+                    </Box>
+                )
+            })}
+
+        </Slider>
+    )
+}
+
+export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
+    return (
+        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             {items.length <= colCount &&
             <>
-                <Box display={['none', null, 'block']}>
+                <Box display={items.length > 1 ? ['none', null, 'block'] : null}>
                     <Row>
                         {items.map((item, index) => {
                             return (
@@ -58,31 +132,16 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
                         })}
                     </Row>
                 </Box>
+                {items.length > 1 &&
                 <Box display={['block', null, 'none']}>
-                    <Slider {...settings} mx='0'>
-                        {items.map((item, index) => {
-                            return (
-                                <Box key={index} px='15px'>
-                                    <ChiffreCle key={index} {...item} />
-                                </Box>
-                            )
-                        })}
-
-                    </Slider>
+                    <ChiffreCleSlider items={items}/>
                 </Box>
+                }
             </>
             }
             {items.length > colCount &&
-            <Slider {...settings} mx='55px'>
-                {items.map((item, index) => {
-                    return (
-                        <Box key={index} px='15px'>
-                            <ChiffreCle key={index} {...item} />
-                        </Box>
-                    )
-                })}
-            </Slider>
+            <ChiffreCleSlider items={items}/>
             }
-        </Box>
+        </TemplateWrapper>
     )
 }
