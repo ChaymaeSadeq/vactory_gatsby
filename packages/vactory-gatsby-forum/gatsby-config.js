@@ -5,12 +5,12 @@ const fs = require('fs');
 // Templates.
 const PostTemplate = require.resolve(`./src/components/post.container`);
 const PostAmpTemplate = require.resolve(`./src/components/post.amp.container`);
-const PostsTemplate = require.resolve(`./src/components/posts.container`);
-const PostsAmpTemplate = require.resolve(`./src/components/posts.amp.container`);
+//const PostsTemplate = require.resolve(`./src/components/posts.container`);
+//const PostsAmpTemplate = require.resolve(`./src/components/posts.amp.container`);
 
 // Processors
-const customProcessors = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/processors.js");
-const processors = fs.existsSync(customProcessors) ? esmRequire(customProcessors) : esmRequire("./src/internal/processors.js");
+// const customProcessors = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/processors.js");
+// const processors = fs.existsSync(customProcessors) ? esmRequire(customProcessors) : esmRequire("./src/internal/processors.js");
 
 // AMP settings
 const customAmpSettings = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/amp.js");
@@ -21,12 +21,12 @@ const customPostParams = path.join(process.cwd(), "src/vactory-gatsby-forum/inte
 const postParams = fs.existsSync(customPostParams) ? esmRequire(customPostParams) : esmRequire("./src/internal/api.post.params.js");
 
 // API Posts params
-const customPostsParams = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/api.posts.params.js");
-const postsParams = fs.existsSync(customPostsParams) ? esmRequire(customPostsParams) : esmRequire("./src/internal/api.posts.params.js");
+// const customPostsParams = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/api.posts.params.js");
+// const postsParams = fs.existsSync(customPostsParams) ? esmRequire(customPostsParams) : esmRequire("./src/internal/api.posts.params.js");
 
 // API Taxonomy params
-const customTaxonomyParams = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/api.postTaxonomy.params.js");
-const taxonomyParams = fs.existsSync(customTaxonomyParams) ? esmRequire(customTaxonomyParams) : esmRequire("./src/internal/api.postTaxonomy.params.js");
+// const customTaxonomyParams = path.join(process.cwd(), "src/vactory-gatsby-forum/internal/api.postTaxonomy.params.js");
+// const taxonomyParams = fs.existsSync(customTaxonomyParams) ? esmRequire(customTaxonomyParams) : esmRequire("./src/internal/api.postTaxonomy.params.js");
 
 module.exports = {
     plugins: [

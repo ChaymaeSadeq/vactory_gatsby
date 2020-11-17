@@ -6,27 +6,20 @@ import {
   normalizeNodes,
   normalizeDFNodes,
   PostsPage,
-  //PostsFormFilter,
 } from 'vactory-gatsby-forum'
 import { Heading, Container, Paragraph } from 'vactory-ui'
 import {LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
 
-const PostsContainer = ({ pageCount, nodes, terms }) => {
-  console.log(nodes)
+const PostsContainer = ({ pageCount, nodes }) => {
   const { t, i18n } = useTranslation()
   const currentLanguage = i18n.language
   const normalizedNodes = normalizeDFNodes(nodes)
+  console.log(normalizedNodes)
   const isFirstRun = useRef(true)
   const [posts, setPosts] = useState(normalizedNodes)
-  const [selectedTerm, setSelectedTerm] = useState('all')
   const [isLoading, setIsLoading] = useState(false)
   const [pager, setPager] = useState(1)
   const [count, setCount] = useState(pageCount)
-
-  // const handleChange = (tid) => {
-  //   setSelectedTerm(tid)
-  //   setPager(1)
-  // }
 
   const handlePaginationChange = (selected) => {
     setPager(selected)
@@ -39,21 +32,10 @@ const PostsContainer = ({ pageCount, nodes, terms }) => {
     }
 
     function fetchData() {
-      let categoryFilter = {
-        'filter[category][condition][path]':
-          'field_vactory_taxonomy_1.drupal_internal__tid',
-        'filter[category][condition][operator]': '=',
-        'filter[category][condition][value]': selectedTerm,
-      }
-
-      if (selectedTerm === 'all') {
-        categoryFilter = {}
-      }
 
       const requestParams = {
         ...postsQueryParams,
         page: { limit: postsQueryParams.page.limit, offset: (pager - 1) * postsQueryParams.page.limit },
-        ...categoryFilter,
       }
 
       setIsLoading(true)
@@ -71,18 +53,13 @@ const PostsContainer = ({ pageCount, nodes, terms }) => {
         })
     }
     fetchData()
-  }, [selectedTerm, currentLanguage, pager])
+  }, [currentLanguage, pager])
 
   return (
     <Container>
       <Heading px="xsmall" level={2}>
         {t('Forum')}
       </Heading>
-      {/* <PostsFormFilter
-        terms={terms}
-        value={selectedTerm}
-        handleChange={handleChange}
-      /> */}
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (
           <PostsPage posts={posts} />

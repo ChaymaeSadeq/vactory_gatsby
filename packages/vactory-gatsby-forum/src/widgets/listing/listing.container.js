@@ -3,6 +3,7 @@ import get from 'lodash.get';
 import {PostsContainer} from 'vactory-gatsby-forum'
 
 export const ListingContainer = ({data}) => {
+    console.log('LISTING',data)
     const nodes = get(data, 'components.0.views.data.nodes', []);
     const pageCount = get(data, 'components.0.views.data.count', 0);
     const terms = get(data, 'components.0.views.data.exposed.forum_section', []);

@@ -11,18 +11,16 @@ export const normalizeNodes = (nodes) => {
 };
 
 export const normalizeDFNodes = (nodes) => {
-    console.log(nodes)
+    console.log('NORM >>',nodes)
     return nodes.map(post => ({
         id: post.id,
         title: post.title,
         url: get(post, 'url', null),
-        // comment: get(post, 'comment.last_comment_name', null),
-        // courseSupport: get(post, 'field_vactory_media_document', null),
         excerpt: get(post, 'excerpt', null),
         category: get(post, 'section.label', null),
         views: get(post, 'views', null),
         status: get(post, 'status', null),
-        
+        last_contribution: get(post, 'last_contribution', null),
     }));
 };
 
