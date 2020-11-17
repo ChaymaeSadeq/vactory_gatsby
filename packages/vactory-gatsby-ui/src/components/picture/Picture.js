@@ -40,7 +40,6 @@ export const Picture = (props) => {
 
     let sources = [];
     if (isStorybookEnv) {
-        console.log(sizes)
         sources = sizes.reverse().map((size, i) => {
             const imageStyle = styles.find(style => style.name === size.name);
             let url = `https://placehold.it/${imageStyle.width}x${imageStyle.height}?text=${imageStyle.name}`;
@@ -55,7 +54,6 @@ export const Picture = (props) => {
                 media: size.media || ""
             };
         }) || [];
-        console.log(sources)
     }
     else {
         sources = sizes.reverse().map((size, i) => {
