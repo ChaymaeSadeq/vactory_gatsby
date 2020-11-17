@@ -1,8 +1,8 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 import {useForm, FormContext, useFormContext} from 'react-hook-form';
 import {Box, Button, Text, Icon} from 'vactory-ui';
 import merge from 'lodash.merge';
-import {StyleCtx, useWebformRequest, FETCHING, SUCCESS, ERROR, idle} from '../hooks';
+import {StyleCtx, useWebformRequest} from '../hooks';
 import {defaultStyles} from './FormStyles'
 import {TextField} from './TextField';
 import {TextAreaField} from './TextAreaField';
@@ -114,24 +114,66 @@ export const Form = ({
                          buttons,
                          styles = {},
                          render,
+                         handleSubmitRedirection = true,
                          formatSubmitData = (data) => data,
                      }) => {
     const {t} = useTranslation();
     const form = useForm({
-        validateCriteriaMode: "all" // you will need to enable validate all criteria mode
+        validateCriteriaMode: "all"
     });
     const internalRefs = useRef({});
     const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
-    const [{status, response}, submitWebform, webformRequestDispatch] = useWebformRequest();
-    const isLoading = status === FETCHING
-    const isSuccess = status === SUCCESS
-    const isError = status === ERROR
+    const submitWebform = useWebformRequest();
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [isSuccess, setIsSuccess] = React.useState(false);
+    const [isError, setIsError] = React.useState(false);
 
     const onSubmit = async (data) => {
         let submit_data = formatSubmitData(data);
         submit_data.webform_id = webformId;
-        submitWebform(submit_data);
-        resetForm();
+
+        setIsLoading(true)
+        setIsSuccess(false)
+        setIsError(false)
+
+        submitWebform(submit_data).then(response => {
+            setIsLoading(false)
+            if (response?.status === 200) {
+                setIsSuccess(true)
+                if (handleSubmitRedirection === true) {
+                    if (
+                        response?.data?.settings?.confirmation_type === 'page' ||
+                        response?.data?.settings?.confirmation_type === 'inline' ||
+                        response?.data?.settings?.confirmation_type === 'message' ||
+                        response?.data?.settings?.confirmation_type === 'url_message' ||
+                        response?.data?.settings?.confirmation_type === 'modal' ||
+                        response?.data?.settings?.confirmation_type === 'none'
+                    ) {
+                        const confirmation_message = response?.data?.settings?.confirmation_message || t("Merci d'avoir rempli notre formulaire!")
+                        const {hide} = cogoToast.success(confirmation_message, {
+                            hideAfter: 0,
+                            onClick: () => {
+                                hide();
+                            }
+                        });
+                    } else if (
+                        response?.data?.settings?.confirmation_type === 'url'
+                    ) {
+                        const confirmation_url = response?.data?.settings?.confirmation_url || '/fr/';
+                        navigate(confirmation_url)
+                    }
+                }
+            } else {
+                setIsError(true)
+                Object.entries(response).forEach(([name, message]) => {
+                    form.setError(name, 'server', message)
+                    // Internal name is used to target upload fields.
+                    form.setError('__' + name + '_internal', 'server', message)
+                })
+            }
+        }).catch(error => {
+            console.log(error)
+        })
     };
 
     const resetForm = () => {
@@ -142,42 +184,6 @@ export const Form = ({
         } catch (err) {
         }
     };
-
-    useEffect(() => {
-        if (status === SUCCESS) {
-            if (
-                response?.data?.settings?.confirmation_type === 'page' ||
-                response?.data?.settings?.confirmation_type === 'inline' ||
-                response?.data?.settings?.confirmation_type === 'message' ||
-                response?.data?.settings?.confirmation_type === 'url_message' ||
-                response?.data?.settings?.confirmation_type === 'modal' ||
-                response?.data?.settings?.confirmation_type === 'none'
-            ) {
-                const confirmation_message = response?.data?.settings?.confirmation_message || t("Merci d'avoir rempli notre formulaire!")
-                const {hide} = cogoToast.success(confirmation_message, {
-                    hideAfter: 0,
-                    onClick: () => {
-                        hide();
-                    }
-                });
-            } else if (
-                response?.data?.settings?.confirmation_type === 'url'
-            ) {
-                const confirmation_url = response?.data?.settings?.confirmation_url || '/fr/';
-                navigate(confirmation_url)
-            }
-        }
-
-        if (status === ERROR) {
-            Object.entries(response).forEach(([name, message]) => {
-                form.setError(name, 'server', message)
-                // Internal name is used to target upload fields.
-                form.setError('__' + name + '_internal', 'server', message)
-            })
-        }
-
-        webformRequestDispatch(idle())
-    }, [status, form.errors]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (<StyleCtx.Provider value={baseStyles}>
         <FormContext webformId={webformId} internalRefs={internalRefs} {...form}>

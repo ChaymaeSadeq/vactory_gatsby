@@ -8,7 +8,7 @@ import {fetching, success, error} from './actionCreators';
 
 export const useWebformRequest = () => {
     const {i18n} = useTranslation();
-    const [state, webformRequestDispatch] = useReducer(reducer, initialState);
+    const [state, webformRequestDispatch] = useReducer(reducer, initialState); // eslint-disable-line no-unused-vars
 
     const submitWebform = useCallback(async (data) => {
         webformRequestDispatch(fetching());
@@ -24,12 +24,14 @@ export const useWebformRequest = () => {
                 }
             );
             webformRequestDispatch(success(response));
+            return response
         } catch (e) {
             const apiErrorMessage = get(e,"response.data.error");
             const errorMessage = apiErrorMessage ? apiErrorMessage : e.message;
             webformRequestDispatch(error(errorMessage));
+            return errorMessage;
         }
     }, [i18n.language]);
 
-    return [state, submitWebform, webformRequestDispatch];
+    return submitWebform;
 };
