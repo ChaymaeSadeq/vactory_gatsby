@@ -3,7 +3,7 @@ import {Col, Row, Slider, NextArrow, PrevArrow, appendDots, Box} from "vactory-u
 import {ContenuColonneImage} from "./contenuColonneImage";
 import {TemplateWrapper} from "../../composants/template-wrapper";
 import {useRtl} from "vactory-gatsby-core";
-import {theme} from "../../vactory-gatsby-ui/theme";
+import { withTheme } from 'styled-components';
 
 
 const imageStyles2Cols = {
@@ -95,7 +95,7 @@ export const ContenuColonneImageWrapper = ({bigTitle, intro, colCount, centercon
     )
 }
 
-const ContenuColonnesSlider = ({items, slidetoShow, imageStyles}) => {
+const ContenuColonnesSlider = withTheme(({items, slidetoShow, imageStyles, theme}) => {
     const isRtl = useRtl()
     const settings = {
         dots: true,
@@ -145,4 +145,4 @@ const ContenuColonnesSlider = ({items, slidetoShow, imageStyles}) => {
 
         </Slider>
     )
-}
+});

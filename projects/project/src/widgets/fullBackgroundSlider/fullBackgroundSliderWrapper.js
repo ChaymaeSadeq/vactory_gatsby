@@ -1,10 +1,10 @@
 import React from "react";
 import {FullBackgroundSlider} from "./fullBackgroundSlider";
 import {Slider, Slide, NextArrow, PrevArrow, appendDots, Box} from 'vactory-ui'
-import {theme} from "../../vactory-gatsby-ui/theme";
+import { withTheme } from 'styled-components';
 
 //@todo: set backgrond video/video After update factory-ui
-export const FullBackgroundSliderWrapper = ({items}) => {
+export const FullBackgroundSliderWrapper = withTheme(({items, theme}) => {
     const [activeSlide, setActiveSlide] = React.useState(0);
     const settings = {
         dots: false,
@@ -53,4 +53,4 @@ export const FullBackgroundSliderWrapper = ({items}) => {
         </Box>
     )
 
-}
+})

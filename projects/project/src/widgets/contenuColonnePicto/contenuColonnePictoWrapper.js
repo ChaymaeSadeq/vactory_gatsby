@@ -3,9 +3,9 @@ import {appendDots, Col, NextArrow, PrevArrow, Slider, Row, Box} from "vactory-u
 import {ContenuColonnePicto} from "./contenuColonnePicto";
 import {TemplateWrapper} from "../../composants/template-wrapper";
 import {useRtl} from "vactory-gatsby-core";
-import {theme} from "../../vactory-gatsby-ui/theme";
+import { withTheme } from 'styled-components';
 
-const ContenuColonnePictoSlider = ({items, slidetoShow}) => {
+const ContenuColonnePictoSlider = withTheme(({items, slidetoShow, theme}) => {
     const isRtl = useRtl()
     const settings = {
         dots: true,
@@ -54,7 +54,7 @@ const ContenuColonnePictoSlider = ({items, slidetoShow}) => {
             })}
         </Slider>
     )
-}
+})
 
 export const ContenuColonnePictoWrapper = ({items, colCount, centercontent, bigTitle, intro}) => {
     const contentTextAlignClass = centercontent ? 'center' : 'left'
