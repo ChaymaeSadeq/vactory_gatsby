@@ -22,8 +22,8 @@ export const ReCaptchaField = forwardRef(({
         shouldDisplay,
         styles = {},
     } = field;
-    const fieldStyles = useStyles('reCaptchaField', styles?.field);
-    const formControlLayout = useStyles('formControlLayout', styles?.layout);
+    const fieldStyles = useStyles('reCaptchaField', styles);
+    const formControlLayout = useStyles('formControlLayout', styles);
     const recaptchaRef = React.createRef();
     const {t, i18n} = useTranslation();
     const currentLanguage = i18n.language;
