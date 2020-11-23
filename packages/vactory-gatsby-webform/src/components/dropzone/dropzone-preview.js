@@ -31,13 +31,14 @@ export const DropzonePreview = (props) => {
     } = props;
     const {t} = useTranslation();
 
-    let title = `${name || "?"}, ${formatBytes(size)}`;
+    let elliptedName = name.length > 64 ? name.slice(0, 31)+'...'+name.slice(-32) : name
+    let title = `${elliptedName || "?"}, ${formatBytes(size)}`;
     if (duration) title = `${title}, ${formatDuration(duration)}`;
 
     if (status === "error_file_size" || status === "error_validation") {
         return (
-            <div className={className} style={style}>
-                <span className="dzu-previewFileNameError">{title}</span>
+            <div className={'dzu-previewStatusContainer '+className} style={style}>
+                <span className="dzu-previewFileName dzu-previewFileNameError">{title}</span><br/>
                 {status === "error_file_size" &&
                 <span>{size < minSizeBytes ? t("webform:Fichier trop petit") : t("webform:Fichier trop gros")}</span>}
                 {status === "error_validation" && <span>{String(validationError)}</span>}

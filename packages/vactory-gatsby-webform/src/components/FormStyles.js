@@ -3,6 +3,7 @@ export const defaultStyles = {
         padding: 4,
     },
     fieldSpacing: 6,
+    fieldsGroup: {},
     buttonGroup: {
         marginTop: 4,
         display: 'flex',

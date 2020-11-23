@@ -63,14 +63,12 @@ export const RenderField = (props) => {
         case 'custom':
             Component = field.component;
             return (
-                <Box key={`${name}-container`}>
-                    <Component
-                        name={name}
-                        webformId={webformId}
-                        field={field}
-                        ref={r => (internalRefs.current[name] = r)}
-                        {...field.props} />
-                </Box>
+                <Component
+                    name={name}
+                    webformId={webformId}
+                    field={field}
+                    ref={r => (internalRefs.current[name] = r)}
+                    {...field.props} />
             );
 
         default:
@@ -96,14 +94,12 @@ export const RenderField = (props) => {
     }
 
     return (
-        <Box key={`${name}-container`}>
-            <Component
-                name={name}
-                webformId={webformId}
-                field={field}
-                ref={r => (internalRefs.current[name] = r)}
-            />
-        </Box>
+        <Component
+            name={name}
+            webformId={webformId}
+            field={field}
+            ref={r => (internalRefs.current[name] = r)}
+        />
     );
 };
 
@@ -122,7 +118,7 @@ export const Form = ({
         validateCriteriaMode: "all"
     });
     const internalRefs = useRef({});
-    const baseStyles = overwriteDefaultStyles ? styles : merge(defaultStyles, styles);
+    const baseStyles = overwriteDefaultStyles ? styles : merge({}, defaultStyles, styles);
     const submitWebform = useWebformRequest();
     const [isLoading, setIsLoading] = React.useState(false);
     const [isSuccess, setIsSuccess] = React.useState(false);
@@ -192,17 +188,15 @@ export const Form = ({
                 onSubmit={form.handleSubmit(onSubmit)}
                 {...baseStyles?.container}
             >
-                {render ? (<Box>
-                    {render(
+                {render ? render(
                         resetForm,
                         isLoading,
                         isSuccess,
                         isError
-                    )}
-                </Box>) : (
-                    <Box>
-                        <Box>
-                            {Object.entries(schema).map((field, key) => <RenderField key={key} field={field}/>)}
+                    ) : (
+                    <React.Fragment>
+                        <Box __css={baseStyles?.fieldsGroup}>
+                            {Object.entries(schema).map((field, key) => <RenderField key={`${field[0]}-container`} field={field}/>)}
                         </Box>
                         <Box __css={baseStyles?.buttonGroup}>
                             {buttons?.reset?.hidden ? null : (
@@ -220,7 +214,7 @@ export const Form = ({
                                 <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
                             </Button>
                         </Box>
-                    </Box>
+                    </React.Fragment>
                 )}
             </Box>
         </FormContext>

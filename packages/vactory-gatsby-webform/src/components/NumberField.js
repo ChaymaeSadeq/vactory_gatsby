@@ -38,6 +38,7 @@ export const NumberField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
             <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
@@ -52,7 +53,7 @@ export const NumberField = forwardRef(({
                 <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
 
                     <Input
-                        id={id}
+                        id={name}
                         data-testid={id}
                         key={id || `${name}-input`}
                         type={htmlInputType || 'number'}
