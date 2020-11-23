@@ -12,6 +12,7 @@ import "./dropzone/dropzone.css"
 import Dropzone from "react-dropzone-uploader"
 import {DropzonePreview} from "./dropzone/dropzone-preview"
 import {AppSettings} from 'vactory-gatsby-core'
+import deburr from "lodash.deburr"
 
 export const UploadField = forwardRef(({
                                            id,
@@ -80,7 +81,7 @@ export const UploadField = forwardRef(({
             body: blob,
             headers: {
                 "Content-Type": "application/octet-stream",
-                "Content-Disposition": `file; filename="${meta.name}"`,
+                "Content-Disposition": `file; filename="${deburr(meta.name)}"`,
             },
         }
     };
@@ -163,6 +164,7 @@ export const UploadField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
             <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
@@ -205,6 +207,9 @@ export const UploadField = forwardRef(({
                         maxFiles={field?.validation?.maxFiles ? field?.validation?.maxFiles : 1}
                         maxSizeBytes={field?.validation?.maxSizeBytes ? field?.validation?.maxSizeBytes : null}
                         PreviewComponent={props => <DropzonePreview {...props} />}
+                        addClassNames={{
+                            dropzone: errorMessage ? 'dzu-dropzoneInvalid' : '',
+                        }}
                     />
 
                     <FormHelperText {...fieldStyles?.helperText}>

@@ -39,6 +39,7 @@ export const TextField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
 
             <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
@@ -53,7 +54,7 @@ export const TextField = forwardRef(({
 
                 <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
                     <Input
-                        id={id}
+                        id={name}
                         data-testid={id}
                         key={id || `${name}-input`}
                         type={htmlInputType || 'text'}

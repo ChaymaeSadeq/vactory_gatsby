@@ -36,6 +36,7 @@ export const SelectField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
             <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
@@ -50,6 +51,7 @@ export const SelectField = forwardRef(({
                 <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
 
                     <Select
+                        id={name}
                         name={name}
                         data-testid={id}
                         ref={register(toRegister(label || name, validation, values, t))}

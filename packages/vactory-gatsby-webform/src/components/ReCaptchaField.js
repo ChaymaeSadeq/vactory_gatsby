@@ -22,8 +22,8 @@ export const ReCaptchaField = forwardRef(({
         shouldDisplay,
         styles = {},
     } = field;
-    const fieldStyles = useStyles('reCaptchaField', styles);
-    const formControlLayout = useStyles('formControlLayout', styles);
+    const fieldStyles = useStyles('reCaptchaField', styles?.field);
+    const formControlLayout = useStyles('formControlLayout', styles?.layout);
     const recaptchaRef = React.createRef();
     const {t, i18n} = useTranslation();
     const currentLanguage = i18n.language;
@@ -53,6 +53,7 @@ export const ReCaptchaField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
             <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
