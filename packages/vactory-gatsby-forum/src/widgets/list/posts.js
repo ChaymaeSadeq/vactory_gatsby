@@ -11,6 +11,7 @@ const CardExcerpt = ({ children, ...rest }) => {
 }
 
 const Posts = ({ posts }) => {
+  console.log('POSTS >>', posts)
   return (
     <Container mb="30px">
       <table border="1" cellSpacing="3" cellPadding="3">

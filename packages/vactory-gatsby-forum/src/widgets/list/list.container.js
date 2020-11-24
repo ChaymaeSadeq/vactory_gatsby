@@ -1,16 +1,19 @@
 import React from 'react'
 import get from 'lodash.get';
-import {List} from './list'
-import { Box, Heading, Button } from 'vactory-ui'
-import { Link } from 'vactory-gatsby-ui'
+import {PostsContainer} from 'vactory-gatsby-forum'
 import {stripHtml, truncate} from 'vactory-gatsby-core'
 
 export const ListContainer = ({data}) => {
-    console.log('DATA', data)
-    const title = get(data, 'components.0.title', '')
-    const link = get(data, 'components.0.link.url', null)
-    const link_label = get(data, 'components.0.link.title', '')
-    const show_link = get(data, 'components.0.show_link', null)
+
+    const pageCount = get(data, 'components.0.data_count', 0);
+
+    let components = {}
+    components.title = get(data, 'components.0.title', '')
+    components.link = get(data, 'components.0.link.url', null)
+    components.link_label = get(data, 'components.0.link.title', '')
+    components.show_link = get(data, 'components.0.show_link', null)
+    components.is_listing = get(data, 'components.0.is_listing', null)
+
     const posts = data.data.map((post) => {
         return {
           ...post,
@@ -19,18 +22,10 @@ export const ListContainer = ({data}) => {
       })
 
     return (
-      <Box mb="30px">
-        <Box >
-          <Heading level={2}>{title}</Heading>
-        </Box>
-        <List posts={posts} />
-        <Box >
-          {show_link && link && (
-            <Button as={Link} to={link}>
-              {link_label}
-            </Button>
-          )}
-        </Box>
-      </Box>
+      <PostsContainer
+        components={components}
+        nodes={posts}
+        pageCount={pageCount}
+      />
     );
 };

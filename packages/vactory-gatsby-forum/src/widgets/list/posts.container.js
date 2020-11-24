@@ -7,14 +7,20 @@ import {
   normalizeDFNodes,
   PostsPage,
 } from 'vactory-gatsby-forum'
-import { Heading, Container, Paragraph } from 'vactory-ui'
-import {LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
+import { Heading, Container, Paragraph, Button } from 'vactory-ui'
+import {Link, LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
 
-const PostsContainer = ({ pageCount, nodes }) => {
+const PostsContainer = ({ pageCount, nodes, components }) => {
   const { t, i18n } = useTranslation()
   const currentLanguage = i18n.language
+
+  console.log('COMPONENTS >>', components)
+  console.log('NODES >>', nodes)
+
   const normalizedNodes = normalizeDFNodes(nodes)
-  console.log(normalizedNodes)
+
+  console.log('NORMALIZED >>', normalizedNodes)
+  
   const isFirstRun = useRef(true)
   const [posts, setPosts] = useState(normalizedNodes)
   const [isLoading, setIsLoading] = useState(false)
@@ -39,8 +45,9 @@ const PostsContainer = ({ pageCount, nodes }) => {
       }
 
       setIsLoading(true)
-      Api.getResponse('node/forum', requestParams, currentLanguage)
+      Api.getResponse('node/vactory_forum', requestParams, currentLanguage)
         .then((res) => {
+          console.log('RES >>', res)
           const normalizedNodes = normalizeNodes(res.data)
           const total = res.meta.count
           setPosts(normalizedNodes)
@@ -57,9 +64,7 @@ const PostsContainer = ({ pageCount, nodes }) => {
 
   return (
     <Container>
-      <Heading px="xsmall" level={2}>
-        {t('Forum')}
-      </Heading>
+      <Heading level={2}>{components.title}</Heading>
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && (
           <PostsPage posts={posts} />
@@ -78,6 +83,11 @@ const PostsContainer = ({ pageCount, nodes }) => {
                 current={pager}
                 onChange={handlePaginationChange}
             />
+      )}
+      {components.show_link && components.link && (
+            <Button as={Link} to={components.link}>
+              {components.link_label}
+            </Button>
       )}
     </Container>
   )
