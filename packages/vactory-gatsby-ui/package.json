@@ -26,7 +26,6 @@
     "react-portal": "^4.2.1",
     "react-rating": "^2.0.5",
     "react-responsive-picture": "^3.2.2",
-    "styled-components": "^5.1.0",
     "styled-system": "^5.1.5",
     "vactory-ui": "^1.0.6"
   },
