@@ -27,7 +27,7 @@
     "react-rating": "^2.0.5",
     "react-responsive-picture": "^3.2.2",
     "styled-system": "^5.1.5",
-    "vactory-ui": "^1.0.6"
+    "vactory-ui": "^1.0.7"
   },
   "devDependencies": {
     "fslightbox-react": "^1.4.9"
