@@ -1,5 +1,6 @@
 import React, {useMemo, useEffect, useState, useImperativeHandle, forwardRef} from 'react';
 import {Box} from 'vactory-ui';
+import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext, useFieldArray} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
@@ -213,7 +214,13 @@ export const UploadField = forwardRef(({
                     />
 
                     <FormHelperText {...fieldStyles?.helperText}>
-                        {!!helperText && <div>{helperText} <Box as={'hr'} {...helperTextSeparatorStyle} /></div>}
+                        {!!helperText && (
+                                <div>
+                                    <Wysiwyg html={helperText} />
+                                    <Box as={'hr'} {...helperTextSeparatorStyle} />
+                                </div>
+                            )
+                        }
 
                         {field.maxSizeMb && <p>{t("webform:Les fichiers ne doivent pas dépasser")}
                             <strong> {field?.maxSizeMb} {t("webform:Mo")}</strong>.</p>}

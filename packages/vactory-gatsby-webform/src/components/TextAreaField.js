@@ -1,5 +1,6 @@
 import React, {useMemo, forwardRef} from 'react';
 import {Box, Input} from 'vactory-ui';
+import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
 import {useTranslation} from "react-i18next";
@@ -62,7 +63,7 @@ export const TextAreaField = forwardRef(({
                     />
                     {!!helperText && (
                         <FormHelperText {...fieldStyles?.helperText}>
-                            {helperText}
+                            <Wysiwyg html={helperText} />
                         </FormHelperText>
                     )}
                     <FormErrorMessage {...fieldStyles?.errorMessage}>
