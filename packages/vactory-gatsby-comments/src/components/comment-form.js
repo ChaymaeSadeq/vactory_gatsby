@@ -32,7 +32,7 @@ export const CommentForm = ({entity_uid, cid = null, type_content}) => {
                     "name": params.name,
                     // "mail": this.state.email,
                     "entity_type": "node",
-                    "field_name": "field_comments",
+                    "field_name": "comment",
                     "g-recaptcha-response": params.captcha,
                     "comment_body": {
                         "value": params.body,

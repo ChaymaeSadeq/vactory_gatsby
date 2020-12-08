@@ -28,6 +28,21 @@ export const normalizeDFNodes = (nodes) => {
     }));
 };
 
+export const normalizeNode = (post) => {
+    console.log('NODE', post)
+    return {
+      id: post.id,
+      nid: post.drupal_internal__nid,
+      title: post.title,
+      url: get(post, 'path.alias', '#.'),
+      body: get(post, 'body.processed', null),
+      comment: get(post, 'comment.last_comment_name', null),
+      forum_expert: get(post, 'internal_user.field_forum_expert', null),
+      excerpt: get(post, 'field_vactory_excerpt.processed', null),
+      category: get(post, 'field_vactory_taxonomy_1.name', null),
+    }
+  }
+
 export const normalizeTerms = (terms) => {
     return terms.map(term => ({
         id: term.drupal_internal__tid,

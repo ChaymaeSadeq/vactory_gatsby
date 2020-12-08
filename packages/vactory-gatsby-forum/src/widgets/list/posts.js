@@ -39,7 +39,7 @@ const Posts = ({ posts }) => {
                 <td>{item.status}</td>
                 <td>{item.views ? item.views : 0}</td>
                 <td>{item.contributions}</td>
-                <td>{item.last_contribution}</td>
+                <td>{item.contributions > 0 && item.last_contribution}</td>
               </tr>
             );
           })}
