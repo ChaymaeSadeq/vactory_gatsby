@@ -46,6 +46,7 @@ export const MapContainer = styled.div`
   }
   .map-input-wrapper {
     position: relative;
+    z-index: 0;
     height: 500px;
     margin: 0 auto;
     box-shadow: 0px 10px 16px 0px #cacaca;
