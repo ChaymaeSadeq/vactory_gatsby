@@ -1,7 +1,6 @@
 import React from 'react'
 import get from 'lodash.get';
 import {Ancre} from "vactory-gatsby-ui";
-import {Box} from "vactory-ui"
 
 export const AncreContainer = ({data}) => {
     const items = data.components.map(component => {
@@ -12,10 +11,8 @@ export const AncreContainer = ({data}) => {
     });
 
     return (
-        <Box>
-            <Ancre
-                items={items}
-            />
-        </Box>
+        <Ancre
+            items={items}
+        />
     )
 };
