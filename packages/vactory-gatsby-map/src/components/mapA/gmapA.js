@@ -1,21 +1,18 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios"
 import {useLoadScript, GoogleMap, InfoWindow} from "@react-google-maps/api"
-import {useTranslation} from "react-i18next"
-import {MapContainer, InfoWindowWrapper} from "./styles"
+import {MapContainer} from "./styles"
 import {MapSearch} from "./map-search"
 import isClient from "is-client"
 import Markers from "./markers"
-import InfoWindowImage from "./images/building.jpg"
 import {mapOptions} from './options'
+import {SearchResult} from "./searchComponents";
+import {LoadingOverlay} from 'vactory-gatsby-ui'
+import placeholder_image from "./images/placeholder.jpg";
 
-const LoadingLayer = () => {
-    return (<h1>Loading map.</h1>);
-};
 
 export const GmapA = (props) => {
     const {mapKey} = props
-    const {t} = useTranslation();
     const [isBrowser, setIsBrowser] = useState(false);
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: mapKey,
@@ -88,9 +85,7 @@ export const GmapA = (props) => {
             <div className="map-input-wrapper">
                 {isLoaded && items.length > 0 ?
                     <>
-                        <div className="map-search-input">
-                            <MapSearch items={items} onSelect={(event, item) => markerHandler(event, item)}/>
-                        </div>
+                        <MapSearch items={items} onSelect={(event, item) => markerHandler(event, item)}/>
                         <GoogleMap
                             id='map-container-a'
                             onLoad={loadHandler}
@@ -108,6 +103,7 @@ export const GmapA = (props) => {
 
                                 {infoOpen && selected && (
                                     <InfoWindow
+                                        disableAutoPan={true}
                                         anchor={markerMap[selected.id]}
                                         position={{
                                             lat: parseFloat(selected.field_locator_info.lat),
@@ -115,29 +111,36 @@ export const GmapA = (props) => {
                                         }}
                                         onCloseClick={() => setInfoOpen(false)}
                                     >
-                                        <InfoWindowWrapper className="card card-map">
-                                            <div className="card-img-wrapper">
-                                                <img src={InfoWindowImage} alt=""/>
-                                            </div>
-                                            <div className="card-body">
-                                                <h5 className="card-title">{selected.name}</h5>
-                                                <p className="card-text map-adresse">{selected.field_locator_adress.address_line1}</p>
-                                                <p className="card-text map-phone">
-                                                    <span> {t('Tel')} : </span>
-                                                    <span
-                                                        className="map-text">{selected.field_locator_phone} / {selected.field_locator_phone2}</span>
-                                                </p>
-                                                <p className="card-text map-phone"> {t('Fax')} : <span
-                                                    className="map-text">{selected.field_locator_fax}</span></p>
-                                            </div>
-                                        </InfoWindowWrapper>
+                                        <SearchResult
+                                            name={selected.name}
+                                            addressLine1={selected.field_locator_adress?.address_line1}
+                                            addressLine2={selected.field_locator_adress?.address_line2}
+                                            phone={selected.field_locator_phone}
+                                            phone2={selected.field_locator_phone2}
+                                            fax={selected.field_locator_fax}
+                                        />
                                     </InfoWindow>
                                 )}
                             </>
                             }
                         </GoogleMap>
                     </>
-                    : <LoadingLayer/>}
+                    :
+                    <LoadingOverlay
+                        active={true}
+                        text="taking care of stuff.."
+                        styles={{
+                            wrapper: base => ({
+                                ...base,
+                                height: '100%',
+                            }),
+                            overlay: base => ({
+                                ...base,
+                                background: `linear-gradient(rgba(0,0,0,.4) 100%, #000), rgba(0,0,0, .7) url(${placeholder_image}) center / cover`,
+                            }),
+                        }}
+                    />
+                    }
             </div>
         </MapContainer>
     )
