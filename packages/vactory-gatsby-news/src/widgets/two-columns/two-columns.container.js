@@ -20,7 +20,7 @@ export const TwoColumnsContainer = ({data}) => {
                 'text-align': 'center'
             }}>
                 <Heading level={2}>{title}</Heading>
-                {raw_description.length > 0 && <div>{description}</div>}
+                {raw_description.length > 0 && {description}}
             </Box>
             <TwoColumns posts={posts}/>
             <Box sx={{
