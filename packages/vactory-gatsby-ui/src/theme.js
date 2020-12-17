@@ -61,7 +61,7 @@ const navs = {
             },
             '&.is-current': {
                 color: 'primary',
-                borderBottom: '4px solid #007732',
+                borderBottom: '4px solid #017CFE',
             },
             a: {
                 display: 'block',
