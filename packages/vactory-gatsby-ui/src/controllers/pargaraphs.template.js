@@ -34,8 +34,6 @@ export const ParagraphsTemplate = (props) => {
     }
 
     return (
-        <div>
-            <Component data={settings} {...rest} />
-        </div>
+        <Component data={settings} {...rest} />
     )
 };
