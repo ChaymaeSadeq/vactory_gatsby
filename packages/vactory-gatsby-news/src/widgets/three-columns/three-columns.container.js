@@ -20,7 +20,7 @@ export const ThreeColumnsContainer = ({data}) => {
                 'text-align': 'center'
             }}>
                 <Heading level={2}>{title}</Heading>
-                {raw_description.length > 0 && {description}}
+                {raw_description.length > 0 && <>{description}</>}
             </Box>
             <ThreeColumns posts={posts}/>
             <Box sx={{
