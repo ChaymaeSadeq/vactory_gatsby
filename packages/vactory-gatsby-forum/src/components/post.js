@@ -1,6 +1,5 @@
 import React from "react"
 import {Comments} from 'vactory-gatsby-comments'
-import { ForumSearchInput } from "vactory-gatsby-forum";
 import { imageLayoutStyles } from 'vactory-gatsby-academy'
 import { Box, Flex, Col, Text, Container } from "vactory-ui";
 import { Picture } from 'vactory-gatsby-ui'
@@ -84,7 +83,6 @@ const Post = ({ post }) => {
           </Flex>
         </Col>
       </Flex>
-      <ForumSearchInput />
       <Comments
         entity_uid={post.id}
         type_content="vactory_forum"
