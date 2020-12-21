@@ -10,7 +10,7 @@ const ForumSearchInput = () => {
     const { register, handleSubmit } = useForm();
     const searchUrl = useViewsAlias("forum_search");
     const onSubmit = ({keyword}) => {
-        navigate(searchUrl, {state: {keyword:keyword}});
+        navigate(`${searchUrl}?q=${keyword}`, {state: {keyword:keyword}});
     };
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
