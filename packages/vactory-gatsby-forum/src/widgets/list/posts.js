@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'vactory-gatsby-ui'
 import { Container, Text } from "vactory-ui";
+import { normalizeDate } from "vactory-gatsby-forum";
+import {useTranslation} from "react-i18next"
 
 const CardExcerpt = ({ children, ...rest }) => {
   return (
@@ -12,6 +14,8 @@ const CardExcerpt = ({ children, ...rest }) => {
 
 const Posts = ({ posts }) => {
   console.log('POSTS >>', posts)
+  const {i18n} = useTranslation();
+  const currentLanguage = i18n.language;
   return (
     <Container mb="30px">
       <table border="1" cellSpacing="3" cellPadding="3">
@@ -39,7 +43,7 @@ const Posts = ({ posts }) => {
                 <td>{item.status}</td>
                 <td>{item.views ? item.views : 0}</td>
                 <td>{item.contributions}</td>
-                <td>{item.contributions > 0 && item.last_contribution}</td>
+                <td>{item.contributions > 0 && normalizeDate(currentLanguage, item.last_contribution)}</td>
               </tr>
             );
           })}

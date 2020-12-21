@@ -1,6 +1,6 @@
 export { params as postQueryParams } from './src/internal/api.post.params'
 export { params as postsQueryParams } from './src/internal/api.posts.params'
-export { normalizeNodes, normalizeNode, normalizeTerms, normalizeDFNodes } from './src/internal/normalizers'
+export { normalizeNodes, normalizeNode, normalizeTerms, normalizeDFNodes, normalizeDate } from './src/internal/normalizers'
 export * from './src/widgets'
 export {default as PostPage} from './src/components/post'
 export {default as PostContainer} from './src/components/post.container'

@@ -1,4 +1,8 @@
 import get from 'lodash.get';
+import * as moment from "moment"
+import 'moment/locale/fr';
+import 'moment/locale/ar';
+
 
 export const normalizeNodes = (nodes) => {
     console.log('TONORMALIZE', nodes)
@@ -6,13 +10,17 @@ export const normalizeNodes = (nodes) => {
         id: post.drupal_internal__nid,
         title: post.title,
         url: get(post, 'path.alias', '#.'),
-        //category: get(post, 'field_vactory_taxonomy_1.name', null),
         excerpt: get(post, 'field_vactory_excerpt.processed', null),
         views: get(post, 'field_forum_views_count', null),
         status: get(post, 'field_forum_status', null),
         contributions: get(post, 'comment.comment_count', null),
         last_contribution: get(post, 'comment.last_comment_timestamp', null)
     }));
+};
+
+export const normalizeDate = (lang, date) => {
+  moment.locale(lang);
+  return moment(date, "X").format("D MMMM YYYY HH:mm");
 };
 
 export const normalizeDFNodes = (nodes) => {
