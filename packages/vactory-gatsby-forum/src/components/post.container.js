@@ -4,13 +4,28 @@ import Api from 'vactory-gatsby-api';
 import { PostPage, postQueryParams, normalizeNode } from "vactory-gatsby-forum";
 import { Paragraph } from 'vactory-ui';
 import { LoadingOverlay } from 'vactory-gatsby-ui';
+import qs from "qs"
 
 const PostContainer = ({pageContext: {node}}) => {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
     const normalizedNode = normalizeNode(node)
     const isFirstRun = useRef(true)
     const [post, setPost] = useState(normalizedNode)
     const [isLoading, setIsLoading] = useState(false);
+
+    const sendData = () => {
+      const params = {'nid': post.nid}
+      Api.postRest('_updateNodeViewsCount', qs.stringify(params), node.langcode)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+    useEffect(() => {
+      sendData()
+    }, [])
 
     useEffect(() => {
         if (isFirstRun.current) {
