@@ -26,10 +26,10 @@ export const WebformWidgetContainer = ({data}) => {
 
     return (
         <Box mb="30px">
-            <Box sx={{'text-align': 'center'}}>
-                <Heading level={2}>{title}</Heading>
+            { (title || raw_description) && <Box sx={{'text-align': 'center'}}>
+                {title && <Heading level={2}>{title}</Heading> }
                 {raw_description.length > 0 && <div>{description}</div>}
-            </Box>
+            </Box> }
 
             <Form
                 webformId={webform_id}
@@ -38,13 +38,11 @@ export const WebformWidgetContainer = ({data}) => {
                 buttons={buttons}
             />
 
-            <Box sx={{'text-align': 'center'}}>
-                {link && (
-                    <Button as={Link} to={link}>
-                        {link_label}
-                    </Button>
-                )}
-            </Box>
+            { (link || link_label) && <Box sx={{'text-align': 'center'}}>
+                <Button as={Link} to={link}>
+                    {link_label}
+                </Button>
+            </Box> }
         </Box>
     )
 };

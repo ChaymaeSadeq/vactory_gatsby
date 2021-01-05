@@ -28,6 +28,7 @@ export const CheckboxField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
             <Box className="ui-form__formControlInner ui-form__formControlInner_noLabel"
                  __css={formControlLayout?.inner}>

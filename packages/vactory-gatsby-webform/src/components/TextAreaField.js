@@ -36,6 +36,7 @@ export const TextAreaField = forwardRef(({
             key={`${name}-control`}
             isRequired={validation?.required}
             isInvalid={!!errorMessage}
+            className={'field--'+name}
         >
             <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
@@ -51,7 +52,7 @@ export const TextAreaField = forwardRef(({
 
                     <Input
                         as={"textarea"}
-                        id={id}
+                        id={name}
                         data-testid={id}
                         name={name}
                         placeholder={placeholder}
