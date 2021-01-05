@@ -1,5 +1,6 @@
 import React from "react"
 import {Box, Icon, Header, Text, Flex} from 'vactory-ui'
+import {StatePageSection} from "../state";
 
 const HeaderAMP = () => {
     return <Header p="xlarge" bg="white" boxShadow={1}>
@@ -21,10 +22,12 @@ const FooterAMP = () => {
 export const DefaultLayoutAmp = ({children, location, pageContext: {node, pageInfo, breadcrumb}, nodeSettings}) => {
     return (
         <>
+            <StatePageSection.Provider>
             <HeaderAMP/>
             <main>
                 {children}
             </main>
+            </StatePageSection.Provider>
             <FooterAMP/>
         </>
     )
