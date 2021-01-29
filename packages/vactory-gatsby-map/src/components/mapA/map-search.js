@@ -1,10 +1,10 @@
 import React, {useState} from "react"
-// import ReactPaginate from "react-paginate"
 import Fuse from "fuse.js"
 import {useTranslation} from "react-i18next"
-import {Icon} from "vactory-ui"
+import {Flex} from "vactory-ui"
 import {MapSearchForm} from "./styles"
-import ImgSearchReslt from "./images/building.jpg"
+import {SearchResult, SearchButton, SearchBox, SearchInput} from "./searchComponents";
+
 
 function paginator(arr, perPage) {
     if (perPage < 1 || !arr) return () => []
@@ -44,7 +44,7 @@ export const MapSearch = ({items, onSelect}) => {
     const {t} = useTranslation()
     const [results, setResults] = useState([])
     const [pageCount, setPageCount] = useState(0)
-    const [pageNumber, setPageNumber] = useState(0)
+    const [pageNumber, setPageNumber] = useState(0) // eslint-disable-line no-unused-vars
     const pageLimit = 10
     const currentResults = paginator(results, pageLimit)(pageNumber)
     const [openSearchLayer, setOpenSearchLayer] = useState(false)
@@ -56,16 +56,13 @@ export const MapSearch = ({items, onSelect}) => {
         if (value.length > 0) {
             suggestions = new Fuse(items, FuzeOptions).search(value)
             setPageCount(Math.ceil(suggestions.length / pageLimit))
-            if (!openSearchLayer) {
-                setOpenSearchLayer(true)
-            }
+
+            setOpenSearchLayer(true)
         }
         setResults(suggestions)
     }
     const onSearchClick = () => {
-        if (!openSearchLayer) {
-            setOpenSearchLayer(true)
-        }
+        setOpenSearchLayer(true)
     }
 
     const onCloseSearchLayer = (event) => {
@@ -73,91 +70,41 @@ export const MapSearch = ({items, onSelect}) => {
         setOpenSearchLayer(false)
     }
 
-    const onSelectItem = (value) => {
-        onSelect(null, value)
-    }
-
-    const handlePageClick = (data) => { // eslint-disable-line no-unused-vars
-        const selected = data.selected
-        setPageNumber(selected)
-    }
-
     return (
         <MapSearchForm>
-            <div className="input-map-search-wrapper">
-                <input
-                    type="text"
-                    placeholder="Search"
-                    className="form-control"
+            <SearchBox>
+                <SearchInput
                     onChange={onSearch}
                     onClick={onSearchClick}
                 />
-                <div className="d-flex align-items-center justify-content-center">
-                    {(currentResults.length > 0 && openSearchLayer) &&
-                    <a href="#." onClick={(e) => onCloseSearchLayer(e)} className="close-search-wrapper">
-                        <Icon icon="close-thin"/>
-                    </a>
+                <Flex borderLeft="1px solid #adadad">
+                    { currentResults.length > 0 &&
+                        <SearchButton icon="close-thin" onClick={(e) => onCloseSearchLayer(e)} />
                     }
-                    <div className="icon-wrapper">
-                        <Icon icon="recherche"/>
-                    </div>
-                </div>
-            </div>
+                    <SearchButton icon="recherche" />
+                </Flex>
+            </SearchBox>
+
             <div className="map-search-result-wrapper">
                 {(currentResults.length > 0 && openSearchLayer) &&
                 <div className="map-search-result">
-                    <div className="map-search-result--list">
-                        {
-                            currentResults.map(({item}, index) => {
-                                return (
-                                    <div role="button" tabIndex="0" key={index} onKeyPress={() => onSelectItem(item)}>
-                                        <div
-                                            className="map-search-result-item d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h5>{item.name}</h5>
-                                                <p>
-                                                    {item.field_locator_adress.locality} <br/>
-                                                    {item.field_locator_adress.address_line1}
-                                                    ​​{item.field_locator_adress.address_line2}
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <img src={ImgSearchReslt} alt={item.name}/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    { currentResults.map(({item}, index) => (
+                            <SearchResult
+                                key={index+item.name}
+                                name={item.name}
+                                locality={item?.field_locator_adress?.locality}
+                                addressLine1={item?.field_locator_adress?.address_line1}
+                                addressLine2={item?.field_locator_adress?.address_line2}
+                                onClick={() => onSelect(null, item)}
+                            />
+                    )) }
                 </div>
                 }
-                {(pageCount > 0 && currentResults.length > 0 && openSearchLayer) &&
-                <div className="map-search-pagination d-flex align-items-center justify-content-end">
-                    <p>
-                        {results.length} {t("Résultat (s)")} {pageNumber + 1} {t("Of")} {pageCount}
-                    </p>
-                    {/*<ReactPaginate*/}
-                    {/*    forcePage={pageNumber}*/}
-                    {/*    previousLabel={"<"}*/}
-                    {/*    nextLabel={">"}*/}
-                    {/*    breakLabel={"..."}*/}
-                    {/*    breakClassName={"break-me"}*/}
-                    {/*    pageCount={pageCount}*/}
-                    {/*    marginPagesDisplayed={5}*/}
-                    {/*    pageRangeDisplayed={5}*/}
-                    {/*    onPageChange={handlePageClick}*/}
-                    {/*    containerClassName={"pagination"}*/}
-                    {/*    pageClassName={"page-item"}*/}
-                    {/*    previousClassName={"page-item"}*/}
-                    {/*    previousLinkClassName={"page-link"}*/}
-                    {/*    nextClassName={"page-item"}*/}
-                    {/*    nextLinkClassName={"page-link"}*/}
-                    {/*    pageLinkClassName={"page-link"}*/}
-                    {/*    subContainerClassName={"pages pagination"}*/}
-                    {/*    activeClassName={"active"}*/}
-                    {/*/>*/}
-                </div>
+                { (pageCount > 0 && currentResults.length > 0 && openSearchLayer) &&
+                    <Flex className="map-search-pagination" alignItems="center" justifyContent="space-between" p={10}>
+                        <span> {results.length} {t("Résultat (s)")} </span>
+                        <span> {pageNumber + 1} {t("of")} {pageCount} </span>
+                    </Flex>
                 }
             </div>
         </MapSearchForm>
