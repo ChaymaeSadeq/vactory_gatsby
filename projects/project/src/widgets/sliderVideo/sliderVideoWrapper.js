@@ -2,10 +2,10 @@ import React from "react";
 import {SliderVideo} from "./sliderVideo";
 import {useRtl} from "vactory-gatsby-core";
 import {appendDots, Box, NextArrow, PrevArrow, Slider} from "vactory-ui";
-import {theme} from "../../vactory-gatsby-ui/theme";
+import { withTheme } from 'styled-components';
 
 
-export const SliderVideoWrapper = ({items}) => {
+export const SliderVideoWrapper = withTheme(({items, theme}) => {
     const isRtl = useRtl()
     const settings = {
         dots: true,
@@ -54,4 +54,4 @@ export const SliderVideoWrapper = ({items}) => {
 
         </Slider>
     )
-}
+})
