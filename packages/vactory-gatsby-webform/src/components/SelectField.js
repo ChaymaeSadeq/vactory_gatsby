@@ -1,5 +1,6 @@
 import React, {useMemo, forwardRef} from 'react';
 import {Box, Select} from 'vactory-ui';
+import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useTranslation} from "react-i18next"
 import {useFormContext} from 'react-hook-form';
@@ -65,7 +66,7 @@ export const SelectField = forwardRef(({
                     </Select>
                     {!!helperText && (
                         <FormHelperText {...fieldStyles?.helperText}>
-                            {helperText}
+                            <Wysiwyg html={helperText} />
                         </FormHelperText>
                     )}
                     <FormErrorMessage {...fieldStyles?.errorMessage}>
