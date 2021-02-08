@@ -41,3 +41,9 @@
         src:url("/fonts/009ca58d-46af-4651-a359-f0ae2301085b.woff2") format("woff2"),url("/fonts/3619b5f4-8df9-44f5-8c53-b7c236e9c74e.woff") format("woff");
     }
 }
+
+@layer components {
+    .container {
+        @apply max-w-6xl;
+    }
+}

@@ -9,7 +9,7 @@ import {
     BackToTop,
     StatePageSection
 } from 'vactory-gatsby-ui'
-import {TestComponents} from '../../stories/test/Test'
+// import {TestComponents} from '../../stories/test/Test'
 import "../../../styles.css"
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}, nodeSettings}) => {
@@ -25,7 +25,7 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             }
             {breadcrumb && breadcrumb.length > 0 && <Breadcrumb items={breadcrumb}/>}
             <main>
-            <TestComponents />
+            {/* <TestComponents /> */}
                 {children}
             </main>
             </StatePageSection.Provider>
