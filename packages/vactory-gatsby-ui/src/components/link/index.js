@@ -9,7 +9,8 @@ const StyledGatsbyLink = styled(GatsbyLink).withConfig({
 `;
 
 export const Link = props => {
-    const {to, ...newProps} = props
+    let { to, ...newProps } = props;
+    to ??= props?.href;
     const internal = /^\/(?!\/)/.test(to)
     const isFile = /^\/sites\/default\/(?!\/)/.test(to)
 
