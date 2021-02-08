@@ -1,9 +1,9 @@
 import React from "react";
 import {ChiffreCle} from "./chiffreCle";
 import {Box, Row, Col, Slider, NextArrow, PrevArrow} from 'vactory-ui';
-import {theme} from "../../vactory-gatsby-ui/theme";
 import {useRtl} from "vactory-gatsby-core";
 import {TemplateWrapper} from '../../composants'
+import { withTheme } from 'styled-components';
 
 export const appendDots = dots => <Box
     as="ul"
@@ -64,7 +64,7 @@ export const appendDots = dots => <Box
     }}
 >{dots}</Box>
 
-export const ChiffreCleSlider = ({items}) => {
+export const ChiffreCleSlider = withTheme(({items, theme}) => {
     const isRtl = useRtl()
     const settings = {
         dots: true,
@@ -114,7 +114,7 @@ export const ChiffreCleSlider = ({items}) => {
 
         </Slider>
     )
-}
+});
 
 export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
     return (

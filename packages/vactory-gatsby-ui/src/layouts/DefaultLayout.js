@@ -7,12 +7,14 @@ import {
     CookieComplianceLayer,
     OfflineDetector,
     BackToTop,
-    StatePageSection
+    StatePageSection,
+    BlocksController
 } from 'vactory-gatsby-ui'
 
 export const DefaultLayout = ({children, location, pageContext: {node, pageInfo, breadcrumb}, nodeSettings}) => {
     return (
         <>
+            <BlocksController blocks={node?.internal_blocks || []} region="top" />
             <StatePageSection.Provider>
             <Header pageInfo={pageInfo} currentLanguage={node.langcode} location={location}/>
             {node.internal_node_banner &&
@@ -23,13 +25,16 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
             }
             {breadcrumb && breadcrumb.length > 0 && <Breadcrumb items={breadcrumb}/>}
             <main>
+                <BlocksController blocks={node?.internal_blocks || []} region="beforeContent" />
                 {children}
+                <BlocksController blocks={node?.internal_blocks || []} region="afterContent" />
             </main>
             </StatePageSection.Provider>
             <Footer/>
             <CookieComplianceLayer />
             <OfflineDetector />
             <BackToTop />
+            <BlocksController blocks={node?.internal_blocks || []} region="bottom" />
         </>
     )
 }

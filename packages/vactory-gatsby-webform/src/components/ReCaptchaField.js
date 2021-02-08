@@ -1,5 +1,6 @@
 import React, {useMemo, useEffect, forwardRef, useImperativeHandle} from 'react';
 import {Box} from 'vactory-ui';
+import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
 import ReCaptcha from "react-google-recaptcha"
@@ -85,7 +86,7 @@ export const ReCaptchaField = forwardRef(({
 
                     {!!helperText && (
                         <FormHelperText {...fieldStyles?.helperText}>
-                            {helperText}
+                            <Wysiwyg html={helperText} />
                         </FormHelperText>
                     )}
                     <FormErrorMessage {...fieldStyles?.errorMessage}>
