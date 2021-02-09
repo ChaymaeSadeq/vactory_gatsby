@@ -20,7 +20,7 @@ export const Link = props => {
 
     if (isFile) {
         return (
-            <a {...newProps} href={`/backend${props.to}`}>
+            <a {...newProps} href={`/backend${to}`}>
                 {props.children}
             </a>
         )
@@ -28,7 +28,7 @@ export const Link = props => {
 
 
     return (
-        <a {...newProps} href={props.to}>
+        <a {...newProps} href={to}>
             {props.children}
         </a>
     )
