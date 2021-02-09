@@ -30,9 +30,9 @@ export const TwoColumnsContainer = ({ data }) => {
 						</h2>
 					)}
 					{raw_description.length > 0 && (
-						<p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
+						<div className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
 							{description}
-						</p>
+						</div>
 					)}
 				</div>
 				<div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-2 lg:max-w-none">
