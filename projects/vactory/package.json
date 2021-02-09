@@ -13,6 +13,7 @@
     "build:styles:old": "rimraf ./styles.css && rimraf ./styles.min.css && cross-env NODE_ENV=production postcss ./src/styles.css -o ./styles.css && cleancss --level 1 -o ./styles.min.css ./styles.css"
   },
   "dependencies": {
+    "@headlessui/react": "^0.3.0",
     "@tailwindcss/typography": "^0.4.0",
     "dotenv": "^8.2.0",
     "gatsby": "^2.20.12",

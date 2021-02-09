@@ -6,7 +6,6 @@ module.exports = {
 	purge: false,
 	darkMode: "class", // or 'media' or 'class'
 	theme: {
-		extend: {},
 		colors: {
 			transparent: "transparent",
 			current: "currentColor",
@@ -14,9 +13,10 @@ module.exports = {
 			white: colors.white,
 			gray: colors.coolGray,
 			red: colors.red,
-			green: colors.green,
-			blue: colors.blue,
+			green: colors.emerald,
+			blue: colors.lightBlue,
 			indigo: colors.indigo,
+			yellow: colors.yellow,
 		},
 		container: {
 			center: true,
@@ -43,6 +43,14 @@ module.exports = {
 			"museo-500": ['"Museo Sans W01_500"', "sans-serif"],
 			"museo-700": ['"Museo Sans W01_700"', "sans-serif"],
 			"museo-900": ['"Museo Sans W01_900"', "sans-serif"],
+		},
+		extend: {
+			zIndex: {
+				"-1": "-1",
+				1: "1",
+				2: "2",
+				3: "3",
+			},
 		},
 	},
 	variants: {
