@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Select, Box, Label, Flex } from 'vactory-ui'
 
 const PostsFormFilter = ({
   cities,
@@ -14,77 +13,84 @@ const PostsFormFilter = ({
   const { t } = useTranslation()
 
   return (
-    <Box pt="10px" pb="30px">
-      <Flex flexDirection={['column', 'row']}>
-        <Flex flexDirection="column" mx="xsmall" mb={['10px', '0px']}>
-          <Label htmlFor="job-ads-professions" mb="xsmall">
-            {t('Profession')}
-          </Label>
-          <Select
-            id="job-ads-professions"
-            onBlur={null}
-            onChange={(e) => {
-              handleChangeProfession(e.currentTarget.value)
-            }}
-            defaultValue={value}
-          >
-            <option value="all">{t('Toutes les professions')}</option>
-            {professions.map((term) => {
-              return (
-                <option key={term.id} value={term.id}>
-                  {term.label}
-                </option>
-              )
-            })}
-          </Select>
-        </Flex>
-        <Flex flexDirection="column" mx="xsmall" mb={['10px', '0px']}>
-          <Label htmlFor="job-ads-contracts" mb="xsmall">
-            {t('Type de contrat')}
-          </Label>
-          <Select
-            id="job-ads-contracts"
-            onBlur={null}
-            onChange={(e) => {
-              handleChangeContract(e.currentTarget.value)
-            }}
-            defaultValue={value}
-          >
-            <option value="all">{t('Tous les types')}</option>
-            {contracts.map((term) => {
-              return (
-                <option key={term.id} value={term.id}>
-                  {term.label}
-                </option>
-              )
-            })}
-          </Select>
-        </Flex>
-        <Flex flexDirection="column" mx="xsmall">
-          <Label htmlFor="job-ads-cities" mb="xsmall">
-            {t('Ville')}
-          </Label>
-          <Select
-            id="job-ads-cities"
-            onBlur={null}
-            onChange={(e) => {
-              handleChangeCity(e.currentTarget.value)
-            }}
-            defaultValue={value}
-          >
-            <option value="all">{t('Toutes les villes')}</option>
-            {cities.map((term) => {
-              return (
-                <option key={term.id} value={term.id}>
-                  {term.label}
-                </option>
-              )
-            })}
-          </Select>
-        </Flex>
-      </Flex>
-    </Box>
-  )
+		<div className="my-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
+			<div>
+				<label
+					htmlFor="job-ads-professions"
+					className="block text-sm font-medium text-gray-700"
+				>
+					{t("Thématique")}
+				</label>
+				<select
+					onChange={(e) => handleChangeCity(e.currentTarget.value)}
+					onBlur={null}
+					defaultValue={value}
+					id="job-ads-professions"
+					name="job-ads-professions"
+					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				>
+					<option value="all">{t("Toutes les professions")}</option>
+					{professions.map((term) => (
+						<option key={term.id} value={term.id}>
+							{term.label}
+						</option>
+					))}
+				</select>
+			</div>
+
+			<div>
+				<label
+					htmlFor="job-ads-contracts"
+					className="block text-sm font-medium text-gray-700"
+				>
+					{t("Type de contrat")}
+				</label>
+				<select
+					onChange={(e) =>
+						handleChangeContract(e.currentTarget.value)
+					}
+					onBlur={null}
+					defaultValue={value}
+					id="job-ads-contracts"
+					name="job-ads-contracts"
+					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				>
+					<option value="all">{t("Tous les thématiques")}</option>
+					{contracts.map((term) => (
+						<option key={term.id} value={term.id}>
+							{term.label}
+						</option>
+					))}
+				</select>
+			</div>
+
+			<div>
+				<label
+					htmlFor="job-ads-cities"
+					className="block text-sm font-medium text-gray-700"
+				>
+					{t("Ville")}
+				</label>
+				<select
+					onChange={(e) =>
+						handleChangeProfession(e.currentTarget.value)
+					}
+					onBlur={null}
+					defaultValue={value}
+					id="job-ads-cities"
+					name="job-ads-cities"
+					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				>
+					<option value="all">{t("Toutes les villes")}</option>
+					{cities.map((term) => (
+						<option key={term.id} value={term.id}>
+							{term.label}
+						</option>
+					))}
+				</select>
+			</div>
+		</div>
+  );
 }
 
 export default PostsFormFilter
