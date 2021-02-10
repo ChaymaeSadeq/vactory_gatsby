@@ -6,6 +6,13 @@ module.exports = {
 	purge: false,
 	darkMode: "class", // or 'media' or 'class'
 	theme: {
+		screens: {
+			xs: "320px",
+			sm: "480px",
+			md: "768px",
+			lg: "1024px",
+			xl: "1280px",
+		},
 		colors: {
 			transparent: "transparent",
 			current: "currentColor",
