@@ -3,7 +3,7 @@ export { params as postsQueryParams } from './internal/api.posts.params'
 export * from './internal/normalizers'
 // export { default as PostsPage } from './components/posts'
 // export { default as PostsFormFilter } from './components/posts.form.filter'
-export { CardAcademy } from './components/cardAcademy'
+export { AcademyCard } from "./components/AcademyCard";
 export * from './widgets'
 export { default as PostPage } from './components/post'
 export { default as PostContainer } from './components/post.container'

@@ -49,50 +49,30 @@ export const imageLayoutStyles = {
         height: 358,
         ratio: 546 / 358
     },
-    Avatar: {
+    avatar: {
         sizes: [
             {
                 name: "academy_image_100_100",
-                media: "(max-width: 767px)",
-            },
-            {
-                name: "academy_image_100_100",
-                media: "(min-width: 768px)",
-            },
-            {
-                name: "academy_image_100_100",
-                media: "(min-width: 992px)",
-            },
-            {
-                name: "academy_image_100_100",
-                media: "(min-width: 1200px)",
+                media: "(min-width: 0)",
             },
         ],
         width: 100,
         height: 100,
-        ratio: 100 / 100
+        ratio: 1,
     },
-    Thumbnail: {
+    thumbnail: {
         sizes: [
             {
-                name: "academy_image_300_200",
+                name: "academy_image_384_288",
                 media: "(max-width: 767px)",
             },
             {
-                name: "academy_image_600_400",
+                name: "academy_image_282_212",
                 media: "(min-width: 768px)",
             },
-            {
-                name: "academy_image_300_200",
-                media: "(min-width: 992px)",
-            },
-            {
-                name: "academy_image_300_200",
-                media: "(min-width: 1200px)",
-            },
         ],
-        width: 300,
-        height: 200,
-        ratio: 600 / 400
+        width: 400,
+        height: 300,
+        ratio: 4/3
     }
 };

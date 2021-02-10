@@ -1,243 +1,55 @@
 import React from 'react'
 import { ParagraphsController } from 'vactory-gatsby-ui'
 import { useTranslation } from 'react-i18next'
-import { imageLayoutStyles } from 'vactory-gatsby-academy'
-import { Picture } from 'vactory-gatsby-ui'
+import { imageLayoutStyles } from "vactory-gatsby-academy";
+import { Picture, Wysiwyg, SingleActionModal as Modal } from 'vactory-gatsby-ui'
 import {
-  Layer,
-  Button,
   Icon,
-  Box,
-  Flex,
-  Row,
-  Col,
-  Text,
-  Container,
 } from 'vactory-ui'
 import get from 'lodash.get'
 import { SocialShare } from 'vactory-gatsby-ui'
 import Rating from 'react-rating'
 import FsLightbox from 'fslightbox-react'
 
-const Card = ({ sx, children, ...rest }) => {
+const VideoThambnail = ({alt, image, onClick}) => {
   return (
-    <Box
-      sx={sx}
-      __css={{
-        bg: 'black600',
-        color: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        fontFamily: 'montserrat',
-        marginBottom: '16px',
-        width: '100%',
-      }}
-      {...rest}
-    >
-      {children}
-    </Box>
-  )
+		<div className="relative mx-auto w-full h-full rounded-lg shadow-lg max-w-sm lg:max-w-lg">
+			<button
+				onClick={onClick && onClick}
+				type="button"
+				className="aspect-h-3 aspect-w-4 relative block w-full bg-white rounded-lg overflow-hidden focus:outline-none"
+			>
+				<span className="sr-only">Watch the video to learn more</span>
+				<Picture
+					sizes={imageLayoutStyles.thumbnail.sizes}
+					className="w-full object-cover"
+					file={image}
+					alt={alt}
+				/>
+				<div
+					className="absolute inset-0 w-full h-full flex items-center justify-center"
+					aria-hidden="true"
+				>
+					<svg
+						className="h-20 w-20 text-indigo-500"
+						fill="currentColor"
+						viewBox="0 0 84 84"
+					>
+						<circle
+							opacity="0.9"
+							cx={42}
+							cy={42}
+							r={42}
+							fill="white"
+						/>
+						<path d="M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z" />
+					</svg>
+				</div>
+			</button>
+		</div>
+  );
 }
 
-const CardTitle = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      as="h1"
-      sx={sx}
-      __css={{
-        fontSize: ['22px', null, '24px', null],
-        ineHeight: '30px',
-        fontWeight: 800,
-        letterSpacing: '0',
-        marginBottom: '16px',
-        textTransform: 'uppercase',
-      }}
-      {...rest}
-    >
-      {children}
-    </Box>
-  )
-}
-
-const CardExcerpt = ({ children, ...rest }) => {
-  return (
-    <Text mb="medium" fontSize="16px" {...rest}>
-      {children}
-    </Text>
-  )
-}
-
-const CardInfo = ({ children, ...rest }) => {
-  return (
-    <Text mb="medium" mr="medium" fontSize="14px" {...rest}>
-      {children}
-    </Text>
-  )
-}
-
-const CardTag = ({ children }) => (
-  <Box
-    __css={{
-      display: 'inline-flex',
-      fontSize: '9px',
-      fontWeight: '600',
-      backgroundColor: 'info500',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 'xsmall',
-      textTransform: 'uppercase',
-      maxWidth: '100px',
-      py: 'xxsmall',
-      px: 'xsmall',
-      mr: 'small',
-      mb: 'small',
-      color: 'white',
-    }}
-  >
-    {children}
-  </Box>
-)
-
-const Title = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      as="h6"
-      sx={sx}
-      __css={{
-        fontSize: ['15px', null, '17px', null],
-        ineHeight: '28px',
-        fontWeight: 600,
-        letterSpacing: '0',
-        color: '#707070',
-        textTransform: 'uppercase',
-        mb: 'small',
-      }}
-      {...rest}
-    >
-      {children}
-    </Box>
-  )
-}
-
-const RateCourse = ({ setShowModal, handleVote, hasVoted, vote }) => {
-  const { t } = useTranslation()
-  return (
-    <Flex
-      mx="xxxlarge"
-      my="large"
-      justifyContent="center"
-      flexDirection="column"
-    >
-      <Title>{hasVoted ? t('Supprimer la note') : t('Evaluer ce cours')}</Title>
-      <Rating
-        initialRating={hasVoted ? vote : false}
-        readonly={hasVoted}
-        fractions={2}
-        onChange={(rate) => {
-          handleVote(rate)
-          setShowModal(false)
-        }}
-        emptySymbol={<Icon name="star-full" color="gray300" size="xlarge" />}
-        fullSymbol={<Icon name="star-full" color="warning500" size="xlarge" />}
-      />
-    </Flex>
-  )
-}
-
-const ParagraphTitle = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      as="h1"
-      sx={sx}
-      __css={{
-        color: 'black600',
-        fontSize: ['20px', null, '22px', null],
-        ineHeight: '30px',
-        fontWeight: 800,
-        letterSpacing: '0',
-        marginBottom: '16px',
-        px: 'medium',
-      }}
-      {...rest}
-    >
-      {children}
-    </Box>
-  )
-}
-
-const Modal = ({
-  children,
-  setShowModal,
-  isRating,
-  hasVoted,
-  handleUnvote,
-}) => {
-  const { t } = useTranslation()
-  return (
-    <Layer position="bottom" onClickOutside={() => setShowModal(false)}>
-      <Flex
-        p="medium"
-        boxShadow={4}
-        flexDirection="column"
-        bg="white"
-        borderRadius="small"
-      >
-        {children}
-        <Flex mt="medium" mx="large" justifyContent="flex-end">
-          <Button
-            mx="small"
-            outline="danger"
-            onClick={() => {
-              if (isRating && hasVoted) handleUnvote()
-              setShowModal(false)
-            }}
-          >
-            {isRating
-              ? hasVoted
-                ? t('Supprimer')
-                : t('Annuler')
-              : t('Annuler')}
-          </Button>
-        </Flex>
-      </Flex>
-    </Layer>
-  )
-}
-
-const PlayButton = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      __css={{
-        position: 'relative',
-        width: '100%',
-        maxWidth: '300px',
-        margin: 'auto',
-      }}
-    >
-      {children}
-      <Icon
-        __css={{
-          position: 'absolute',
-          float: 'left',
-          left: '50%',
-          top: '50%',
-          zIndex: 2,
-          color: 'gray300',
-          cursor: 'pointer',
-          transform: 'translate(-50%, -50%)',
-          '-ms-transform': 'translate(-50%, -50%)',
-          '&:hover': {
-            color: 'info500',
-          },
-        }}
-        size="xxlarge"
-        name="videos"
-        {...rest}
-      />
-    </Box>
-  )
-}
 
 const Post = (props) => {
   const { t } = useTranslation()
@@ -260,209 +72,231 @@ const Post = (props) => {
   const [toggler, setToggler] = React.useState(false)
 
   return (
-    <>
-      <Card>
-        <Container>
-          {/* <Box
-          sx={{
-            p: 'medium',
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <span>add to favorite</span>
-        </Box> */}
-          <Row>
-            <Col xs={12}>
-              <Flex
-                flexDirection={[
-                  'column-reverse',
-                  'column-reverse',
-                  'column-reverse',
-                  'row',
-                ]}
-              >
-                <Col xs={12} lg={8}>
-                  <Flex flexDirection="column">
-                    <Box sx={{ p: 'medium', flexGrow: 1 }}>
-                      <CardTitle>{title}</CardTitle>
-                      <CardExcerpt
-                        dangerouslySetInnerHTML={{
-                          __html: excerpt,
-                        }}
-                      />
-                      <Flex
-                        mb="small"
-                        flexDirection={['column', 'column', 'row']}
-                      >
-                        <CardTag>{category}</CardTag>
-                        <Flex py="1px" maxHeight="20px">
-                          <Rating
-                            initialRating={vote_average}
-                            readonly
-                            emptySymbol={
-                              <Icon
-                                name="star-full"
-                                color="gray500"
-                                size="medium"
-                              />
-                            }
-                            fullSymbol={
-                              <Icon
-                                name="star-full"
-                                color="warning500"
-                                size="medium"
-                              />
-                            }
-                          />
-                          <CardInfo pl="small">
-                            ({vote_count} {t('notes')})
-                          </CardInfo>
-                        </Flex>
-                      </Flex>
-                      <Flex flexDirection={['column', 'column', 'row']}>
-                        <CardInfo>Créé par {instructor.name}</CardInfo>
-                        <CardInfo>Dernière mise à jour : {changed}</CardInfo>
-                      </Flex>
-                      <Flex flexDirection={['column', 'column', 'row']}>
-                        <Flex>
-                          <Icon
-                            mr="xxsmall"
-                            name="comment_signe"
-                            size="medium"
-                          />
-                          <CardInfo>{language}</CardInfo>
-                        </Flex>
-                        <CardInfo>Durée : {duration}</CardInfo>
-                      </Flex>
-                    </Box>
-                  </Flex>
-                </Col>
-                <Col xs={12} lg={4}>
-                  <Box py="medium">
-                    <PlayButton onClick={() => setToggler(!toggler)}>
-                      <Picture
-                        file={image}
-                        sizes={imageLayoutStyles.Thumbnail.sizes}
-                        alt={instructor.name}
-                        width={imageLayoutStyles.Thumbnail.width}
-                        height={imageLayoutStyles.Thumbnail.height}
-                        ratio={imageLayoutStyles.Thumbnail.ratio}
-                      />
-                    </PlayButton>
-                    <FsLightbox toggler={toggler} sources={[video]} />
-                  </Box>
-                </Col>
-              </Flex>
-            </Col>
-          </Row>
-        </Container>
-      </Card>
-      <Container>
-        <Flex mb="xxxlarge" flexDirection={['column-reverse', 'column', 'row']}>
-          <Col xs={12} md={8}>
-            <div>
-              {paragraphs &&
-                paragraphs.map((paragraph) => {
-                  return (
-                    <ParagraphsController
-                      key={paragraph.id}
-                      data={paragraph}
-                      hasAMP={false}
-                    />
-                  )
-                })}
-            </div>
-          </Col>
-          <Col xs={12} md={4}>
-            <Flex mb="large" flexDirection="column">
-              <Flex m="auto" p="small" justifyContent="center">
-                <Button
-                  width="180px"
-                  outline="info"
-                  onClick={() => setShowShareModal(true)}
-                >
-                  {t('Partager ce cours')}
-                </Button>
-                {showShareModal && (
-                  <Modal setShowModal={setShowShareModal}>
-                    <SocialShare />
-                  </Modal>
-                )}
-              </Flex>
-              <Flex m="auto" p="small" justifyContent="center">
-                <Button
-                  width="180px"
-                  textAlign="center"
-                  outline="info"
-                  onClick={() => setShowRateModal(true)}
-                >
-                  {hasVoted ? t('Supprimer la note') : t('Evaluer ce cours')}
-                </Button>
-                {showRateModal && (
-                  <Modal
-                    handleUnvote={props.handleUnvote}
-                    hasVoted={hasVoted}
-                    isRating={true}
-                    setShowModal={setShowRateModal}
-                  >
-                    <RateCourse
-                      setShowModal={setShowRateModal}
-                      handleVote={props.handleVote}
-                      hasVoted={hasVoted}
-                      vote={vote}
-                    />
-                  </Modal>
-                )}
-              </Flex>
-            </Flex>
-          </Col>
-        </Flex>
-        <ParagraphTitle px="large">{t('Formateur')}</ParagraphTitle>
-        <Flex p="medium" flexDirection={['column', 'column', 'row']}>
-          <Col xs={12} md={4}>
-            <Flex flexDirection={['row', 'column', 'column']}>
-              <Col xs={6} md={12}>
-                <Picture
-                  file={instructor.picture}
-                  sizes={imageLayoutStyles.Avatar.sizes}
-                  alt={instructor.name}
-                  width={imageLayoutStyles.Avatar.width}
-                  height={imageLayoutStyles.Avatar.height}
-                  ratio={imageLayoutStyles.Avatar.ratio}
-                  style={{
-                    mb: '16px',
-                    borderRadius: '50%',
-                  }}
-                />
-              </Col>
-              <Flex ml={['medium', 'none', 'none']} flexDirection="column">
-                <Flex py="xxsmall">
-                  <Icon mr="xxsmall" name="star-full" size="medium" />
-                  <CardInfo>4.8 Note du formateur</CardInfo>
-                </Flex>
-                <Flex py="xxsmall">
-                  <Icon mr="xxsmall" name="comment_signe" size="medium" />
-                  <CardInfo>10 avis</CardInfo>
-                </Flex>
-                <Flex py="xxsmall">
-                  <Icon mr="xxsmall" name="play-picto" size="medium" />
-                  <CardInfo>10 cours</CardInfo>
-                </Flex>
-              </Flex>
-            </Flex>
-          </Col>
-          <Col xs={12} md={8}>
-            <Flex flexDirection="column">
-              <CardTitle mb="large" color="info500" p="none">
-                {instructor.first_name} {instructor.last_name}
-              </CardTitle>
-              <CardExcerpt color="#29303b">{instructor.about}</CardExcerpt>
-            </Flex>
-          </Col>
-        </Flex>
-      </Container>
-    </>
-  )
+		<>
+			<div>
+				<div className="bg-blue-900 text-white">
+					<div className="container px-3">
+						<div className="flex py-10 flex-wrap md:flex-nowrap">
+							<div className="w-full md:w-3/4 space-y-3 px-3">
+								<h2 className="text-3xl font-semibold mb-8 uppercase">
+									{title}
+								</h2>
+								<div>
+									<Wysiwyg html={excerpt} />
+								</div>
+								<div className="flex flex-wrap space-x-3 rtl:space-x-reverse items-center">
+									<p className="text-sm font-medium">
+										<a
+											href="#!"
+											className="inline-flex items-center px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800"
+										>
+											{category}
+										</a>
+									</p>
+									<Rating
+										initialRating={vote_average}
+										readonly
+										emptySymbol={
+											<Icon
+												name="star-full"
+												color="gray500"
+												size="medium"
+											/>
+										}
+										fullSymbol={
+											<Icon
+												name="star-full"
+												color="warning500"
+												size="medium"
+											/>
+										}
+									/>
+									<span>
+										({vote_count} {t("notes")})
+									</span>
+								</div>
+								<div className="flex flex-wrap space-x-4 rtl:space-x-reverse">
+									<div>
+										<svg
+											title="Créé par"
+											className="h-4 w-4 ltr:mr-2 rtl:ml-2 inline"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												fill="#fff"
+												d="M12 14l9-5-9-5-9 5 9 5z"
+											/>
+											<path
+												fill="#fff"
+												d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+											/>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+											/>
+										</svg>
+										Créé par: {instructor.name}
+									</div>
+									<div>Dernière mise à jour : {changed}</div>
+								</div>
+								<div className="flex flex-wrap space-x-4 rtl:space-x-reverse">
+									<div>
+										<Icon
+											mr="xxsmall"
+											name="comment_signe"
+											size="medium"
+										/>
+										{language}
+									</div>
+									<div>Durée : {duration}</div>
+								</div>
+							</div>
+							<div className="w-full md:w-1/4 order-first md:order-none py-4">
+								<VideoThambnail
+									onClick={() => setToggler(!toggler)}
+									alt={title}
+									image={image}
+								/>
+								<FsLightbox
+									toggler={toggler}
+									sources={[video]}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="container px-3">
+				<section className="flex flex-wrap">
+					<div className="w-4/5">
+						{paragraphs &&
+							paragraphs.map((paragraph) => (
+								<ParagraphsController
+									key={paragraph.id}
+									data={paragraph}
+									hasAMP={false}
+								/>
+							))}
+					</div>
+
+					<aside className="w-1/5 flex flex-col items-center space-y-5 py-10">
+						<button
+							className="inline-flex items-center border border-blue-300 shadow-sm px-3 py-2 text-sm leading-4 font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+							onClick={() => setShowRateModal(true)}
+						>
+							{hasVoted
+								? t("Supprimer la note")
+								: t("Evaluer ce cours")}
+						</button>
+						<Modal
+							isOpen={showRateModal}
+							body={
+								<div className="my-8 mx-16 flex flex-col justify-center">
+									<h4 className="text-lg font-medium">
+										{hasVoted
+											? t("Supprimer la note")
+											: t("Evaluer ce cours")}
+									</h4>
+
+									<Rating
+										initialRating={hasVoted ? vote : false}
+										readonly={hasVoted}
+										fractions={2}
+										onChange={(rate) => {
+											props.handleVote(rate);
+											setShowRateModal(false);
+										}}
+										emptySymbol={
+											<Icon
+												name="star-full"
+												color="gray300"
+												size="xlarge"
+											/>
+										}
+										fullSymbol={
+											<Icon
+												name="star-full"
+												color="warning500"
+												size="xlarge"
+											/>
+										}
+									/>
+								</div>
+							}
+							actionHandler={() => {
+								if (hasVoted) props.handleUnvote();
+								setShowRateModal(false);
+							}}
+							actionLabel={
+								hasVoted ? t("Supprimer la note") : t("Annuler")
+							}
+						/>
+
+						<button
+							className="inline-flex items-center border border-blue-300 shadow-sm px-3 py-2 text-sm leading-4 font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+							onClick={() => setShowShareModal(true)}
+						>
+							{t("Partager ce cours")}
+						</button>
+
+						<Modal
+							body={<SocialShare />}
+							isOpen={showShareModal}
+							actionLabel={t("Annuler")}
+							actionHandler={() => setShowShareModal(false)}
+						/>
+					</aside>
+				</section>
+
+				<section className="">
+					<h4 className="text-2xl font-bold">{t("Formateur")}</h4>
+					<div className="sm:flex">
+						<div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+							<Picture
+								disableAspectRatio
+								file={instructor.picture}
+								alt={instructor.name}
+								sizes={imageLayoutStyles.avatar.sizes}
+								className="h-32 w-32 border border-gray-300 bg-white text-gray-300"
+							/>
+						</div>
+						<div>
+							<h4 className="text-lg font-bold">
+								{instructor.first_name} {instructor.last_name}
+							</h4>
+							<div className="mt-1">{instructor.about}</div>
+						</div>
+					</div>
+					<ul>
+						<li>
+							<Icon mr="xxsmall" name="star-full" size="medium" />
+							<span>4.8 Note du formateur</span>
+						</li>
+						<li>
+							<Icon
+								mr="xxsmall"
+								name="comment_signe"
+								size="medium"
+							/>
+							<span>10 avis</span>
+						</li>
+						<li>
+							<Icon
+								mr="xxsmall"
+								name="play-picto"
+								size="medium"
+							/>
+							<span>10 cours</span>
+						</li>
+					</ul>
+				</section>
+			</div>
+		</>
+  );
 }
 export default Post
