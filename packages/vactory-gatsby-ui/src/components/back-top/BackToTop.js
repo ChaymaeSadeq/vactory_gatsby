@@ -1,33 +1,4 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
-
-const Button = styled.button`
-  font-size: 45px;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  margin: 30px;
-  border-radius: 50%;
-  border: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.4s opacity ease;
-  cursor: pointer;
-  outline: none;
-  background: rgb(255, 255, 255);
-    border: 1px solid transparent;
-    border-radius: 50%;
-    color: rgb(152, 151, 151);
-    display: flex;
-    height: 50px;
-    width: 50px;
-    justify-content: center;
-    align-items: center;
-    
-    &:hover > svg {
-        fill: #3366ff;
-    }
-`;
 
 function scrollToY(scrollTargetYY, speedd, easingg) {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -140,14 +111,14 @@ class BackToTop extends PureComponent {
 
     render() {
         return (
-            <Button
-                className="back-to-top"
-                onClick={this.moveToTop}
-                style={this.props.style}
-            >
-                {this.props.children || "UP"}
-            </Button>
-        );
+			<button
+				className="back-to-top border border-gray-50 bg-white bottom-10 fixed hover:text-blue-500 ltr:right-10 p-3 rounded-full rtl:left-10 shadow-2xl transition"
+				onClick={this.moveToTop}
+				style={this.props.style}
+			>
+				{this.props.children || "UP"}
+			</button>
+		);
     }
 }
 
