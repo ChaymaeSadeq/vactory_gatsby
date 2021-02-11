@@ -1,6 +1,5 @@
 export {params as postsQueryParams} from './src/internal/api.posts.params'
 export {normalizeNodes, normalizeTerms} from './src/internal/normalizers'
-export {CardGlossary} from './src/components/cardGlossary'
 export {Alphabet,arabicAlphabet} from './src/internal/alphabets'
 export * from './src/internal/AlphabetFilter'
 export * from './src/widgets'
