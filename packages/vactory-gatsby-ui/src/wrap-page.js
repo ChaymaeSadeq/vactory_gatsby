@@ -9,7 +9,7 @@ import {
   theme as vactoryTheme,
   ColorModeProvider,
   DirectionManager,
-  GlobalStyle,
+  // GlobalStyle,
   mergeIcons,
   iconSet,
   VactoryIconProvider,
@@ -52,7 +52,7 @@ export const wrapPageElement = ({ element, props }) => {
           <VactoryIconProvider value={customIcons}>
             <ColorModeProvider>
               <DirectionManager dir={dir}>
-                <GlobalStyle />
+                {/* <GlobalStyle /> */}
                 <VactoryGlobaltStyle />
                 <Head lang={node.langcode} meta={node.metatag_normalized} />
                 {hasAMP ? (

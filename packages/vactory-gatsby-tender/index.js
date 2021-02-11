@@ -1,7 +1,6 @@
 export {params as postQueryParams} from './src/internal/api.post.params'
 export {params as postsQueryParams} from './src/internal/api.posts.params'
 export * from './src/internal/normalizers'
-export {CardTender} from './src/components/cardTender'
 export {TenderCard} from './src/components/TenderCard'
 export * from './src/widgets'
 export {default as PostContainer} from './src/components/post.container'
