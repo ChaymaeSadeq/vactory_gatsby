@@ -1,11 +1,9 @@
 import React from "react"
 
 const Post = ({post}) => (
-    <div>
-        <main>
-            <h1>{post.title}</h1>
-        </main>
-    </div>
+    <article>
+        <h1>{post.title}</h1>
+    </article>
 )
 
 export default Post
