@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import {Portal} from 'react-portal';
 import Api from "vactory-gatsby-api";
 import {useTranslation} from "react-i18next"
-import {useMedia} from "vactory-ui"
 import {PrevNode} from './prev'
 import {NextNode} from './next'
 
@@ -12,7 +11,7 @@ export const NextPre = ({nid, resource, queryParams, normalizer}) => {
     const [prevPost, setPrevPost] = useState(null);
     const [nextPost, setNextPost] = useState(null);
     const [loaded, setLoaded] = useState(false);
-    const isSmallScreen = useMedia('(max-width: 720px)');
+    const isSmallScreen = window.matchMedia("(max-width: 720px)").matches;
 
     useEffect(() => {
         async function load(filter) {
@@ -68,7 +67,9 @@ export const NextPre = ({nid, resource, queryParams, normalizer}) => {
         return null;
     }
 
-    return <Portal>
+    return <Portal
+            node={document.querySelector('#app')} // tailwind is scoped to '#app' selector
+        >
         {prevPost && <PrevNode
             url={prevPost.url}
             title={prevPost.title}

@@ -28,35 +28,41 @@ module.exports = {
 		container: {
 			center: true,
 		},
-		fontFamily: {
-			"helvetica-100": [
-				'"Helvetica Neue W20_45 Light"',
-				"Helvetica",
-				"sans-serif",
-			],
-			"helvetica-400": [
-				'"Helvetica Neue W20_55 Roman"',
-				"Helvetica",
-				"sans-serif",
-			],
-			"helvetica-700": [
-				'"Helvetica Neue W20_75 Bold"',
-				"Helvetica",
-				"sans-serif",
-			],
-			"museo-100": ['"Museo Sans W01_100"', "sans-serif"],
-			"museo-300": ['"Museo Sans W01_300"', "sans-serif"],
-			"museo-300-italic": ['"MuseoSansW01-300Italic"', "sans-serif"],
-			"museo-500": ['"Museo Sans W01_500"', "sans-serif"],
-			"museo-700": ['"Museo Sans W01_700"', "sans-serif"],
-			"museo-900": ['"Museo Sans W01_900"', "sans-serif"],
-		},
 		extend: {
+			fontFamily: {
+				"helvetica-100": [
+					'"Helvetica Neue W20_45 Light"',
+					"Helvetica",
+					"sans-serif",
+				],
+				"helvetica-400": [
+					'"Helvetica Neue W20_55 Roman"',
+					"Helvetica",
+					"sans-serif",
+				],
+				"helvetica-700": [
+					'"Helvetica Neue W20_75 Bold"',
+					"Helvetica",
+					"sans-serif",
+				],
+				"museo-100": ['"Museo Sans W01_100"', "sans-serif"],
+				"museo-300": ['"Museo Sans W01_300"', "sans-serif"],
+				"museo-300-italic": ['"MuseoSansW01-300Italic"', "sans-serif"],
+				"museo-500": ['"Museo Sans W01_500"', "sans-serif"],
+				"museo-700": ['"Museo Sans W01_700"', "sans-serif"],
+				"museo-900": ['"Museo Sans W01_900"', "sans-serif"],
+			},
 			zIndex: {
 				"-1": "-1",
 				1: "1",
 				2: "2",
 				3: "3",
+			},
+			transitionDelay: {
+				none: "0s",
+			},
+			scale: {
+				"-100": "-1",
 			},
 		},
 	},
@@ -76,6 +82,8 @@ module.exports = {
 			borderRadius: ["direction"],
 			transformOrigin: ["direction"],
 			gridAutoFlow: ["direction"],
+			translate: ["group-hover"],
+			transitionDelay: ["group-hover"],
 		},
 		margin: ["responsive", "direction"],
 		padding: ["responsive", "direction"],
