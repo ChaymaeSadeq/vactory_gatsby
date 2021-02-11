@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Api from "vactory-gatsby-api";
 import {useTranslation} from "react-i18next"
-import {Box, Button, Container, Row, Col, Heading, MotionBox} from "vactory-ui";
+import { Transition } from "@headlessui/react";
 import {Link, CardContentLoader} from "vactory-gatsby-ui";
 import {mapOrder} from '../utils/mapOrder'
 
@@ -72,52 +72,59 @@ export const VCC = ({title, linkLabel, nid, resource, resourceType, queryParams,
         }).catch(error => console.warn(error));
     }, [nid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    let Markup = () => (
-        <Row>
-            {new Array(limit).fill().map((e, i) => {
-                return (
-                    <Col key={i} xs={12} sm={6} md={4}><CardContentLoader/></Col>
-                );
-            })}
-        </Row>
-    );
+    return (
+		<div className="py-10 bg-gray-100">
+			<div className="container">
+				<div className="text-center">
+					<h2 className="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl mb-14">
+						{internalTitle}
+					</h2>
+					{/* {raw_description.length > 0 && (
+						<div className="my-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
+							{description}
+						</div>
+					)} */}
+				</div>
 
-    if (posts) {
-        Markup = () => (
-            <Row>
-                {posts.map((node) => {
-                    const view = renderNode(node);
-                    return (
-                        <Col key={node.id} xs={12} sm={6} md={4}>
-                            <MotionBox
-                                initial="hidden"
-                                animate="visible"
-                                variants={{
-                                    visible: {opacity: 1},
-                                    hidden: {opacity: 0},
-                                }}>{view}</MotionBox>
-                        </Col>
-                    );
-                })}
-            </Row>
-        );
-    }
+				{(posts && (
+					<div className="flex flex-wrap">
+						{posts.map((node) => (
+                            <Transition
+                                key={node.id}
+                                show={true}
+                                enter="transform ease-out duration-300 transition"
+                                enterFrom="scale-90 opacity-0"
+                                enterTo="scale-100 opacity-100"
+                                leave="transform ease-out duration-300 transition"
+                                leaveFrom="scale-100 opacity-100"
+                                leaveTo="scale-90 opacity-0"
+                                className="w-full sm:w-1/2 md:w-1/3 px-1 sm:px-2: md:px-3"
+                            >
+                                {renderNode(node)}
+                            </Transition>
+						))}
+					</div>
+				)) || (
+					<div className="flex flex-wrap">
+						{Array(limit).fill().map((e, i) => (
+                            <div key={i} className="w-full sm:w-1/2 md:w-1/3 px-1 sm:px-2: md:px-3" >
+                                <CardContentLoader />
+                            </div>
+                        ))}
+					</div>
+				)}
 
-    return (<Box bg="#e0e0e0" py="medium">
-        <Container>
-            <Box sx={{
-                'text-align': 'center'
-            }}>
-                <Heading level={2}>{internalTitle}</Heading>
-            </Box>
-            <Markup/>
-
-            <Box sx={{
-                'text-align': 'center'
-            }}>
-                {moreLink && <Button as={Link} to={moreLink}>{internalLinkLabel}</Button>}
-            </Box>
-
-        </Container>
-    </Box>)
+				{moreLink && (
+					<div className="flex justify-center mt-12">
+						<Link
+							href={moreLink}
+							className="inline-flex items-center border border-gray-300 shadow-sm px-6 py-3 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						>
+							{internalLinkLabel}
+						</Link>
+					</div>
+				)}
+			</div>
+		</div>
+	);
 };
