@@ -8,7 +8,6 @@ import {
   PostsPage,
   PostsFormFilter,
 } from 'vactory-gatsby-press-release'
-import { Heading, Container, Paragraph } from 'vactory-ui'
 import {LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
 
 const PostsContainer = ({ pageCount, nodes, terms }) => {
@@ -79,37 +78,33 @@ const PostsContainer = ({ pageCount, nodes, terms }) => {
   }, [selectedTerm, currentLanguage, pager])
 
   return (
-    <Container>
-      <Heading px="xsmall" level={2}>
-        {t('Press Release')}
-      </Heading>
+		<div className="container">
+			<h2 className="text-3xl font-bold">{t("Press Release")}</h2>
 
-      <PostsFormFilter
-        terms={terms}
-        value={selectedTerm}
-        handleChange={handleChange}
-      />
-      <LoadingOverlay active={isLoading}>
-        {posts.length > 0 && (
-          <PostsPage posts={posts} />
-        )}
-        {!isLoading && posts.length <= 0 && (
-          <Paragraph my="medium" textAlign="center">
-            {t('Aucun résultat trouvé')}
-          </Paragraph>
-        )}
-      </LoadingOverlay>
-      {count > postsQueryParams.page.limit && (
-          <Pagination
-              total={count}
-              defaultPageSize={postsQueryParams.page.limit}
-              pageSize={postsQueryParams.page.limit}
-              current={pager}
-              onChange={handlePaginationChange}
-          />
-      )}
-    </Container>
-  )
+			<PostsFormFilter
+				terms={terms}
+				value={selectedTerm}
+				handleChange={handleChange}
+			/>
+			<LoadingOverlay active={isLoading}>
+				{posts.length > 0 && <PostsPage posts={posts} />}
+				{!isLoading && posts.length <= 0 && (
+					<p className="text-center my-8">
+						{t("Aucun résultat trouvé")}
+					</p>
+				)}
+			</LoadingOverlay>
+			{count > postsQueryParams.page.limit && (
+				<Pagination
+					total={count}
+					defaultPageSize={postsQueryParams.page.limit}
+					pageSize={postsQueryParams.page.limit}
+					current={pager}
+					onChange={handlePaginationChange}
+				/>
+			)}
+		</div>
+  );
 }
 
 export default PostsContainer
