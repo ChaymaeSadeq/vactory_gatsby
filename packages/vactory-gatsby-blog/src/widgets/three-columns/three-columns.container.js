@@ -7,8 +7,7 @@ import { BlogCard, normalizeDFNodes, imageLayoutStyles } from 'vactory-gatsby-bl
 export const ThreeColumnsContainer = ({ data }) => {
     const nodes = get(data, 'components.0.views.data.nodes', []);
     const title = get(data, 'components.0.title', '')
-  const raw_description = get(data, 'components.0.description.value.#text', null)
-  const description = <Wysiwyg html={raw_description} />
+	const description = get(data, 'components.0.description.value.#text', null)
   const link = get(data, 'components.0.link.url', null)
   const link_label = get(data, 'components.0.link.title', '');
     const posts = normalizeDFNodes(nodes);
@@ -21,9 +20,9 @@ export const ThreeColumnsContainer = ({ data }) => {
 						{title}
 					</h2>
 				)}
-				{raw_description.length > 0 && (
+				{description && (
 					<div className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-						{description}
+						<Wysiwyg html={description} />
 					</div>
 				)}
 			</div>
