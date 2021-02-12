@@ -23,7 +23,11 @@ export const DefaultLayout = ({children, location, pageContext: {node, pageInfo,
                 node={node}
                 breadcrumbItems={(breadcrumb && breadcrumb.length > 0) ? breadcrumb : [] }/>
             }
-            {breadcrumb && breadcrumb.length > 0 && <Breadcrumb items={breadcrumb}/>}
+            {breadcrumb && breadcrumb.length > 0 && (
+                <div className="mt-5 mb-3">
+                    <Breadcrumb items={breadcrumb} />
+                </div>
+            )}
             <main>
             {/* <TestComponents /> */}
                 {children}
