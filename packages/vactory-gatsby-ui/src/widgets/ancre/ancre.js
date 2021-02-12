@@ -1,5 +1,4 @@
 import React from 'react'
-import {List, Item, Box, Label, Select} from 'vactory-ui'
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import {useTranslation} from "react-i18next"
 import { Waypoint } from 'react-waypoint'
@@ -22,55 +21,59 @@ export const Ancre = ({items}) => {
         [desktopRef, mobileRef]
     )
 
-    return <Box style={{minHeight:  shouldStick ? navsMinHeight : null }}>
+    return <div style={{minHeight:  shouldStick ? navsMinHeight : null }}>
         <Waypoint onLeave={() => setShouldStick(true)} onEnter={() => setShouldStick(false)} />
-        <Box variant="navs.ancre.wrapper" className={shouldStick ? 'stuck' : ''} >
+        <div className={`bg-white shadow-md mb-2 py-4 ${shouldStick ? 'fixed top-0 inset-x-0 mt-0 z-1' : ''}`} >
 
             {/* For Desktop */}
-            <Box display={['none', null, 'flex']} ref={desktopRef} variant="navs.ancre.layout">
-                <Box mr={20} as="span">{t("Sur cette page")}</Box>
-                <List
-                    as={Scrollspy}
-                    items={ items.map( i => i.id ) }
-                    currentClassName="is-current"
-                    offset={0}
-                    horizontal
-                    variant="navs.ancre"
-                    className="stripe"
-                >
-                    {items.map((item, index) => {
-                        return (
-                            <Item
-                                key={index}
-                                variant="navs.ancre.item"
-                            >
-                                <AnchorLink
-                                    href={`#${item.id}`}
-                                    id={`ancre-${item.id}`}
+            <div className="hidden sm:block" ref={desktopRef} variant="navs.ancre.layout">
+                <div className="flex justify-center">
+                    <span className="mr-5">{t("Sur cette page")}:</span>
+
+                    <Scrollspy
+                        as="ul"
+                        items={ items.map( i => i.id ) }
+                        currentClassName="underline"
+                        offset={0}
+                        className="flex space-x-4 rtl:space-x-reverse"
+                    >
+                        {items.map((item, index) => {
+                            return (
+                                <li
+                                    key={index}
                                 >
-                                    {item.title}
-                                </AnchorLink>
-                            </Item>
-                        )
-                    })}
-                </List>
-            </Box>
+                                    <AnchorLink
+                                        href={`#${item.id}`}
+                                        id={`ancre-${item.id}`}
+                                        className="text-gray-500 font-bold"
+                                    >
+                                        {item.title}
+                                    </AnchorLink>
+                                </li>
+                            )
+                        })}
+                    </Scrollspy>
+                </div>
+
+            </div>
 
             {/* For Mobile */}
-            <Box display={['flex', null, 'none']} ref={mobileRef} variant="navs.ancre.layout">
-                <Label mr={10} htmlFor={'factory-ancre'}>{t("Sur cette page")}</Label>
-                <Select
-                    id='factory-ancre'
-                    name='factory-ancre'
-                    onChange={(e) => jumpTo(e.currentTarget.value)}
-                >
-                    {items.map((item, index) => {
-                        return (
-                            <option key={index} value={`ancre-${item.id}`}>{item.title}</option>
-                        )
-                    })}
-                </Select>
-            </Box>
-        </Box>
-    </Box>
+			<div className="sm:hidden">
+				<label htmlFor="factory-ancre" className="sr-only">
+					Select a tab:
+				</label>
+				<select
+					onBlur={null}
+					onChange={(e) => jumpTo(e.currentTarget.value)}
+					id="factory-ancre"
+					name="factory-ancre"
+					className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+				>
+					{items.map((item, i) => (
+                        <option key={i} value={`ancre-${item.id}`}>{item.title}</option>
+					))}
+				</select>
+			</div>
+        </div>
+    </div>
 };

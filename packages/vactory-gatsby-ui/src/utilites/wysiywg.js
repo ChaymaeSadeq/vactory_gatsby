@@ -1,7 +1,7 @@
 import React from "react"
 import parse, {domToReact} from "html-react-parser"
 import {Link} from 'vactory-gatsby-ui'
-import {Heading, Paragraph, Icon} from 'vactory-ui'
+import {Icon} from 'vactory-ui'
 
 export const Wysiwyg = ({html}) => {
     if (typeof html !== 'string') {
@@ -17,10 +17,10 @@ export const Wysiwyg = ({html}) => {
                 delete attribs.class
             }
 
-            // Paragraphs.
-            if (type === "tag" && name === "p") {
-                return <Paragraph {...attribs}>{domToReact(children, options)}</Paragraph>
-            }
+            // // Paragraphs.
+            // if (type === "tag" && name === "p") {
+            //     return <Paragraph {...attribs}>{domToReact(children, options)}</Paragraph>
+            // }
 
             // Icons.
             if (
@@ -32,12 +32,12 @@ export const Wysiwyg = ({html}) => {
                 return <Icon icon="download">{domToReact(children, options)}</Icon>
             }
 
-            // Headings.
-            for (let level = 1; level <= 6; level++) {
-                if (type === "tag" && name === "h" + level) {
-                    return <Heading level={level} {...attribs}>{domToReact(children, options)}</Heading>
-                }
-            }
+            // // Headings.
+            // for (let level = 1; level <= 6; level++) {
+            //     if (type === "tag" && name === "h" + level) {
+            //         return <Heading level={level} {...attribs}>{domToReact(children, options)}</Heading>
+            //     }
+            // }
 
             // Links.
             if (type === "tag" && name === "a") {

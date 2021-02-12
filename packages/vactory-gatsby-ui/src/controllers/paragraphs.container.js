@@ -1,19 +1,18 @@
 import React from "react"
 import classNames from "classnames"
-import {Container} from 'vactory-ui'
 import { StatePageSection } from 'vactory-gatsby-ui'
 import { Waypoint } from 'react-waypoint';
 
 const NarrowContainer = ({children}) => {
-    return (<Container className="vui-container">{children}</Container>)
+    return <div className="container--narrow">{children}</div>;
 };
 
 const FullContainer = ({children}) => {
-    return (<Container className="vui-container" fluid={true}>{children}</Container>)
+    return <div className="container--fluid">{children}</div>;
 };
 
 const NoContainer = ({children}) => {
-    return (<div className="vui-container">{children}</div>)
+    return <div className="no-container">{children}</div>
 };
 
 const layoutsMapping = {
