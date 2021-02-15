@@ -1,6 +1,6 @@
 import React from "react"
 import {useTranslation} from "react-i18next"
-import {Icon, Box, Heading, Text, Button, Flex, Input, Image} from "vactory-ui"
+import {Icon} from "vactory-gatsby-ui"
 import default_image from "./images/building.jpg"
 
 export const SearchResult = ({image = 'default', name, locality, addressLine1, addressLine2, phone, phone2, fax, ...rest}) => {
@@ -18,8 +18,8 @@ export const SearchResult = ({image = 'default', name, locality, addressLine1, a
         image_url = image;
 
     return (
-        <Flex
-            className="card"
+        <div
+            className="card items-center max-w-sm"
             __css={{
                 alignItems: 'center',
                 maxWidth: 395,
@@ -35,73 +35,46 @@ export const SearchResult = ({image = 'default', name, locality, addressLine1, a
             }}
             {...rest}
         >
-            <Box __css={{
-                mr: 10,
-                flexShrink: 0,
-                img: { objectFit: 'cover' }
-            }}>
-                <Image src={image_url} alt={name} width={78} height={78} sx={image_style} />
-            </Box>
-            <Box>
-                <Heading variant={null} fontWeight="normal" fontSize={15} level={5}>{name}</Heading>
-                <Text fontSize={11} color='#9c9c9c'>
+            <div className="mr-2.5 flex-shrink-0">
+                <img className="object-cover" src={image_url} alt={name} width={78} height={78} style={image_style} />
+            </div>
+            <div>
+                <h5 className="font-medium text-sm">{name}</h5>
+                <p className="text-gray-400 text-xs">
                     {locality}
                     ​​{ addressLine1 && <><br/> {addressLine1}</> }
                     ​​{ addressLine2 && <><br/> {addressLine2}</> }
                     ​​{ phone        && <><br/> {t('Phone')}: {phone}</> }
                     ​​{ phone2       && <><br/> {t('Phone')}: {phone2}</> }
                     ​​{ fax          && <><br/> {t('Fax')}: {fax}</> }
-                </Text>
-            </Box>
-        </Flex>
+                </p>
+            </div>
+        </div>
     )
 }
 
 export const SearchButton = ({icon, ...rest}) => {
     return (
-        <Button
-            __css={{
-                marginLeft: 10,
-                padding: 0,
-                flexGrow: 0,
-                border: 0,
-                color: '#adadad',
-            }}
-            fill={null}
+        <button
+            className="ml-2.5"
             {...rest}
         >
             <Icon icon={icon} size={22} />
-        </Button>
+        </button>
     )
 }
 
 export const SearchInput = props => (
-    <Input
-        border={0}
-        padding={0}
-        width="auto"
-        variant={null}
-        sx={{
-            '&:focus': {boxShadow: 'none'},
-        }}
+    <input
         type="text"
         placeholder="Search"
-        className="form-control"
+        className="form-control border-0 flex-grow p-0"
         {...props}
     />
 )
 
 export const SearchBox = props => (
-    <Flex
-        __css={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: '#FFF',
-            padding: '10px',
-            border: '1px solid #eee',
-            marginBottom: '4px',
-            boxShadow: '0px 0px 1px rgba(0,0,0,0.45)',
-        }}
+    <div className="flex items-center justify-between bg-white p-2.5 border border-gray-100 mb-1 shadow"
         {...props}
     />
 )

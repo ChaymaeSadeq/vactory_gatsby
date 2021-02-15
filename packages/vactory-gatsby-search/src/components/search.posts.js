@@ -1,37 +1,28 @@
 import React from "react"
 import {useTranslation} from "react-i18next"
 import {Link} from 'vactory-gatsby-ui'
-import {Box, Heading, Paragraph, Button} from "vactory-ui";
 
 export const SearchPosts = ({posts}) => {
     const {t} = useTranslation();
 
     return (
-        <Box sx={{
-            m: 0,
-            px: 3,
-            py: 4,
-        }}>
+        <div className="p-3.5">
             {posts.map(function (item, index) {
                 return (
-                    <Box
+                    <div
                         key={index}
-                        boxShadow={1}
-                        pb="medium"
-                        sx={{
-                            mb: 'large',
-                        }}
+                        className="mb-5 p-3 shadow-md"
                     >
-                        <Heading level={3}>{item.title}</Heading>
-                        <Paragraph dangerouslySetInnerHTML={{__html: item.excerpt}}/>
+                        <h3 className="text-2xl">{item.title}</h3>
+                        <p dangerouslySetInnerHTML={{__html: item.excerpt}}/>
                         <div>
                             <Link to={item.url}>
-                                <Button>{t("En Savoir Plus")}</Button>
+                                {t("En Savoir Plus")}
                             </Link>
                         </div>
-                    </Box>
+                    </div>
                 )
             })}
-        </Box>
+        </div>
     )
 }

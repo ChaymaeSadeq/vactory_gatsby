@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {greaterThan} from 'vactory-ui';
 
 export const MapContainer = styled.div`
   padding-top: 30px;
@@ -64,69 +63,68 @@ export const MapContainer = styled.div`
 `;
 
 export const MapSearchForm = styled.div`
-  width: 100%;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 1;
+			width: 100%;
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			z-index: 1;
 
-  ${ greaterThan('sm')`
-      width: 395px;
-  `}
+			@media (min-width: 480px) {
+				width: 395px;
+			}
 
+			.map-search-result-wrapper {
+				background-color: #fff;
+				max-width: 100%;
+				.map-search-result {
+					min-height: 271px;
+					max-height: 287px;
+					position: relative;
+					overflow: auto;
+					overflow-x: auto;
+					overflow-x: hidden;
+				}
+				.map-search-pagination {
+					font-size: 13px;
+					height: 36px;
+					padding-right: 23px;
+					border-top: 2px solid #efefef;
 
-  .map-search-result-wrapper {
-    background-color: #FFF;
-    max-width: 100%;
-    .map-search-result {
-      min-height: 271px;
-      max-height: 287px;
-      position: relative;
-      overflow: auto;
-      overflow-x: auto;
-      overflow-x: hidden;
-    }
-    .map-search-pagination {
-      font-size: 13px;
-      height: 36px;
-      padding-right: 23px;
-      border-top: 2px solid #efefef;
+					p {
+						font-size: 13px;
+						line-height: 13px;
+						color: #505050;
+						margin-bottom: 0;
+					}
+					.pagination {
+						margin-left: 15px;
+						margin-bottom: 0;
 
-      p{
-        font-size: 13px;
-        line-height: 13px;
-        color: #505050;
-        margin-bottom: 0;
-      }
-      .pagination {
-        margin-left: 15px;
-        margin-bottom: 0;
-
-        .page-item {
-          width: 30px;
-          text-align: center;
-          a.page-link {
-            color: #8a8a8a;
-            font-size: 24px;
-            border: none;
-            &:hover {
-              background: none;
-            }
-          }
-          &.disabled {
-            a.page-link {
-              background: none;
-              color: #bcbcbc;
-            }
-          }
-        }
-        li:not(:first-child):not(:last-child){
-          display: none;
-        }
-      }
-    }
-  }
-`
+						.page-item {
+							width: 30px;
+							text-align: center;
+							a.page-link {
+								color: #8a8a8a;
+								font-size: 24px;
+								border: none;
+								&:hover {
+									background: none;
+								}
+							}
+							&.disabled {
+								a.page-link {
+									background: none;
+									color: #bcbcbc;
+								}
+							}
+						}
+						li:not(:first-child):not(:last-child) {
+							display: none;
+						}
+					}
+				}
+			}
+		`;
 
 export const MapInfoWindowContainer = styled.div`
     background: white;

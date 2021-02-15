@@ -8,26 +8,30 @@ import {
   mergeIcons,
   iconSet
 } from "vactory-gatsby-ui";
-import {
-  theme as vactoryTheme,
-  ColorModeProvider,
-  DirectionManager,
+// import {
+  // theme as vactoryTheme,
+  // ColorModeProvider,
+  // DirectionManager,
   // GlobalStyle,
-} from "vactory-ui";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
-import deepmerge from "deepmerge";
-import { theme as UiTheme } from "./theme";
+// } from "vactory-ui";
+// import {
+  // ThemeProvider,
+  // createGlobalStyle
+// } from "styled-components";
+// import deepmerge from "deepmerge";
+// import { theme as UiTheme } from "./theme";
 import customIconSet from "./icons/custom-icons.json";
 
-const theme = deepmerge.all([vactoryTheme, UiTheme]);
-theme.breakpoints = vactoryTheme.breakpoints;
+// const theme = deepmerge.all([vactoryTheme, UiTheme]);
+// theme.breakpoints = vactoryTheme.breakpoints;
+
 const customIcons = mergeIcons(iconSet, customIconSet);
 
-const VactoryGlobaltStyle = createGlobalStyle`
-    a {
-    text-decoration: none;
-    }
-`;
+// const VactoryGlobaltStyle = createGlobalStyle`
+//     a {
+//     text-decoration: none;
+//     }
+// `;
 export const wrapPageElement = ({ element, props }) => {
   const node = get(props, "pageContext.node");
   const hasAMP = get(props, "pageContext.hasAMP");
@@ -53,7 +57,7 @@ export const wrapPageElement = ({ element, props }) => {
             {/* <ColorModeProvider> */}
               {/* <DirectionManager dir={dir}> */}
                 {/* <GlobalStyle /> */}
-                <VactoryGlobaltStyle />
+                {/* <VactoryGlobaltStyle /> */}
                 <Head lang={node.langcode} meta={node.metatag_normalized} />
                 {hasAMP ? (
                   <LayoutAMP nodeSettings={settings} hasAMP={hasAMP} {...props}>
