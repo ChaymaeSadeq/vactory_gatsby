@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {useForm, FormContext, useFormContext} from 'react-hook-form';
-import {Box, Button, Text, Icon} from 'vactory-ui';
+import {Icon} from 'vactory-gatsby-ui';
 import merge from 'lodash.merge';
 import {StyleCtx, useWebformRequest} from '../hooks';
 import {defaultStyles} from './FormStyles'
@@ -73,7 +73,7 @@ export const RenderField = (props) => {
 
         default:
             return (
-                <Box
+                <div
                     variant="primary"
                     __themeKey="alerts"
                     __css={{
@@ -87,9 +87,9 @@ export const RenderField = (props) => {
                         borderRadius: 4,
                     }}
                 >
-                    <Text>Component <i>{field.type}</i> is not found. Checkout
-                        `packages/vactory-gatsby-webform/src/components/Form.js` for more.</Text>
-                </Box>
+                    <p>Component <i>{field.type}</i> is not found. Checkout
+                        `packages/vactory-gatsby-webform/src/components/Form.js` for more.</p>
+                </div>
             );
     }
 
@@ -183,7 +183,7 @@ export const Form = ({
 
     return (<StyleCtx.Provider value={baseStyles}>
         <FormContext webformId={webformId} internalRefs={internalRefs} {...form}>
-            <Box
+            <div
                 as="form"
                 onSubmit={form.handleSubmit(onSubmit)}
                 {...baseStyles?.container}
@@ -195,28 +195,28 @@ export const Form = ({
                         isError
                     ) : (
                     <React.Fragment>
-                        <Box __css={baseStyles?.fieldsGroup}>
+                        <div __css={baseStyles?.fieldsGroup}>
                             {Object.entries(schema).map((field, key) => <RenderField key={`${field[0]}-container`} field={field}/>)}
-                        </Box>
-                        <Box __css={baseStyles?.buttonGroup}>
+                        </div>
+                        <div __css={baseStyles?.buttonGroup}>
                             {buttons?.reset?.hidden ? null : (
-                                <Button type="reset" onClick={resetForm} {...baseStyles?.resetButton}
+                                <button type="reset" onClick={resetForm} {...baseStyles?.resetButton}
                                         disabled={isLoading}>
                                     {buttons?.reset?.text || t('webform:Reset')}
-                                </Button>
+                                </button>
                             )}
-                            <Button type="submit" {...baseStyles?.submitButton} disabled={isLoading}>
+                            <button type="submit" {...baseStyles?.submitButton} disabled={isLoading}>
                                 {!!buttons?.submit?.leftIcon &&
                                 <Icon mr="14px" name={buttons.submit.leftIcon} __css={baseStyles?.submitButtonLeftIcon}
                                       size="14px"/>}
                                 {buttons?.submit?.text || t('webform:Submit')}
                                 {!!buttons?.submit?.rightIcon &&
                                 <Icon name={buttons.submit.rightIcon} __css={baseStyles?.submitButtonRightIcon}/>}
-                            </Button>
-                        </Box>
+                            </button>
+                        </div>
                     </React.Fragment>
                 )}
-            </Box>
+            </div>
         </FormContext>
     </StyleCtx.Provider>)
 

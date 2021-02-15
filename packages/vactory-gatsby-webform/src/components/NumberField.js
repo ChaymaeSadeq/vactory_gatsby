@@ -1,5 +1,4 @@
 import React, {useMemo, forwardRef} from 'react';
-import {Box, Input} from 'vactory-ui';
 import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
@@ -9,11 +8,7 @@ import {FormControl, FormLabel, FormHelperText, FormErrorMessage} from './FormCo
 import {useTranslation} from "react-i18next"
 import {toRegister} from "../utils/toRegister";
 
-export const NumberField = forwardRef(({
-                                id,
-                                name,
-                                field,
-                            }, ref) => {
+export const NumberField = forwardRef(({id, name, field}, ref) => {
     const {
         label,
         placeholder,
@@ -26,7 +21,6 @@ export const NumberField = forwardRef(({
     const fieldStyles = useStyles('numberField', styles);
     const formControlLayout = useStyles('formControlLayout', styles);
     const {t} = useTranslation();
-
     const {register, watch} = useFormContext();
     const errorMessage = useErrorMessage(name, label);
     const values = watch({nest: true});
@@ -41,40 +35,61 @@ export const NumberField = forwardRef(({
             isInvalid={!!errorMessage}
             className={'field--'+name}
         >
-            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
-                 __css={formControlLayout?.inner}>
-
+            
+            <div
+                className={classNames("ui-form__formControlInner", {"ui-form__formControlInner_noLabel": !!label})}
+                __css={formControlLayout?.inner}
+            >
                 {!!label && (
-                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
-                        <FormLabel htmlFor={name} {...fieldStyles?.label}>
-                            {label}
-                        </FormLabel>
-                    </Box>
+                    <label
+                        htmlFor={name}
+                        className="ui-form__formControlLabel block text-sm font-medium text-gray-700"
+                        __css={formControlLayout?.label}
+                        {...fieldStyles?.label}
+                    >
+                        {label}
+                    </label>
                 )}
-                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
 
-                    <Input
+                <div className="ui-form__formControlField mt-1 relative rounded-md shadow-sm" __css={formControlLayout?.field}>
+                    <input
                         id={name}
                         data-testid={id}
-                        key={id || `${name}-input`}
+                        defaultValue=""
                         type={htmlInputType || 'number'}
                         name={name}
-                        aria-label={name}
+                        aria-invalid={!!errorMessage}
+                        aria-describedby={!!errorMessage ? `field-${name}-error` : `field-${name}-description`}
+                        className={`
+                            block w-full focus:outline-none sm:text-sm rounded-md shadow-sm
+                            ${!!errorMessage
+                                ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
+                                : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'}
+                        `}
                         ref={register(toRegister(label || name, validation, values, t))}
                         placeholder={placeholder}
                         {...fieldStyles?.input}
                     />
+                </div>
 
-                    {!!helperText && (
-                        <FormHelperText {...fieldStyles?.helperText}>
-                            <Wysiwyg html={helperText} />
-                        </FormHelperText>
-                    )}
-                    <FormErrorMessage {...fieldStyles?.errorMessage}>
-                        {errorMessage}
-                    </FormErrorMessage>
-                </Box>
-            </Box>
+                {!!helperText && (
+                    <p
+                        className="mt-2 text-sm text-gray-500"
+                        id={`field-${name}-description`}>
+                        <Wysiwyg html={helperText} />
+                    </p>
+                )}
+
+                {!!errorMessage && (
+                    <p
+                        className="mt-2 text-sm text-red-600"
+                        id={`field-${name}-error`}
+                        {...fieldStyles?.errorMessage}
+                    >
+                    <Wysiwyg html={errorMessage} />
+                    </p>
+                )}
+            </div>
         </FormControl>
     ) : null;
 });

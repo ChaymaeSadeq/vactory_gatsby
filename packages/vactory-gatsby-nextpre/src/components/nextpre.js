@@ -4,6 +4,7 @@ import Api from "vactory-gatsby-api";
 import {useTranslation} from "react-i18next"
 import {PrevNode} from './prev'
 import {NextNode} from './next'
+import isClient from "is-client"
 
 export const NextPre = ({nid, resource, queryParams, normalizer}) => {
     const {i18n} = useTranslation();
@@ -11,7 +12,7 @@ export const NextPre = ({nid, resource, queryParams, normalizer}) => {
     const [prevPost, setPrevPost] = useState(null);
     const [nextPost, setNextPost] = useState(null);
     const [loaded, setLoaded] = useState(false);
-    const isSmallScreen = window.matchMedia("(max-width: 720px)").matches;
+    const isSmallScreen = isClient() && window.matchMedia("(max-width: 720px)").matches;
 
     useEffect(() => {
         async function load(filter) {

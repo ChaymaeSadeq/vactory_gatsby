@@ -2,13 +2,14 @@ import React from 'react'
 import { Transition } from "@headlessui/react";
 import { Portal } from "react-portal";
 import {useMenu} from "vactory-gatsby-core";
-import {Link} from '../../link';
+import { Link } from '../../link';
+import isClient from "is-client";
 
 export const LayerMenu = ({showMenu, setShowMenu}) => {
     const items = useMenu('main');
 
     return (
-        <Portal node={document.getElementById('app')}>
+        <Portal node={isClient() && document.getElementById('app')}>
 		<div className="fixed inset-y-0 ltr:right-0 rtl:left-0 md:ltr:pl-5 md:rtl:pr-5 max-w-full flex">
 			<Transition
 				show={showMenu}

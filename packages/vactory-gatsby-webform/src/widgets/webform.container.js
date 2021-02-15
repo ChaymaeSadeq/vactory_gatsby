@@ -1,6 +1,5 @@
 import React from 'react'
 import get from 'lodash.get'
-import {Box, Heading, Button} from 'vactory-ui'
 import {Link, Wysiwyg} from "vactory-gatsby-ui";
 import {Form, useWebform} from 'vactory-gatsby-webform';
 
@@ -10,10 +9,9 @@ export const WebformWidgetContainer = ({data}) => {
     let buttons = get(data, 'components.0.webform.buttons', {});
     // const component = get(data, 'components.0.component', null);
     const title = get(data, 'extra_field.title', null);
-    const raw_description = get(data, 'extra_field.intro.value.#text', null);
+    const description = get(data, 'extra_field.intro.value.#text', null);
     const link = get(data, 'extra_field.link.url', null);
     const link_label = get(data, 'extra_field.link.title', null);
-    const description = <Wysiwyg html={raw_description}/>;
     const webform = useWebform(webform_id);
 
     if (style !== "") {
@@ -25,24 +23,37 @@ export const WebformWidgetContainer = ({data}) => {
     }
 
     return (
-        <Box mb="30px">
-            { (title || raw_description) && <Box sx={{'text-align': 'center'}}>
-                {title && <Heading level={2}>{title}</Heading> }
-                {raw_description.length > 0 && <div>{description}</div>}
-            </Box> }
+		<div className="my-10">
+			<div className="text-center mb-12">
+				{title && (
+					<h2 className="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+						{title}
+					</h2>
+				)}
+				{description && (
+					<div className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
+						<Wysiwyg html={description} />
+					</div>
+				)}
+			</div>
 
-            <Form
-                webformId={webform_id}
-                schema={webform.elements}
-                styles={style}
-                buttons={buttons}
-            />
+			<Form
+				webformId={webform_id}
+				schema={webform.elements}
+				styles={style}
+				buttons={buttons}
+			/>
 
-            { (link || link_label) && <Box sx={{'text-align': 'center'}}>
-                <Button as={Link} to={link}>
-                    {link_label}
-                </Button>
-            </Box> }
-        </Box>
-    )
+			{link && (
+				<div className="flex justify-center mt-12">
+					<Link
+						href={link}
+						className="inline-flex items-center border border-gray-300 shadow-sm px-6 py-3 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+					>
+						{link_label}
+					</Link>
+				</div>
+			)}
+		</div>
+	);
 };

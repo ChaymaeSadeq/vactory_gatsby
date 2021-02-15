@@ -1,5 +1,4 @@
 import React, {useMemo, useEffect, forwardRef, useImperativeHandle} from 'react';
-import {Box} from 'vactory-ui';
 import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
@@ -56,17 +55,17 @@ export const ReCaptchaField = forwardRef(({
             isInvalid={!!errorMessage}
             className={'field--'+name}
         >
-            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
+            <div className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
                 {!!label && (
-                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
+                    <div className="ui-form__formControlLabel" __css={formControlLayout?.label}>
                         <FormLabel htmlFor={name}>
                             {label}
                         </FormLabel>
-                    </Box>
+                    </div>
                 )}
 
-                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
+                <div className="ui-form__formControlField" __css={formControlLayout?.field}>
                     <input type="hidden" name="captcha_response" ref={register} value='Google no captcha'/>
 
                     <ReCaptcha
@@ -92,8 +91,8 @@ export const ReCaptchaField = forwardRef(({
                     <FormErrorMessage {...fieldStyles?.errorMessage}>
                         {errorMessage}
                     </FormErrorMessage>
-                </Box>
-            </Box>
+                </div>
+            </div>
         </FormControl>
     ) : null;
 });

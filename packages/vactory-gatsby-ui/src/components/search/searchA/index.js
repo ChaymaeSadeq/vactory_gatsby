@@ -44,7 +44,7 @@ export const SearchA = () => {
 				<div className="sr-only">Search</div>
 			</button>
 			{isBrowser && (
-				<Portal node={document.getElementById("app")}>
+				<Portal node={isClient() && document.getElementById("app")}>
 					<Transition
 						show={show}
 						enter="transition ease-out duration-100"
