@@ -2,8 +2,11 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-	important: "#app",
-	purge: false,
+	// important: "#app",
+	purge: [
+		"../../packages/**/*.js",
+		"../../projects/**/*.js",
+	],
 	darkMode: "class", // or 'media' or 'class'
 	theme: {
 		screens: {
@@ -84,7 +87,6 @@ module.exports = {
 		padding: ["responsive", "direction"],
 		fontFamily: ["responsive", "direction"],
 		backgroundColor: [
-			"children",
 			"responsive",
 			"dark",
 			"group-hover",
@@ -97,7 +99,7 @@ module.exports = {
 		require("@tailwindcss/forms"),
 		require("@tailwindcss/aspect-ratio"),
 		require("tailwindcss-dir")(),
-		require("tailwindcss-children"),
+		// require("tailwindcss-children"),
 		require("@tailwindcss/typography"),
 	],
 	corePlugins: {
