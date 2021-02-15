@@ -2,10 +2,12 @@ import React from 'react'
 import { ParagraphsController } from 'vactory-gatsby-ui'
 import { useTranslation } from 'react-i18next'
 import { imageLayoutStyles } from "vactory-gatsby-academy";
-import { Picture, Wysiwyg, SingleActionModal as Modal } from 'vactory-gatsby-ui'
 import {
-  Icon,
-} from 'vactory-ui'
+	Picture,
+	Wysiwyg,
+	SingleActionModal as Modal,
+	Icon,
+} from "vactory-gatsby-ui";
 import get from 'lodash.get'
 import { SocialShare } from 'vactory-gatsby-ui'
 import Rating from 'react-rating'

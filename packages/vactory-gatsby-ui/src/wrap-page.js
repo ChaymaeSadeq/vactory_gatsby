@@ -4,15 +4,15 @@ import { Head } from "vactory-gatsby-core";
 import {
   DefaultLayout as Layout,
   DefaultLayoutAmp as LayoutAMP,
+  VactoryIconProvider,
+  mergeIcons,
+  iconSet
 } from "vactory-gatsby-ui";
 import {
   theme as vactoryTheme,
   ColorModeProvider,
   DirectionManager,
   // GlobalStyle,
-  mergeIcons,
-  iconSet,
-  VactoryIconProvider,
 } from "vactory-ui";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import deepmerge from "deepmerge";
@@ -48,10 +48,10 @@ export const wrapPageElement = ({ element, props }) => {
   if (node) {
     return (
       <div id="app">
-        <ThemeProvider theme={theme}>
+        {/* <ThemeProvider theme={theme}> */}
           <VactoryIconProvider value={customIcons}>
-            <ColorModeProvider>
-              <DirectionManager dir={dir}>
+            {/* <ColorModeProvider> */}
+              {/* <DirectionManager dir={dir}> */}
                 {/* <GlobalStyle /> */}
                 <VactoryGlobaltStyle />
                 <Head lang={node.langcode} meta={node.metatag_normalized} />
@@ -64,10 +64,10 @@ export const wrapPageElement = ({ element, props }) => {
                     {element}
                   </Layout>
                 )}
-              </DirectionManager>
-            </ColorModeProvider>
+              {/* </DirectionManager> */}
+            {/* </ColorModeProvider> */}
           </VactoryIconProvider>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </div>
     );
   } else {

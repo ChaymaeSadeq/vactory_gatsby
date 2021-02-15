@@ -1,7 +1,6 @@
 import React from "react"
 import parse, {domToReact} from "html-react-parser"
-import {Link} from 'vactory-gatsby-ui'
-import {Icon} from 'vactory-ui'
+import { Link, Icon } from "vactory-gatsby-ui";
 
 export const Wysiwyg = ({html}) => {
     if (typeof html !== 'string') {

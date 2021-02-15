@@ -1,6 +1,6 @@
 import React from 'react'
 import shareLinks from './consts'
-import { Icon } from 'vactory-ui'
+import { Icon } from 'vactory-gatsby-ui'
 
 export const Share = ({ link, platform, icon, color, ...props }) => (
   <a
