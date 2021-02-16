@@ -27,7 +27,7 @@ export const TestComponents = () => {
 
       <div className="aspect-w-16 aspect-h-9">
         <iframe
-          title="shut up"
+          title=""
           src="https://www.youtube.com/embed/dQw4w9WgXcQ"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
