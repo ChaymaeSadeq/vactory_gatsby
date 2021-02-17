@@ -1,1 +1,1 @@
-/Users/abdelko/workspace/v3-migrate/vactory-gatsby/projects/vactory/tailwind.config.js
+projects/vactory/tailwind.config.js
