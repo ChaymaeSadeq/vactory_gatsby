@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build",
+    "build": "yarn run build:styles && gatsby build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build:styles": "node ./tailwind.build.js",

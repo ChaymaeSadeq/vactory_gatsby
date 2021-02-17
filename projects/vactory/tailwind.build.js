@@ -60,6 +60,7 @@ function buildDistFile() {
 
 // Start.
 console.info("Building Tailwind!");
+process.env.NODE_ENV && console.info(`running in ${process.env.NODE_ENV} env.`);
 
 Promise.all([buildDistFile()]).then(() => {
   console.log("Finished Building Tailwind!");
