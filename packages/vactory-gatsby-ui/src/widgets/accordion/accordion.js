@@ -47,7 +47,7 @@ export const Accordion = ({items: data}) => {
 								openId === i ? "" : "hidden"
 							} mt-2 ltr:pr-12 rtl:pl-12`}
 						>
-							<div className="py-4 text-base text-gray-500 dark:text-gray-300">
+							<div className="py-4 text-base">
 								{qa.description}
 							</div>
 						</dd>

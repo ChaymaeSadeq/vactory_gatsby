@@ -13,6 +13,7 @@ const DefaultAvatar = ({name}) => {
 const UserAvatarImage = (props) => {
     return (
 		<img
+			alt={props.alt}
 			className="inline-block h-10 w-10 rounded-full bg-indigo-400 bg-opacity-50 ltr:mr-2.5 rtl:ml-2.5"
 			{...props}
 		/>

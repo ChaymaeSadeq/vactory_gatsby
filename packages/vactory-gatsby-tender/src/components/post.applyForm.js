@@ -190,7 +190,7 @@ const PostApplyForm = ({post}) => {
                         {webformFetch.status && webformFetch.status === "loading" &&
                         <h4>Sending data.</h4>
                         }
-                        <Button type={'submit'}>{t('Envoyer')}</Button>
+                        <button className="btn px-3 py-2 text-sm leading-4" type={'submit'}>{t('Envoyer')}</button>
                     </div>
 
                 </form>
