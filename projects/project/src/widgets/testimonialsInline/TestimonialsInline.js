@@ -1,5 +1,4 @@
 import React from "react";
-import {Flex, Box, Heading, Paragraph} from 'vactory-ui'
 import {Picture, Wysiwyg} from "vactory-gatsby-ui";
 
 const imageStyles = {
@@ -16,41 +15,35 @@ const imageStyles = {
 }
 
 export const TestimonialsInline = ({imageUrl, image_alt, name, description, role, inversed}) => {
-    const classRowInversed = inversed ? 'row-reverse' : 'row'
     return (
-        <Flex flexDirection={['column', null, classRowInversed]} py="large" alignItems="center">
-            <Box minWidth={imageStyles.width} width={imageStyles.width} mx={['auto', null, '0']}
-                 borderRadius="rounded"
-                 overflow="hidden"
-                 sx={{position: "relative"}}
-                 mb={['medium', null, '0px']}
-            >
-                <Picture
-                    file={imageUrl}
-                    alt={image_alt}
-                    sizes={imageStyles.sizes}
-                    width={imageStyles.width}
-                    height={imageStyles.height}
-                    ratio={imageStyles.ratio}
-                />
-            </Box>
-            <Box
-                paddingRight={inversed ? [null, null, 'xxlarge', 'xxxlarge'] : null}
-                paddingLeft={!inversed ? [null, null, 'xxlarge', 'xxxlarge'] : null}>
-                {description &&
-                <Wysiwyg html={description}/>
-                }
-                {(role || name) &&
-                <Box>
-                    {name &&
-                    <Heading mb={0} level={4}>{name}</Heading>
-                    }
-                    {role &&
-                    <Paragraph mb={0} fontSize="body" fontStyle="italic" lineHeight="body">{role}</Paragraph>
-                    }
-                </Box>
-                }
-            </Box>
-        </Flex>
-    )
+		<>
+			<div className="my-3 space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
+				{/* <!-- Image --> */}
+                <div className={`aspect-w-2 aspect-h-2 sm:aspect-w-4 sm:aspect-h-4${inversed ? " sm:col-start-3 sm:row-start-1" : ""}`}>
+					<Picture
+						file={imageUrl}
+						alt={image_alt}
+						sizes={imageStyles.sizes}
+						width={imageStyles.width}
+						height={imageStyles.height}
+                        ratio={imageStyles.ratio}
+                        className="object-cover shadow-lg rounded-lg"
+                    />
+				</div>
+                <div className={`sm:col-span-2${inversed ? " sm:col-start-1 sm:row-start-1" : ""}`}>
+					<div className="space-y-4">
+                        {(role || name) && <div className="text-lg leading-6 font-medium space-y-1">
+                            <h3>{name}</h3>
+                            <p className="text-indigo-600">{role}</p>
+                        </div>}
+						{description && <div className="text-lg">
+							<div className="text-gray-500">
+                             <Wysiwyg html={description} />
+							</div>
+                        </div>}
+                    </div>
+				</div>
+			</div>	
+        </>
+	);
 }

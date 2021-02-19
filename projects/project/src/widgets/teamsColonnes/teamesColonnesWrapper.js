@@ -1,6 +1,5 @@
 import React from "react";
 import {TeamsColonnes} from "./teamsColonnes";
-import {Row, Col} from 'vactory-ui'
 import {TemplateWrapper} from "../../composants/template-wrapper";
 
 const imageStyles2Cols = {
@@ -76,15 +75,15 @@ export const TeamsColonnesWrapper = ({bigTitle, intro, colCount, image_cyrcle, i
     }
     return (
         <TemplateWrapper bigTitle={bigTitle} intro={intro}>
-            <Row>
+            <div className="flex flex-wrap">
                 {items.map((item, index) => {
                     return (
-                        <Col key={index} xs={12} md={6} lg={12 / colCount}>
+                        <div className={`w-full sm:w-1/2 md:w-1/${colCount}`} key={index}>
                             <TeamsColonnes imageStyles={imageStyles} image_cyrcle={image_cyrcle} key={index} {...item} />
-                        </Col>
+                        </div>
                     )
                 })}
-            </Row>
+            </div>
         </TemplateWrapper>
     )
 }

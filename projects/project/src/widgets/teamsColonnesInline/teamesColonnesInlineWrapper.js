@@ -1,5 +1,4 @@
 import React from "react";
-import {Row, Col} from 'vactory-ui'
 import {TemplateWrapper} from "../../composants/template-wrapper";
 import {TeamsColonnesInline} from "./teamsColonnesInline";
 
@@ -7,15 +6,15 @@ import {TeamsColonnesInline} from "./teamsColonnesInline";
 export const TeamsColonnesInlineWrapper = ({bigTitle, intro, colCount, activeBorder, items}) => {
     return (
         <TemplateWrapper bigTitle={bigTitle} intro={intro}>
-            <Row>
+            <div className="flex flex-wrap">
                 {items.map((item, index) => {
                     return (
-                        <Col key={index} xs={12} md={6} lg={12/colCount}>
+                        <div className={`w-full sm:w-1/2 md:w-1/${colCount}`} key={index}>
                             <TeamsColonnesInline key={index} activeBorder={activeBorder} {...item} />
-                        </Col>
+                        </div>
                     )
                 })}
-            </Row>
+            </div>
         </TemplateWrapper>
     )
 }

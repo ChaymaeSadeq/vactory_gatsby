@@ -1,18 +1,13 @@
 import React from "react";
-import {Box, Heading, Button as Permalink} from "vactory-ui";
 import { Wysiwyg } from 'vactory-gatsby-ui'
 import {Picture} from "vactory-gatsby-ui";
+import {LinkUrl} from "../../composants/link-url";
 
 export const ContenuColonneImage = ({title, description, cta_url, cta_text, pictoImg, pictoImg_alt, activeBorder, imageStyles}) => {
     return (
-        <Box mb="large" padding={activeBorder? "xlarge" : "inherit"}
-             borderStyle={activeBorder ? 'solid' : 'none'}
-             borderColor={activeBorder ? 'black' : 'none'}
-             borderWidth={activeBorder ? 'medium' : 'none'}
-             height="100%"
-        >
+        <div className={`p-1 mb-6 h-full ${activeBorder ? "border-4 border-black p-3" : ""}`}>
             {pictoImg &&
-            <Box mb="medium">
+            <div className="mb-5">
                 <Picture
                     file={pictoImg}
                     sizes={imageStyles.sizes}
@@ -22,17 +17,19 @@ export const ContenuColonneImage = ({title, description, cta_url, cta_text, pict
                     alt={pictoImg_alt}
                     className="card-image"
                 />
-            </Box>
+            </div>
             }
             {title  &&
-            <Heading level={3}>{title}</Heading>
+            <h3 className="text-2xl font-medium mb-1">{title}</h3>
             }
             {description &&
-                <Wysiwyg html={description} />
+                <div className="mb-2">
+                    <Wysiwyg html={description} />
+                </div>
             }
             {(cta_text && cta_url) &&
-            <Permalink>{cta_text}</Permalink>
+            <LinkUrl href={cta_url}>{cta_text}</LinkUrl>
             }
-        </Box>
+        </div>
     )
 }

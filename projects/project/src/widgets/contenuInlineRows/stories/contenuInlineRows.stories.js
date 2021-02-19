@@ -1,6 +1,5 @@
 import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
-import {Container} from "vactory-ui";
 import {ContenuInlineRowsWrapper} from "../contenuInlineRowsWrapper";
 import imageContent from '../../assets/pictoImage.png'
 import {useRtl} from "vactory-gatsby-core";
@@ -67,9 +66,9 @@ export const Variant1 = () => {
         }
 
     return (
-        <Container>
+        <div className="container">
             <ContenuInlineRowsWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 
@@ -133,9 +132,9 @@ export const Variant2 = () => {
         }
 
     return (
-        <Container>
+        <div className="container">
             <ContenuInlineRowsWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 

@@ -1,26 +1,23 @@
 import React from "react";
-import {Flex, Heading, Button, Box, MotionBox} from 'vactory-ui'
 import {Wysiwyg} from "../../utilites";
+import {LinkUrl} from "../../composants/link-url";
 
 export const FullBackgroundSlider = ({title, description, cta_text, cta_url, isActive}) => {
     return (
-        <Flex height="100%" flexDirection="column" justifyContent="center" alignItems="center" mx="auto"
-              maxWidth="500px">
-            <MotionBox textAlign="center" animate={isActive ? 'show' : 'hide'} initial='hide'
-                       transition={{ease: "easeOut", duration: .5}}
-                       variants={{show: {opacity: 1, y: 0}, hide: {opacity: 0, y: 100}}}>
+        <div className="flex h-full flex-col justify-center items-center mx-auto max-w-lg">
+            <div className="text-center" textAlign="center" >
                 {title &&
-                <Heading color="white" level={3}>{title}</Heading>
+                <h3 className="text-white text-3xl font-bold mb-2">{title}</h3>
                 }
                 {description &&
-                <Box color="white">
+                <div className="text-white mb-3">
                     <Wysiwyg html={description}/>
-                </Box>
+                </div>
                 }
                 {(cta_url && cta_text) &&
-                <Button href={cta_url}>{cta_text}</Button>
+                <LinkUrl href={cta_url}>{cta_text}</LinkUrl>
                 }
-            </MotionBox>
-        </Flex>
+            </div>
+        </div>
     )
 }

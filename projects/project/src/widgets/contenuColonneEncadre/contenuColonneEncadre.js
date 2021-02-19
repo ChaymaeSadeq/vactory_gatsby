@@ -1,5 +1,4 @@
 import React from "react";
-import {Box, Heading} from "vactory-ui";
 import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
 import {LinkUrl} from "../../composants/link-url";
 
@@ -16,18 +15,12 @@ const imageStyles = {
     ratio: 60 / 60
 };
 
-const Encadre = ({sx, children, ...rest}) => {
-    return (<Box sx={sx} __css={{
-        borderStyle: 'solid',
-        borderColor: 'black',
-        borderWidth: 'small',
-        borderTopWidth: 'large',
-        px: 'medium',
-        py: 'xlarge',
-        marginBottom: 'medium',
-    }}>
-        {children}
-    </Box>)
+const Encadre = ({ sx, children, ...rest }) => {
+    return (
+        <div className="border-12 border-black px-4 py-5 mb-4" {...rest}>
+            {children}
+        </div>
+    )
 }
 
 
@@ -35,7 +28,7 @@ export const ContenuColonneEncadre = ({title, description, pictoImg, image_alt, 
     return (
         <Encadre>
             {pictoImg &&
-            <Box mx='auto' mb="medium" width={imageStyles.width} height={imageStyles.height}>
+            <div className="mx-auto mb-4 max-w-min" >
                 <Picture
                     file={pictoImg}
                     sizes={imageStyles.sizes}
@@ -44,11 +37,11 @@ export const ContenuColonneEncadre = ({title, description, pictoImg, image_alt, 
                     ratio={imageStyles.ratio}
                     alt={image_alt}
                 />
-            </Box>
+            </div>
 
             }
             {title &&
-            <Heading level={3}>{title}</Heading>
+            <h3 className="text-2xl font-bold mb-1">{title}</h3>
             }
             {description &&
             <Wysiwyg html={description}/>

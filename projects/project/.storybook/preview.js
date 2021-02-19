@@ -12,6 +12,7 @@ import {
     VactoryIconProvider,
     DirectionManager
 } from 'vactory-ui';
+import "vactory/styles.css"
 
 import deepmerge from 'deepmerge';
 import VactoryGlobaltStyle from '../src/vactory-gatsby-ui/GlobalStyle'
@@ -22,6 +23,8 @@ import Api from "vactory-gatsby-api";
 const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
 const customIcons = mergeIcons(iconSet, customIconSet);
+
+console.log(theme)
 
 export const parameters = {
     actions: {argTypesRegex: "^on[A-Z].*"},
@@ -94,8 +97,8 @@ addDecorator((storyFn, context) => {
     return (<Suspense fallback="loading">
         <I18nextProvider i18n={i18nInstance}>
             <ThemeProvider theme={theme}>
-                <GlobalStyle/>
-                <VactoryGlobaltStyle/>
+                {/* <GlobalStyle/> */}
+                {/* <VactoryGlobaltStyle/> */}
                 <VactoryIconProvider value={customIcons}>
                     <DirectionManager dir={dir}>
                         {storyFn()}

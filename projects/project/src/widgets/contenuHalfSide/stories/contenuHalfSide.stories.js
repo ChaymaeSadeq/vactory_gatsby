@@ -1,6 +1,5 @@
 import React from 'react';
 import {withKnobs, boolean, color} from "@storybook/addon-knobs";
-import {Container, Box} from "vactory-ui";
 import {ContenuHalfSide} from "../contenuHalfSide";
 import {useRtl} from "vactory-gatsby-core";
 
@@ -28,11 +27,11 @@ export const Variant1 = () => {
             centercontent: centercontent,
         }
     return (
-        <Box backgroundColor={backgroundColor}>
-            <Container>
+        <div style={{ backgroundColor: backgroundColor }}>
+            <div className="container">
                 <ContenuHalfSide {...data} />
-            </Container>
-        </Box>
+            </div>
+        </div>
     )
 }
 
@@ -58,11 +57,11 @@ export const Variant2 = () => {
             centercontent: centercontent,
         }
     return (
-        <Box backgroundColor={backgroundColor}>
-            <Container>
+        <div style={{backgroundColor: backgroundColor}}>
+            <div className="container">
                 <ContenuHalfSide {...data} />
-            </Container>
-        </Box>
+            </div>
+        </div>
     )
 }
 
@@ -88,11 +87,11 @@ export const Variant3 = () => {
             centercontent: centercontent,
         }
     return (
-        <Box backgroundColor={backgroundColor}>
-            <Container>
+        <div style={{backgroundColor: backgroundColor}}>
+            <div className="container">
                 <ContenuHalfSide {...data} />
-            </Container>
-        </Box>
+            </div>
+        </div>
     )
 }
 

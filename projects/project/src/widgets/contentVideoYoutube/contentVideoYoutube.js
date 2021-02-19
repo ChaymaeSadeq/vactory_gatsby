@@ -1,6 +1,5 @@
 import React from "react"
 import {Wysiwyg} from 'vactory-gatsby-ui'
-import {Box} from 'vactory-ui'
 import {TemplateWrapper} from "../../composants/template-wrapper";
 import {VideoYoutube} from "../../composants/videoYoutube/videoYoutube";
 
@@ -27,9 +26,9 @@ export const ContentVideoYoutube = ({videoId, image, image_alt, hideImage, isPop
             <VideoYoutube videoId={videoId} image={image} image_alt={image_alt}
                           hideImage={hideImage} isPopUp={isPopUp} imageStyles={imageStyles}/>
             {description &&
-            <Box mt="20px">
+            <div className="mt-5">
                 <Wysiwyg html={description}/>
-            </Box>
+            </div>
             }
         </TemplateWrapper>
     )

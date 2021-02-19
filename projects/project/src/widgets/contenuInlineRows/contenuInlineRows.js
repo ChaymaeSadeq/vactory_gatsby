@@ -1,6 +1,6 @@
 import React from "react";
-import {Flex, Box, Heading, Link} from 'vactory-ui';
 import {Wysiwyg, Picture} from "vactory-gatsby-ui";
+import {LinkUrl} from "../../composants/link-url";
 
 
 const imageStyles = {
@@ -16,22 +16,11 @@ const imageStyles = {
 };
 
 export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, description, inversed, image_alt}) => {
-    const inversedClass = inversed ? 'row-reverse' : 'row'
     return (
-        <Flex flexDirection={['column', 'column', inversedClass]} alignItems="center"
-              py="medium"
-              sx={{
-                  borderBottomStyle: 'solid',
-                  borderBottomWidth: 'small',
-                  borderBottomColor: 'black',
-              }}
-        >
+        <div className={`flex flex-col ${ inversed ? "md:flex-row-reverse" : "md:flex-row" } items-center p-5 border-b border-black`}>
             {pictoImg &&
-            <Box
-                pr={!inversed ? 'medium' : '0'}
-                pl={inversed ? 'medium' : '0'}
-                mb={['medium', '0']}
-                width="200px">
+            <div
+                className={`${ !inversed ? "pr-4" : "pr-0" } ${ inversed ? "pl-4" : "pl-0" } mb-4 sm:mb-0 w-52`}>
                 <Picture
                     file={pictoImg}
                     sizes={imageStyles.sizes}
@@ -39,30 +28,25 @@ export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, descripti
                     height={imageStyles.height}
                     ratio={imageStyles.ratio}
                     alt={image_alt}
+                    disableAspectRatio
                 />
-            </Box>
+            </div>
             }
             {(title || description) &&
-            <Box
-                pr={!inversed ? 'medium' : '0'}
-                pl={inversed ? 'medium' : '0'}
-                flex={1}>
+            <div
+                className={` ${ !inversed ? "pr-4" : "pr-0" } ${ inversed ? "pl-4" : "pl-0" } flex-1 `}>
                 {title &&
-                <Heading level='4'>{title}</Heading>
+                <h4 className="text-2xl font-medium mb-2">{title}</h4>
                 }
                 {description &&
                 <Wysiwyg html={description}/>
                 }
-            </Box>
+            </div>
             }
             {(cta_text && cta_url) &&
-            <Box>
-                <Link sx={{
-                    whiteSpace: 'nowrap',
-                }} outline="primary" borderRadius="rounded" href={cta_url}>{cta_text}</Link>
-            </Box>
+                <LinkUrl href={cta_url}>{cta_text}</LinkUrl>
             }
 
-        </Flex>
+        </div>
     )
 }

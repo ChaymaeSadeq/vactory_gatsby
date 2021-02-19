@@ -1,20 +1,19 @@
 import React from "react";
 import {TestimonaislColonnes} from "./testimonaislColonnes";
 import {TemplateWrapper} from "../../composants/template-wrapper";
-import {Row, Col} from 'vactory-ui'
 
 export const TestimonaislColonnesWrapper = ({bigTitle, intro, items, colCount, inversed}) => {
     return (
         <TemplateWrapper bigTitle={bigTitle} intro={intro}>
-            <Row>
+            <div className="flex flex-wrap">
                 {items.map((item, index) => {
                     return (
-                        <Col key={index} xs={12} md={6} lg={12 / colCount}>
+                        <div className={`w-full sm:w-1/2 md:w-1/${colCount}`} key={index}>
                             <TestimonaislColonnes inversed={inversed} {...item} />
-                        </Col>
+                        </div>
                     )
                 })}
-            </Row>
+            </div>
         </TemplateWrapper>
     )
 }

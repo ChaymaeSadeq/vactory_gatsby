@@ -1,6 +1,5 @@
 import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
-import {Container} from "vactory-ui";
 import {ChiffreCleWrapper} from "../chiffreCleWrapper";
 import {useRtl} from "vactory-gatsby-core";
 
@@ -66,9 +65,9 @@ export const Variant1 = () => {
         }
 
     return (
-        <Container>
+        <div className="container">
             <ChiffreCleWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 
@@ -133,9 +132,9 @@ export const Variant2 = () => {
         }
 
     return (
-        <Container>
+        <div className="container">
             <ChiffreCleWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 
