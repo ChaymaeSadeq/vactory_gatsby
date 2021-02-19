@@ -6,7 +6,7 @@ export const LoginButton = ({login}) => {
     const {t} = useTranslation();
 
     return (<Box marginLeft={'10px'}>
-        <Button as="a" outline="primary" href={login} borderRadius="rounded">
+        <Button as="a" outline="primary" href="#" onClick={login} borderRadius="rounded">
             <Icon mr="5px" name="lock" size="20px"/>
             <span>{t('Se connecter')}</span>
         </Button>

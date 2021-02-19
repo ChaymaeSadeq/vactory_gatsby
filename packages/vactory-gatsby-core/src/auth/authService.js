@@ -101,12 +101,15 @@ export default class AuthService {
 
     logout = () => {
         if (typeof window !== 'undefined') {
-            return this.UserManager.signoutRedirect()
+            return this.UserManager.signoutRedirect({post_logout_redirect_uri: window.location.href})
         }
     };
 
     login = (lng) => {
-        return `${IDENTITY_CONFIG.authority}/${lng}/user/login`
+        return () => {
+            window.sessionStorage.setItem('redirect', window.location.href)
+            window.location.href = `${IDENTITY_CONFIG.authority}/${lng}/user/login`
+        }
     };
 
     edit = (lng, id) => {
