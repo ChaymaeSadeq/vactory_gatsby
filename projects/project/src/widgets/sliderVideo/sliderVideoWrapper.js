@@ -1,56 +1,56 @@
 import React from "react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import Glide from "@glidejs/glide";
 import {SliderVideo} from "./sliderVideo";
 
 import "@glidejs/glide/dist/css/glide.core.css";
 import "@glidejs/glide/dist/css/glide.theme.css";
 
-const appendDots = dots => <ul className="dots-style">{dots}</ul>
+// const appendDots = dots => <ul className="dots-style">{dots}</ul>
 
-export const e  = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        variableWidth: true,
-        arrows: false,
-        centerMode: true,
-        centerPadding: '40px',
-        nextArrow: <div><button type="button" className="ltr:right-0 rtl:left-0 border border-black rounded-md text-base text-black px-1">Next</button></div>,
-        prevArrow: <div><button type="button" className="ltr:left-0 rtl:right-0 border border-black rounded-md text-base text-black px-1">Prev</button></div>,
-        dotsClass: 'slick-dots',
-        appendDots: appendDots,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    centerPadding: '20px',
-                    centerMode: true,
-                    arrows: false,
-                    dots: true,
-                },
+// export const e  = () => {
+//     const settings = {
+//         dots: true,
+//         infinite: true,
+//         speed: 500,
+//         slidesToShow: 1,
+//         slidesToScroll: 1,
+//         variableWidth: true,
+//         arrows: false,
+//         centerMode: true,
+//         centerPadding: '40px',
+//         nextArrow: <div><button type="button" className="ltr:right-0 rtl:left-0 border border-black rounded-md text-base text-black px-1">Next</button></div>,
+//         prevArrow: <div><button type="button" className="ltr:left-0 rtl:right-0 border border-black rounded-md text-base text-black px-1">Prev</button></div>,
+//         dotsClass: 'slick-dots',
+//         appendDots: appendDots,
+//         responsive: [
+//             {
+//                 breakpoint: 768,
+//                 settings: {
+//                     slidesToShow: 1,
+//                     slidesToScroll: 1,
+//                     centerPadding: '20px',
+//                     centerMode: true,
+//                     arrows: false,
+//                     dots: true,
+//                 },
 
-            }
-        ]
-    }
-    return (
-        <Slider {...settings}>
-            {items.map((item, index) => {
-                return (
-                    <div key={index} className="mx-3">
-                        <SliderVideo {...item} />
-                    </div>
-                )
-            })}
+//             }
+//         ]
+//     }
+//     return (
+//         <Slider {...settings}>
+//             {items.map((item, index) => {
+//                 return (
+//                     <div key={index} className="mx-3">
+//                         <SliderVideo {...item} />
+//                     </div>
+//                 )
+//             })}
 
-        </Slider>
-    )
-}
+//         </Slider>
+//     )
+// }
 
 
 export const SliderVideoWrapper = ({items}) => {

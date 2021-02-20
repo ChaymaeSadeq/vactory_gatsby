@@ -81,7 +81,7 @@ export const VideoYoutube = ({ videoId, image, image_alt, hideImage, isPopUp, im
                             &#8203;
 				</span>
                         <Transition
-                            show={isOpen}
+                            show={isShowVideo && isPopUp}
                             enter="ease-out duration-300"
                             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             enterTo="opacity-100 translate-y-0 sm:scale-100"
