@@ -1,5 +1,4 @@
 import React from "react"
-import {Box, Nav, Navs} from "vactory-ui";
 import {useMenu} from 'vactory-gatsby-core'
 import {Link} from 'vactory-gatsby-ui'
 
@@ -7,14 +6,16 @@ export const FooterMenu = () => {
     const items = useMenu('footer');
 
     return (
-        <Box>
-            <Navs>
-                {items.map(item => {
-                    return (
-                        <Nav key={item.id} as={Link} to={item.url}>{item.title}</Nav>
-                    )
-                })}
-            </Navs>
-        </Box>
+        <ul className="flex my-3 justify-center divide-x-2 rtl:divide-x-reverse">
+            {items.map(item => {
+                return (
+					<li key={item.id}>
+						<Link className="hover:underline mx-4 px-2" href={item.url}>
+							{item.title}
+						</Link>
+					</li>
+				);
+            })}
+        </ul>
     )
 };

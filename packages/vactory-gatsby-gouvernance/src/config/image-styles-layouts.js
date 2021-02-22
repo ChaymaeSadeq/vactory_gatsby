@@ -3,6 +3,17 @@
  * @type {{threeColumns: {sizes: *[], width: number, height: number, ratio: number}, twoColumns: {sizes: *[], width: number, height: number, ratio: number}}}
  */
 export const imageLayoutStyles = {
+    avatar: {
+        sizes: [
+            {
+                name: "gouvernance_avatar_200_200",
+                media: "(min-width: 0px)",
+            },
+        ],
+        width: 200,
+        height: 200,
+        ratio: 1
+    },
     slider: {
         sizes: [
             {

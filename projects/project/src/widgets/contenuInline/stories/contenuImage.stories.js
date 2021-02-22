@@ -2,7 +2,6 @@ import React from 'react';
 import {withKnobs, select, boolean} from "@storybook/addon-knobs";
 import ContenuImg from '../../assets/img1.jpg'
 import {ContenuInline} from "../contenuInline"
-import {Container} from "vactory-ui";
 import {useRtl} from "vactory-gatsby-core";
 
 const numberCols = [3, 4, 5, 6];
@@ -34,14 +33,14 @@ export const Variant1 = () => {
             colImage: select('Nombre des colonnes', numberCols, 5, groupId),
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuInline imgUrl={data.imgUrl} title={data.title} description={data.description}
                            cta_text={data.cta_text} cta_url={data.cta_url}
                            activeBorder={data.activeBorder} activeBorderImage={data.activeBorderImage}
                            inversed={data.inversed}
                            colImage={data.colImage}
             />
-        </Container>
+        </div>
     );
 }
 
@@ -70,14 +69,14 @@ export const Variant2 = () => {
             colImage: select('Nombre des colonnes', numberCols, 3, groupId),
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuInline imgUrl={data.imgUrl} title={data.title} description={data.description}
                            cta_text={data.cta_text} cta_url={data.cta_url}
                            activeBorder={data.activeBorder} activeBorderImage={data.activeBorderImage}
                            inversed={data.inversed}
                            colImage={data.colImage}
             />
-        </Container>
+        </div>
     )
 }
 
@@ -106,14 +105,14 @@ export const Variant3 = () => {
             colImage: select('Nombre des colonnes', numberCols, 5, groupId),
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuInline imgUrl={data.imgUrl} title={data.title} description={data.description}
                            cta_text={data.cta_text} cta_url={data.cta_url}
                            activeBorder={data.activeBorder} activeBorderImage={data.activeBorderImage}
                            inversed={data.inversed}
                            colImage={data.colImage}
             />
-        </Container>
+        </div>
     );
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {withKnobs, boolean, select, text, color} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
 import {ContenuColonneEncadreWrapper} from "../contenuColonneEncadreWrapper";
-import {Container, Box} from "vactory-ui";
 import {useRtl} from 'vactory-gatsby-core'
 
 
@@ -62,16 +61,16 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <Box backgroundColor={backgroundColor}>
-            <Container>
+        <div style={{ backgroundColor: backgroundColor }}>
+            <div className="container">
                 <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
                                               intro={data.intro}
                                               colCount={data.colCount}
                                               items={data.items}
                                               centercontent={data.centercontent}
                 />
-            </Container>
-        </Box>
+            </div>
+        </div>
     )
 }
 export const Variant2 = () => {
@@ -137,14 +136,14 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
                                           intro={data.intro}
                                           colCount={data.colCount}
                                           items={data.items}
                                           centercontent={data.centercontent}
             />
-        </Container>
+        </div>
     )
 }
 export const Variant3 = () => {
@@ -206,14 +205,14 @@ export const Variant3 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonneEncadreWrapper bigTitle={data.bigTitle}
                                           intro={data.intro}
                                           colCount={data.colCount}
                                           items={data.items}
                                           centercontent={data.centercontent}
             />
-        </Container>
+        </div>
     )
 }
 

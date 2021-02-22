@@ -2,7 +2,6 @@ import React from 'react';
 import {withKnobs, select, boolean} from "@storybook/addon-knobs";
 import imageContent from "../../assets/image.png"
 import {ContenuColonneImageWrapper} from "../contenuColonneImageWrapper"
-import {Container} from "vactory-ui";
 import {useRtl} from "vactory-gatsby-core";
 
 const groupId = 'Options';
@@ -71,7 +70,7 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonneImageWrapper bigTitle={data.bigTitle}
                                         intro={data.intro}
                                         colCount={data.colCount}
@@ -79,7 +78,7 @@ export const Variant1 = () => {
                                         centercontent={data.centercontent}
                                         activeBorder={data.activeBorder}
             />
-        </Container>
+        </div>
     )
 }
 export const Variant2 = () => {
@@ -180,7 +179,7 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonneImageWrapper bigTitle={data.bigTitle}
                                         intro={data.intro}
                                         colCount={data.colCount}
@@ -188,7 +187,7 @@ export const Variant2 = () => {
                                         centercontent={data.centercontent}
                                         activeBorder={data.activeBorder}
             />
-        </Container>
+        </div>
     )
 }
 export const Variant3 = () => {
@@ -213,7 +212,7 @@ export const Variant3 = () => {
         ]
     }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonneImageWrapper bigTitle={data.bigTitle}
                                         intro={data.intro}
                                         colCount={data.colCount}
@@ -221,7 +220,7 @@ export const Variant3 = () => {
                                         centercontent={data.centercontent}
                                         activeBorder={data.activeBorder}
             />
-        </Container>
+        </div>
     )
 }
 export const Variant4 = () => {
@@ -257,7 +256,7 @@ export const Variant4 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonneImageWrapper bigTitle={data.bigTitle}
                                         intro={data.intro}
                                         colCount={data.colCount}
@@ -265,7 +264,7 @@ export const Variant4 = () => {
                                         centercontent={data.centercontent}
                                         activeBorder={data.activeBorder}
             />
-        </Container>
+        </div>
     )
 }
 

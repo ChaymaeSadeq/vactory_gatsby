@@ -3,7 +3,7 @@ export {params as postsQueryParams} from './src/internal/api.posts.params'
 export * from './src/internal/normalizers'
 // export {default as PostsPage} from './src/components/posts'
 // export {default as PostsFormFilter} from './src/components/posts.form.filter'
-export {CardEvents} from './src/components/cardEvents'
+export { EventCard } from "./src/components/EventCard";
 export * from './src/widgets'
 export {imageLayoutStyles} from './src/config/image-styles-layouts'
 export {default as PostPage} from './src/components/post'

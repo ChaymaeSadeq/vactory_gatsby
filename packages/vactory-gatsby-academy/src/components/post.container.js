@@ -6,7 +6,6 @@ import {
   postQueryParams,
   normalizeNode,
 } from 'vactory-gatsby-academy'
-import { Paragraph } from 'vactory-ui'
 import { LoadingOverlay } from 'vactory-gatsby-ui'
 
 const PostContainer = ({ pageContext: { node } }) => {
@@ -108,24 +107,24 @@ const PostContainer = ({ pageContext: { node } }) => {
   }
 
   return (
-    <>
-      <LoadingOverlay active={isLoading}>
-        {post && (
-          <PostPage
-            {...post}
-            {...rate}
-            handleVote={handleVote}
-            handleUnvote={handleUnvote}
-          />
-        )}
-        {!isLoading && !post && (
-          <Paragraph my="medium" textAlign="center">
-            {t('Aucun résultat trouvé')}
-          </Paragraph>
-        )}
-      </LoadingOverlay>
-    </>
-  )
+		<>
+			<LoadingOverlay active={isLoading}>
+				{post && (
+					<PostPage
+						{...post}
+						{...rate}
+						handleVote={handleVote}
+						handleUnvote={handleUnvote}
+					/>
+				)}
+				{!isLoading && !post && (
+					<p className="text-center my-8">
+						{t("Aucun résultat trouvé")}
+					</p>
+				)}
+			</LoadingOverlay>
+		</>
+  );
 }
 
 export default PostContainer

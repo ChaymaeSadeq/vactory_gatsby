@@ -3,28 +3,26 @@ import {Link} from "gatsby"
 
 const Posts = ({posts}) => {
     return (
-        <div>
-            <main>
-                {posts.map(node => {
-                    const title = node.title;
-                    const url = node.url;
+        <article>
+            {posts.map(node => {
+                const title = node.title;
+                const url = node.url;
 
-                    return (
-                        <Fragment key={node.id}>
-                            <div>
-                                <h2
-                                >
-                                    {title}
-                                </h2>
-                                <small>{node.date}</small>
-                                <p>{node.excerpt}</p>
-                                <Link to={url}>Read more</Link>
-                            </div>
-                        </Fragment>
-                    )
-                })}
-            </main>
-        </div>
+                return (
+                    <Fragment key={node.id}>
+                        <div>
+                            <h3
+                            >
+                                {title}
+                            </h3>
+                            <small>{node.date}</small>
+                            <p>{node.excerpt}</p>
+                            <Link to={url}>Read more</Link>
+                        </div>
+                    </Fragment>
+                )
+            })}
+        </article>
     )
 };
 

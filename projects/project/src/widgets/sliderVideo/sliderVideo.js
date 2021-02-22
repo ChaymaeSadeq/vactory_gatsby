@@ -1,6 +1,5 @@
 import React from "react";
 import {VideoYoutube} from "../../composants/videoYoutube/videoYoutube";
-import {Box} from 'vactory-ui'
 
 const imageStyles = {
     sizes: [
@@ -15,9 +14,9 @@ const imageStyles = {
 };
 export const SliderVideo = ({imageUrl, image_alt, videoId}) => {
     return (
-        <Box minWidth={['300px', null, '500px', '700px']}>
+        <div>
             <VideoYoutube image={imageUrl} hideImage={false} isPopUp={false} image_alt={image_alt} videoId={videoId}
                           imageStyles={imageStyles}/>
-        </Box>
+        </div>
     )
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import {withKnobs, boolean, select, text} from "@storybook/addon-knobs";
 import {TestimonialsInlineWrapper} from "../testimonialsInlineWrapper";
-import {Container} from 'vactory-ui'
 import {useRtl} from "vactory-gatsby-core";
 
 const groupId = 'Options';
@@ -65,9 +64,9 @@ export const Variant1 = () => {
     }
 
     return (
-        <Container>
+        <div className="container">
             <TestimonialsInlineWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 
@@ -130,9 +129,9 @@ export const Variant2 = () => {
     }
 
     return (
-        <Container>
+        <div className="container">
             <TestimonialsInlineWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 

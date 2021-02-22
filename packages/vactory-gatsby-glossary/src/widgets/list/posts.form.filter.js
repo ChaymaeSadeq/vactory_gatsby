@@ -1,64 +1,22 @@
 import React from "react";
-import {Box, Button} from "vactory-ui";
-import {useRtl} from "vactory-gatsby-core";
-
-const CardAlphabet = ({sx, children, ...rest}) => {
-    return (
-        <Box
-            sx={sx}
-            __css={{
-                borderRadius: "small",
-                boxShadow: "2",
-                background: "white",
-                display: "inline-block",
-                align: "center",
-                overflow: "hidden",
-                fontFamily: "montserrat",
-                m: "9px",
-            }}
-            {...rest}
-        >
-            {children}
-        </Box>
-    );
-};
 
 const PostsFormFilter = ({alphabet, handleChange}) => {
-    const isRtl = useRtl();
 
-    const ButtonAlphabet = ({children}) => (
-        <Button
-            onClick={() => handleChange(children)}
-            sx={{
-                width: isRtl ? "37px" : "42px",
-                height: "42px",
-                padding: " 5px 10px",
-                backgroundColor: " white",
-                color: " black",
-                border: "1px solid",
-                textAlign: " center",
-                display: " inline-block",
-                fontSize: " 18px",
-                cursor: " pointer",
-                "&:hover": {
-                    backgroundColor: "#F5ED06",
-                    color: "black",
-                    border: "0px",
-                    borderRadius: "0px",
-                },
-            }}
-        >
-            {children}
-        </Button>
-    );
     return (
-        <CardAlphabet>
-            {alphabet.map((node) => {
-                return <ButtonAlphabet key={node}>{node}</ButtonAlphabet>;
-            })}
-        </CardAlphabet>
-
-    );
+		<div className="mb-10 flex rounded-md shadow border border-gray-100 bg-gradient-to-b from-white via-gray-300 to-white space-x-px rtl:space-x-reverse">
+			{alphabet.map((node) => {
+				return (
+					<button
+						key={node}
+						onClick={() => handleChange(node)}
+						className="w-11 h-11 flex-1 rounded-md bg-white hover:bg-gray-100"
+					>
+						{node}
+					</button>
+				);
+			})}
+		</div>
+	);
 };
 
 export default PostsFormFilter;

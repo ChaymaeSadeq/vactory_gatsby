@@ -1,7 +1,6 @@
 import React from 'react';
 import {withKnobs} from "@storybook/addon-knobs";
 import {ContenuLibre} from "../contenuLibre";
-import {Container} from "vactory-ui";
 import {useRtl} from "vactory-gatsby-core";
 
 export const Variant1 = () => {
@@ -14,9 +13,9 @@ export const Variant1 = () => {
             "<a href='/node/1'>اقرأ أكثر</a>",
     }
     return (
-        <Container>
+        <div className="container">
             <ContenuLibre content={data.content}/>
-        </Container>
+        </div>
     )
 }
 

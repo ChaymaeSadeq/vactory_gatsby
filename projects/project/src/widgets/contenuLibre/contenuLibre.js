@@ -1,6 +1,5 @@
 import React from "react";
-//import {Wysiwyg} from "vactory-gatsby-ui";
-import {Wysiwyg} from "../../utilites";
+import {Wysiwyg} from "vactory-gatsby-ui";
 import {TemplateWrapper} from "../../composants/template-wrapper";
 
 

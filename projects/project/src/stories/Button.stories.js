@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from 'vactory-ui';
+const Button = (props) => <button type="button" className="border border-indigo-500 bg-indigo-100 hover:bg-indigo-500 hover:text-white px-3 py-1.5 rounded-md"></button>
 
 export default {
   title: 'Example/Button',

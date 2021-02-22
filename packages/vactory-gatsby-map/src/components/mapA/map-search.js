@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import Fuse from "fuse.js"
 import {useTranslation} from "react-i18next"
-import {Flex} from "vactory-ui"
 import {MapSearchForm} from "./styles"
 import {SearchResult, SearchButton, SearchBox, SearchInput} from "./searchComponents";
 
@@ -77,12 +76,12 @@ export const MapSearch = ({items, onSelect}) => {
                     onChange={onSearch}
                     onClick={onSearchClick}
                 />
-                <Flex borderLeft="1px solid #adadad">
+                <div className="border-l border-gray-500">
                     { currentResults.length > 0 &&
                         <SearchButton icon="close-thin" onClick={(e) => onCloseSearchLayer(e)} />
                     }
                     <SearchButton icon="recherche" />
-                </Flex>
+                </div>
             </SearchBox>
 
             <div className="map-search-result-wrapper">
@@ -101,10 +100,10 @@ export const MapSearch = ({items, onSelect}) => {
                 </div>
                 }
                 { (pageCount > 0 && currentResults.length > 0 && openSearchLayer) &&
-                    <Flex className="map-search-pagination" alignItems="center" justifyContent="space-between" p={10}>
+                    <div className="map-search-pagination flex items-center justify-between p-2.5">
                         <span> {results.length} {t("Résultat (s)")} </span>
                         <span> {pageNumber + 1} {t("of")} {pageCount} </span>
-                    </Flex>
+                    </div>
                 }
             </div>
         </MapSearchForm>

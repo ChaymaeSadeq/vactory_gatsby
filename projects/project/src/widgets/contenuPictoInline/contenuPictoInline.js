@@ -1,6 +1,5 @@
 import React from "react";
 import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
-import {Box, Flex, Heading} from "vactory-ui";
 
 const imageStyles = {
     sizes: [
@@ -16,27 +15,28 @@ const imageStyles = {
 
 export const ContenuPictoInline = ({imgUrl, image_alt, title, description, centercontent}) => {
     return (
-        <Flex flexDirection={['column', 'row']} mb="small" alignItems={centercontent ? 'center' : 'flex-start'}>
+        <div className={`flex flex-col sm:flex-row mb-2 ${ centercontent ? "items-center" : "" }`}>
             {imgUrl &&
-            <Box width={imageStyles.width} mb={['medium', '0']} mx={['auto', '0']}>
+            <div className="mb-4 sm:mb-0 mx-auto sm:mx-0">
                 <Picture
                     file={imgUrl}
                     alt={image_alt}
                     sizes={imageStyles.sizes}
                     width={imageStyles.width}
                     height={imageStyles.height}
-                    ratio={imageStyles.ratio}
+                    // ratio={imageStyles.ratio}
+                    disableAspectRatio
                 />
-            </Box>
+            </div>
             }
-            <Box paddingLeft={15}>
+            <div className="ltr:pl-4 rtl:pr-4">
                 {title &&
-                <Heading level={4}>{title}</Heading>
+                <h4 className="text-2xl font-medium mb-2">{title}</h4>
                 }
                 {description &&
                 <Wysiwyg html={description}/>
                 }
-            </Box>
-        </Flex>
+            </div>
+        </div>
     )
 }

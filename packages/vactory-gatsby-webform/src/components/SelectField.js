@@ -1,5 +1,4 @@
 import React, {useMemo, forwardRef} from 'react';
-import {Box, Select} from 'vactory-ui';
 import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useTranslation} from "react-i18next"
@@ -39,22 +38,30 @@ export const SelectField = forwardRef(({
             isInvalid={!!errorMessage}
             className={'field--'+name}
         >
-            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
-                 __css={formControlLayout?.inner}>
+            <div
+                className={classNames("ui-form__formControlInner", {"ui-form__formControlInner_noLabel": !!label})}
+                __css={formControlLayout?.inner}
+            >
                 {!!label && (
-                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
-                        <FormLabel htmlFor={name} {...fieldStyles?.label}>
-                            {label}
-                        </FormLabel>
-                    </Box>
+                    <label
+                        htmlFor={name}
+                        className="ui-form__formControlLabel block text-sm font-medium text-gray-700"
+                    {...fieldStyles?.label}
+                    >
+                        {label}
+                    </label>
                 )}
 
-                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
-
-                    <Select
+                <div className="ui-form__formControlField mt-1 relative rounded-md shadow-sm" __css={formControlLayout?.field}>
+                    <select
                         id={name}
                         name={name}
                         data-testid={id}
+                        className={`mt-1 block w-full pl-3 ltr:pr-10 rtl:pl-10 py-2 text-base focus:outline-none sm:text-sm rounded-md ${
+							!!errorMessage
+								? "border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500"
+								: "border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+						}`}
                         ref={register(toRegister(label || name, validation, values, t))}
                         {...fieldStyles?.input}
                     >
@@ -63,17 +70,21 @@ export const SelectField = forwardRef(({
                                 {option.label || option.value}
                             </option>
                         ))}
-                    </Select>
-                    {!!helperText && (
-                        <FormHelperText {...fieldStyles?.helperText}>
-                            <Wysiwyg html={helperText} />
-                        </FormHelperText>
-                    )}
-                    <FormErrorMessage {...fieldStyles?.errorMessage}>
-                        {errorMessage}
-                    </FormErrorMessage>
-                </Box>
-            </Box>
+                    </select>
+                </div>
+
+                {!!helperText && (
+                    <p className="mt-2 text-sm text-gray-500" id={`field-${name}-description`}>
+                    <Wysiwyg html={helperText} />
+                    </p>
+                )}
+
+                {!!errorMessage && (
+                    <p className="mt-2 text-sm text-red-600" id={`field-${name}-error`}>
+                    <Wysiwyg html={errorMessage} />
+                    </p>
+                )}
+            </div>
         </FormControl>
     ) : null;
 });

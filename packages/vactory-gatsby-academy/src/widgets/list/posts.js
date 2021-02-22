@@ -1,26 +1,20 @@
 import React from 'react'
 import {
-  CardAcademy,
+  AcademyCard,
   imageLayoutStyles,
 } from 'vactory-gatsby-academy'
-import { Container, Row, Col } from 'vactory-ui'
 
 const Posts = ({ posts }) => {
   return (
-      <Container>
-        <Row>
-          {posts.map((node) => {
-            return (
-              <Col key={node.id} xs={12} sm={6} md={4}>
-                <CardAcademy
-                  {...node}
-                  imageSettings={imageLayoutStyles.threeColumns}
-                />
-              </Col>
-            )
-          })}
-        </Row>
-      </Container>
+		<div className="space-y-4 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:grid-cols-3 lg:gap-8">
+        {posts.map((node) => (
+            <AcademyCard
+              key={node.id}
+              {...node}
+              imageSettings={imageLayoutStyles.threeColumns}
+            />
+			  ))}
+      </div>
   )
 }
 

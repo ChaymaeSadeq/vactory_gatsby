@@ -2,7 +2,6 @@ import React from 'react';
 import {withKnobs, boolean, select, text} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
 import {ContenuPictoInlineWrapper} from "../contenuPictoInlineWrapper";
-import {Container} from "vactory-ui";
 import {useRtl} from "vactory-gatsby-core";
 
 const groupId = 'Options';
@@ -64,9 +63,9 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuPictoInlineWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 
@@ -121,9 +120,9 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuPictoInlineWrapper {...data} />
-        </Container>
+        </div>
     )
 }
 

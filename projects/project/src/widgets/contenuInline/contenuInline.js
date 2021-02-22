@@ -1,7 +1,8 @@
 import React from "react";
 import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
-import {Col, Row, Box, Heading, Button as Permalink} from "vactory-ui";
 import {TemplateWrapper} from "../../composants/template-wrapper";
+import {LinkUrl} from "../../composants/link-url";
+
 
 const imageStyles = {
     sizes: [
@@ -22,23 +23,13 @@ const imageStyles = {
 export const ContenuInline = ({imgUrl, image_alt, title, description, cta_text, cta_url, colImage, activeBorder, activeBorderImage, inversed}) => {
     return (
         <TemplateWrapper>
-            <Box
-                p={activeBorder ? ["small", "small", "xlarge"] : '0'}
-                borderStyle={activeBorder ? 'solid' : 'none'}
-                borderWidth={activeBorder ? 'medium' : 'none'}
-                borderColor={activeBorder ? 'black' : 'none'}
+            <div
+                className={` ${activeBorder ? "p-2 md:p-5 border-4 border-black" : "p-0"} `}
             >
-                <Row alignItems="center" sx={{
-                    flexDirection: inversed ? 'row-reverse' : 'row'
-                }}>
+                <div className={`flex items-center ${inversed ? "flex-row-reverse" : "flex-row"}`}>
                     {imgUrl &&
-                    <Col xs={12} sm={4} md={colImage}
-                    >
-                        <Box mb={['medium', "0px"]} p={activeBorderImage ? ['small', 'large'] : ''}
-                             borderStyle={activeBorderImage ? 'solid' : 'none'}
-                             borderColor={activeBorderImage ? 'black' : 'none'}
-                             borderWidth={activeBorderImage ? 'medium' : 'none'}
-                        >
+                    <div className={`px-3 w-full sm:w-1/2 md:1/${colImage}`}>
+                        <div className={`mb-5 sm:mb-0 ${activeBorderImage ? "p-1" : "p-5" } ${activeBorderImage ? "border-4 border-black" : ""} `}>
                             <Picture
                                 file={imgUrl}
                                 alt={image_alt}
@@ -46,27 +37,26 @@ export const ContenuInline = ({imgUrl, image_alt, title, description, cta_text, 
                                 width={imageStyles.width}
                                 height={imageStyles.height}
                                 ratio={imageStyles.ratio}
+                                disableAspectRatio
                             />
-                        </Box>
-                    </Col>
+                        </div>
+                    </div>
                     }
-                    <Col xs={12} sm={5} md={12 - colImage}>
-                        <Box>
+                    <div className={`px-3 w-full sm:w-1/2 md:1/${colImage}`}>
+                        <div>
                             {title &&
-                            <Heading level={3}>{title}s</Heading>
+                            <h3 className="text-3xl font-medium">{title}s</h3>
                             }
                             {description &&
                             <Wysiwyg html={description}/>
                             }
                             {(cta_text && cta_url) &&
-                            <Box>
-                                <Permalink>{cta_text}</Permalink>
-                            </Box>
+                                <LinkUrl href={cta_url}>{cta_text}</LinkUrl>
                             }
-                        </Box>
-                    </Col>
-                </Row>
-            </Box>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </TemplateWrapper>
     )
 }

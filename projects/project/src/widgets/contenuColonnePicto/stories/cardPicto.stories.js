@@ -1,7 +1,6 @@
 import React from 'react';
 import {withKnobs, select, boolean, text} from "@storybook/addon-knobs";
 import PictoImage from "../../assets/pictoImage.png"
-import {Container} from "vactory-ui";
 import {ContenuColonnePictoWrapper} from "../contenuColonnePictoWrapper";
 import {useRtl} from "vactory-gatsby-core";
 
@@ -61,13 +60,13 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonnePictoWrapper items={data.items}
                                         intro={data.intro}
                                         bigTitle={data.bigTitle}
                                         colCount={data.colCount}
                                         centercontent={data.centercontent}/>
-        </Container>
+        </div>
     )
 }
 export const Variant2 = () => {
@@ -121,13 +120,13 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonnePictoWrapper items={data.items}
                                         intro={data.intro}
                                         bigTitle={data.bigTitle}
                                         colCount={data.colCount}
                                         centercontent={data.centercontent}/>
-        </Container>
+        </div>
     )
 }
 export const Variant3 = () => {
@@ -189,13 +188,13 @@ export const Variant3 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonnePictoWrapper items={data.items}
                                         intro={data.intro}
                                         bigTitle={data.bigTitle}
                                         colCount={data.colCount}
                                         centercontent={data.centercontent}/>
-        </Container>
+        </div>
     )
 }
 export const Variant4 = () => {
@@ -249,13 +248,13 @@ export const Variant4 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuColonnePictoWrapper items={data.items}
                                         intro={data.intro}
                                         bigTitle={data.bigTitle}
                                         colCount={data.colCount}
                                         centercontent={data.centercontent}/>
-        </Container>
+        </div>
     )
 }
 

@@ -1,26 +1,18 @@
 import React from 'react'
 import {
-  CardPressReleaseOneRow,
+  HorizontalCard,
   imageLayoutStyles,
 } from 'vactory-gatsby-press-release'
-import { Col, Container, Row } from 'vactory-ui'
 
 const Posts = ({ posts }) => {
   return (
-      <Container>
-        {posts.map((node) => {
-          return (
-            <Row key={node.id}>
-              <Col xs={12}>
-                <CardPressReleaseOneRow
-                  {...node}
-                  imageSettings={imageLayoutStyles.threeColumns}
-                />
-              </Col>
-            </Row>
-          )
-        })}
-      </Container>
+    <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-1 lg:gap-x-5 lg:gap-y-12">
+      {posts.map((node) => (
+        <HorizontalCard
+          {...node}
+          imageSettings={imageLayoutStyles.threeColumns}
+      />))}
+    </div>
   )
 }
 

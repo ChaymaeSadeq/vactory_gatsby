@@ -1,6 +1,5 @@
 import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
-import {Container} from 'vactory-ui';
 import {ContentVideoYoutube} from "../contentVideoYoutube";
 import ImageUrl from "../../assets/img1.jpg"
 import {useRtl} from "vactory-gatsby-core";
@@ -14,10 +13,10 @@ export const Variant1 = () => {
     const rtl = useRtl()
     const isPopUp = boolean("Video dans une popup", false, groupId)
     return (
-        <Container>
+        <div className="container">
             <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
                                  description={rtl ? description_ar : description}/>
-        </Container>
+        </div>
     )
 }
 
@@ -25,20 +24,20 @@ export const Variant2 = () => {
     const rtl = useRtl()
     const isPopUp = boolean("Video dans une popup", true, groupId)
     return (
-        <Container>
+        <div className="container">
             <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={false} isPopUp={isPopUp}
                                  description={rtl ? description_ar : description}/>
-        </Container>
+        </div>
     )
 }
 
 export const Variant3 = () => {
     const rtl = useRtl()
     return (
-        <Container>
+        <div className="container">
             <ContentVideoYoutube videoId="FSchPwCHBdA" image={ImageUrl} hideImage={true} isPopUp={false}
                                  description={rtl ? description_ar : description}/>
-        </Container>
+        </div>
     )
 }
 

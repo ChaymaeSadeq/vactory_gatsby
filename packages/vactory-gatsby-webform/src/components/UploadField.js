@@ -1,5 +1,4 @@
 import React, {useMemo, useEffect, useState, useImperativeHandle, forwardRef} from 'react';
-import {Box} from 'vactory-ui';
 import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext, useFieldArray} from 'react-hook-form';
@@ -167,18 +166,18 @@ export const UploadField = forwardRef(({
             isInvalid={!!errorMessage}
             className={'field--'+name}
         >
-            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
+            <div className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
                 {!!label && (
-                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
+                    <div className="ui-form__formControlLabel" __css={formControlLayout?.label}>
                         <FormLabel htmlFor={name}>
                             <span>{label}</span>
                         </FormLabel>
-                    </Box>
+                    </div>
                 )}
 
-                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
-                    <Box display="none">
+                <div className="ui-form__formControlField" __css={formControlLayout?.field}>
+                    <div className="hidden">
                         {isMultiple === true ? <div>
                             {fields.map((field, index) => (
                                 <input
@@ -196,7 +195,7 @@ export const UploadField = forwardRef(({
                             />
                         </div>}
 
-                    </Box>
+                    </div>
                     <Dropzone
                         getUploadParams={getUploadParams}
                         onChangeStatus={handleChangeStatus}
@@ -217,7 +216,7 @@ export const UploadField = forwardRef(({
                         {!!helperText && (
                                 <div>
                                     <Wysiwyg html={helperText} />
-                                    <Box as={'hr'} {...helperTextSeparatorStyle} />
+                                    <hr {...helperTextSeparatorStyle} />
                                 </div>
                             )
                         }
@@ -234,8 +233,8 @@ export const UploadField = forwardRef(({
                     <FormErrorMessage {...fieldStyles?.errorMessage}>
                         {errorMessage}
                     </FormErrorMessage>
-                </Box>
-            </Box>
+                </div>
+            </div>
         </FormControl>
     ) : null;
 });
