@@ -1,7 +1,6 @@
 import styled, {css} from "styled-components"
-import {Box, Flex} from 'vactory-ui';
 
-export const CommentBase = styled(Flex)`
+export const CommentBase = styled.div`
   margin-bottom: 15px;
   position: relative;
   
@@ -14,7 +13,7 @@ export const CommentBase = styled(Flex)`
    }
 `;
 
-export const CommentAvatar = styled(Box)`
+export const CommentAvatar = styled.div`
   width: 65px;
 height: 65px;
 position: relative;
@@ -29,7 +28,7 @@ height: 100%;
 }
 `;
 
-export const CommentBox = styled(Box)`
+export const CommentBox = styled.div`
   flex-grow: 1;
     margin-left: 30px;
     position: relative;
@@ -55,7 +54,7 @@ export const CommentBox = styled(Box)`
 }
 `;
 
-export const CommentHead = styled(Box)`
+export const CommentHead = styled.div`
       background: #FCFCFC;
     padding: 10px 12px;
     border-bottom: 1px solid #E5E5E5;
@@ -63,7 +62,7 @@ export const CommentHead = styled(Box)`
     border-radius: 4px 4px 0 0;
 `;
 
-export const CommentContent = styled(Box)`
+export const CommentContent = styled.div`
       background: #FFF;
     padding: 12px;
     font-size: 15px;
@@ -71,7 +70,7 @@ export const CommentContent = styled(Box)`
     border-radius: 0 0 4px 4px;
 `;
 
-export const CommentName = styled(Box)`
+export const CommentName = styled.div`
     color: ${props => props.isOwner ? "#03658c" : "#283035"};
     font-size: 14px;
     font-weight: 700;

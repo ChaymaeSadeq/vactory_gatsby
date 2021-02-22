@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'vactory-gatsby-ui'
-import { Container, Text } from "vactory-ui";
+// import { Container, Text } from "vactory-ui";
 import { normalizeDate } from "vactory-gatsby-forum";
 import {useTranslation} from "react-i18next"
 
 const CardExcerpt = ({ children, ...rest }) => {
   return (
-    <Text fontSize="14px" color="black800" {...rest}>
+    <p>
       {children}
-    </Text>
+    </p>
   )
 }
 
@@ -17,7 +17,7 @@ const Posts = ({ posts }) => {
   const {i18n} = useTranslation();
   const currentLanguage = i18n.language;
   return (
-    <Container mb="30px">
+    <div>
       <table border="1" cellSpacing="3" cellPadding="3">
         <thead>
           <tr>
@@ -49,7 +49,7 @@ const Posts = ({ posts }) => {
           })}
         </tbody>
       </table>
-    </Container>
+    </div>
   );
 }
 

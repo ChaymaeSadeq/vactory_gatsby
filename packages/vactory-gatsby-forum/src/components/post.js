@@ -1,55 +1,25 @@
 import React from "react"
 import {Comments} from 'vactory-gatsby-comments'
 import { imageLayoutStyles } from 'vactory-gatsby-academy'
-import { Box, Flex, Col, Text, Container } from "vactory-ui";
 import { Picture } from 'vactory-gatsby-ui'
-
-const Title = ({ sx, children, ...rest }) => {
-  return (
-    <Box
-      as="h1"
-      sx={sx}
-      __css={{
-        fontSize: ['22px', null, '24px', null],
-        ineHeight: '30px',
-        fontWeight: 800,
-        letterSpacing: '0',
-        marginBottom: '16px',
-      }}
-      {...rest}
-    >
-      {children}
-    </Box>
-  )
-}
-
-const Paragraph = ({ children, ...rest }) => {
-  return (
-    <Text mb="medium"  fontSize="18px" {...rest}>
-      {children}
-    </Text>
-  )
-}
 
 const Post = ({ post }) => {
   return (
-    <Container>
-      <Flex py="medium" flexDirection={["column", "column", "row"]}>
-        <Col xs={12} md={7}>
-          <Title>{post.title}</Title>
-          <Paragraph
-            lineHeight="1.5"
-            fontWeight="300"
+    <div>
+      <div>
+        <div>
+          <h1>{post.title}</h1>
+          <p
             dangerouslySetInnerHTML={{
               __html: post.body,
             }}
           />
-        </Col>
-        <Col xs={12} md={5}>
-          <Flex p="medium" flexDirection={"column"}>
-            <Col xs={12}>
-              <Flex flexDirection="row">
-                <Col xs={6}>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
                 {post.forum_expert.picture &&
                   <Picture
                     file={post.forum_expert.picture}
@@ -63,32 +33,32 @@ const Post = ({ post }) => {
                       borderRadius: "50%",
                     }}
                   />}
-                </Col>
-                <Col xs={6}>
-                  <Flex m="large" flexDirection="column">
-                    <Title mb="large" p="none">
+                </div>
+                <div>
+                  <div>
+                    <h5>
                       {post.forum_expert.first_name}{" "}
                       {post.forum_expert.last_name}
-                    </Title>
-                    <Text mb="medium" mr="medium" fontSize="16px">
+                    </h5>
+                    <p>
                       {post.forum_expert.profession}
-                    </Text>
-                  </Flex>
-                </Col>
-              </Flex>
-            </Col>
-            <Col xs={12}>
-              <Paragraph color="#29303b">{post.forum_expert.about}</Paragraph>
-            </Col>
-          </Flex>
-        </Col>
-      </Flex>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>{post.forum_expert.about}</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <Comments
         entity_uid={post.id}
         type_content="vactory_forum"
         uid={parseInt(post.forum_expert.id)}
       />
-    </Container>
+    </div>
   );
   }
 export default Post;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Api from 'vactory-gatsby-api';
 import { PostPage, postQueryParams, normalizeNode } from "vactory-gatsby-forum";
-import { Paragraph } from 'vactory-ui';
+// import { Paragraph } from 'vactory-ui';
 import { LoadingOverlay } from 'vactory-gatsby-ui';
 import qs from "qs"
 
@@ -55,9 +55,9 @@ const PostContainer = ({pageContext: {node}}) => {
       <LoadingOverlay active={isLoading}>
         {post && <PostPage post={post} />}
         {!isLoading && !post && (
-          <Paragraph my="medium" textAlign="center">
+          <p>
             {t("Aucun résultat trouvé")}
-          </Paragraph>
+          </p>
         )}
       </LoadingOverlay>
     );

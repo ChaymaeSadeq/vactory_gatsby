@@ -10,5 +10,5 @@ export const params = {
         "media--document": "thumbnail",
         "taxonomy_term--forum_section": "name",
     },
-    include: "field_vactory_taxonomy_1,field_vactory_media_document,field_vactory_media_document.thumbnail,field_forum_editeur,field_forum_expert"
+    include: "category,field_vactory_media_document,field_vactory_media_document.thumbnail,expert,editor"
 };

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "esm": "^3.2.25",
+    "vactory-gatsby-comments": "*",
     "vactory-gatsby-core": "*",
     "vactory-gatsby-nodes": "*"
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Input, Button } from "vactory-ui";
+// import { Box, Flex, Input, Button } from "vactory-ui";
 import { useForm } from "react-hook-form";
 import {useViewsAlias} from "vactory-gatsby-nodes";
 import {navigate} from "gatsby"
@@ -14,22 +14,21 @@ const ForumSearchInput = () => {
     };
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box py="medium">
-          <Flex flexDirection={["column", "row"]} mb={["10px", "0px"]}>
-            <Input
+        <div>
+          <div>
+            <input
               type="text"
               placeholder={t("Que recherchez-vous ?")}
-              m="small"
               name="keyword"
               id="keyword"
               width="100%"
               ref={register}
             />
-            <Button type={"submit"} m="xsmall">
+            <button type={"submit"} m="xsmall">
               {t("Appliquer")}
-            </Button>
-          </Flex>
-        </Box>
+            </button>
+          </div>
+        </div>
       </form>
     );
 }

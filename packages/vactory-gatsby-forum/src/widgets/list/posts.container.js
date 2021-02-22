@@ -7,7 +7,7 @@ import {
   normalizeDFNodes,
   PostsPage,
 } from 'vactory-gatsby-forum'
-import { Heading, Container, Paragraph, Button } from 'vactory-ui'
+// import { Heading, Container, Paragraph, Button } from 'vactory-ui'
 import {Link, LoadingOverlay, Pagination} from 'vactory-gatsby-ui'
 
 const PostsContainer = ({ pageCount, nodes, components }) => {
@@ -54,14 +54,14 @@ const PostsContainer = ({ pageCount, nodes, components }) => {
   }, [currentLanguage, pager])
 
   return (
-    <Container>
-      <Heading level={2}>{components.title}</Heading>
+    <div>
+      <h2>{components.title}</h2>
       <LoadingOverlay active={isLoading}>
         {posts.length > 0 && <PostsPage posts={posts} />}
         {!isLoading && posts.length <= 0 && (
-          <Paragraph my="medium" textAlign="center">
+          <p>
             {t("Aucun résultat trouvé")}
-          </Paragraph>
+          </p>
         )}
       </LoadingOverlay>
       {count > postsQueryParams.page.limit && (
@@ -74,11 +74,11 @@ const PostsContainer = ({ pageCount, nodes, components }) => {
         />
       )}
       {components.show_link && components.link && (
-        <Button as={Link} to={components.link}>
+        <button as={Link} to={components.link}>
           {components.link_label}
-        </Button>
+        </button>
       )}
-    </Container>
+    </div>
   );
 }
 

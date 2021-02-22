@@ -5,7 +5,6 @@ import isClient from "is-client"
 import Api from "vactory-gatsby-api"
 import {searchPageSize, SearchPosts} from 'vactory-gatsby-search'
 import { useForm } from "react-hook-form";
-import { Paragraph, Container, Box, Flex, Input, Button } from "vactory-ui";
 import {Pagination, LoadingOverlay} from 'vactory-gatsby-ui'
 import {useViewsAlias} from "vactory-gatsby-nodes";
 
@@ -57,11 +56,11 @@ const ForumSearchContainer = ({pageContext: {node}, location}) => {
     }, [pager, q, node.langcode, pageSize]);
 
     return (
-      <Container>
+      <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box py="medium">
-            <Flex flexDirection={["column", "row"]} mb={["10px", "0px"]}>
-              <Input
+          <div>
+            <div>
+              <input
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 type="text"
@@ -72,24 +71,24 @@ const ForumSearchContainer = ({pageContext: {node}, location}) => {
                 width="100%"
                 ref={register}
               />
-              <Button type={"submit"} m="xsmall">
+              <button type={"submit"} m="xsmall">
                 {t("Appliquer")}
-              </Button>
-            </Flex>
-          </Box>
+              </button>
+            </div>
+          </div>
         </form>
         {count > 0 && (
-          <Paragraph my="medium" textAlign="center">
+          <p>
             {count} {t("résultat(s) pour votre recherche")}
-          </Paragraph>
+          </p>
         )}
 
         <LoadingOverlay active={isLoading}>
           {pageItems.length > 0 && <SearchPosts posts={pageItems} />}
           {!isLoading && pageItems.length <= 0 && (
-            <Paragraph my="medium" textAlign="center">
+            <p>
               {t("Aucun résultat trouvé pour votre recherche.")}
-            </Paragraph>
+            </p>
           )}
         </LoadingOverlay>
 
@@ -101,7 +100,7 @@ const ForumSearchContainer = ({pageContext: {node}, location}) => {
             onChange={handlePaginationChange}
           />
         )}
-      </Container>
+      </div>
     );
 };
 
