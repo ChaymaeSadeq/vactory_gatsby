@@ -83,6 +83,7 @@ module.exports = {
 			transformOrigin: ["direction"],
 			transitionDelay: ["group-hover"],
 		},
+		display: ['responsive'],
 		margin: ["responsive", "direction"],
 		padding: ["responsive", "direction"],
 		fontFamily: ["responsive", "direction"],

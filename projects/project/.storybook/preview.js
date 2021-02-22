@@ -1,30 +1,32 @@
 import React, {Suspense} from 'react';
 import {action} from "@storybook/addon-actions"
-import {ThemeProvider} from 'styled-components'
+// import {ThemeProvider} from 'styled-components'
 import {I18nextProvider} from "react-i18next"
 import {AppSettings, i18nInstance} from 'vactory-gatsby-core';
 import {addDecorator} from '@storybook/react';
-import {
-    theme as vactoryTheme,
-    GlobalStyle,
-    mergeIcons,
-    iconSet,
-    VactoryIconProvider,
-    DirectionManager
-} from 'vactory-ui';
+// import {
+//     theme as vactoryTheme,
+//     GlobalStyle,
+//     mergeIcons,
+//     iconSet,
+//     VactoryIconProvider,
+//     DirectionManager
+// } from 'vactory-ui';
 import "vactory/styles.css"
+import "../styles.css"
 
-import deepmerge from 'deepmerge';
-import VactoryGlobaltStyle from '../src/vactory-gatsby-ui/GlobalStyle'
-import {theme as UiTheme} from '../src/vactory-gatsby-ui/theme'
-import customIconSet from '../src/vactory-gatsby-ui/custom-icons';
+// import deepmerge from 'deepmerge';
+// import VactoryGlobaltStyle from '../src/vactory-gatsby-ui/GlobalStyle'
+// import {theme as UiTheme} from '../src/vactory-gatsby-ui/theme'
+// import customIconSet from '../src/vactory-gatsby-ui/custom-icons';
 import Api from "vactory-gatsby-api";
 
+/*
 const theme = deepmerge.all([vactoryTheme, UiTheme]);
 theme.breakpoints = vactoryTheme.breakpoints;
-const customIcons = mergeIcons(iconSet, customIconSet);
+const customIcons = mergeIcons(iconSet, customIconSet);*/
 
-console.log(theme)
+// console.log(theme)
 
 export const parameters = {
     actions: {argTypesRegex: "^on[A-Z].*"},
@@ -96,15 +98,15 @@ addDecorator((storyFn, context) => {
 
     return (<Suspense fallback="loading">
         <I18nextProvider i18n={i18nInstance}>
-            <ThemeProvider theme={theme}>
+            {/* <ThemeProvider theme={theme}> */}
                 {/* <GlobalStyle/> */}
                 {/* <VactoryGlobaltStyle/> */}
-                <VactoryIconProvider value={customIcons}>
-                    <DirectionManager dir={dir}>
+                {/* <VactoryIconProvider value={customIcons}> */}
+                    {/* <DirectionManager dir={dir}> */}
                         {storyFn()}
-                    </DirectionManager>
-                </VactoryIconProvider>
-            </ThemeProvider>
+                    {/* </DirectionManager> */}
+                {/* </VactoryIconProvider> */}
+            {/* </ThemeProvider> */}
         </I18nextProvider>
     </Suspense>)
 });
