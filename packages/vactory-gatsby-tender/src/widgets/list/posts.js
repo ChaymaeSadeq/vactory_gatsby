@@ -1,20 +1,13 @@
 import React from 'react'
-import { CardTender } from 'vactory-gatsby-tender'
-import { Container, Row, Col } from 'vactory-ui'
+import { TenderCard } from 'vactory-gatsby-tender'
 
 const Posts = ({ posts }) => {
   return (
-    <Container>
-      <Row>
-        {posts.map((node) => {
-          return (
-            <Col key={node.id} xs={12}>
-              <CardTender {...node} />
-            </Col>
-          )
-        })}
-      </Row>
-    </Container>
+    <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-1 lg:gap-x-5 lg:gap-y-12">
+      {posts.map((node) => (
+        <TenderCard {...node} />
+      ))}
+    </div>
   )
 }
 

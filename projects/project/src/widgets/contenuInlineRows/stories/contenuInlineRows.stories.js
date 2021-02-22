@@ -1,15 +1,13 @@
 import React from 'react';
-import {withKnobs, select, boolean} from "@storybook/addon-knobs";
-import {DirectionManager, Container} from "vactory-ui";
+import {withKnobs, boolean} from "@storybook/addon-knobs";
 import {ContenuInlineRowsWrapper} from "../contenuInlineRowsWrapper";
 import imageContent from '../../assets/pictoImage.png'
+import {useRtl} from "vactory-gatsby-core";
 
 const groupId = 'Options';
-const groupRtl = "Version arabe"
-const activeRtl = false
 
 export const Variant1 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const inversed = boolean('inversed', false, groupId)
     const data = !rtl ? {
             bigTitle: "This is the big title",
@@ -68,16 +66,14 @@ export const Variant1 = () => {
         }
 
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuInlineRowsWrapper {...data} />
-            </Container>
-        </DirectionManager>
+        <div className="container">
+            <ContenuInlineRowsWrapper {...data} />
+        </div>
     )
 }
 
 export const Variant2 = () => {
-    const rtl = boolean('Activer RTl', activeRtl, groupRtl)
+    const rtl = useRtl();
     const inversed = boolean('inversed', true, groupId)
     const data = !rtl ? {
             bigTitle: "This is the big title",
@@ -136,14 +132,11 @@ export const Variant2 = () => {
         }
 
     return (
-        <DirectionManager dir={rtl ? 'rtl' : 'ltr'}>
-            <Container>
-                <ContenuInlineRowsWrapper {...data} />
-            </Container>
-        </DirectionManager>
+        <div className="container">
+            <ContenuInlineRowsWrapper {...data} />
+        </div>
     )
 }
-
 
 
 export default {

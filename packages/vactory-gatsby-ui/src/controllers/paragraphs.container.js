@@ -1,19 +1,18 @@
 import React from "react"
 import classNames from "classnames"
-import {Container, Row, Col} from 'vactory-ui'
 import { StatePageSection } from 'vactory-gatsby-ui'
 import { Waypoint } from 'react-waypoint';
 
 const NarrowContainer = ({children}) => {
-    return (<Container><Row><Col>{children}</Col></Row></Container>)
+    return <div className="container--narrow">{children}</div>;
 };
 
 const FullContainer = ({children}) => {
-    return (<Container fluid={true}>{children}</Container>)
+    return <div className="container--fluid">{children}</div>;
 };
 
 const NoContainer = ({children}) => {
-    return (<div>{children}</div>)
+    return <div className="no-container">{children}</div>
 };
 
 const layoutsMapping = {
@@ -33,11 +32,11 @@ export const ParagraphsContainer = ({children, id, style, layout, className, sta
         }
     };
     return (
-        <div className={classNames(className, isBackgroundSolid)} style={style} id={id}>
+        <section className={classNames(className, isBackgroundSolid)} style={style} id={id}>
             <Waypoint onEnter={handleEnter} />
             <LayoutComponent>
                 {children}
             </LayoutComponent>
-        </div>
+        </section>
     )
 };

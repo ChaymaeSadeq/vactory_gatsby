@@ -1,23 +1,42 @@
 import React from "react";
-import {Wysiwyg} from 'vactory-gatsby-ui'
-import {Box, Flex, Image, Heading} from "vactory-ui";
+import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
 
-export const ContenuPictoInline = ({imgUrl, title, description, centercontent}) => {
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_100_100",
+            media: "(min-width: 0px)",
+        }
+    ],
+    width: 100,
+    height: 100,
+    ratio: 100 / 100
+}
+
+export const ContenuPictoInline = ({imgUrl, image_alt, title, description, centercontent}) => {
     return (
-        <Flex flexDirection={['column', 'row']} mb="small" alignItems={centercontent ? 'center' : 'flex-start'}>
+        <div className={`flex flex-col sm:flex-row mb-2 ${ centercontent ? "items-center" : "" }`}>
             {imgUrl &&
-            <Box sx={{maxWidth: '100px'}} mx={['auto', '0']}>
-                <Image src={imgUrl}/>
-            </Box>
+            <div className="mb-4 sm:mb-0 mx-auto sm:mx-0">
+                <Picture
+                    file={imgUrl}
+                    alt={image_alt}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    // ratio={imageStyles.ratio}
+                    disableAspectRatio
+                />
+            </div>
             }
-            <Box paddingLeft={15}>
+            <div className="ltr:pl-4 rtl:pr-4">
                 {title &&
-                <Heading level={4}>{title}</Heading>
+                <h4 className="text-2xl font-medium mb-2">{title}</h4>
                 }
                 {description &&
                 <Wysiwyg html={description}/>
                 }
-            </Box>
-        </Flex>
+            </div>
+        </div>
     )
 }

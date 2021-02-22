@@ -7,8 +7,8 @@ import {
   normalizeDFNodes,
   PostsPage,
   PostsFormFilter,
+  NewsletterSection,
 } from 'vactory-gatsby-job-ads'
-import { Heading, Container, Paragraph } from 'vactory-ui'
 import { LoadingOverlay, Pagination } from 'vactory-gatsby-ui'
 
 const PostsContainer = ({nodes, cities, contracts, professions, pageCount}) => {
@@ -105,38 +105,44 @@ const PostsContainer = ({nodes, cities, contracts, professions, pageCount}) => {
   }, [selectedCity, selectedContract, selectedProfession, currentLanguage, pager])
 
   return (
-    <Container>
-      <Heading px="xsmall" level={2}>
-        {t('Job Ads')}
-      </Heading>
-      <PostsFormFilter
-        cities={cities}
-        contracts={contracts}
-        professions={professions}
-        value={selectedCity}
-        handleChangeCity={handleChangeCity}
-        handleChangeContract={handleChangeContract}
-        handleChangeProfession={handleChangeProfession}
-      />
-      <LoadingOverlay active={isLoading}>
-        {posts.length > 0 && <PostsPage posts={posts} />}
-        {!isLoading && posts.length <= 0 && (
-          <Paragraph my="medium" textAlign="center">
-            {t('Aucun résultat trouvé')}
-          </Paragraph>
-        )}
-      </LoadingOverlay>
-      {count > postsQueryParams.page.limit && (
-        <Pagination
-          total={count}
-          defaultPageSize={postsQueryParams.page.limit}
-          pageSize={postsQueryParams.page.limit}
-          current={pager}
-          onChange={handlePaginationChange}
-        />
-      )}
-    </Container>
-  )
+		<div className="container">
+			<h2 className="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+				{t("Job Ads")}
+			</h2>
+			<PostsFormFilter
+				cities={cities}
+				contracts={contracts}
+				professions={professions}
+				value={selectedCity}
+				handleChangeCity={handleChangeCity}
+				handleChangeContract={handleChangeContract}
+				handleChangeProfession={handleChangeProfession}
+			/>
+			<div className="relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl">
+				<NewsletterSection />
+				<LoadingOverlay
+					className="mt-6 pt-10 grid gap-16 lg:grid-cols-1 lg:gap-x-5 lg:gap-y-12"
+					active={isLoading}
+				>
+					{posts.length > 0 && <PostsPage posts={posts} />}
+					{!isLoading && posts.length <= 0 && (
+						<p className="text-center my-8">
+							{t("Aucun résultat trouvé")}
+						</p>
+					)}
+				</LoadingOverlay>
+			</div>
+			{count > postsQueryParams.page.limit && (
+				<Pagination
+					total={count}
+					defaultPageSize={postsQueryParams.page.limit}
+					pageSize={postsQueryParams.page.limit}
+					current={pager}
+					onChange={handlePaginationChange}
+				/>
+			)}
+		</div>
+  );
 }
 
 export default PostsContainer

@@ -4,7 +4,6 @@ import * as queryString from "query-string"
 import isClient from "is-client"
 import Api from "vactory-gatsby-api"
 import {searchPageSize, SearchPosts} from 'vactory-gatsby-search'
-import {Paragraph, Container} from "vactory-ui";
 import {Pagination, LoadingOverlay} from 'vactory-gatsby-ui'
 
 const SearchContainer = ({pageContext: {node}}) => {
@@ -48,11 +47,11 @@ const SearchContainer = ({pageContext: {node}}) => {
     }, [pager, q, node.langcode, pageSize]);
 
     return (
-        <Container>
+        <div className="container">
             {(count > 0) &&
-            <Paragraph my="medium" textAlign="center">
+            <p className="text-center my-8">
                 {count} {t("résultat(s) pour votre recherche")}
-            </Paragraph>
+            </p>
             }
 
             <LoadingOverlay active={isLoading}>
@@ -60,9 +59,9 @@ const SearchContainer = ({pageContext: {node}}) => {
                 <SearchPosts posts={pageItems}/>
                 }
                 {!isLoading && pageItems.length <= 0 &&
-                <Paragraph my="medium" textAlign="center">
-                    {t("Aucun résultat trouvé pour votre recherche.")}
-                </Paragraph>
+                    <p className="text-center my-8">
+                        {t("Aucun résultat trouvé pour votre recherche.")}
+					</p>
                 }
             </LoadingOverlay>
 
@@ -74,7 +73,7 @@ const SearchContainer = ({pageContext: {node}}) => {
                 onChange={handlePaginationChange}
             />
             }
-        </Container>
+        </div>
     )
 };
 

@@ -6,13 +6,20 @@
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build"
+    "build": "yarn run build:styles && gatsby build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build:styles": "node ./tailwind.build.js",
+    "build:styles:old": "rimraf ./styles.css && rimraf ./styles.min.css && cross-env NODE_ENV=production postcss ./src/styles.css -o ./styles.css && cleancss --level 1 -o ./styles.min.css ./styles.css"
   },
   "dependencies": {
+    "@headlessui/react": "^0.3.0",
+    "@tailwindcss/typography": "^0.4.0",
     "dotenv": "^8.2.0",
     "gatsby": "^2.20.12",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "tailwindcss": "^2.0.2",
     "vactory-gatsby-academy": "*",
     "vactory-gatsby-annual-report": "*",
     "vactory-gatsby-blog": "*",
@@ -29,5 +36,27 @@
     "vactory-gatsby-publication": "*",
     "vactory-gatsby-search": "*",
     "vactory-gatsby-tender": "*"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-controls": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-knobs": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/react": "^6.1.11",
+    "@tailwindcss/aspect-ratio": "^0.2.0",
+    "@tailwindcss/forms": "^0.2.1",
+    "autoprefixer": "^10.2.0",
+    "clean-css-cli": "^4.3.0",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.0",
+    "postcss-nested": "^5.0.3",
+    "react-is": "^17.0.1",
+    "tailwindcss": "^2.0.2",
+    "tailwindcss-children": "^2.1.0",
+    "tailwindcss-cli": "^0.1.2",
+    "tailwindcss-dir": "^4.0.0"
   }
 }

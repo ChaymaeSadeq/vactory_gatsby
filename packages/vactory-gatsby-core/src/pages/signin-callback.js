@@ -27,7 +27,16 @@ const CallbackPage = (props) => {
 
             if (window.location.href.indexOf('code=') !== -1) {
                 new UserManager({ response_mode: "query", userStore: new WebStorageStateStore({ store: window.localStorage })  }).signinRedirectCallback().then(function () {
-                    window.location = "/";
+                    if (window.sessionStorage.getItem('redirect') !== null) {
+                        // @todo: [Security] Redirect should match frontend URL.
+                        const redirect = window.sessionStorage.getItem('redirect')
+                        window.sessionStorage.removeItem('redirect')
+                        window.location.href = redirect;
+                    }
+                    else {
+                        window.location = "/";
+                    }
+
                 }).catch(function (e) {
                     console.error(e);
                 });

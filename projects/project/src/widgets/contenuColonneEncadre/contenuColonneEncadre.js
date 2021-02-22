@@ -1,38 +1,53 @@
 import React from "react";
-import {Box, Heading, Image, Button as Permalink} from "vactory-ui";
-//import { Wysiwyg, Picture } from 'vactory-gatsby-ui'
-import { Wysiwyg } from 'vactory-gatsby-ui'
+import {Wysiwyg, Picture} from 'vactory-gatsby-ui'
+import {LinkUrl} from "../../composants/link-url";
 
 
-const Encadre = ({sx, children, ...rest}) => {
-    return (<Box sx={sx} __css={{
-        borderStyle: 'solid',
-        borderColor: 'black',
-        borderWidth: 'small',
-        borderTopWidth: 'large',
-        px: 'medium',
-        py: 'xlarge',
-        marginBottom: 'medium',
-    }}>
-        {children}
-    </Box>)
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_60_60",
+            media: "(min-width: 0px)"
+        },
+    ],
+    width: 60,
+    height: 60,
+    ratio: 60 / 60
+};
+
+const Encadre = ({ sx, children, ...rest }) => {
+    return (
+        <div className="border-12 border-black px-4 py-5 mb-4" {...rest}>
+            {children}
+        </div>
+    )
 }
 
 
-export const ContenuColonneEncadre = ({title, description, cta_url, cta_text, pictoImg}) => {
+export const ContenuColonneEncadre = ({title, description, pictoImg, image_alt, link}) => {
     return (
         <Encadre>
             {pictoImg &&
-            <Image src={pictoImg} width="60px"/>
+            <div className="mx-auto mb-4 max-w-min" >
+                <Picture
+                    file={pictoImg}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
+                    alt={image_alt}
+                />
+            </div>
+
             }
             {title &&
-            <Heading level={3}>{title}</Heading>
+            <h3 className="text-2xl font-bold mb-1">{title}</h3>
             }
             {description &&
-            <Wysiwyg html={description} />
+            <Wysiwyg html={description}/>
             }
-            {(cta_text && cta_url) &&
-            <Permalink>{cta_text}</Permalink>
+            {(link) &&
+                <LinkUrl outline="primary" {...link} />
             }
         </Encadre>
     )

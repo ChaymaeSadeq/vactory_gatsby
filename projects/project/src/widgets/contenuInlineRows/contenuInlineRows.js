@@ -1,47 +1,52 @@
 import React from "react";
-import {Flex, Box, Heading, Link, Image} from 'vactory-ui';
-import {Wysiwyg} from "vactory-gatsby-ui";
+import {Wysiwyg, Picture} from "vactory-gatsby-ui";
+import {LinkUrl} from "../../composants/link-url";
 
-export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, description, inversed}) => {
-    const inversedClass = inversed ? 'row-reverse' : 'row'
+
+const imageStyles = {
+    sizes: [
+        {
+            name: "decoupled_image_200_200",
+            media: "(min-width: 0px)"
+        }
+    ],
+    width: 200,
+    height: 200,
+    ratio: 200 / 200
+};
+
+export const ContenuInlineRows = ({pictoImg, title, cta_text, cta_url, description, inversed, image_alt}) => {
     return (
-        <Flex flexDirection={['column', 'column', inversedClass]} alignItems="center"
-              py="medium"
-              sx={{
-                  borderBottomStyle: 'solid',
-                  borderBottomWidth: 'small',
-                  borderBottomColor: 'black',
-              }}
-        >
+        <div className={`flex flex-col ${ inversed ? "md:flex-row-reverse" : "md:flex-row" } items-center p-5 border-b border-black`}>
             {pictoImg &&
-            <Box
-                pr={!inversed ? 'medium' : '0'}
-                pl={inversed ? 'medium' : '0'}
-                maxWidth="200px">
-                <Image src={pictoImg}/>
-            </Box>
+            <div
+                className={`${ !inversed ? "pr-4" : "pr-0" } ${ inversed ? "pl-4" : "pl-0" } mb-4 sm:mb-0 w-52`}>
+                <Picture
+                    file={pictoImg}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
+                    alt={image_alt}
+                    disableAspectRatio
+                />
+            </div>
             }
             {(title || description) &&
-            <Box
-                pr={!inversed ? 'medium' : '0'}
-                pl={inversed ? 'medium' : '0'}
-                flex={1}>
+            <div
+                className={` ${ !inversed ? "pr-4" : "pr-0" } ${ inversed ? "pl-4" : "pl-0" } flex-1 `}>
                 {title &&
-                <Heading level='4'>{title}</Heading>
+                <h4 className="text-2xl font-medium mb-2">{title}</h4>
                 }
                 {description &&
                 <Wysiwyg html={description}/>
                 }
-            </Box>
+            </div>
             }
             {(cta_text && cta_url) &&
-            <Box>
-                <Link sx={{
-                    whiteSpace: 'nowrap',
-                }} outline="primary" borderRadius="rounded" href={cta_url}>{cta_text}</Link>
-            </Box>
+                <LinkUrl href={cta_url}>{cta_text}</LinkUrl>
             }
 
-        </Flex>
+        </div>
     )
 }

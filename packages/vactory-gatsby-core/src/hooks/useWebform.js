@@ -4,6 +4,7 @@ import get from 'lodash.get';
 import qs from "qs"
 
 export const useWebformSubmit = () => {
+    console.warn("[Deprecated] useWebformSubmit is deprecated in favor of useWebformSubmitter from vactory-gatsby-webform package.");
     const [webformFetch, setWebformFetch] = React.useState({
         status: "idle",
         response: null,

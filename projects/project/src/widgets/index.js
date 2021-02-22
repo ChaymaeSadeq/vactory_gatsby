@@ -8,4 +8,10 @@ export * from "./contenuPictoInline"
 export * from "./chiffreCle"
 export * from './contenuHalfSide'
 export * from './contenuInlineRows'
-export * from './videoYoutube'
+export * from './contentVideoYoutube'
+export * from './teamsColonnes'
+export * from './teamsColonnesInline'
+export * from './testimonaislColonnes'
+export * from './testimonialsInline'
+export * from './sliderVideo'
+export * from './fullBackgroundSlider'

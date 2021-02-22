@@ -1,41 +1,6 @@
 import React from 'react'
 import shareLinks from './consts'
-import { Icon, Box } from 'vactory-ui'
-
-const LinkIcon = ({ icon, color, sx, children, ...rest }) => {
-  return (
-    <Box
-      as="span"
-      __css={{
-        display: 'flex',
-        border: '1px solid #e2e2e2',
-        p: 'xsmall',
-        m: '3px',
-        bg: 'white',
-          '.icon': {
-            color: '#9c9c9c'
-          },
-        '&:hover': {
-          bg: color,
-          borderColor: color,
-          '.icon': {
-            fill: 'white',
-          },
-        },
-      }}
-      {...rest}
-    >
-      <Icon
-        className="icon"
-        __css={{
-        }}
-        name={icon}
-        size="28px"
-        color={color}
-      />
-    </Box>
-  )
-}
+import { Icon } from 'vactory-gatsby-ui'
 
 export const Share = ({ link, platform, icon, color, ...props }) => (
   <a
@@ -47,6 +12,6 @@ export const Share = ({ link, platform, icon, color, ...props }) => (
     name={platform}
     {...props}
   >
-    <LinkIcon icon={icon} color={color} />
+    <Icon name={icon} size="28px" className="icon mx-2" color={color} />
   </a>
 )

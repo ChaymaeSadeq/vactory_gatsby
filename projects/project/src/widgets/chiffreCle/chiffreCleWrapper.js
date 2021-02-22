@@ -1,8 +1,18 @@
 import React from "react";
-import {ChiffreCle} from "./chiffreCle";
-import {Box, Heading, Paragraph, Row, Col, Slider, NextArrow, PrevArrow, theme, appendDots} from 'vactory-ui';
+import { ChiffreCle } from "./chiffreCle";
+import Slider from "react-slick";
+import {useRtl} from "vactory-gatsby-core";
+import {TemplateWrapper} from '../../composants'
+import './dots-style.css';
 
-export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+
+export const appendDots = dots => <ul
+    className="dots-style"
+>{dots}</ul>
+
+export const ChiffreCleSlider = ({items}) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -12,13 +22,13 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
         arrows: true,
         centerMode: false,
         centerPadding: '0px',
-        nextArrow: <NextArrow color="black"/>,
-        prevArrow: <PrevArrow color="black"/>,
+        nextArrow: <div><button type="button" className="ltr:right-0 rtl:left-0 border border-black rounded-md text-base text-black px-1">Next</button></div>,
+        prevArrow: <div><button type="button" className="ltr:left-0 rtl:right-0 border border-black rounded-md text-base text-black px-1">Prev</button></div>,
         dotsClass: 'slick-dots',
         appendDots: appendDots,
         responsive: [
             {
-                breakpoint: theme.breakpoints.md,
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -34,55 +44,45 @@ export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
         ]
     }
     return (
-        <Box>
-            {(bigTitle || intro) &&
-            <Box mb={30}>
-                {bigTitle &&
-                <Heading level={2}>{bigTitle}</Heading>
-                }
-                {intro &&
-                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
-                }
-            </Box>
-            }
+        <Slider {...settings} mx={['0', null, 'xxlarge', 'xxxlarge']}>
+            {items.map((item, index) => {
+                return (
+                    <div key={index} className="p-3">
+                        <ChiffreCle {...item} />
+                    </div>
+                )
+            })}
+
+        </Slider>
+    )
+};
+
+export const ChiffreCleWrapper = ({bigTitle, intro, colCount, items}) => {
+    return (
+        <TemplateWrapper bigTitle={bigTitle} intro={intro}>
             {items.length <= colCount &&
             <>
-                <Box display={['none', null, 'block']}>
-                    <Row>
+                <div className={items.length > 1 ? "hidden md:block" : null}>
+                    <div className="flex">
                         {items.map((item, index) => {
                             return (
-                                <Col key={index} xs={12} sm={6} md={12 / colCount}>
+                                <div className={`w-full sm:w-1/2 md:w-1/${colCount}`} key={index}>
                                     <ChiffreCle{...item} />
-                                </Col>
+                                </div>
                             )
                         })}
-                    </Row>
-                </Box>
-                <Box display={['block', null, 'none']}>
-                    <Slider {...settings} mx='0'>
-                        {items.map((item, index) => {
-                            return (
-                                <Box key={index} px='15px'>
-                                    <ChiffreCle key={index} {...item} />
-                                </Box>
-                            )
-                        })}
-
-                    </Slider>
-                </Box>
+                    </div>
+                </div>
+                {items.length > 1 &&
+                <div className={"block md:hidden"}>
+                    <ChiffreCleSlider items={items}/>
+                </div>
+                }
             </>
             }
             {items.length > colCount &&
-            <Slider {...settings} mx='55px'>
-                {items.map((item, index) => {
-                    return (
-                        <Box key={index} px='15px'>
-                            <ChiffreCle key={index} {...item} />
-                        </Box>
-                    )
-                })}
-            </Slider>
+            <ChiffreCleSlider items={items}/>
             }
-        </Box>
+        </TemplateWrapper>
     )
 }

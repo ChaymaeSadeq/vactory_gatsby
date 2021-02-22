@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import {useTranslation} from "react-i18next";
 import Api from "vactory-gatsby-api";
-import {Container, Paragraph} from "vactory-ui";
 import {LoadingOverlay, Pagination} from "vactory-gatsby-ui";
 import {
     postsQueryParams,
@@ -58,7 +57,10 @@ const PostsContainer = ({nodes, pageCount}) => {
     }, [currentLanguage, pager]);
 
     return (
-        <Container>
+    <div className="container">
+      <h2 className="text-3xl font-bold">
+        {t("Tender")}
+      </h2>
             <LoadingOverlay active={isLoading}>
                 {posts.length > 0 && (
                     <PostsPage
@@ -69,9 +71,9 @@ const PostsContainer = ({nodes, pageCount}) => {
                     />
                 )}
                 {!isLoading && posts.length <= 0 && (
-                    <Paragraph my="medium" textAlign="center">
+                    <p className="text-center my-8">
                         {t("Aucun résultat trouvé")}
-                    </Paragraph>
+                    </p>
                 )}
             </LoadingOverlay>
             {count > postsQueryParams.page.limit && (
@@ -83,7 +85,7 @@ const PostsContainer = ({nodes, pageCount}) => {
                     onChange={handlePaginationChange}
                 />
             )}
-        </Container>
+        </div>
     );
 };
 

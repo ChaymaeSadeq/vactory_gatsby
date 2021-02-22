@@ -10,6 +10,8 @@
   "dependencies": {
     "esm": "^3.2.25",
     "vactory-gatsby-core": "*",
-    "vactory-gatsby-nodes": "*"
+    "vactory-gatsby-nextpre": "*",
+    "vactory-gatsby-nodes": "*",
+    "vactory-gatsby-vcc": "*"
   }
 }

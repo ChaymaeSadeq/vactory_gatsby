@@ -1,29 +1,22 @@
 import React from 'react'
-import {Container, Flex, Heading, Box} from 'vactory-ui'
 import {Breadcrumb} from 'vactory-gatsby-ui'
 
 export const BannerA = ({settings}) => {
     return (
-        <Flex
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="gray400"
-            sx={{
-                minHeight: '180px',
-                py: 'large',
-                backgroundImage: `url(${settings.image._default})`,
-                backgroundSize: 'cover',
-                color: 'white',
-                bg: 'gray',
-            }}
-        >
-            <Container>
-                <Heading level="1" color={'white'}>{settings.title}</Heading>
-                <Box>{settings.description}</Box>
-                {settings.useBreadcrumb && settings.breadcrumbItems.length > 0 &&
-                <Breadcrumb items={settings.breadcrumbItems}/>
-                }
-            </Container>
-        </Flex>
-    )
+		<div
+			className="flex justify-center items-center bg-gray-400 py-10 bg-cover h-48"
+			style={{ backgroundImage: `url(${settings.image._default})` }}
+		>
+			<div className="container">
+				<h1 className="text-white text-5xl font-extrabold">
+					{settings.title}
+				</h1>
+				<div>{settings.description}</div>
+				{settings.useBreadcrumb &&
+					settings.breadcrumbItems.length > 0 && (
+						<Breadcrumb items={settings.breadcrumbItems} />
+					)}
+			</div>
+		</div>
+	);
 };

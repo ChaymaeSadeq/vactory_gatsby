@@ -1,62 +1,66 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Select, Box, Label, Flex } from "vactory-ui";
 
 const PostsFormFilter = ({
-  terms,
-  cities,
-  value,
-  handleChangeCategory,
-  handleChangeCity,
+	terms,
+	cities,
+	value,
+	handleChangeCategory,
+	handleChangeCity,
 }) => {
-  const { t } = useTranslation();
-  return (
-    <Box pt="10px" pb="30px" px="xsmall">
-      <Flex flexDirection={['column', 'row']}>
-        <Flex flexDirection="column" mx="xsmall" mb={['10px', '0px']}>
-          <Label htmlFor="events-category" mb="xsmall">
-            {t("Thématique")}
-          </Label>
-          <Select
-            id="events-category"
-            onBlur={null}
-            onChange={(e) => handleChangeCategory(e.currentTarget.value)}
-            defaultValue={value}
-          >
-            <option value="all">{t("Tous les thématiques")}</option>
-            {terms.map((term) => {
-              return (
-                <option key={term.id} value={term.id}>
-                  {term.label}
-                </option>
-              );
-            })}
-          </Select>
-        </Flex>
+	const { t } = useTranslation();
 
-        <Flex flexDirection="column" mx="xsmall">
-          <Label htmlFor="events-cities" mb="xsmall">
-            {t("Ville")}
-          </Label>
-          <Select
-            id="events-cities"
-            onBlur={null}
-            onChange={(e) => handleChangeCity(e.currentTarget.value)}
-            defaultValue={value}
-          >
-            <option value="all">{t("Toutes les villes")}</option>
-            {cities.map((term) => {
-              return (
-                <option key={term.id} value={term.id}>
-                  {term.label}
-                </option>
-              );
-            })}
-          </Select>
-        </Flex>
-      </Flex>
-    </Box>
-  );
+	return (
+		<div className="my-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
+			<div>
+				<label
+					htmlFor="events-category"
+					className="block text-sm font-medium text-gray-700"
+				>
+					{t("Thématique")}
+				</label>
+				<select
+					onChange={(e) => handleChangeCategory(e.currentTarget.value)}
+					onBlur=""
+					defaultValue={value}
+					id="events-category"
+					name="events-category"
+					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				>
+					<option value="all">{t("Tous les thématiques")}</option>
+					{terms.map((term) => (
+						<option key={term.id} value={term.id}>
+							{term.label}
+						</option>
+					))}
+				</select>
+			</div>
+
+			<div>
+				<label
+					htmlFor="events-cities"
+					className="block text-sm font-medium text-gray-700"
+				>
+					{t("Ville")}
+				</label>
+				<select
+					onChange={(e) => handleChangeCity(e.currentTarget.value)}
+					onBlur=""
+					defaultValue={value}
+					id="events-cities"
+					name="events-cities"
+					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				>
+					<option value="all">{t("Toutes les villes")}</option>
+					{cities.map((term) => (
+						<option key={term.id} value={term.id}>
+							{term.label}
+						</option>
+					))}
+				</select>
+			</div>
+		</div>
+	);
 };
 
 export default PostsFormFilter;
