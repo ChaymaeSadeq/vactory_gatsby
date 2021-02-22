@@ -26,7 +26,7 @@ export const ChevronBreadcrumb = ({items}) => {
 					</div>
 				</li>
 				{items.map((item) => (
-					<li>
+					<li key={item.url}>
 						<div className="flex items-center">
 							{/* <!-- Heroicon name: chevron-right --> */}
 							<svg
