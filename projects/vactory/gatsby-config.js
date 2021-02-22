@@ -13,6 +13,7 @@ module.exports = {
         `vactory-gatsby-core`,
         `vactory-gatsby-nextpre`,
         `vactory-gatsby-search`,
+        `vactory-gatsby-forum`,
         `vactory-gatsby-map`,
         `vactory-gatsby-blog`,
         `vactory-gatsby-news`,

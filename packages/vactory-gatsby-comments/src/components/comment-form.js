@@ -4,7 +4,7 @@ import ReCaptcha from "react-google-recaptcha"
 import {useTranslation} from "react-i18next"
 import Api from "vactory-gatsby-api"
 import {AppSettings} from "vactory-gatsby-core"
-import {Box, Label, Input, Button, Text} from "vactory-ui"
+// import {Box, Label, Input, Button, Text} from "vactory-ui"
 import {Toast} from 'vactory-gatsby-ui';
 
 export const CommentForm = ({entity_uid, cid = null, type_content}) => {
@@ -32,7 +32,7 @@ export const CommentForm = ({entity_uid, cid = null, type_content}) => {
                     "name": params.name,
                     // "mail": this.state.email,
                     "entity_type": "node",
-                    "field_name": "field_comments",
+                    "field_name": "comment",
                     "g-recaptcha-response": params.captcha,
                     "comment_body": {
                         "value": params.body,
@@ -91,39 +91,38 @@ export const CommentForm = ({entity_uid, cid = null, type_content}) => {
     };
 
     return (
-        <Box>
+        <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input type="hidden" name="captcha_response"
                        ref={register({required: t("Le champs Captcha est requis")})}/>
-                <Box display="flex" flexDirection="column">
-                    <Box my="xsmall" px="xsmall">
-                        <Label>{t('Votre nom')} <Text as="span" color="#ef3d25">*</Text></Label>
-                        <Input
+                <div display="flex" flexDirection="column">
+                    <div my="xsmall" px="xsmall">
+                        <label>{t('Votre nom')} <span>*</span></label>
+                        <input
                             name="name"
                             type="text"
                             placeholder={t("Votre nom")}
                             status={errors.name ? 'danger' : null}
                             ref={register({required: t("Le champs 'Votre nom' est requis")})}/>
                         {errors.name &&
-                        <Text color="danger500" mt="xxsmall" fontSize="13px">
+                        <p>
                             {errors.name.message}
-                        </Text>
+                        </p>
                         }
-                    </Box>
-                    <Box my="xsmall" px="xsmall">
-                        <Label>{t('Votre commentaire')} <Text as="span" color="#ef3d25">*</Text></Label>
-                        <Input as="textarea" name="body" placeholder={t("Votre commentaire")}
-                               status={errors.body ? 'danger' : null}
-                               ref={register({required: t("Le champs 'Votre commentaire' est requis")})}
-                        />
-                        {errors.body &&
-                        <Text color="danger500" mt="xxsmall" fontSize="13px">
-                            {errors.body.message}
-                        </Text>
-                        }
-                    </Box>
+                    </div>
+                    <div>
+                        <label>{t('Votre commentaire')} <span>*</span></label>
+                        <textarea ref={register({required: t("Le champs 'Votre commentaire' est requis")})} name="body" placeholder={t("Votre commentaire")}                                status={errors.body ? 'danger' : null}
+></textarea>
 
-                    <Box my="xsmall" px="xsmall">
+                        {errors.body &&
+                        <p color="danger500" mt="xxsmall" fontSize="13px">
+                            {errors.body.message}
+                        </p>
+                        }
+                    </div>
+
+                    <div my="xsmall" px="xsmall">
                         <ReCaptcha
                             sitekey={AppSettings.keys.reCaptcha}
                             hl={currentLanguage}
@@ -140,17 +139,17 @@ export const CommentForm = ({entity_uid, cid = null, type_content}) => {
                             }}
                         />
                         {errors.captcha_response &&
-                        <Text color="danger500" mt="xxsmall"
-                              fontSize="13px">{errors.captcha_response.message}</Text>
+                        <p color="danger500" mt="xxsmall"
+                              fontSize="13px">{errors.captcha_response.message}</p>
                         }
-                    </Box>
+                    </div>
 
-                    <Box my="xsmall" px="xsmall">
-                        <Button type="submit" variant="primary" size="medium">{t('Envoyer')}</Button>
-                    </Box>
-                </Box>
+                    <div my="xsmall" px="xsmall">
+                        <button type="submit" variant="primary" size="medium">{t('Envoyer')}</button>
+                    </div>
+                </div>
             </form>
-        </Box>
+        </div>
     )
 };
 

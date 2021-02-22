@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import {Box} from 'vactory-ui';
 
-export const StyledCommentsList = styled(Box)`
+export const StyledCommentsList = styled.div`
         background: #f5f5f5;
     position: relative;
     padding: 30px;
