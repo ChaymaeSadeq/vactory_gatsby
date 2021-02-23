@@ -27,5 +27,6 @@ module.exports = {
         `vactory-gatsby-gouvernance`,
         `vactory-gatsby-glossary`,
         `vactory-gatsby-tender`,
+        `vactory-gatsby-faq`,
     ],
 };
