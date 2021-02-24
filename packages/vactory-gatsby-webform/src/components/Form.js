@@ -13,6 +13,8 @@ import {RadiosField} from './RadiosField';
 import {SelectField} from './SelectField';
 import {ReCaptchaField} from './ReCaptchaField';
 import {UploadField} from './UploadField';
+import {DateField} from './DateField';
+import {TimeField} from './TimeField';
 import {useTranslation} from "react-i18next"
 import {navigate} from "gatsby"
 import cogoToast from 'cogo-toast';
@@ -58,6 +60,14 @@ export const RenderField = (props) => {
 
         case 'upload':
             Component = UploadField;
+            break;
+
+        case 'date':
+            Component = DateField;
+            break;
+
+        case 'time':
+            Component = TimeField;
             break;
 
         case 'custom':
