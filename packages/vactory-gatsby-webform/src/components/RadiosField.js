@@ -1,5 +1,5 @@
 import React, {useMemo, forwardRef} from 'react';
-import {Box, Radio} from 'vactory-ui';
+import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
 import {useErrorMessage} from '../hooks/useErrorMessage';
@@ -15,7 +15,7 @@ export const RadiosField = forwardRef(({
                             }, ref) => {
     const {label, helperText, validation, shouldDisplay, styles = {}} = field;
     const {t} = useTranslation();
-    const fieldStyles = useStyles('checkboxesField', styles);
+    const fieldStyles = useStyles('checkdivesField', styles);
     const formControlLayout = useStyles('formControlLayout', styles);
     const {register, watch} = useFormContext();
     const values = watch({nest: true});
@@ -31,50 +31,67 @@ export const RadiosField = forwardRef(({
             isInvalid={!!errorMessage}
             className={'field--'+name}
         >
-            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
-                 __css={formControlLayout?.inner}>
+            <div
+                className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
+                __css={formControlLayout?.inner}
+            >
                 {!!label && (
-                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
-                        <FormLabel {...fieldStyles?.label}>
-                            {label}
-                        </FormLabel>
-                    </Box>
+                        <div
+                        className="ui-form__formControlLabel block text-sm font-medium text-gray-700"
+                        __css={formControlLayout?.label}
+                        {...fieldStyles?.label}
+                    >
+                        {label}
+                    </div>
                 )}
 
-                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
-                    <div>
-                        {field.options.map((radio, i) => (
-                            <div key={i}>
-                                <FormLabel htmlFor={radio.name}
-                                           showRequiredIndicator={false}
-                                           alignItems="center"
-                                           {...fieldStyles?.labelOptions}
+                <div className="ui-form__formControlField" __css={formControlLayout?.field}>
+                    <div className="mt-4 space-y-4">
+                        {field.options.map((radio, i) => (                                
+                                <div
+                                    key={i}
+                                    className="flex items-center"
                                 >
-                                    <Radio
-                                        mr="8px"
-                                        key={radio.name}
+                                    <input
                                         id={radio.name}
                                         name={name}
                                         value={radio.value}
+                                        type="radio"
+                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                         ref={register(toRegister(radio.label || radio.name, validation, values, t))}
                                         data-testid={`${id}-${radio.name}`}
                                         {...fieldStyles?.input}
                                     />
-                                    {radio.label || radio.name}
-                                </FormLabel>
-                            </div>
+                                    <label
+                                        {...fieldStyles?.labelOptions}
+                                        htmlFor={radio.name}
+                                        className="ltr:ml-3 rtl:mr-3 block text-sm font-medium text-gray-700"
+                                    >
+                                        {radio.label || radio.name}
+                                    </label>
+                                </div>
                         ))}
                     </div>
                     {!!helperText && (
-                        <FormHelperText {...fieldStyles?.helperText}>
-                            {helperText}
-                        </FormHelperText>
+                        <p
+                            className="mt-2 text-sm text-gray-500"
+                            id={`field-${name}-description`}
+                            {...fieldStyles?.helperText}
+                        >
+                            <Wysiwyg html={helperText} />
+                        </p>
                     )}
-                    <FormErrorMessage {...fieldStyles?.errorMessage}>
-                        {errorMessage}
-                    </FormErrorMessage>
-                </Box>
-            </Box>
+                    {!!errorMessage && (
+                        <p
+                            className="mt-2 text-sm text-red-600"
+                            id={`field-${name}-error`}
+                            {...fieldStyles?.errorMessage}
+                        >
+                            <Wysiwyg html={errorMessage} />
+                        </p>
+                    )}
+                </div>
+            </div>
         </FormControl>
     ) : null;
 });

@@ -1,12 +1,10 @@
 import React from "react"
 import get from 'lodash.get';
-import {Box, Button, Heading, Tabs, Tab} from "vactory-ui";
-import {Link, Wysiwyg} from "vactory-gatsby-ui";
+import {Link, Wysiwyg, Tabs} from "vactory-gatsby-ui";
 
 export const ParagraphsMultipleTab = ({items, ...rest}) => {
-    const {title = '', introduction = '', cta} = rest;
-    const raw_description = get(introduction, 'processed', null);
-    const description = <Wysiwyg html={raw_description}/>;
+    const {title = '', introduction = '', cta: action} = rest;
+    const description = get(introduction, 'processed', null);
 
     const tabItems = items.map((item, index) => {
         return {
@@ -16,27 +14,34 @@ export const ParagraphsMultipleTab = ({items, ...rest}) => {
         }
     });
 
-    return (<Box>
-        <Box sx={{
-            'text-align': 'center'
-        }}>
-            {title && title !== "" && <Heading level={2}>{title}</Heading>}
-            {raw_description.length > 0 && <div>{description}</div>}
-        </Box>
-        <Box my="large">
-            <Tabs>
-                {tabItems.map(tab => {
-                    return <Tab key={tab.key} title={tab.title}>
-                        {tab.content}
-                    </Tab>
-                })}
-            </Tabs>
-        </Box>
-        <Box sx={{
-            'text-align': 'center'
-        }}>
-            {cta && cta.url && <Button as={Link} to={cta.url}>{cta.title}</Button>}
-        </Box>
-    </Box>)
+    return (
+		<div className="my-10">
+			<div className="text-center">
+				{title && (
+					<h2 className="text-3xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
+						{title}
+					</h2>
+				)}
+				{description && (
+					<div className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
+						<Wysiwyg html={description} />
+					</div>
+				)}
+			</div>
+			<div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                <Tabs items={tabItems.map( ({title, content: description}) => ({title, description}) )} />
+			</div>
+			{action?.url && (
+				<div className="flex justify-center mt-12">
+					<Link
+						href={action.url}
+						className="inline-flex items-center border border-gray-300 shadow-sm px-6 py-3 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+					>
+						{action.title}
+					</Link>
+				</div>
+			)}
+		</div>
+	);
 
 };

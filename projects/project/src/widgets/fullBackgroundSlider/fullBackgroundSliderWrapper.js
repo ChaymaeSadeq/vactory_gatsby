@@ -1,7 +1,11 @@
 import React from "react";
+import Slider from "react-slick";
 import {FullBackgroundSlider} from "./fullBackgroundSlider";
-import {Slider, Slide, NextArrow, PrevArrow, appendDots, Box} from 'vactory-ui'
-import {theme} from "../../vactory-gatsby-ui/theme";
+
+
+export const appendDots = dots => <ul
+    className="dots-style"
+>{dots}</ul>
 
 //@todo: set backgrond video/video After update factory-ui
 export const FullBackgroundSliderWrapper = ({items}) => {
@@ -15,12 +19,12 @@ export const FullBackgroundSliderWrapper = ({items}) => {
         arrows: true,
         centerPadding: '0px',
         centerMode: false,
-        nextArrow: <NextArrow/>,
-        prevArrow: <PrevArrow/>,
+        nextArrow: <div><button type="button" className="absolute z-10 ltr:right-2 rtl:left-2 border border-black rounded-md text-base text-black px-1">Next</button></div>,
+        prevArrow: <div><button type="button" className="absolute z-10 ltr:left-2 rtl:right-2 border border-black rounded-md text-base text-black px-1">Prev</button></div>,
 
         responsive: [
             {
-                breakpoint: theme.breakpoints.md,
+                breakpoint: 768,
                 settings: {
                     centerPadding: '40px',
                     centerMode: true,
@@ -35,22 +39,18 @@ export const FullBackgroundSliderWrapper = ({items}) => {
     }
 
     return (
-        <Box>
+        <div>
             <Slider {...settings} afterChange={index => setActiveSlide(index)}>
                 {items.map((item, index) => {
                     return (
-                        <Slide
-                            key={index}
-                            isActive={activeSlide === index}
-                            bgImage={!item.videoId ? item.imageUrl._default : null}
-                            videoId={item.videoId}
-                            content={<FullBackgroundSlider isActive={activeSlide === index} cta_text={item.cta_text} cta_url={item.cta_url}
-                                                           title={item.title} description={item.description}/>}
-                        />
+                        <div className="w-full py-56 text-center bg-gray-500" style={{backgrondImage: `url(${!item.videoId ? item.imageUrl._default : null || ""})`}}>
+                            <FullBackgroundSlider key={index} isActive={activeSlide === index} cta_text={item.cta_text} cta_url={item.cta_url}
+                                                            title={item.title} description={item.description}/>
+                        </div>
                     )
                 })}
             </Slider>
-        </Box>
+        </div>
     )
 
 }

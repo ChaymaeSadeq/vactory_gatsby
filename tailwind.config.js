@@ -1,0 +1,1 @@
+projects/vactory/tailwind.config.js

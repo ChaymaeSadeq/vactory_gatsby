@@ -4,6 +4,12 @@
  */
 export const imageStyles = [
     {
+        name: "gouvernance_avatar_200_200",
+        width: 200,
+        height: 200,
+        operation: "scale_crop",
+    },
+    {
         name: "gouvernance_image_480_314",
         width: 480,
         height: 314,

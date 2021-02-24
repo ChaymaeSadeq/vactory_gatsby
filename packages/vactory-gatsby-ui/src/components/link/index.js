@@ -9,7 +9,8 @@ const StyledGatsbyLink = styled(GatsbyLink).withConfig({
 `;
 
 export const Link = props => {
-    const {to, ...newProps} = props
+    let { to, ...newProps } = props;
+    to ??= props?.href;
     const internal = /^\/(?!\/)/.test(to)
     const isFile = /^\/sites\/default\/(?!\/)/.test(to)
 
@@ -19,7 +20,7 @@ export const Link = props => {
 
     if (isFile) {
         return (
-            <a {...newProps} href={`/backend${props.to}`}>
+            <a {...newProps} href={`/backend${to}`}>
                 {props.children}
             </a>
         )
@@ -27,7 +28,7 @@ export const Link = props => {
 
 
     return (
-        <a {...newProps} href={props.to}>
+        <a {...newProps} href={to}>
             {props.children}
         </a>
     )

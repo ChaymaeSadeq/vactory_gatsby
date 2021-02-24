@@ -1,6 +1,6 @@
 import React from "react"
 import {useTranslation} from "react-i18next"
-import {Text, Image} from "vactory-ui";
+// import {Text, Image} from "vactory-ui";
 import * as moment from "moment"
 import 'moment/locale/fr';
 import 'moment/locale/ar';
@@ -43,7 +43,7 @@ export const Comment = ({comment, uid}) => {
     return (
         <CommentBase>
             <CommentAvatar>
-                <Image src={avatar} alt={fullName}/>
+                <img src={avatar} alt={fullName}/>
             </CommentAvatar>
             <CommentBox>
                 <CommentHead>
@@ -51,7 +51,7 @@ export const Comment = ({comment, uid}) => {
                     <p>{timeAgo}</p>
                 </CommentHead>
                 <CommentContent>
-                    <Text dangerouslySetInnerHTML={{__html: content}}/>
+                    <p dangerouslySetInnerHTML={{__html: content}}/>
                 </CommentContent>
 
                 {/*{hasReplies &&*/}

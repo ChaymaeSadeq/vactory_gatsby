@@ -1,5 +1,5 @@
 import React from "react"
-import {CardEvents, imageLayoutStyles, normalizeNodes, postsQueryParams} from "vactory-gatsby-events";
+import {EventCard, imageLayoutStyles, normalizeNodes, postsQueryParams} from "vactory-gatsby-events";
 import {VCC} from "vactory-gatsby-vcc";
 import {useTranslation} from "react-i18next"
 
@@ -7,8 +7,7 @@ const Post = ({post}) => {
     const {t} = useTranslation();
 
     return (
-        <div>
-            <main>
+            <article>
                 <h1>{post.title}</h1>
                 {/*<p>*/}
                 {/*    {post.date}*/}
@@ -22,11 +21,10 @@ const Post = ({post}) => {
                     queryParams={postsQueryParams}
                     normalizer={normalizeNodes}
                     renderNode={
-                        node =>  <CardEvents {...node} imageSettings={imageLayoutStyles.threeColumns} />
+                        node =>  <EventCard {...node} imageSettings={imageLayoutStyles.threeColumns} />
                     }
                 />
-            </main>
-        </div>
+            </article>
     )
 }
 

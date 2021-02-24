@@ -1,27 +1,13 @@
 import React from 'react'
 import { FullSliderItem } from './full-slider-item'
 import { default as SlickSlider } from 'react-slick'
-import styled from 'styled-components'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-const StyledSlickSlider = styled(SlickSlider)`
-  /*.slick-track {
-    display: flex;
-  }
-  .slick-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }*/
-  .slick-dots {
-    position: relative;
-    bottom: inherit;
-  }
-`
 
 export const FullSlider = ({ items }) => {
   const settings = {
+    appendDots: dots => <ul style={{position: 'relative', bottom: 0}}>{dots}</ul>,
     dots: true,
     infinite: true,
     speed: 500,
@@ -30,10 +16,10 @@ export const FullSlider = ({ items }) => {
   }
 
   return (
-    <StyledSlickSlider {...settings}>
+    <SlickSlider {...settings}>
       {items.map((node, i) => {
         return <FullSliderItem key={i} {...node} />
       })}
-    </StyledSlickSlider>
+    </SlickSlider>
   )
 }

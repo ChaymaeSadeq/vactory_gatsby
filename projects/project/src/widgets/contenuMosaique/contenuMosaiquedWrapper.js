@@ -1,18 +1,13 @@
 import React from "react";
-import {Box} from "vactory-ui";
 import {ContenuMosaique} from "./contenuMosaique";
 import {TemplateWrapper} from "../../composants/template-wrapper";
 
 export const ContenuMosaiquedWrapper = ({centercontent, intro, bigTitle, activeBorder, items}) => {
-    const contentTextAlignClass = centercontent ? "center" : "left"
     const contentWithBorder = activeBorder
     return (
         <TemplateWrapper bigTitle={bigTitle} intro={intro}>
-            <Box
-                borderWidth={contentWithBorder ? 'medium' : 'none'}
-                borderStyle={contentWithBorder ? 'solid' : 'none'}
-                borderColor={contentWithBorder ? 'black' : 'none'}
-                borderRadius={contentWithBorder ? 'xlarge' : '0'}
+            <div
+                className={` space-x-2 rtl:space-x-reverse  ${ contentWithBorder ? "space-y-2 bg-black border-4 border-black rounded-lg overflow-hidden" : "" } `}
             >
                 {
                     items.map((item, index) => {
@@ -20,13 +15,13 @@ export const ContenuMosaiquedWrapper = ({centercontent, intro, bigTitle, activeB
                         return (
                             <ContenuMosaique key={index} {...item}
                                              inversed={inversed}
-                                             textAlign={contentTextAlignClass}
+                                             centered={centercontent}
                                              activeBorder={contentWithBorder}
                             />
                         )
                     })
                 }
-            </Box>
+            </div>
         </TemplateWrapper>
     )
 }

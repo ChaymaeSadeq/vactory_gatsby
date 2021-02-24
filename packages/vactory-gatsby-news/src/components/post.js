@@ -3,7 +3,6 @@ import {SocialShare, WebShare, Wysiwyg} from "vactory-gatsby-ui"
 import {VCC} from "vactory-gatsby-vcc"
 import {NextPre} from "vactory-gatsby-nextpre"
 import {CardNews, imageLayoutStyles, normalizeNodes, postsQueryParams, PostSchema} from "vactory-gatsby-news"
-import {Box, Container, Row, Col, Heading, Text} from "vactory-ui";
 
 const Post = ({post}) => {
     const bodyMarkup = <Wysiwyg html={post.body.processed}/>;
@@ -15,19 +14,16 @@ const Post = ({post}) => {
                 datePublished={post.field_vactory_date}
                 imageURL={post.field_vactory_media_image.thumbnail.uri.value._default}
             />
-            <Container>
-                <Row>
-                    <Col>
-                        <Heading level={1}>{post.title}</Heading>
-                        <Text>{post.field_vactory_date}</Text>
-                        <hr />
-                        <Box py={'15px'}>{bodyMarkup}</Box>
-                        <hr />
-                        <SocialShare/>
-                        <WebShare/>
-                    </Col>
-                </Row>
-            </Container>
+            <div className="container">
+                <div className="mx-auto prose prose-lg border-b border-gray-400">
+                    <h2>{post.title}</h2>
+                    <span>{post.field_vactory_date}</span>
+                    <hr />
+                    <div className="py-4">{bodyMarkup}</div>
+                </div>
+                <SocialShare/>
+                <WebShare/>
+            </div>
             <VCC
                 nid={post.drupal_internal__nid}
                 resource={'vactory_news'}

@@ -1,22 +1,21 @@
 import React from "react";
-import {Box, Heading, Paragraph} from "vactory-ui";
 
 export const TemplateWrapper = ({bigTitle, intro, children}) => {
     return (
-        <Box py={['large', null, 'xlarge']}>
+        <div className="p-6 md:p-8">
             {(bigTitle || bigTitle) &&
-            <Box mb={30}>
+            <div className="mb-8">
                 {bigTitle &&
-                <Heading level={2}>{bigTitle}</Heading>
+                <h2 className="text-3xl font-bold">{bigTitle}</h2>
                 }
                 {intro &&
-                <Paragraph fontSize="title" lineHeight="title">{intro}</Paragraph>
+                <div className="leading-snug text-base">{intro}</div>
                 }
-            </Box>
+            </div>
             }
             <>
                 {children}
             </>
-        </Box>
+        </div>
     )
 }

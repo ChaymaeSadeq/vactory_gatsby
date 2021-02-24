@@ -2,7 +2,6 @@ import React from 'react';
 import {withKnobs, boolean} from "@storybook/addon-knobs";
 import CardImg from '../../assets/img1.jpg'
 import {ContenuMosaiquedWrapper} from "../contenuMosaiquedWrapper";
-import {Container} from "vactory-ui";
 import {useRtl} from "vactory-gatsby-core";
 
 // Variable for kbobs
@@ -79,13 +78,13 @@ export const Variant1 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuMosaiquedWrapper centercontent={data.centercontent}
                                      intro={data.intro}
                                      bigTitle={data.bigTitle}
                                      activeBorder={data.activeBorder}
                                      items={data.items}/>
-        </Container>
+        </div>
     )
 }
 
@@ -164,13 +163,13 @@ export const Variant2 = () => {
             ]
         }
     return (
-        <Container>
+        <div className="container">
             <ContenuMosaiquedWrapper centercontent={data.centercontent}
                                      intro={data.intro}
                                      bigTitle={data.bigTitle}
                                      activeBorder={data.activeBorder}
                                      items={data.items}/>
-        </Container>
+        </div>
     )
 }
 

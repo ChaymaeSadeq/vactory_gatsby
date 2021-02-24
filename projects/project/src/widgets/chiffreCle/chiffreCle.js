@@ -1,5 +1,4 @@
 import React from "react";
-import {Box, Paragraph, Heading} from 'vactory-ui'
 import {Picture} from "vactory-gatsby-ui";
 import AnimatedNumber from "animated-number-react";
 
@@ -35,51 +34,25 @@ const ChiffreCss = {
 export const ChiffreCle = ({number, word_before, word_after, description, imageUrl, image_alt}) => {
     const formatValue = (value) =>  value % 1 === 0 ? value.toFixed(0) : value.toFixed(2);
     return (
-        <Box sx={{
-            borderStyle: 'solid',
-            borderColor: 'black',
-            borderWidth: 'small',
-            borderTopWidth: 'large',
-            py: 'large',
-            px: 'small',
-            textAlign: 'center',
-        }}>
-            <Box>
-                {imageUrl &&
-                <Box width={imageStyles.width} mx="auto" mb="medium">
-                    <Picture
-                        file={imageUrl}
-                        alt={image_alt}
-                        sizes={imageStyles.sizes}
-                        width={imageStyles.width}
-                        height={imageStyles.height}
-                        ratio={imageStyles.ratio}
-                    />
-                </Box>
-                }
-                {(word_before || word_after || number) &&
-                <Paragraph sx={ChiffreCss}>
-                    {word_before &&
-                    <Paragraph sx={ChiffreCss} as="span">
-                        {word_before}
-                    </Paragraph>
-                    }
-                    {number &&
-                    <Paragraph sx={ChiffreCss} mx='xxsmall' as="span">
-                        <AnimatedNumber value={number} formatValue={(number)=> formatValue(number)} duration="2000" />
-                    </Paragraph>
-                    }
-                    {word_after &&
-                    <Paragraph sx={ChiffreCss} as="span">
-                        {word_after}
-                    </Paragraph>
-                    }
-                </Paragraph>
-                }
-            </Box>
-            {description &&
-            <Heading level="3" fontSize="heading5">{description}</Heading>
-            }
-        </Box>
+        <div className="flex flex-col justify-center bg-white border border-indigo-500 rounded-lg w-56 px-8 py-14 box-content mx-4 mt-10 text-center">
+            {imageUrl && <div className="w-16 h-16 mx-auto">
+                <Picture
+                    file={imageUrl}
+                    alt={image_alt}
+                    sizes={imageStyles.sizes}
+                    width={imageStyles.width}
+                    height={imageStyles.height}
+                    ratio={imageStyles.ratio}
+                />
+            </div>}
+            <span className="text-7xl font-black text-indigo-500 text-stroked">
+                {word_before}
+                <AnimatedNumber value={number} formatValue={(number)=> formatValue(number)} duration="2000" />
+                {word_after}
+            </span>
+            {description && <span className="mt-2 leading-6 font-medium text-indigo-900">
+                {description}
+            </span>}
+        </div>
     )
 }

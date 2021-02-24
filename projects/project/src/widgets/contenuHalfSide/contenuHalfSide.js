@@ -1,31 +1,26 @@
 import React from "react";
-import {Box, Heading, Link, Flex, Paragraph} from 'vactory-ui'
 import {TemplateWrapper} from "../../composants/template-wrapper";
+import {LinkUrl} from "../../composants/link-url";
 
 export const ContenuHalfSide = ({title, description, cta_text, cta_url, inversed, centercontent}) => {
-    const contentTextAlign = centercontent ? 'center' : 'left'
     return (
         <TemplateWrapper>
-            <Flex py={['xlarge', 'xxlarge', 'xxxlarge']}>
-                <Box
-                    textAlign={contentTextAlign}
-                    width={['100%', '60%', '50%', '40%']}
-                    backgroundColor="white"
-                    p="large"
-                    ml={!inversed ? 'auto' : '0'}
-                    mr={inversed ? 'auto' : '0'}
+            <div className="flex p-6 sm:p-8 md:p-10">
+
+                <div
+                    className={`${ centercontent ? "text-center" : ""} w-full sm:2/3 md:1/2 lg:w-5/12 bg-white p-5 ${ !inversed ? "mt-auto" : "ml-0"} ${ inversed ? "mr-auto" : "mr-0" }`}
                 >
                     {title &&
-                    <Heading level={3}>{title}</Heading>
+                    <h3 className="text-2xl font-medium">{title}</h3>
                     }
                     {description &&
-                    <Paragraph>{description}</Paragraph>
+                    <div className="mb-3">{description}</div>
                     }
                     {(cta_text && cta_url) &&
-                    <Link outline="primary" borderRadius="rounded" href={cta_url}>{cta_text}</Link>
+                    <LinkUrl href={cta_url}>{cta_text}</LinkUrl>
                     }
-                </Box>
-            </Flex>
+                </div>
+            </div>
         </TemplateWrapper>
     )
 }

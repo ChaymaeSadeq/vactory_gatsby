@@ -1,5 +1,4 @@
 import React from "react"
-import {Box, Header, Layer, Button, Icon} from "vactory-ui";
 import {
     MenuA as MenuNavigation,
     SearchA as SearchBox,
@@ -8,34 +7,15 @@ import {
     HeaderALayerMenu as LayerMenu,
     StatePageSection
 } from 'vactory-gatsby-ui'
-import {useRtl, AuthUserProfile, AppSettings} from "vactory-gatsby-core";
+import {AuthUserProfile, AppSettings} from "vactory-gatsby-core";
 import { motion, useAnimation } from 'framer-motion';
 
-const MotionHeader = motion.custom(Header);
-
-const MenuButton = ({size = 'large', ...props}) =>
-    <Button {...props}
-            sx={{
-                padding: '0',
-                background: 'transparent',
-                color: 'inherit',
-                '&:hover, &:focus': {
-                    background: 'transparent',
-                    color: 'inherit',
-                    borderColor: 'transparent'
-                }
-            }}
-            size="none"
-            onClick={props.onClick}>
-        <Icon name="menu" size={size}/>
-    </Button>;
+const MotionHeader = motion.header;
 
 export const HeaderA = ({pageInfo, currentLanguage, location}) => {
     const headerRef = React.useRef({
         location: null,
     });
-    const [showSidebarMenu, setShowSidebarMenu] = React.useState();
-    const isRtl = useRtl();
     let pageSection = StatePageSection.useContainer();
     const headerAnimationCtrls = useAnimation();
     let variants = {
@@ -43,6 +23,7 @@ export const HeaderA = ({pageInfo, currentLanguage, location}) => {
         state2: { backgroundColor: '#333333' },
         state3: { backgroundColor: '#ff6347' },
     };
+	const [showMenu, setShowMenu] = React.useState(false);
 
     React.useEffect(() => {
         if (!headerRef.current.location) {
@@ -58,60 +39,64 @@ export const HeaderA = ({pageInfo, currentLanguage, location}) => {
     }, [pageSection]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Box>
             <MotionHeader
+                variants={variants}
+                className="p-8 sticky shadow-lg flex justify-between"
                 animate={headerAnimationCtrls}
                 initial="initial"
-                variants={variants}
                 transition={{ ease: "easeOut", duration: 0.5 }}
-                p="large"
-                boxShadow={1}
-                sticky={true}
             >
-                <Box flexGrow={[1, 1, 0, 0]}>
-                    <Box display="inline-block" textAlign="center" fontWeight="black" fontSize="14px"
-                         sx={{
-                             px: 3,
-                             py: 3,
-                             textTransform: 'uppercase',
-                             letterSpacing: '0.1em',
-                             border: '4px solid',
-                             color: 'primary500',
-                         }}
-                    >
-                        <Link color="primary500" to={`/${currentLanguage}`}>VACTORY</Link>
-                    </Box>
-                </Box>
-                <Box
-                    flexGrow={1}
-                    justifyContent="center"
-                    display={['none', 'none', 'flex']}>
+                <div className="flex-grow-0">
+                    <div className="flex border-4 border-indigo-500 p-1">
+                        <svg
+                            className="h-6 w-6 text-blue-500 ltr:mr-1 rtl:ml-1"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={48}
+                            height={48}
+                            viewBox="0 0 512 512"
+                            fill="currentColor"
+                        >
+                            <path d="M482.365 89.402c-46.951-54.725-116.605-89.402-194.365-89.402-141.385 0-256 114.615-256 256s114.615 256 256 256c77.76 0 147.414-34.678 194.364-89.402l-162.364-166.598 162.365-166.598zM352 60.301c19.716 0 35.699 15.982 35.699 35.699s-15.983 35.699-35.699 35.699-35.699-15.983-35.699-35.699c0-19.716 15.983-35.699 35.699-35.699z" />
+                        </svg>
+                        <Link className="font-black tracking-widest text-indigo-500" to={`/${currentLanguage}`}>VACTORY</Link>
+                    </div>
+                </div>
+                
+                <div className="flex-grow justify-center hidden md:flex">
                     <MenuNavigation/>
-                </Box>
-                <Box mx="10px"><SearchBox/></Box>
+                </div>
+                
+                <div className="mx-2.5"><SearchBox/></div>
+                
                 <LanguageSelector currentLanguage={currentLanguage} pageInfo={pageInfo}/>
-                <Box display={['block', null, 'none']} color="gray900">
-                    <MenuButton onClick={() => setShowSidebarMenu(true)}/>
-                </Box>
-
+                
                 {AppSettings.enableAuth &&
                 <AuthUserProfile />
                 }
 
-                {showSidebarMenu && (
-                    <Layer
-                        position={isRtl ? "left" : "right"}
-                        full="vertical"
-                        modal={true}
-                        responsive
-                        plain={true}
-                        onClickOutside={() => setShowSidebarMenu(false)}
-                        onEsc={() => setShowSidebarMenu(false)}
-                    >
-                        <LayerMenu onClose={() => setShowSidebarMenu(false)} />
-                    </Layer>
-                )}
+                <div className="md:hidden text-gray-900">
+                    <button type="button" onClick={() => setShowMenu(true)}>
+                        <svg
+                            className="w-5 h-5"
+                            width={24}
+                            height={24}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <LayerMenu showMenu={showMenu} setShowMenu={setShowMenu} />
             </MotionHeader>
-        </Box>
     );
 };

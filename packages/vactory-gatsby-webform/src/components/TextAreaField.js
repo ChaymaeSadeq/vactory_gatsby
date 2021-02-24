@@ -1,5 +1,5 @@
 import React, {useMemo, forwardRef} from 'react';
-import {Box, Input} from 'vactory-ui';
+import {Wysiwyg} from 'vactory-gatsby-ui';
 import classNames from "classnames"
 import {useFormContext} from 'react-hook-form';
 import {useTranslation} from "react-i18next";
@@ -38,38 +38,41 @@ export const TextAreaField = forwardRef(({
             isInvalid={!!errorMessage}
             className={'field--'+name}
         >
-            <Box className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
+            <div className={classNames("ui-form__formControlInner", !!label ? "" : "ui-form__formControlInner_noLabel")}
                  __css={formControlLayout?.inner}>
-
                 {!!label && (
-                    <Box className="ui-form__formControlLabel" __css={formControlLayout?.label}>
-                        <FormLabel htmlFor={name}>
-                            {label}
-                        </FormLabel>
-                    </Box>
+                    <label
+                        htmlFor={name}
+                        className="ui-form__formControlLabel block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        __css={formControlLayout?.label}
+                    >
+                        {label}
+                    </label>
                 )}
-                <Box className="ui-form__formControlField" __css={formControlLayout?.field}>
-
-                    <Input
-                        as={"textarea"}
+                <div className="mt-1 sm:mt-0 sm:col-span-2" __css={formControlLayout?.field}>
+                    <textarea
                         id={name}
                         data-testid={id}
                         name={name}
-                        placeholder={placeholder}
+                        rows="3"
+                        className="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                         ref={register(toRegister(label || name, validation, values, t))}
-                        status={!!errorMessage ? 'danger' : null}
+                        placeholder={placeholder}
+                        aira-invalid={!!errorMessage}
                         {...fieldStyles?.input}
                     />
                     {!!helperText && (
-                        <FormHelperText {...fieldStyles?.helperText}>
-                            {helperText}
-                        </FormHelperText>
+                        <p className="mt-2 text-sm text-gray-500" {...fieldStyles?.helperText}>
+                            <Wysiwyg html={helperText} />
+                        </p>
                     )}
-                    <FormErrorMessage {...fieldStyles?.errorMessage}>
-                        {errorMessage}
-                    </FormErrorMessage>
-                </Box>
-            </Box>
+                    {!!errorMessage && (
+                        <p className="mt-2 text-sm text-red-600" {...fieldStyles?.errorMessage}>
+                            <Wysiwyg html={errorMessage} />
+                        </p>
+                    )}
+                </div>
+            </div>
         </FormControl>
     ) : null;
 });

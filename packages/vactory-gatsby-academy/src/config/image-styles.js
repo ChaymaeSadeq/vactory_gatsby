@@ -40,15 +40,15 @@ export const imageStyles = [
         operation: "scale_crop",
     },
     {
-        name: "academy_image_300_200",
-        width: 300,
-        height: 200,
+        name: "academy_image_384_288",
+        width: 384,
+        height: 288,
         operation: "scale_crop",
     },
     {
-        name: "academy_image_600_400",
-        width: 600,
-        height: 400,
+        name: "academy_image_282_212",
+        width: 282,
+        height: 212,
         operation: "scale_crop",
     },
 ];

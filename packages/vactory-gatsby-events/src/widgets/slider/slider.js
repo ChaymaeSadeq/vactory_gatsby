@@ -1,27 +1,12 @@
 import React from 'react'
-import { CardEvents, imageLayoutStyles } from 'vactory-gatsby-events'
-import { default as SlickSlider } from 'react-slick'
-import styled from 'styled-components'
+import { EventCard, imageLayoutStyles } from 'vactory-gatsby-events'
+import SlickSlider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-const StyledSlickSlider = styled(SlickSlider)`
-  /*.slick-track {
-    display: flex;
-  }
-  .slick-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }*/
-  .slick-dots {
-    position: relative;
-    bottom: inherit;
-  }
-`
-
 export const Slider = ({ posts }) => {
   const settings = {
+    appendDots: dots => <ul style={{position: 'relative', bottom: 0}}>{dots}</ul>,
     dots: true,
     infinite: true,
     speed: 500,
@@ -30,16 +15,16 @@ export const Slider = ({ posts }) => {
   }
 
   return (
-    <StyledSlickSlider {...settings}>
-      {posts.map((node, i) => {
-        return (
-          <CardEvents
-            key={i}
-            {...node}
-            imageSettings={imageLayoutStyles.twoColumns}
-          />
-        )
-      })}
-    </StyledSlickSlider>
-  )
+		<SlickSlider {...settings}>
+			{posts.map((node, i) => {
+				return (
+					<EventCard
+						key={i}
+						{...node}
+						imageSettings={imageLayoutStyles.twoColumns}
+					/>
+				);
+			})}
+		</SlickSlider>
+  );
 }

@@ -1,6 +1,5 @@
 import React, {useCallback, useContext, useState} from 'react';
 import classNames from "classnames"
-import {Box, Label} from 'vactory-ui'
 import isClient from "is-client"
 import {FormControlContext} from '../context/FormControl'
 import {useStyles} from "..";
@@ -129,14 +128,14 @@ export const FormLabel = (props) => {
     const field = useContext(FormControlContext);
 
     return (
-        <Label
+        <label
             className={classNames("ui-form__label", className)}
             __css={styles}
             {...rest}
         >
             {children}
             {field?.isRequired && showRequiredIndicator && <RequiredIndicator/>}
-        </Label>
+        </label>
     );
 
 };
@@ -156,7 +155,7 @@ export const FormControl = (props) => {
 
     return (
         <FormControlContext.Provider value={context}>
-            <Box
+            <div
                 role="group"
                 {...htmlProps}
                 className={_className}
@@ -179,7 +178,7 @@ export const RequiredIndicator = (props) => {
     const _className = classNames("ui-form__required-indicator", props.className);
 
     return (
-        <Box as={'span'}
+        <span
              role="presentation"
              aria-hidden
              {...props}
@@ -214,7 +213,7 @@ export const FormHelperText = (props) => {
     const _className = classNames("ui-form__helper-text", props.className);
 
     return (
-        <Box
+        <div
             __css={styles}
             {...props}
             className={_className}
@@ -236,7 +235,7 @@ export const FormErrorMessage = (props, ref) => {
     const _className = classNames("ui-form__error-message", props.className);
 
     return (
-        <Box
+        <div
             aria-live="polite"
             {...props}
             __css={styles}

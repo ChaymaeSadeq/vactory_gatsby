@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Api from "vactory-gatsby-api";
-import { Heading, Container, Paragraph } from "vactory-ui";
 import {LoadingOverlay, Pagination} from "vactory-gatsby-ui";
 import {
   postsQueryParams,
@@ -83,10 +82,10 @@ const PostsContainer = ({ node, nodes, terms, pageCount }) => {
   }, [selectedTerm, currentLanguage, pager]);
 
   return (
-    <Container>
-      <Heading px="xsmall" level={2}>
+    <div className="container">
+      <h2 className="text-3xl font-bold">
         {t("Blogs")}
-      </Heading>
+      </h2>
       <PostsFormFilter
         terms={terms}
         value={selectedTerm}
@@ -97,21 +96,21 @@ const PostsContainer = ({ node, nodes, terms, pageCount }) => {
           <PostsPage posts={posts} />
         )}
         {!isLoading && posts.length <= 0 && (
-          <Paragraph my="medium" textAlign="center">
+          <p className="text-center my-8">
             {t("Aucun résultat trouvé")}
-          </Paragraph>
+          </p>
         )}
       </LoadingOverlay>
       {count > postsQueryParams.page.limit && (
-            <Pagination
-                total={count}
-                defaultPageSize={postsQueryParams.page.limit}
-                pageSize={postsQueryParams.page.limit}
-                current={pager}
-                onChange={handlePaginationChange}
-            />
+        <Pagination
+          total={count}
+          defaultPageSize={postsQueryParams.page.limit}
+          pageSize={postsQueryParams.page.limit}
+          current={pager}
+          onChange={handlePaginationChange}
+        />
       )}
-    </Container>
+    </div>
   );
 };
 

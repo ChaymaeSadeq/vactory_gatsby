@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import {useTranslation} from "react-i18next"
 import Api from "vactory-gatsby-api"
 import {LoadingOverlay, InfiniteScroll} from 'vactory-gatsby-ui'
-import {Container, Box, Heading} from "vactory-ui";
+// import {Container, Box, Heading} from "vactory-ui";
 import {Comment, CommentForm, StyledCommentsList} from "vactory-gatsby-comments"
 
 /**
@@ -83,19 +83,19 @@ export const Comments = ({entity_uid, type_content, uid, perPage = 10}) => {
     };
 
     return (
-        <Container>
-            <Box>
-                <Heading level={4}>{t("Poster un commentaire")}</Heading>
-            </Box>
+        <div>
+            <div>
+                <h4>{t("Poster un commentaire")}</h4>
+            </div>
 
             <CommentForm entity_uid={entity_uid} type_content={type_content}/>
 
             <LoadingOverlay active={isLoading}>
                 {pageItems.length > 0 &&
-                <Box>
-                    <Box>
-                        <Heading level={6}>{totalComments} {t("Commentaires")}</Heading>
-                    </Box>
+                <div>
+                    <div>
+                        <h6>{totalComments} {t("Commentaires")}</h6>
+                    </div>
                     <StyledCommentsList>
                         <InfiniteScroll
                             ref={scroller}
@@ -111,10 +111,10 @@ export const Comments = ({entity_uid, type_content, uid, perPage = 10}) => {
                             }
                         </InfiniteScroll>
                     </StyledCommentsList>
-                </Box>
+                </div>
                 }
             </LoadingOverlay>
-        </Container>
+        </div>
     )
 };
 

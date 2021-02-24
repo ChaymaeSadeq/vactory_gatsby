@@ -8,9 +8,11 @@
     "gatsby": "^2.20.12"
   },
   "dependencies": {
+    "@glidejs/glide": "^3.4.1",
     "classnames": "^2.2.6",
     "cogo-toast": "^4.2.3",
     "deepmerge": "^4.2.2",
+    "framer-motion": "^3.3.0",
     "fslightbox-react": "^1.4.9",
     "gatsby-plugin-styled-components": "^3.3.1",
     "gatsby-plugin-web-font-loader": "^1.0.4",
@@ -21,13 +23,17 @@
     "react-aspect-ratio": "^1.0.42",
     "react-content-loader": "^5.1.0",
     "react-detect-offline": "^2.4.0",
+    "react-icomoon": "^2.2.4",
     "react-lazyload": "^2.6.8",
     "react-loading-overlay": "^1.0.1",
     "react-portal": "^4.2.1",
     "react-rating": "^2.0.5",
     "react-responsive-picture": "^3.2.2",
-    "styled-system": "^5.1.5",
-    "vactory-ui": "^1.0.7"
+    "react-scrollspy": "^3.4.3",
+    "react-slick": "^0.28.0",
+    "react-waypoint": "^9.0.3",
+    "slick-carousel": "^1.8.1",
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "fslightbox-react": "^1.4.9"
