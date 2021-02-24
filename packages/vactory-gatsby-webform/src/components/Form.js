@@ -193,8 +193,7 @@ export const Form = ({
 
     return (<StyleCtx.Provider value={baseStyles}>
         <FormContext webformId={webformId} internalRefs={internalRefs} {...form}>
-            <div
-                as="form"
+            <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 {...baseStyles?.container}
             >
@@ -226,7 +225,7 @@ export const Form = ({
                         </div>
                     </React.Fragment>
                 )}
-            </div>
+            </form>
         </FormContext>
     </StyleCtx.Provider>)
 

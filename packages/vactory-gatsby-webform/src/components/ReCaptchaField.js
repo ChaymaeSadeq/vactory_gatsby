@@ -83,14 +83,23 @@ export const ReCaptchaField = forwardRef(({
                         }}
                     />
 
-                    {!!helperText && (
-                        <FormHelperText {...fieldStyles?.helperText}>
-                            <Wysiwyg html={helperText} />
-                        </FormHelperText>
-                    )}
-                    <FormErrorMessage {...fieldStyles?.errorMessage}>
-                        {errorMessage}
-                    </FormErrorMessage>
+                {!!helperText && (
+                    <p
+                        className="mt-2 text-sm text-gray-500"
+                        id={`field-${name}-description`}>
+                        <Wysiwyg html={helperText} />
+                    </p>
+                )}
+
+                {!!errorMessage && (
+                    <p
+                        className="mt-2 text-sm text-red-600"
+                        id={`field-${name}-error`}
+                        {...fieldStyles?.errorMessage}
+                    >
+                    <Wysiwyg html={errorMessage} />
+                    </p>
+                )}
                 </div>
             </div>
         </FormControl>
