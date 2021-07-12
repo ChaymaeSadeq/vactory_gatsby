@@ -607,3 +607,9 @@ FileETag None
 # ----------------------------------------------------------------------
 # | Custom Rules                                                       |
 # ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+        #rules
+	Redirect permanent "/fr/old-page"    "/fr/new-page"
+	Redirect permanent "/ar/about"    "/ar/new-about"
+	Redirect  "/fr/contat"    "/fr/new-contact-error"
+        </IfModule>

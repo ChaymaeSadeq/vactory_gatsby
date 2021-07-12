@@ -28,7 +28,7 @@ export const Webform = () => {
     const {t, i18n} = useTranslation();
     const currentLanguage = i18n.language;
     const {handleWebformRemoteSubmit, webformFetch} = useWebformSubmit();
-    const {register, handleSubmit, watch, errors, setValue, reset} = useForm();
+    const {register, handleSubmit, errors, setValue, reset} = useForm();
     const formId = 'job_application';
     const recaptchaRef = React.createRef();
 

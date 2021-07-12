@@ -28,6 +28,7 @@ export const CookieComplianceLayer = () => {
     useEffect(() => {
         if (Cookies.get(cookieName) === undefined) {
             setShowCookie(true);
+            // Cookies.set('foo', 'bar')
         }
     }, []);
 

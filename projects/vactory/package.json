@@ -36,8 +36,10 @@
     "vactory-gatsby-press-kit": "*",
     "vactory-gatsby-press-release": "*",
     "vactory-gatsby-publication": "*",
+    "vactory-gatsby-redirection": "*",
     "vactory-gatsby-search": "*",
-    "vactory-gatsby-tender": "*"
+    "vactory-gatsby-tender": "*",
+    "vactory-gatsby-tour": "*"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.1.11",
